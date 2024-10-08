@@ -25,9 +25,12 @@
     gap: 2em;
   }
   .screen-1 .logo {
-    width: 150px;
     margin-top: -3em;
   }
+  .logo img {
+    width: 50px; /* Set your desired width */
+    height: auto; /* Maintains aspect ratio */
+    }
   .screen-1 .email {
     background: white;
     box-shadow: 0 0 2em #e6e9f9;
