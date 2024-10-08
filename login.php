@@ -40,9 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-
+<form action="login.php" method="POST">
 <div class="screen-1">
-  <form action="login.php" method="POST">
   <div class="email">
     <label for="mail-outline">User</label>
     <div class="sec-2">
