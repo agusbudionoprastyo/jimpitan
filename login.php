@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Prepare and execute query
         $stmt = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
-        $stmt->execute([$idCode]);
+        $stmt->execute([$user_name]); // Use the correct variable
         $user = $stmt->fetch();
 
         // Verify password
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             // Invalid credentials
-            $error = 'Invalid ID Code or Password';
+            $error = 'Invalid Username or Password';
         }
     } catch (PDOException $e) {
         $error = 'Database error: ' . $e->getMessage();
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <h2>Login</h2>
         <?php if (isset($error)): ?>
-            <p style="color: red;"><?php echo $error; ?></p>
+            <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
         <form action="login.php" method="POST">
             <label for="user_name">User:</label>
