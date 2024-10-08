@@ -258,6 +258,30 @@ function onScanSuccess(decodedText, decodedResult) {
     html5QrCode.stop();
 }
 
+  function onScanError(errorMessage) {
+      // Handle scan error (optional)
+      console.warn(`Scan error: ${errorMessage}`);
+  }
+
+  function startScanning() {
+      // Initialize the QR code scanner
+      html5QrCode.start(
+          { facingMode: "environment" }, // Use rear camera
+          {
+              fps: 20, // Frame rate
+              qrbox: 200 // QR code scanning box size
+          },
+          onScanSuccess,
+          onScanError
+      );
+  }
+
+  // Initialize the QR code scanner instance
+  const html5QrCode = new Html5Qrcode("qr-reader");
+
+  // Start scanning with the camera
+  startScanning();
+
 </script>
 
 </body>
