@@ -56,39 +56,43 @@
 </div>
 
 <script>
-  // Function to show or hide the landscape blocker
-  function updateLandscapeBlocker() {
-      let landscapeBlocker = document.getElementById('landscapeBlocker');
-      if (window.orientation === 90 || window.orientation === -90) {
-          landscapeBlocker.style.display = 'flex';
-          html5QrCode.stop().catch(function(err) {
-              console.error('Error stopping QR Code scanner:', err);
-          });
-      } else {
-          landscapeBlocker.style.display = 'none';
-          startScanning();
-      }
-  }
+ // Function to show or hide the landscape blocker
+function updateLandscapeBlocker() {
+    let landscapeBlocker = document.getElementById('landscapeBlocker');
+    if (landscapeBlocker) {
+        if (window.orientation === 90 || window.orientation === -90) {
+            landscapeBlocker.style.display = 'flex';
+            html5QrCode.stop().catch(function(err) {
+                console.error('Error stopping QR Code scanner:', err);
+            });
+        } else {
+            landscapeBlocker.style.display = 'none';
+            startScanning();
+        }
+    }
+}
 
-  // Start scanning when document is loaded
-  document.addEventListener('DOMContentLoaded', function() {
-      updateLandscapeBlocker();
-  });
+// Start scanning when document is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    updateLandscapeBlocker();
+});
 
-  // Handle orientation change
-  window.addEventListener('orientationchange', function() {
-      updateLandscapeBlocker();
-  });
-      
-  // Function to play audio
-  function playAudio() {
-      const audio = document.getElementById('audio');
-      audio.play().catch(function(error) {
-          console.error('Error playing audio:', error);
-      });
-  }
+// Handle orientation change
+window.addEventListener('orientationchange', function() {
+    updateLandscapeBlocker();
+});
 
-  function onScanSuccess(decodedText, decodedResult) {
+// Function to play audio
+function playAudio() {
+    const audio = document.getElementById('audio');
+    if (audio) {
+        audio.play().catch(function(error) {
+            console.error('Error playing audio:', error);
+        });
+    }
+}
+
+function onScanSuccess(decodedText, decodedResult) {
     const id = decodedText;
 
     // Play audio
@@ -134,6 +138,7 @@
     })
     .catch(error => {
         console.error('Error fetching KK name:', error);
+        html5QrCode.stop(); // Stop the scanner on error
         Swal.fire({
             icon: 'error',
             title: 'Error',
@@ -148,15 +153,11 @@
     // Now send the ID to Google Apps Script
     fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
         method: 'POST',
-        mode: "no-cors",
+        mode: "no-cors", // Use no-cors mode
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ scanned_id: id })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Data sent to GAS:', data);
     })
     .catch(error => {
         console.error('Error sending data to GAS:', error);
@@ -201,6 +202,7 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
 </script>
 
 </body>
