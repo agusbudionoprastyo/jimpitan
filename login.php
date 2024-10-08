@@ -43,9 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form action="login.php" method="POST">
 <div class="screen-1">
   <div class="email">
-    <label for="mail-outline">User</label>
+    <label for="user_name">User</label>
     <div class="sec-2">
-      <ion-icon name="user-outline"></ion-icon>
+    <ion-icon name="mail-outline"></ion-icon>
       <input type="text" name="user_name" placeholder="username" required>
     </div>
   </div>
