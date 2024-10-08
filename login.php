@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form action="login.php" method="POST">
 <div class="screen-1">
      <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg fill="#000000" width="800px" height="800px" viewBox="0 0 32 32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg fill="#000000" width="50px" height="50px" viewBox="0 0 32 32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g transform="matrix(1,0,0,1,-192,0)">
 <g transform="matrix(1.1,0,0,1.1,-19.5,-0.3)">
 <path d="M205,4.818C205,4.336 204.808,3.874 204.467,3.533C204.126,3.192 203.664,3 203.182,3L196.818,3C196.336,3 195.874,3.192 195.533,3.533C195.192,3.874 195,4.336 195,4.818L195,11.182C195,11.664 195.192,12.126 195.533,12.467C195.874,12.808 196.336,13 196.818,13L203.182,13C203.664,13 204.126,12.808 204.467,12.467C204.808,12.126 205,11.664 205,11.182L205,4.818Z" style="fill:rgb(144,224,239);"/>
@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="email">
     <label for="user_name">User</label>
     <div class="sec-2">
-    <ion-icon name="mail-outline"></ion-icon>
-      <input type="text" name="user_name" required>
+    <ion-icon name="person-outline"></ion-icon>
+      <input type="text" name="user_name" placeholder="********" required/>
     </div>
   </div>
   <div class="password">
