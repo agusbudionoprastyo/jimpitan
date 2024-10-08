@@ -68,14 +68,15 @@ function onScanSuccess(decodedText, decodedResult) {
     .then(response => response.json())
     .then(data => {
         if (data.success && data.kk_name) {
-            const today = new Date().toLocaleDateString(); // Format tanggal sesuai keinginan
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const today = new Date().toLocaleDateString('id-ID', options); // Format tanggal
             const nominal = 'Rp500'; // Nominal yang ingin ditampilkan
         
             Swal.fire({
                 icon: 'success',
                 title: `${data.kk_name}`,
                 text: `Jimpitan tanggal ${today} tercatat dengan nominal ${nominal}`,
-                timer: 20000,
+                timer: 10000,
                 timerProgressBar: true,
                 customClass: {
                     popup: 'rounded',
@@ -83,7 +84,7 @@ function onScanSuccess(decodedText, decodedResult) {
                     confirmButton: 'roundedBtn'
                 },
                 willClose: startScanning // Mulai kembali pemindaian setelah alert ditutup
-            });        
+            });               
         } else {
             Swal.fire({
                 icon: 'error',
