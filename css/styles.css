@@ -15,7 +15,7 @@
     height: 100vh;
   }
   
-  /* .screen-1 {
+  .screen-1 {
     background: #f1f7fe;
     padding: 2em;
     display: flex;
@@ -23,7 +23,8 @@
     border-radius: 30px;
     box-shadow: 0 0 2em #e6e9f9;
     gap: 2em;
-  } */
+  }
+
   /* .screen-1 .logo{
     margin-top: -3em;
   } */
@@ -50,6 +51,8 @@
         display: flex; /* Use flexbox */
         justify-content: center; /* Center content horizontally */
         align-items: center; /* Center content vertically */
+        width: 100px; 
+        height: auto;
         margin-bottom: 2rem; /* Keep this for spacing below */
     }
     
