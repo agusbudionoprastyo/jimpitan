@@ -24,11 +24,11 @@
     box-shadow: 0 0 2em #e6e9f9;
     gap: 2em;
   }
-  .screen-1 .logo {
+  .screen-1 {
     margin-top: -3em;
   }
   .logo img {
-    width: 50px; /* Set your desired width */
+    width: 100px; /* Set your desired width */
     height: auto; /* Maintains aspect ratio */
     }
   .screen-1 .email {
