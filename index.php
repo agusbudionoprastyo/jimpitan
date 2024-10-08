@@ -74,7 +74,7 @@ if (!isset($_SESSION['user'])) {
 </div>
 
 <div class="container">
-  <h1>Welcome to Jimpitan</h1>
+  <h1>Jimpitan</h1>
   <p>Please scan the QR code to proceed.</p>
   <div id="qr-reader"></div>
   <button class="roundedBtn" onclick="startQRCodeScanner()">Start QR Scanner</button>

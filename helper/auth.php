@@ -1,28 +1,27 @@
 <?php
 session_start();
-require 'connection.php'; // Include the database connection file
+require 'connection.php'; // Assuming this includes the getDatabaseConnection function
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $pdo = getDatabaseConnection(); // Get the database connection
+    $user_name = $_POST['user_name'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-    // Retrieve form data
-    $user_name = $_POST['user_name'];
-    $password = $_POST['password'];
+    try {
+        $pdo = getDatabaseConnection();
 
-    // Prepare and execute query
-    $stmt = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
-    $stmt->execute([$user_name]);
-    $user = $stmt->fetch();
+        $stmt = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
+        $stmt->execute([$user_name]);
+        $user = $stmt->fetch();
 
-    // Verify password
-    if ($user && password_verify($password, $user['password'])) {
-        // Password is correct
-        $_SESSION['user'] = $user;
-        header('Location: index.php'); // Redirect to a protected page
-        exit;
-    } else {
-        // Invalid credentials
-        $error = 'Invalid Username or Password';
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['user'] = $user;
+            header('Location: index.php'); // Redirect to the index page
+            exit;
+        } else {
+            $error = 'Invalid username or password.';
+        }
+    } catch (PDOException $e) {
+        $error = 'Database error: ' . $e->getMessage();
     }
 }
 ?>
