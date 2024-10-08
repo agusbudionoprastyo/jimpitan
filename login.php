@@ -16,11 +16,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user'] = $user;
-            header('Location: index.php'); // Redirect to the index page
-            exit;
+            // Get the current day of the week
+            $currentDay = date('l'); // e.g., "Monday", "Tuesday", etc.
+
+            // Check if the current day is in the user's shift
+            $shifts = explode(',', $user['shift']); // Assuming shifts are stored as a comma-separated string
+
+            if (in_array($currentDay, $shifts)) {
+                $_SESSION['user'] = $user;
+                header('Location: index.php'); // Redirect to the index page
+                exit;
+            } else {
+                $error = 'Login gagal! Hari ini bukan jadwalmu jaga';
+            }
         } else {
-            $error = 'Invalid username or password.';
+            $error = 'username atau password salah!';
         }
     } catch (PDOException $e) {
         $error = 'Database error: ' . $e->getMessage();
