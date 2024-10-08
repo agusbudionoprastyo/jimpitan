@@ -36,16 +36,6 @@
     height: auto;
     margin-bottom: 2rem;
     } */
-    .screen-1 {
-        background: #f1f7fe;
-        padding: 2em;
-        display: flex;
-        flex-direction: column;
-        border-radius: 30px;
-        box-shadow: 0 0 2em #e6e9f9;
-        gap: 2em;
-        align-items: center; /* Center items horizontally */
-    }
     
     .logo {
         display: flex; /* Use flexbox */
