@@ -56,6 +56,38 @@
 </div>
 
 <script>
+  // Function to show or hide the landscape blocker
+  function updateLandscapeBlocker() {
+      let landscapeBlocker = document.getElementById('landscapeBlocker');
+      if (window.orientation === 90 || window.orientation === -90) {
+          landscapeBlocker.style.display = 'flex';
+          html5QrCode.stop().catch(function(err) {
+              console.error('Error stopping QR Code scanner:', err);
+          });
+      } else {
+          landscapeBlocker.style.display = 'none';
+          startScanning();
+      }
+  }
+
+  // Start scanning when document is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+      updateLandscapeBlocker();
+  });
+
+  // Handle orientation change
+  window.addEventListener('orientationchange', function() {
+      updateLandscapeBlocker();
+  });
+      
+  // Function to play audio
+  function playAudio() {
+      const audio = document.getElementById('audio');
+      audio.play().catch(function(error) {
+          console.error('Error playing audio:', error);
+      });
+  }
+
   function onScanSuccess(decodedText, decodedResult) {
     const id = decodedText;
 
@@ -85,7 +117,6 @@
                     confirmButton: 'roundedBtn'
                 },
                 willClose: () => {
-                    // Restart scanning when the alert closes
                     startScanning();
                 }
             });
@@ -112,10 +143,6 @@
                 startScanning();
             }
         });
-    })
-    .finally(() => {
-        // Stop scanning after successful read
-        html5QrCode.stop();
     });
 
     // Now send the ID to Google Apps Script
@@ -132,6 +159,10 @@
     })
     .catch(error => {
         console.error('Error sending data to GAS:', error);
+    })
+    .finally(() => {
+        // Stop scanning after processing the scanned ID
+        html5QrCode.stop();
     });
 }
 
@@ -157,18 +188,18 @@ const html5QrCode = new Html5Qrcode("qr-reader");
 // Start scanning with the camera
 startScanning();
   
-  // Register the service worker
-  if ('serviceWorker' in navigator) {
+// Register the service worker
+if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then((registration) => {
-          console.log('Service Worker registered with scope:', registration.scope);
-        })
-        .catch((error) => {
-          console.error('Service Worker registration failed:', error);
-        });
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch((error) => {
+                console.error('Service Worker registration failed:', error);
+            });
     });
-  }
+}
 </script>
 
 </body>
