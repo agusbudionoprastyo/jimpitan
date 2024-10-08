@@ -56,128 +56,13 @@
 </div>
 
 <script>
-  // Function to show or hide the landscape blocker
-  function updateLandscapeBlocker() {
-      let landscapeBlocker = document.getElementById('landscapeBlocker');
-      if (window.orientation === 90 || window.orientation === -90) {
-          landscapeBlocker.style.display = 'flex';
-          html5QrCode.stop().catch(function(err) {
-              console.error('Error stopping QR Code scanner:', err);
-          });
-      } else {
-          landscapeBlocker.style.display = 'none';
-          startScanning();
-      }
-  }
-
-  // Start scanning when document is loaded
-  document.addEventListener('DOMContentLoaded', function() {
-      updateLandscapeBlocker();
-  });
-
-  // Handle orientation change
-  window.addEventListener('orientationchange', function() {
-      updateLandscapeBlocker();
-  });
-      
-  // Function to play audio
-  function playAudio() {
-      const audio = document.getElementById('audio');
-      audio.play().catch(function(error) {
-          console.error('Error playing audio:', error);
-      });
-  }
-
-// function onScanSuccess(decodedText, decodedResult) {
-//     // Ambil ID dari QR code
-//     const id = decodedText;
-
-//     // Play audio
-//     playAudio();
-
-//     // Perform fetch request to get kk_name based on the scanned id
-//     fetch('/api/get_kk.php', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ code_id: id }) // Send the scanned id
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         // Check if kk_name was returned
-//         if (data.success && data.kk_name) {
-//             // Show SweetAlert2 popup with scanned text
-//             Swal.fire({
-//                 icon: 'success',
-//                 title: `${data.kk_name}`,
-//                 text: 'Checked', // Display the KK name
-//                 timer: 10000, // Automatically closes after 10 seconds
-//                 timerProgressBar: true,
-//                 customClass: {
-//                     popup: 'rounded',
-//                     timerProgressBar: 'custom-timer-progress-bar',
-//                     confirmButton: 'roundedBtn'
-//                 }
-//             });
-//         } else {
-//             // Handle case where no kk_name is found
-//             Swal.fire({
-//                 icon: 'error',
-//                 title: 'Not Found',
-//                 text: 'No record found for the scanned ID.',
-//                 confirmButton: 'OK'
-//             });
-//         }
-//     })
-//     .catch(error => {
-//         console.error('Error fetching KK name:', error);
-//         Swal.fire({
-//             icon: 'error',
-//             title: 'Error',
-//             text: 'There was an error fetching data.',
-//             confirmButton: 'OK'
-//         });
-//     })
-//     .finally(() => {
-//         // Ensure scanning restarts after the alert and fetch are handled
-//         startScanning();
-//     });
-
-//     // Stop scanning after successful read
-//     html5QrCode.stop();
-// }
-
-//   function onScanError(errorMessage) {
-//       // Handle scan error (optional)
-//       console.warn(`Scan error: ${errorMessage}`);
-//   }
-
-//   function startScanning() {
-//       // Initialize the QR code scanner
-//       html5QrCode.start(
-//           { facingMode: "environment" }, // Use rear camera
-//           {
-//               fps: 20, // Frame rate
-//               qrbox: 200 // QR code scanning box size
-//           },
-//           onScanSuccess,
-//           onScanError
-//       );
-//   }
-
-//   // Initialize the QR code scanner instance
-//   const html5QrCode = new Html5Qrcode("qr-reader");
-
-//   // Start scanning with the camera
-//   startScanning();
-
-function onScanSuccess(decodedText, decodedResult) {
+  function onScanSuccess(decodedText, decodedResult) {
     const id = decodedText;
 
     // Play audio
     playAudio();
 
+    // Send the scanned ID to your server
     fetch('/api/get_kk.php', {
         method: 'POST',
         headers: {
@@ -211,7 +96,6 @@ function onScanSuccess(decodedText, decodedResult) {
                 text: 'No record found for the scanned ID.',
                 confirmButton: 'OK',
                 willClose: () => {
-                    // Restart scanning when the alert closes
                     startScanning();
                 }
             });
@@ -225,7 +109,6 @@ function onScanSuccess(decodedText, decodedResult) {
             text: 'There was an error fetching data.',
             confirmButton: 'OK',
             willClose: () => {
-                // Restart scanning when the alert closes
                 startScanning();
             }
         });
@@ -233,6 +116,22 @@ function onScanSuccess(decodedText, decodedResult) {
     .finally(() => {
         // Stop scanning after successful read
         html5QrCode.stop();
+    });
+
+    // Now send the ID to Google Apps Script
+    fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ scanned_id: id })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Data sent to GAS:', data);
+    })
+    .catch(error => {
+        console.error('Error sending data to GAS:', error);
     });
 }
 
@@ -257,7 +156,6 @@ const html5QrCode = new Html5Qrcode("qr-reader");
 
 // Start scanning with the camera
 startScanning();
-
   
   // Register the service worker
   if ('serviceWorker' in navigator) {
