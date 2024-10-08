@@ -145,6 +145,42 @@
 //     });
 // }
 
+// Function to show or hide the landscape blocker
+function updateLandscapeBlocker() {
+    let landscapeBlocker = document.getElementById('landscapeBlocker');
+    if (landscapeBlocker) {
+        if (window.orientation === 90 || window.orientation === -90) {
+            landscapeBlocker.style.display = 'flex';
+            html5QrCode.stop().catch(function(err) {
+                console.error('Error stopping QR Code scanner:', err);
+            });
+        } else {
+            landscapeBlocker.style.display = 'none';
+            startScanning();
+        }
+    }
+}
+
+// Start scanning when document is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    updateLandscapeBlocker();
+});
+
+// Handle orientation change
+window.addEventListener('orientationchange', function() {
+    updateLandscapeBlocker();
+});
+
+// Function to play audio
+function playAudio() {
+    const audio = document.getElementById('audio');
+    if (audio) {
+        audio.play().catch(function(error) {
+            console.error('Error playing audio:', error);
+        });
+    }
+}
+
 function onScanSuccess(decodedText, decodedResult) {
     const id = decodedText; // Ambil ID dari QR code
 
