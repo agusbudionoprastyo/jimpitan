@@ -145,153 +145,78 @@
 //     });
 // }
 
- // Function to show or hide the landscape blocker
- function updateLandscapeBlocker() {
-    let landscapeBlocker = document.getElementById('landscapeBlocker');
-    if (window.orientation === 90 || window.orientation === -90) {
-        landscapeBlocker.style.display = 'flex';
-        html5QrCode.stop().catch(function(err) {
-            console.error('Error stopping QR Code scanner:', err);
-        });
-    } else {
-        landscapeBlocker.style.display = 'none';
-        startScanning();
-    }
-}
-
-// Start scanning when document is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    updateLandscapeBlocker();
-});
-
-// Handle orientation change
-window.addEventListener('orientationchange', function() {
-    updateLandscapeBlocker();
-});
-    
-// Function to play audio
-function playAudio() {
-    const audio = document.getElementById('audio');
-    audio.play().catch(function(error) {
-        console.error('Error playing audio:', error);
-    });
-}
-    
 function onScanSuccess(decodedText, decodedResult) {
-  // Ambil ID dari QR code
-  const id = decodedText;
+    const id = decodedText; // Ambil ID dari QR code
 
-  // Play audio
-  playAudio();
+    // Play audio
+    playAudio();
 
-  // Show SweetAlert2 popup with scanned text
-  const alertPromise = Swal.fire({
-      icon: 'success',
-      title: 'Scanned',
-      text: `${id}`, // Display the scanned text
-      timer: 10000, // Automatically closes after 10 seconds
-      timerProgressBar: true,
-      customClass: {
-          popup: 'rounded',
-          timerProgressBar: 'custom-timer-progress-bar',
-          confirmButton: 'roundedBtn'
-      }
-  });
+    // Kirim ID ke server GAS
+    fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id })
+    })
+    .then(response => {
+        // Jika perlu, tambahkan logika untuk memeriksa status respons
+        console.log('Data sent to GAS:', id);
+    })
+    .catch(error => {
+        console.error('Error sending data to GAS:', error);
+    });
 
-  // Perform fetch request
-  fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ id: id }) // Ganti nama sesuai kebutuhan
-  })
-  .finally(() => {
-      // Ensure scanning restarts after the alert and fetch are handled
-      alertPromise.then(() => {
-          startScanning();
-      }).catch(() => {
-          startScanning();
-      });
-  });
+    // Fetch ke API get_kk.php untuk mendapatkan nama
+    fetch('../api/get_kk.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code_id: id })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success && data.kk_name) {
+            Swal.fire({
+                icon: 'success',
+                title: `${data.kk_name}`,
+                text: 'Checked',
+                timer: 10000,
+                timerProgressBar: true,
+                customClass: {
+                    popup: 'rounded',
+                    timerProgressBar: 'custom-timer-progress-bar',
+                    confirmButton: 'roundedBtn'
+                },
+                willClose: startScanning // Mulai kembali pemindaian setelah alert ditutup
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Not Found',
+                text: 'No record found for the scanned ID.',
+                confirmButton: 'OK',
+                willClose: startScanning // Mulai kembali pemindaian setelah alert ditutup
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Fetch Error',
+            text: 'Could not retrieve data from server.',
+            confirmButton: 'OK',
+            willClose: startScanning // Mulai kembali pemindaian setelah alert ditutup
+        });
+    });
 
-  // Stop scanning after successful read
-  html5QrCode.stop();
+    // Stop scanning after successful read
+    html5QrCode.stop();
 }
 
-function onScanError(errorMessage) {
-    // Handle scan error (optional)function onScanSuccess(decodedText, decodedResult) {
-  const id = decodedText; // Ambil ID dari QR code
-
-  // Play audio
-  playAudio();
-
-  // Kirim ID ke server GAS
-  fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ id: id })
-  })
-  .then(response => {
-      // Jika perlu, tambahkan logika untuk memeriksa status respons
-      console.log('Data sent to GAS:', id);
-  })
-  .catch(error => {
-      console.error('Error sending data to GAS:', error);
-  });
-
-  // Fetch ke API get_kk.php untuk mendapatkan nama
-  fetch('../api/get_kk.php', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ code_id: id })
-  })
-  .then(response => response.json())
-  .then(data => {
-      if (data.success && data.kk_name) {
-          Swal.fire({
-              icon: 'success',
-              title: `${data.kk_name}`,
-              text: 'Checked',
-              timer: 10000,
-              timerProgressBar: true,
-              customClass: {
-                  popup: 'rounded',
-                  timerProgressBar: 'custom-timer-progress-bar',
-                  confirmButton: 'roundedBtn'
-              },
-              willClose: startScanning // Mulai kembali pemindaian setelah alert ditutup
-          });
-      } else {
-          Swal.fire({
-              icon: 'error',
-              title: 'Not Found',
-              text: 'No record found for the scanned ID.',
-              confirmButton: 'OK',
-              willClose: startScanning // Mulai kembali pemindaian setelah alert ditutup
-          });
-      }
-  })
-  .catch(error => {
-      console.error('Error fetching data:', error);
-      Swal.fire({
-          icon: 'error',
-          title: 'Fetch Error',
-          text: 'Could not retrieve data from server.',
-          confirmButton: 'OK',
-          willClose: startScanning // Mulai kembali pemindaian setelah alert ditutup
-      });
-  });
-
-  // Stop scanning after successful read
-  html5QrCode.stop();
-}
 
   function onScanError(errorMessage) {
       // Handle scan error (optional)
