@@ -24,9 +24,9 @@
     box-shadow: 0 0 2em #e6e9f9;
     gap: 2em;
   }
-  .screen-1 {
+  /* .screen-1 .logo{
     margin-top: -3em;
-  }
+  } */
   .logo img {
     width: 100px; /* Set your desired width */
     height: auto; /* Maintains aspect ratio */
