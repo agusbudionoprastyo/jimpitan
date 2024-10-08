@@ -43,9 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <form action="login.php" method="POST">
 <div class="screen-1">
-    <div class="logo">
-        <img src="icon-192x192.png" alt="Logo" /> <!-- Update the path to your logo -->
-    </div>
+    <!-- <div class="logo">
+        <img src="icon-192x192.png" alt="Logo" />
+    </div> -->
     <div class="email">
         <label for="user_name">User</label>
         <div class="sec-2">

@@ -25,17 +25,9 @@
     gap: 2em;
   }
 
-  /* .screen-1 .logo{
+  .screen-1 .logo{
     margin-top: -3em;
-  } */
-
-  .logo {
-    justify-content: center; 
-    align-items: center; 
-    width: 50px; 
-    height: auto;
-    margin-bottom: 2rem;
-    }
+  }
 
   .screen-1 .email {
     background: white;
@@ -46,7 +38,7 @@
     gap: 0.5em;
     border-radius: 20px;
     color: #4d4d4d;
-    margin-top: -3em;
+    margin-top: 3em;
   }
   .screen-1 .email input {
     outline: none;
