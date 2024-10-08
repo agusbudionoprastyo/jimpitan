@@ -87,88 +87,133 @@
           console.error('Error playing audio:', error);
       });
   }
-      
-//   function onScanSuccess(decodedText, decodedResult) {
+
+// function onScanSuccess(decodedText, decodedResult) {
 //     // Ambil ID dari QR code
 //     const id = decodedText;
 
 //     // Play audio
 //     playAudio();
 
-//     // Show SweetAlert2 popup with scanned text
-//     const alertPromise = Swal.fire({
-//         icon: 'success',
-//         title: 'Scanned',
-//         text: `${id}`, // Display the scanned text
-//         timer: 10000, // Automatically closes after 10 seconds
-//         timerProgressBar: true,
-//         customClass: {
-//             popup: 'rounded',
-//             timerProgressBar: 'custom-timer-progress-bar',
-//             confirmButton: 'roundedBtn'
-//         }
-//     });
-
-//     // Perform fetch request
-//     fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
+//     // Perform fetch request to get kk_name based on the scanned id
+//     fetch('/api/get_kk.php', {
 //         method: 'POST',
-//         mode: 'no-cors',
 //         headers: {
 //             'Content-Type': 'application/json'
 //         },
-//         body: JSON.stringify({ id: id }) // Ganti nama sesuai kebutuhan
+//         body: JSON.stringify({ code_id: id }) // Send the scanned id
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         // Check if kk_name was returned
+//         if (data.success && data.kk_name) {
+//             // Show SweetAlert2 popup with scanned text
+//             Swal.fire({
+//                 icon: 'success',
+//                 title: `${data.kk_name}`,
+//                 text: 'Checked', // Display the KK name
+//                 timer: 10000, // Automatically closes after 10 seconds
+//                 timerProgressBar: true,
+//                 customClass: {
+//                     popup: 'rounded',
+//                     timerProgressBar: 'custom-timer-progress-bar',
+//                     confirmButton: 'roundedBtn'
+//                 }
+//             });
+//         } else {
+//             // Handle case where no kk_name is found
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Not Found',
+//                 text: 'No record found for the scanned ID.',
+//                 confirmButton: 'OK'
+//             });
+//         }
+//     })
+//     .catch(error => {
+//         console.error('Error fetching KK name:', error);
+//         Swal.fire({
+//             icon: 'error',
+//             title: 'Error',
+//             text: 'There was an error fetching data.',
+//             confirmButton: 'OK'
+//         });
 //     })
 //     .finally(() => {
 //         // Ensure scanning restarts after the alert and fetch are handled
-//         alertPromise.then(() => {
-//             startScanning();
-//         }).catch(() => {
-//             startScanning();
-//         });
+//         startScanning();
 //     });
 
 //     // Stop scanning after successful read
 //     html5QrCode.stop();
 // }
+
+//   function onScanError(errorMessage) {
+//       // Handle scan error (optional)
+//       console.warn(`Scan error: ${errorMessage}`);
+//   }
+
+//   function startScanning() {
+//       // Initialize the QR code scanner
+//       html5QrCode.start(
+//           { facingMode: "environment" }, // Use rear camera
+//           {
+//               fps: 20, // Frame rate
+//               qrbox: 200 // QR code scanning box size
+//           },
+//           onScanSuccess,
+//           onScanError
+//       );
+//   }
+
+//   // Initialize the QR code scanner instance
+//   const html5QrCode = new Html5Qrcode("qr-reader");
+
+//   // Start scanning with the camera
+//   startScanning();
+
 function onScanSuccess(decodedText, decodedResult) {
-    // Ambil ID dari QR code
     const id = decodedText;
 
     // Play audio
     playAudio();
 
-    // Perform fetch request to get kk_name based on the scanned id
     fetch('/api/get_kk.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ code_id: id }) // Send the scanned id
+        body: JSON.stringify({ code_id: id })
     })
     .then(response => response.json())
     .then(data => {
-        // Check if kk_name was returned
         if (data.success && data.kk_name) {
-            // Show SweetAlert2 popup with scanned text
             Swal.fire({
                 icon: 'success',
-                title: 'Checked',
-                text: `${data.kk_name}`, // Display the KK name
-                timer: 10000, // Automatically closes after 10 seconds
+                title: `${data.kk_name}`,
+                text: 'Checked',
+                timer: 10000,
                 timerProgressBar: true,
                 customClass: {
                     popup: 'rounded',
                     timerProgressBar: 'custom-timer-progress-bar',
                     confirmButton: 'roundedBtn'
+                },
+                willClose: () => {
+                    // Restart scanning when the alert closes
+                    startScanning();
                 }
             });
         } else {
-            // Handle case where no kk_name is found
             Swal.fire({
                 icon: 'error',
                 title: 'Not Found',
                 text: 'No record found for the scanned ID.',
-                confirmButton: 'OK'
+                confirmButton: 'OK',
+                willClose: () => {
+                    // Restart scanning when the alert closes
+                    startScanning();
+                }
             });
         }
     })
@@ -178,41 +223,41 @@ function onScanSuccess(decodedText, decodedResult) {
             icon: 'error',
             title: 'Error',
             text: 'There was an error fetching data.',
-            confirmButton: 'OK'
+            confirmButton: 'OK',
+            willClose: () => {
+                // Restart scanning when the alert closes
+                startScanning();
+            }
         });
     })
     .finally(() => {
-        // Ensure scanning restarts after the alert and fetch are handled
-        startScanning();
+        // Stop scanning after successful read
+        html5QrCode.stop();
     });
-
-    // Stop scanning after successful read
-    html5QrCode.stop();
 }
 
-  function onScanError(errorMessage) {
-      // Handle scan error (optional)
-      console.warn(`Scan error: ${errorMessage}`);
-  }
+function onScanError(errorMessage) {
+    console.warn(`Scan error: ${errorMessage}`);
+}
 
-  function startScanning() {
-      // Initialize the QR code scanner
-      html5QrCode.start(
-          { facingMode: "environment" }, // Use rear camera
-          {
-              fps: 20, // Frame rate
-              qrbox: 200 // QR code scanning box size
-          },
-          onScanSuccess,
-          onScanError
-      );
-  }
+function startScanning() {
+    html5QrCode.start(
+        { facingMode: "environment" },
+        {
+            fps: 20,
+            qrbox: 200
+        },
+        onScanSuccess,
+        onScanError
+    );
+}
 
-  // Initialize the QR code scanner instance
-  const html5QrCode = new Html5Qrcode("qr-reader");
+// Initialize the QR code scanner instance
+const html5QrCode = new Html5Qrcode("qr-reader");
 
-  // Start scanning with the camera
-  startScanning();
+// Start scanning with the camera
+startScanning();
+
   
   // Register the service worker
   if ('serviceWorker' in navigator) {
