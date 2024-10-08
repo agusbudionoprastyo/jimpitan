@@ -35,13 +35,12 @@ function playAudio() {
 }
 
 function onScanSuccess(decodedText, decodedResult) {
-    if (isScanning) return; // Prevent further scans if already scanning
-
-    isScanning = true; // Set scanning state to true
     const id = decodedText;
+
+    // Play audio
     playAudio();
 
-    // First, fetch KK name from your server
+    // First, send the ID to your server
     fetch('../api/get_kk.php', {
         method: 'POST',
         headers: {
@@ -92,21 +91,21 @@ function onScanSuccess(decodedText, decodedResult) {
         });
     })
     .finally(() => {
-        // Now send the ID to Google Apps Script
+        // Send the ID to Google Apps Script at the end
         fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
             method: 'POST',
-            mode: 'no-cors',
+            mode: 'no-cors', // Use no-cors mode
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: id })
+            body: JSON.stringify({ scanned_id: id })
         })
         .catch(error => {
             console.error('Error sending data to GAS:', error);
         })
         .finally(() => {
+            // Stop scanning after processing
             html5QrCode.stop();
-            isScanning = false; // Reset scanning state after processing
         });
     });
 }
@@ -116,9 +115,6 @@ function onScanError(errorMessage) {
 }
 
 function startScanning() {
-    if (isScanning) return; // Prevent starting a new scan if already scanning
-
-    isScanning = true; // Set scanning state to true
     html5QrCode.start(
         { facingMode: "environment" },
         {
@@ -135,7 +131,7 @@ const html5QrCode = new Html5Qrcode("qr-reader");
 
 // Start scanning with the camera
 startScanning();
-
+  
 // Register the service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
