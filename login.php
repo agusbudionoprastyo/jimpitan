@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <!-- stylesCss -->
+        <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <div class="container">
@@ -39,15 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (isset($error)): ?>
             <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
-    <form action="login.php" method="POST">
-        <label for="user_name">User:</label>
-        <input type="text" name="user_name" required>
-
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
-
-        <button type="submit">Login</button>
-    </form>
+    <div class="login-page">
+        <div class="form">  
+            <form class="login-form" action="login.php" method="POST">
+                <input type="text" name="user_name" placeholder="username" required>
+                <input type="password" name="password" placeholder="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
