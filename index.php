@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php'); // Redirect to login page
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +23,7 @@
         margin: 10px;
         padding: 0;
         overflow: hidden;
+        font-family: Arial, sans-serif;
     }
     #landscapeBlocker {
         display: none;
@@ -31,12 +42,21 @@
         max-width: 30%;
         max-height: 30%;
     }
+    .container {
+        text-align: center;
+        margin-top: 50px;
+    }
     .rounded {
         border-radius: 25px;
     }
     .roundedBtn {
         border-radius: 25px;
         background-color: #14505c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
     }
     .custom-timer-progress-bar {
         height: 4px; /* Height of the progress bar */
@@ -47,15 +67,21 @@
   </style>
 </head>
 <body>
-<div class="container">
-  <div id="qr-reader"></div>
-</div>
-<audio id="audio" src="interface.wav"></audio>
+
 <div id="landscapeBlocker">
   <img src="block.gif" alt="Please rotate your device to portrait mode">
+  <p>Please rotate your device to portrait mode.</p>
 </div>
 
-<script src="js/app.js"></script>
+<div class="container">
+  <h1>Welcome to Jimpitan</h1>
+  <p>Please scan the QR code to proceed.</p>
+  <div id="qr-reader"></div>
+  <button class="roundedBtn" onclick="startQRCodeScanner()">Start QR Scanner</button>
+</div>
 
+<audio id="audio" src="interface.wav"></audio>
+
+<script src="js/app.js"></script>
 </body>
 </html>

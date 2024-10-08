@@ -1,6 +1,10 @@
 <?php
 header('Content-Type: application/json');
 
+// Include the connection file
+require '../helper/connection.php';
+
+// Get input data
 $input = json_decode(file_get_contents('php://input'), true);
 
 if (isset($input['id_code']) && isset($input['user_name']) && isset($input['password']) && isset($input['shift'])) {
@@ -9,22 +13,9 @@ if (isset($input['id_code']) && isset($input['user_name']) && isset($input['pass
     $password = password_hash($input['password'], PASSWORD_DEFAULT); // Hash the password
     $shift = $input['shift'];
 
-    // Database connection (replace with your details)
-    $host = 'localhost'; // usually localhost
-    $db   = 'dafm5634_jimpitan'; // database name
-    $user = 'dafm5634_ag'; // database username
-    $pass = 'Ag7us777__'; // database password
-    $charset = 'utf8mb4';
-
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    $options = [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES   => false,
-    ];
-
     try {
-        $pdo = new PDO($dsn, $user, $pass, $options);
+        // Get database connection
+        $pdo = getDatabaseConnection();
 
         // Check if id_code already exists
         $stmt = $pdo->prepare('SELECT * FROM users WHERE id_code = ?');
@@ -41,7 +32,7 @@ if (isset($input['id_code']) && isset($input['user_name']) && isset($input['pass
             $stmt->execute([$idCode, $userName, $password, $shift]);
             echo json_encode(['status' => 'success', 'message' => 'User data inserted successfully.']);
         }
-    } catch (\PDOException $e) {
+    } catch (PDOException $e) {
         echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
     }
 } else {
