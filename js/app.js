@@ -44,7 +44,7 @@ function onScanSuccess(decodedText, decodedResult) {
     playAudio();
 
     // First, fetch KK name from your server
-    fetch('/api/get_kk.php', {
+    fetch('../api/get_kk.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
