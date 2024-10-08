@@ -28,10 +28,14 @@
     margin-top: -3em;
   } */
   .logo img {
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
     width: 100px; /* Set your desired width */
     height: auto; /* Maintains aspect ratio */
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     }
+
   .screen-1 .email {
     background: white;
     box-shadow: 0 0 2em #e6e9f9;
