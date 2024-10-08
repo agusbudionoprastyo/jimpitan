@@ -206,131 +206,58 @@
 //         });
 //     });
 //   }
-// Fungsi untuk menampilkan atau menyembunyikan blokir landscape
-function updateLandscapeBlocker() {
-        let landscapeBlocker = document.getElementById('landscapeBlocker');
-        if (window.orientation === 90 || window.orientation === -90) {
-            landscapeBlocker.style.display = 'flex';
-            html5QrCode.stop().catch(err => {
-                console.error('Error stopping QR Code scanner:', err);
+
+function onScanSuccess(decodedText, decodedResult) {
+    const id = decodedText;
+    playAudio();
+
+    console.log("ID QR Code:", id); // Tambahkan log untuk ID yang dipindai
+
+    fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Response Data:", data); // Log respons dari server
+        if (data.status === 'success') {
+            const additionalData = data.data.join(', ');
+            Swal.fire({
+                icon: 'success',
+                title: 'Checked',
+                text: `Checked CODE ${id}\nKK NAME ${additionalData}`,
             });
         } else {
-            landscapeBlocker.style.display = 'none';
-            startScanning();
-        }
-    }
-
-    // Mulai pemindaian saat dokumen dimuat
-    document.addEventListener('DOMContentLoaded', function() {
-        updateLandscapeBlocker();
-    });
-
-    // Tangani perubahan orientasi
-    window.addEventListener('orientationchange', function() {
-        updateLandscapeBlocker();
-    });
-
-    // Fungsi untuk memutar audio
-    function playAudio() {
-        const audio = document.getElementById('audio');
-        audio.play().catch(error => {
-            console.error('Error playing audio:', error);
-        });
-    }
-
-    // Fungsi untuk menangani hasil pemindaian
-    function onScanSuccess(decodedText, decodedResult) {
-        const id = decodedText; // Ambil ID dari QR code
-        playAudio(); // Putar audio
-
-        fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id: id }) // Kirim ID yang dipindai
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json(); // Ambil data sebagai JSON
-        })
-        .then(data => {
-            if (data.status === 'success') {
-                const additionalData = data.data.join(', '); // Gabungkan data
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Checked',
-                    text: `Checked CODE ${id}\nKK NAME ${additionalData}`, // Tampilkan data
-                    timer: 10000,
-                    timerProgressBar: true,
-                    customClass: {
-                        popup: 'rounded',
-                        timerProgressBar: 'custom-timer-progress-bar',
-                        confirmButton: 'roundedBtn'
-                    }
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: data.message // Tampilkan pesan error
-                });
-            }
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Terjadi kesalahan saat menghubungi server.'
+                text: data.message
             });
-        })
-        .finally(() => {
-            startScanning(); // Pastikan pemindaian dimulai ulang
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Terjadi kesalahan saat menghubungi server.'
         });
+    })
+    .finally(() => {
+        startScanning();
+    });
 
-        // Hentikan pemindaian setelah berhasil
-        html5QrCode.stop();
-    }
+    html5QrCode.stop();
+}
 
-    function onScanError(errorMessage) {
-        // Tangani kesalahan pemindaian (opsional)
-        console.warn(`Scan error: ${errorMessage}`);
-    }
-
-    function startScanning() {
-        // Inisialisasi pemindai QR code
-        html5QrCode.start(
-            { facingMode: "environment" }, // Gunakan kamera belakang
-            {
-                fps: 20, // Frame rate
-                qrbox: 200 // Ukuran kotak pemindaian QR code
-            },
-            onScanSuccess,
-            onScanError
-        );
-    }
-
-    // Inisialisasi instansi pemindai QR code
-    const html5QrCode = new Html5Qrcode("qr-reader");
-
-    // Mulai pemindaian dengan kamera
-    startScanning();
-
-    // Registrasi service worker
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then((registration) => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch((error) => {
-                    console.error('Service Worker registration failed:', error);
-                });
-        });
-    }
 </script>
 
 </body>
