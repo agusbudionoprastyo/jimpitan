@@ -152,8 +152,8 @@ function onScanSuccess(decodedText, decodedResult) {
             // Show SweetAlert2 popup with scanned text
             Swal.fire({
                 icon: 'success',
-                title: 'Scanned',
-                text: `Nama ${data.kk_name}`, // Display the KK name
+                title: 'Checked',
+                text: `${data.id}` `${data.kk_name}`, // Display the KK name
                 timer: 10000, // Automatically closes after 10 seconds
                 timerProgressBar: true,
                 customClass: {
