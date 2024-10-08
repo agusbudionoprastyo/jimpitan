@@ -30,6 +30,7 @@
   .logo img {
     width: 100px; /* Set your desired width */
     height: auto; /* Maintains aspect ratio */
+    margin-bottom: 1rem;
     }
   .screen-1 .email {
     background: white;
