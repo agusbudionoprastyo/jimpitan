@@ -20,11 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo = new PDO($dsn, $user, $pass, $options);
 
         // Retrieve form data
-        $idCode = $_POST['id_code'];
+        $user_name = $_POST['user_name'];
         $password = $_POST['password'];
 
         // Prepare and execute query
-        $stmt = $pdo->prepare('SELECT * FROM users WHERE id_code = ?');
+        $stmt = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
         $stmt->execute([$idCode]);
         $user = $stmt->fetch();
 
@@ -58,8 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p style="color: red;"><?php echo $error; ?></p>
         <?php endif; ?>
         <form action="login.php" method="POST">
-            <label for="id_code">ID Code:</label>
-            <input type="text" name="id_code" required>
+            <label for="user_name">User:</label>
+            <input type="text" name="user_name" required>
 
             <label for="password">Password:</label>
             <input type="password" name="password" required>
