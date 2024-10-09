@@ -1,6 +1,8 @@
 $(document).ready(function() {
 	// table initialize
 	var table = new DataTable('#example', {
+		pageLength: 10, // Set the default number of records per page to 10
+        lengthMenu: [10, 25, 50, 100], // Options for the dropdown
 		searching: true, // Aktifkan pencarian
 		order: [[1, 'asc']], // Urutkan berdasarkan kolom kedua (indeks 1), urutan ascending
 		columnDefs: [
@@ -16,7 +18,14 @@ $(document).ready(function() {
 				"targets": 2,  // Kolom ke-3 (indeks mulai dari 0)
 				"className": "text-center" 
 			}
-		]
+		],
+		language: {
+            lengthMenu: "_MENU_ Entri per halaman",
+            zeroRecords: "No records found",
+            info: "Showing page _PAGE_ of _PAGES_",
+            infoEmpty: "No records available",
+            infoFiltered: "(filtered from _MAX_ total records)"
+        }
 	});
 	// Select All functionality
 	$('#selectAllCheckbox').change(function() {
