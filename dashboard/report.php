@@ -137,7 +137,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     </tr>
                                 <?php endforeach; 
                             } else {
-                                echo '<tr><td colspan="2">No data available</td></tr>';
+                                echo '<tr><td colspan="3">No data available</td></tr>';
                             }
                         ?>
                         </tbody>
@@ -157,7 +157,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <script src="js/script.js"></script>
     <script src="js/report.js"></script>
-    <script src="js/search.js"></script>
 
     <script>
         const searchButton = document.querySelector('#content nav form .form-input button');
