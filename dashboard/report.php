@@ -137,7 +137,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     </tr>
                                 <?php endforeach; 
                             } else {
-                                echo '<tr><td colspan="3">No data available</td></tr>';
+                                echo '<tr><td colspan="2">No data available</td></tr>';
                             }
                         ?>
                         </tbody>
