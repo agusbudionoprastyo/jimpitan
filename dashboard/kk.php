@@ -108,46 +108,38 @@
 						</button>
                     </div>
                     <table id="example" class="display" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th style="text-align: left;">
-                                        Nama KK
-                                    </th>
-                                    <th style="text-align: center;">
-										Code
-									</th>
-                                    <?php
-                                    // Setelah mendapatkan data dari database
-                                    $data = $stmt->fetchAll();
+    <thead>
+        <tr>
+            <th style="text-align: left;">Nama KK</th>
+            <th style="text-align: center;">Code</th>
+            <th style="text-align: center;">
+                <input type="checkbox" id="selectAllCheckbox" style="display:none">
+                <label for="selectAllCheckbox" style="font-size:24px"><i class='bx bx-check-double'></i></label>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        // Pastikan $stmt sudah dieksekusi sebelumnya
+        $data = $stmt->fetchAll();
 
-                                    // Jika data ada, tampilkan dalam tabel
-                                    if ($data) {
-                                        foreach ($data as $row): ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row["kk_name"]); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row["code_id"]); ?>
-                                                </td>
-                                                <td>
-                                                    <input type="checkbox" class="print-checkbox">    
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; 
-                                    } else {
-                                        echo '<tr><td colspan="3">No data available</td></tr>';
-                                    }
-                                    ?>
+        // Jika data ada, tampilkan dalam tabel
+        if ($data) {
+            foreach ($data as $row): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($row["kk_name"]); ?></td>
+                    <td><?php echo htmlspecialchars($row["code_id"]); ?></td>
+                    <td>
+                        <input type="checkbox" class="print-checkbox">    
+                    </td>
+                </tr>
+            <?php endforeach; 
+        } else {
+            echo '<tr><td colspan="3">No data available</td></tr>';
+        }
+        ?>
+    </tbody>
 
-                                    <th style="text-align: center;">
-                                    <input type="checkbox" id="selectAllCheckbox" style="display:none">
-										<label for="selectAllCheckbox"  style="font-size:24px"><i class='bx bx-check-double'></i></label>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
                     </table>
                 </div>
             </div>
