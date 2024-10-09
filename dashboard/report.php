@@ -124,7 +124,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <thead>
                             <tr>
                                 <th style="text-align: left;">Nama KK</th>
-                                <th style="text-align: center;">Code</th>
+                                <th style="text-align: left;">Code</th>
                             </tr>
                         </thead>
                         <tbody>
