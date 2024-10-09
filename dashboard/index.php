@@ -10,10 +10,6 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- sweetalert2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <title>Jimpitan - RT07 Salatiga</title>
 </head>
 <body>
@@ -43,20 +39,20 @@
                 </a>
             </li>
         </ul>
-        <!-- <ul class="side-menu">
-			<li>
+        <ul class="side-menu">
+			<!-- <li>
 				<a href="#">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
 				</a>
-			</li>
+			</li> -->
 			<li>
 				<a href="#" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
 			</li>
-		</ul> -->
+		</ul>
     </section>
     <!-- SIDEBAR -->
 
@@ -158,14 +154,10 @@
                     </main>
             <!-- MAIN -->
         </section>
-
-    <!-- CONTENT -->
-    <audio id="audio" src="assets/magic.wav"></audio>
     
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="js/script.js"></script>
-    <script src="js/sse.js"></script>
 </body>
 </html>
