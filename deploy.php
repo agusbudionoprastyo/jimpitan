@@ -1,6 +1,6 @@
 <?php
 $repository = 'https://github.com/agusbudionoprastyo/jimpitan.git';
-$targetDir = '/home/dafm5634/public_html/jimpitan';
+$targetDir = '/home/dafm5634/repositories/jimpitan';
 
 // Change to the target directory
 chdir($targetDir);
