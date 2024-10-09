@@ -39,7 +39,7 @@
             <li>
             <a href="report.php">
                     <i class='bx bxs-group' ></i>
-                    <span class="text">List KK</span>
+                    <span class="text">Report</span>
                 </a>
             </li>
         </ul>

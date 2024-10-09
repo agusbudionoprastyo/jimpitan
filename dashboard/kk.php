@@ -56,7 +56,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li>
                 <a href="report.php">
                     <i class='bx bxs-dashboard' ></i>
-                    <span class="text">Dashboard</span>
+                    <span class="text">Report</span>
                 </a>
             </li>
         </ul>

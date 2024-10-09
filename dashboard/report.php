@@ -47,6 +47,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <span class="text">Dashboard</span>
                 </a>
             </li>
+            <li>
             <a href="kk.php">
                     <i class='bx bxs-group' ></i>
                     <span class="text">List KK</span>
@@ -55,11 +56,11 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li class="active">
             <a href="#">
                     <i class='bx bxs-group' ></i>
-                    <span class="text">List KK</span>
+                    <span class="text">Report</span>
                 </a>
             </li>
         </ul>
-        
+
         <!-- <ul class="side-menu">
 			<li>
 				<a href="#">
