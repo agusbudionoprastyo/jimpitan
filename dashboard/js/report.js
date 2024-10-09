@@ -1,20 +1,4 @@
 $(document).ready(function() {
-	// // table initialize
-	// var table = new DataTable('#example', {
-	// 	searching: true, // Aktifkan pencarian
-	// 	order: [[1, 'asc']], // Urutkan berdasarkan kolom kedua (indeks 1), urutan ascending
-	// 	columnDefs: [
-	// 		{ 
-	// 			"orderable": false, 
-	// 			"targets": [0] // Disable ordering for the third column (index 0)
-	// 		},
-	// 		{ 
-	// 			"targets": 1,  // Kolom ke-2 (indeks mulai dari 0)
-	// 			"className": "text-left" 
-	// 		}
-	// 	]
-	// });
-
     // Table initialize
     var table = new DataTable('#example', {
         pageLength: 10, // Set the default number of records per page to 10
@@ -32,7 +16,7 @@ $(document).ready(function() {
             }
         ],
         language: {
-            lengthMenu: "Display _MENU_ records per page",
+            lengthMenu: "_MENU_ records per page",
             zeroRecords: "No records found",
             info: "Showing page _PAGE_ of _PAGES_",
             infoEmpty: "No records available",
