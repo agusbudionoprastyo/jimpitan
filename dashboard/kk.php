@@ -37,7 +37,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- SIDEBAR -->
     <section id="sidebar">
         <a href="#" class="brand">
-            <i class='bx bx-medal'></i>
+            <i class='bx bx-square-rounded'></i>
             <span class="text">Jimpitan</span>
         </a>
         <ul class="side-menu top">
