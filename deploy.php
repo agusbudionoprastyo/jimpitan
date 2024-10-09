@@ -8,3 +8,4 @@ chdir($targetDir);
 // Pull the latest changes
 exec("git pull $repository master");
 ?>
+<!-- auto push event from github -->
