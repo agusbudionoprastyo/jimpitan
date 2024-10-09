@@ -121,7 +121,7 @@ $(document).ready(function() {
 			justify-content: center; 
 			width: 100%; /* Lebar penuh untuk memastikan konten mengisi halaman */
 			height: 100%; /* Setengah tinggi halaman untuk setiap konten */
-			color: white !important;
+			color: black !important;
 			-webkit-print-color-adjust: exact;
 		  }
 
@@ -179,8 +179,8 @@ entries.forEach(function(entry, index) {
 
     new QRCode(qrCodeDiv, {
         text: entry.nomorBIB,
-        width: 80,
-        height: 80,
+        width: 120,
+        height: 120,
         colorDark: '#000000',
         colorLight: 'rgba(255, 255, 255, 0)',
         correctLevel: QRCode.CorrectLevel.H
