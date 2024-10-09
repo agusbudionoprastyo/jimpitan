@@ -2,12 +2,19 @@
 // Include the database connection
 include 'api/db.php';
 
-// Prepare the SQL statement
+// Get the current day of the week (e.g., "Sunday", "Monday", etc.)
+$currentDay = date('l'); // 'l' gives full textual representation of the day
+
+// Prepare the SQL statement to select only today's shift
 $stmt = $pdo->prepare("
     SELECT master_kk.kk_name, users.shift 
     FROM users 
     JOIN master_kk ON users.id_code = master_kk.code_id
+    WHERE users.shift = :currentDay
 ");
+
+// Bind the parameter
+$stmt->bindParam(':currentDay', $currentDay);
 
 // Execute the SQL statement
 $stmt->execute();
@@ -15,11 +22,8 @@ $stmt->execute();
 // Fetch all results
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// // You can now work with $data, e.g., print it
-// foreach ($data as $row) {
-//     echo 'KK Name: ' . $row['kk_name'] . ' - Shift: ' . $row['shift'] . '<br>';
-// }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -145,7 +149,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 					<table id="checkin-table">
 						<thead>
 							<tr>
-								<th>KK NAME</th>
+								<th>NAMA</th>
 								<th>SHIFT</th>
 							</tr>
 						</thead>
