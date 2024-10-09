@@ -190,7 +190,6 @@ entries.forEach(function(entry, index) {
     var containerDiv = document.createElement('div');
     containerDiv.classList.add('container');
     containerDiv.innerHTML = `
-        // <img src="assets/bg.png" class="img">
         <div class="NameGroup">${entry.namaGeng}</div>
         <div class="BIBText">${entry.nomorBIB}</div>
     `;
