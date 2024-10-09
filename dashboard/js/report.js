@@ -17,6 +17,8 @@ $(document).ready(function() {
 
     // Table initialize
     var table = new DataTable('#example', {
+        pageLength: 10, // Set the default number of records per page to 10
+        lengthMenu: [10, 25, 50, 100], // Options for the dropdown
         searching: true, // Enable searching
         order: [[1, 'asc']], // Sort by the second column (index 1), ascending order
         columnDefs: [
