@@ -120,8 +120,8 @@
 					<table id="checkin-table">
 						<thead>
 							<tr>
-								<th>GENG's</th>
-								<th>BIBNUMBER</th>
+								<th>KK NAME</th>
+								<th>CODE ID</th>
                                 <th>TIMESTAMP</th>
 							</tr>
 						</thead>
