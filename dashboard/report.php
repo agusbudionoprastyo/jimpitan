@@ -2,10 +2,19 @@
 // Include the database connection
 include 'api/db.php';
 
-// Prepare and execute the SQL statement
-$stmt = $pdo->prepare("SELECT kk_name, code_id FROM master_kk"); // Update 'your_table'
+// Prepare the SQL statement to select only today's shift
+$stmt = $pdo->prepare("
+    SELECT master_kk.kk_name, report.* 
+    FROM report 
+    JOIN master_kk ON report.report_id = master_kk.code_id
+");
+
+// Execute the SQL statement
 $stmt->execute();
+
+// Fetch all results
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -133,10 +142,10 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($data as $row): ?>
                                     <tr>
                                         <td><?php echo htmlspecialchars($row["kk_name"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["code_id"]); ?></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><?php echo htmlspecialchars($row["report_id"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["nominal"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["collector"]); ?></td>
                                     </tr>
                                 <?php endforeach; 
                             } else {
