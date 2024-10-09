@@ -105,7 +105,7 @@ $(document).ready(function() {
 			<style>
 				@page { 
 					size: A4;
-					margin: 5mm; /* Adjust margins as necessary */
+					margin: 0; /* Adjust margins as necessary */
 				}
 				body {
 					display: flex;
@@ -118,7 +118,7 @@ $(document).ready(function() {
 				}
 				.container {
 					width: 45%; /* Adjust width to fit 2 per row */
-					margin: 5mm 0; /* Add margin for spacing */
+					margin: 1mm 0; /* Add margin for spacing */
 					text-align: center;
 					position: relative;
 					border: 1px solid #000; /* Add border around each container */
