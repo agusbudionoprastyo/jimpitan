@@ -5,22 +5,30 @@ header("Content-Type: application/json; charset=UTF-8");
 // Include the connection file
 require '../../helper/connection.php';
 
-// Get database connection
-$conn = getDatabaseConnection();
+try {
+    // Get database connection
+    $conn = getDatabaseConnection();
 
-// Prepare SQL statement
-$sql = "SELECT * FROM master_kk";
-$stmt = $conn->prepare($sql);
+    // Prepare SQL statement
+    $sql = "SELECT * FROM master_kk";
+    $stmt = $conn->prepare($sql);
 
-if ($stmt) {
-    $stmt->execute();
-    $data = $stmt->fetchAll();
-    echo json_encode($data);
-    
-    $stmt->close();
-} else {
-    echo json_encode(["error" => "Failed to prepare statement."]);
+    // Execute the statement
+    if ($stmt->execute()) {
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($data);
+    } else {
+        http_response_code(500);
+        echo json_encode(["error" => "Failed to execute statement."]);
+    }
+
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(["error" => "Database error: " . $e->getMessage()]);
+} finally {
+    if (isset($stmt)) {
+        $stmt->close();
+    }
+    $conn = null; // Close the connection
 }
-
-$conn = null; // Close the connection
 ?>
