@@ -73,10 +73,10 @@ $(document).ready(function() {
 				var firstThreeWords = words.slice(0, 3);
 
 				// Gabungkan 3 kata tersebut kembali dengan spasi di antara mereka
-				var namaGeng = firstThreeWords.join(' ');
+				var namaKK = firstThreeWords.join(' ');
 
-				var nomorBIB = row.cells[1].textContent.trim();
-				selectedEntries.push({ namaGeng: namaGeng, nomorBIB: nomorBIB });
+				var codeID = row.cells[1].textContent.trim();
+				selectedEntries.push({ namaKK: namaKK, codeID: codeID });
 			});
 
 			printSelectedEntries(selectedEntries);
@@ -125,14 +125,14 @@ $(document).ready(function() {
 				.qrCode {
 					margin: 0 auto;
 				}
-				.NameGroup, .BIBText {
+				.NamaKK, .CodeText {
 					font-family: 'Adumu';
 					margin-top: 5px;
 				}
-				.NameGroup {
+				.NamaKK {
 					font-size: 24px; /* Adjust size as needed */
 				}
-				.BIBText {
+				.CodeText {
 					font-size: 18px; /* Adjust size as needed */
 				}
 			</style>
@@ -148,7 +148,7 @@ $(document).ready(function() {
 			qrCodeDiv.classList.add('qrCode');
 	
 			new QRCode(qrCodeDiv, {
-				text: entry.nomorBIB,
+				text: entry.codeID,
 				width: 120,
 				height: 120,
 				colorDark: '#000000',
@@ -157,16 +157,16 @@ $(document).ready(function() {
 			});
 	
 			containerDiv.appendChild(qrCodeDiv);
-			var nameGroupDiv = document.createElement('div');
-			nameGroupDiv.className = 'NameGroup';
-			nameGroupDiv.textContent = entry.namaGeng;
+			var NamaKKDiv = document.createElement('div');
+			NamaKKDiv.className = 'NamaKK';
+			NamaKKDiv.textContent = entry.namaKK;
 	
-			var bibTextDiv = document.createElement('div');
-			bibTextDiv.className = 'BIBText';
-			bibTextDiv.textContent = entry.nomorBIB;
+			// var CodeTextDiv = document.createElement('div');
+			// CodeTextDiv.className = 'CodeText';
+			// CodeTextDiv.textContent = entry.codeID;
 	
-			containerDiv.appendChild(nameGroupDiv);
-			containerDiv.appendChild(bibTextDiv);
+			containerDiv.appendChild(NamaKKDiv);
+			// containerDiv.appendChild(CodeTextDiv);
 			iframeDoc.body.appendChild(containerDiv);
 		});
 	
@@ -183,5 +183,4 @@ $(document).ready(function() {
 				document.body.removeChild(iframe);
 			}, 100);
 		};
-	}
-	
+	}	
