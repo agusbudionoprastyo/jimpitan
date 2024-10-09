@@ -118,7 +118,7 @@ $(document).ready(function() {
 				}
 				.container {
 					width: 45%; /* Adjust width to fit 2 per row */
-					margin: 0; /* Add margin for spacing */
+					margin: 1.5mm; /* Add margin for spacing */
 					text-align: center;
 					position: relative;
 					border: 1px solid #000; /* Add border around each container */
@@ -172,8 +172,8 @@ $(document).ready(function() {
 			containerDiv.appendChild(NamaKKDiv);
 			iframeDoc.body.appendChild(containerDiv);
 	
-			// Insert a page break after every 8 entries
-			if ((index + 1) % 8 === 0) {
+			// Insert a page break after every 10 entries
+			if ((index + 1) % 10 === 0) {
 				var pageBreakDiv = document.createElement('div');
 				pageBreakDiv.className = 'page-break';
 				iframeDoc.body.appendChild(pageBreakDiv);
