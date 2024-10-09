@@ -18,6 +18,17 @@ $(document).ready(function() {
 			}
 		]
 	});
+	// Select All functionality
+	$('#selectAllCheckbox').change(function() {
+		var isChecked = $(this).prop('checked');
+		$('.print-checkbox').prop('checked', isChecked);
+	});
+
+	// Handle individual checkbox change
+	$('.print-checkbox').change(function() {
+		var allChecked = $('.print-checkbox:checked').length === $('.print-checkbox').length;
+		$('#selectAllCheckbox').prop('checked', allChecked);
+	});
 
 	// Event listener untuk "Enter" pada #search-input
 	$('#search-input').keypress(function(event) {
@@ -38,19 +49,7 @@ $(document).ready(function() {
 	$('.clear-btn').click(function(event) {
 		$('#search-input').val(''); // Mengosongkan nilai input pencarian
 		table.search('').draw(); // Mereset pencarian pada tabel
-		});
-
-	// Select All functionality
-	$('#selectAllCheckbox').change(function() {
-		var isChecked = $(this).prop('checked');
-		$('.print-checkbox').prop('checked', isChecked);
-	});
-
-	// Handle individual checkbox change
-	$('.print-checkbox').change(function() {
-		var allChecked = $('.print-checkbox:checked').length === $('.print-checkbox').length;
-		$('#selectAllCheckbox').prop('checked', allChecked);
-	});
+		});	
 
 	});
 

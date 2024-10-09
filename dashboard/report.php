@@ -116,9 +116,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="order">
                     <div class="head">
                         <h3>Report</h3>
-						<button type="button" id="printSelectedBtn" class="btn-download">
-							Print QR <i class='bx bxs-printer' style="font-size:24px"></i>
-						</button>
                     </div>
                     <table id="example" class="display" style="width:100%">
                         <thead>
