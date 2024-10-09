@@ -105,79 +105,68 @@ $(document).ready(function() {
 			<style>
 				@page { 
 					size: A4;
-					margin: 10mm; /* Adjust margins as necessary */
+					margin: 0; /* No margin for better label alignment */
 				}
 				body {
 					display: flex;
 					flex-wrap: wrap;
-					justify-content: space-around;
-					align-items: center;
+					justify-content: flex-start; /* Align items to the start */
+					align-items: flex-start; /* Align items to the top */
 					padding: 0;
 					margin: 0;
 					height: 100%;
+					font-family: 'Adumu', sans-serif; /* Add your font */
 				}
-				.container {
-					width: 45%; /* Adjust width to fit 2 per row */
-					margin: 5mm 0; /* Add margin for spacing */
-					text-align: center;
+				.label {
+					width: 100mm; /* Label width */
+					height: 50mm; /* Label height */
+					margin: 0; /* No margin */
+					padding: 5mm; /* Optional padding */
+					box-sizing: border-box; /* Include padding in width/height */
+					border: 1px solid #000; /* Add border around each label */
+					display: flex;
+					flex-direction: column;
+					justify-content: center; /* Center content vertically */
+					align-items: center; /* Center content horizontally */
 					position: relative;
-					border: 2px solid #000; /* Add border around each container */
-					border-radius: 5px; /* Optional: add border radius */
-					padding: 10px; /* Add padding for spacing inside the border */
+					page-break-inside: avoid; /* Avoid page breaks inside labels */
 				}
 				.qrCode {
 					margin: 0 auto;
 				}
-				.NamaKK, .CodeText {
-					font-family: 'Adumu';
-					margin-top: 5px;
-				}
 				.NamaKK {
-					font-size: 24px; /* Adjust size as needed */
-				}
-				.CodeText {
 					font-size: 18px; /* Adjust size as needed */
-				}
-				/* Page break style */
-				.page-break {
-					page-break-after: always; /* Add page break after this element */
-					display: block; /* Ensure it occupies space */
+					text-align: center; /* Center text */
+					margin-top: 5px; /* Space between QR and text */
 				}
 			</style>
 		</head>
 		<body>
 		`);
 	
-		entries.forEach(function(entry, index) {
-			var containerDiv = document.createElement('div');
-			containerDiv.classList.add('container');
+		entries.forEach(function(entry) {
+			var labelDiv = document.createElement('div');
+			labelDiv.classList.add('label');
 	
 			var qrCodeDiv = document.createElement('div');
 			qrCodeDiv.classList.add('qrCode');
 	
 			new QRCode(qrCodeDiv, {
 				text: entry.codeID,
-				width: 120,
-				height: 120,
+				width: 40, // Adjust QR size as needed
+				height: 40,
 				colorDark: '#000000',
 				colorLight: 'rgba(255, 255, 255, 0)',
 				correctLevel: QRCode.CorrectLevel.H
 			});
 	
-			containerDiv.appendChild(qrCodeDiv);
+			labelDiv.appendChild(qrCodeDiv);
 			var NamaKKDiv = document.createElement('div');
 			NamaKKDiv.className = 'NamaKK';
 			NamaKKDiv.textContent = entry.namaKK;
 	
-			containerDiv.appendChild(NamaKKDiv);
-			iframeDoc.body.appendChild(containerDiv);
-	
-			// Insert a page break after every 8 entries
-			if ((index + 1) % 8 === 0) {
-				var pageBreakDiv = document.createElement('div');
-				pageBreakDiv.className = 'page-break';
-				iframeDoc.body.appendChild(pageBreakDiv);
-			}
+			labelDiv.appendChild(NamaKKDiv);
+			iframeDoc.body.appendChild(labelDiv);
 		});
 	
 		iframeDoc.write(`
@@ -193,4 +182,4 @@ $(document).ready(function() {
 				document.body.removeChild(iframe);
 			}, 100);
 		};
-	}		
+	}			
