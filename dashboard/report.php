@@ -126,7 +126,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="head">
                         <h3>Report</h3>
                     </div>
-                    <table id="example" class="display" style="width:100%">
+                    <!-- <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th style="text-align: left;">Nama KK</th>
@@ -152,6 +152,34 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 echo '<tr><td colspan="3">No data available</td></tr>';
                             }
                         ?>
+                        </tbody>
+                    </table> -->
+                    <table id="example" class="min-w-full divide-y divide-gray-200" style="width:100%">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama KK</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jimpitan Tanggal</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nominal</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Input By</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <?php
+                                if ($data) {
+                                    foreach ($data as $row): ?>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($row["kk_name"]); ?></td>
+                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($row["report_id"]); ?></td>
+                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
+                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($row["nominal"]); ?></td>
+                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($row["collector"]); ?></td>
+                                        </tr>
+                                    <?php endforeach; 
+                                } else {
+                                    echo '<tr><td colspan="5" class="px-6 py-4 text-center">No data available</td></tr>';
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>
