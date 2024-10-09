@@ -43,19 +43,7 @@ html {
 body.dark {
 	--light: #0C0C1E;
 	--grey: #060714;
-	--dark: #FBFBFB;
-}
-/* Adjust DataTable styles for dark mode */
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-	background: #2d3748; /* Dark background for buttons */
-	color: #f7fafc; /* Light text for buttons */
-}
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-	background: #4a5568; /* Darker background on hover */
-}
-.dataTables_wrapper .dataTables_length label,
-.dataTables_wrapper .dataTables_info {
-	color: #f7fafc; /* Light text color */
+	--dark: #454444;
 }
 
 body {
