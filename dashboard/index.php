@@ -38,7 +38,7 @@
             </li>
             <li>
             <a href="report.php">
-                    <i class='bx bxs-group' ></i>
+                    <i class='bx bxs-report'></i>
                     <span class="text">Report</span>
                 </a>
             </li>
