@@ -86,12 +86,6 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- <div class="marquee">
-                <div class="marquee__inner">
-                    <p class="marquee__line" id="running-text">Fun Run - Lari Antar Geng</p>
-                </div>
-            </div> -->
             
             <ul class="box-info">
                 <li>
@@ -118,7 +112,7 @@
             </ul>
 
 
-            <!-- <div class="table-data">
+            <div class="table-data">
 				<div class="order">
 					<div class="head">
                         <h3 id="current-time"></h3>
@@ -134,7 +128,7 @@
 						<tbody id="checkin-table-body">
 						</tbody>
 					</table>
-                </div> -->
+                </div>
 
                     <div class="todo">
                         <div class="head">
