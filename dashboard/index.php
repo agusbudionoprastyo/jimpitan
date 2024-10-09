@@ -74,7 +74,7 @@
         <main>
             <div class="head-title">
                 <div class="left">
-                    <!-- <h1>Fun Run - Lari Antar Geng</h1> -->
+                <h1>Jimpitan - RT07 Salatiga</h1>
                     <ul class="breadcrumb">
                         <li>
                             <a href="#">Dashboard</a>
