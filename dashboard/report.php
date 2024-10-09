@@ -50,7 +50,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li>
             <a href="kk.php">
                     <i class='bx bxs-group' ></i>
-                    <span class="text">List KK</span>
+                    <span class="text">KK</span>
                 </a>
             </li>
             <li class="active">
@@ -102,7 +102,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h1>Jimpitan - RT07 Salatiga</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="#">List KK</a>
+                            <a href="#">Report</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
@@ -115,20 +115,16 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>List KK</h3>
-						<button type="button" id="printSelectedBtn" class="btn-download">
+                        <h3>Report</h3>
+						<!-- <button type="button" id="printSelectedBtn" class="btn-download">
 							Print QR <i class='bx bxs-printer' style="font-size:24px"></i>
-						</button>
+						</button> -->
                     </div>
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th style="text-align: left;">Nama KK</th>
                                 <th style="text-align: center;">Code</th>
-                                <th style="text-align: center;">
-                                    <input type="checkbox" id="selectAllCheckbox" style="display:none">
-                                    <label for="selectAllCheckbox" style="font-size:24px"><i class='bx bx-check-double'></i></label>
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -138,9 +134,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <tr>
                                         <td><?php echo htmlspecialchars($row["kk_name"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["code_id"]); ?></td>
-                                        <td>
-                                            <input type="checkbox" class="print-checkbox">    
-                                        </td>
                                     </tr>
                                 <?php endforeach; 
                             } else {
@@ -163,8 +156,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.tailwindcss.js"></script>
 
     <script src="js/script.js"></script>
-    <script src="js/print.js"></script>
-	<script src="js/qrcode.min.js"></script>
 
     <script>
         const searchButton = document.querySelector('#content nav form .form-input button');

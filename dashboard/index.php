@@ -33,7 +33,7 @@
             <li>
             <a href="kk.php">
                     <i class='bx bxs-group' ></i>
-                    <span class="text">List KK</span>
+                    <span class="text">KK</span>
                 </a>
             </li>
             <li>

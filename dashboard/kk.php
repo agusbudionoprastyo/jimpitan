@@ -50,7 +50,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li class="active">
             <a href="#">
                     <i class='bx bxs-group' ></i>
-                    <span class="text">List KK</span>
+                    <span class="text">KK</span>
                 </a>
             </li>
             <li>
@@ -101,7 +101,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h1>Jimpitan - RT07 Salatiga</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="#">List KK</a>
+                            <a href="#">KK</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
@@ -114,7 +114,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>List KK</h3>
+                        <h3>KK</h3>
 						<button type="button" id="printSelectedBtn" class="btn-download">
 							Print QR <i class='bx bxs-printer' style="font-size:24px"></i>
 						</button>
