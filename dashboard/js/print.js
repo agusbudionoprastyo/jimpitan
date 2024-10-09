@@ -105,7 +105,7 @@ $(document).ready(function() {
 			<style>
 				@page { 
 					size: A4;
-					margin: 10mm; /* Adjust margins as necessary */
+					margin: 5mm; /* Adjust margins as necessary */
 				}
 				body {
 					display: flex;
