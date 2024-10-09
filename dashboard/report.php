@@ -122,6 +122,9 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <th style="text-align: left;">Nama KK</th>
                                 <th style="text-align: left;">Code</th>
+                                <th style="text-align: left;">Jimpitan Tanggal</th>
+                                <th style="text-align: left;">Nominal</th>
+                                <th style="text-align: left;">Input By</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,6 +134,9 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <tr>
                                         <td><?php echo htmlspecialchars($row["kk_name"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["code_id"]); ?></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 <?php endforeach; 
                             } else {

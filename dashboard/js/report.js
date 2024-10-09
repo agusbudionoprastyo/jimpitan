@@ -10,7 +10,7 @@ $(document).ready(function() {
 			},
 			{ 
 				"targets": 1,  // Kolom ke-2 (indeks mulai dari 0)
-				"className": "text-center" 
+				"className": "text-left" 
 			}
 		]
 	});
