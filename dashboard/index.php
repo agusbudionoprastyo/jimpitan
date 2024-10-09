@@ -1,3 +1,26 @@
+<?php
+// Include the database connection
+include 'api/db.php';
+
+// Prepare the SQL statement
+$stmt = $pdo->prepare("
+    SELECT master_kk.kk_name, users.shift 
+    FROM users 
+    JOIN master_kk ON users.id_code = master_kk.code_id
+");
+
+// Execute the SQL statement
+$stmt->execute();
+
+// Fetch all results
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// // You can now work with $data, e.g., print it
+// foreach ($data as $row) {
+//     echo 'KK Name: ' . $row['kk_name'] . ' - Shift: ' . $row['shift'] . '<br>';
+// }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,16 +140,28 @@
             <div class="table-data">
 				<div class="order">
 					<div class="head">
-                        <h3 id="current-time"></h3>
+                    <h3>Jaga Malam</h3>
 					</div>
 					<table id="checkin-table">
 						<thead>
 							<tr>
 								<th>KK NAME</th>
-								<th>CODE ID</th>
+								<th>SHIFT</th>
 							</tr>
 						</thead>
-						<tbody id="checkin-table-body">
+						<tbody>
+                        <?php
+                            if ($data) {
+                                foreach ($data as $row): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($row["kk_name"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["shift"]); ?></td>
+                                    </tr>
+                                <?php endforeach; 
+                            } else {
+                                echo '<tr><td colspan="3">No data available</td></tr>';
+                            }
+                        ?>
 						</tbody>
 					</table>
                 </div>
