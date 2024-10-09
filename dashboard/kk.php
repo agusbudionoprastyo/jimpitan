@@ -30,7 +30,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <title>FunRun - Lari Antar Geng</title>
+    <title>Jimpitan</title>
 </head>
 <body>
 
@@ -92,10 +92,10 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Fun Run - Lari Antar Geng</h1>
+                    <h1>Jimpitan - RT07 Salatiga</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="#">List Runner's</a>
+                            <a href="#">List KK</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
@@ -159,7 +159,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="js/print.js"></script>
 	<script src="js/qrcode.min.js"></script>
 
-    <!-- <script>
+    <script>
         const searchButton = document.querySelector('#content nav form .form-input button');
         const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
         const searchForm = document.querySelector('#content nav form');
@@ -189,7 +189,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 searchForm.classList.remove('show');
             }
         })
-    </script> -->
-
+    </script>
 </body>
 </html>
