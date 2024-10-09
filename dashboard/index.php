@@ -123,17 +123,16 @@
 					<div class="head">
                         <h3 id="current-time"></h3>
 					</div>
-					<table id="checkin-table">
+					<!-- <table id="checkin-table">
 						<thead>
 							<tr>
 								<th>KK NAME</th>
 								<th>CODE ID</th>
-                                <!-- <th>TIMESTAMP</th> -->
 							</tr>
 						</thead>
 						<tbody id="checkin-table-body">
 						</tbody>
-					</table>
+					</table> -->
                 </div>
 
                     <div class="todo">
