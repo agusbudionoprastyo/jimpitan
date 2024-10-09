@@ -122,7 +122,7 @@
 							<tr>
 								<th>KK NAME</th>
 								<th>CODE ID</th>
-                                <th>TIMESTAMP</th>
+                                <!-- <th>TIMESTAMP</th> -->
 							</tr>
 						</thead>
 						<tbody id="checkin-table-body">
