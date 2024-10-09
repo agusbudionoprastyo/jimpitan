@@ -115,7 +115,7 @@
 
 
             <div class="table-data">
-				<!-- <div class="order">
+				<div class="order">
 					<div class="head">
                         <h3 id="current-time"></h3>
 					</div>
@@ -129,9 +129,9 @@
 						<tbody id="checkin-table-body">
 						</tbody>
 					</table>
-                </div> -->
+                </div>
 
-                    <div class="todo">
+                    <!-- <div class="todo">
                         <div class="head">
                             <h3>Jaga Malam</h3>
                         </div>
@@ -149,7 +149,7 @@
                             <li class="sixth">
                             </li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </main>
             <!-- MAIN -->
