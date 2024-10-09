@@ -69,7 +69,7 @@ if (!isset($_SESSION['user'])) {
 <body>
 
 <div id="landscapeBlocker">
-  <img src="block.gif" alt="Please rotate your device to portrait mode">
+  <img src="assets/image/block.gif" alt="Please rotate your device to portrait mode">
   <p>Please rotate your device to portrait mode.</p>
 </div>
 
@@ -79,7 +79,7 @@ if (!isset($_SESSION['user'])) {
   <div id="qr-reader"></div>
 </div>
 
-<audio id="audio" src="interface.wav"></audio>
+<audio id="audio" src="assets/audio/interface.wav"></audio>
 
 <script src="js/app.js"></script>
 </body>

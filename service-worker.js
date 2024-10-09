@@ -1,10 +1,11 @@
-const CACHE_NAME = 'cila-cache-v1';
+const CACHE_NAME = 'jimpitan-cache-v1';
 const urlsToCache = [
   '/',
-  'index.html',
+  'index.php',
+  'login.php',
   'manifest.json',
-  'interface.wav',
-  'block.gif'
+  'assets/audio/interface.wav',
+  'assets/image/block.gif'
 ];
 
 self.addEventListener('install', (event) => {
