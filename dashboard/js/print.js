@@ -83,18 +83,16 @@ $(document).ready(function() {
 		});
 	});
 
-		function printSelectedEntries(entries) {
-		// Buat elemen iframe secara dinamis
+	function printSelectedEntries(entries) {
+		// Create an iframe element dynamically
 		var iframe = document.createElement('iframe');
-		// Tetapkan beberapa gaya untuk iframe
 		iframe.style.position = 'absolute';
-		iframe.style.left = '-9999px'; // Mengatur posisi di luar layar
-		iframe.style.width = '200mm'; // Menetapkan lebar iframe sesuai gaya label
-		iframe.style.height = '145mm'; // Menetapkan tinggi iframe sesuai gaya label
-		iframe.style.border = 'none'; // Menghapus border iframe
-		iframe.style.display = 'none'; // Sembunyikan iframe dari tampilan pengguna
+		iframe.style.left = '-9999px'; // Position outside the screen
+		iframe.style.width = '210mm'; // Set width to A4
+		iframe.style.height = '297mm'; // Set height to A4
+		iframe.style.border = 'none'; // Remove border
 		document.body.appendChild(iframe);
-
+	
 		var iframeDoc = iframe.contentWindow.document;
 		iframeDoc.open();
 		iframeDoc.write(`
@@ -103,120 +101,87 @@ $(document).ready(function() {
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>Print Qr</title>
-		<style>
-		@font-face {
-						font-family: 'Adumu'; /* Nama font yang akan digunakan */
-						src: url('assets/Adumu.ttf') format('truetype'); /* Lokasi file TTF */
-					}
-
-		  @page { 
-			size: A4;
-			margin:3.5mm;
-		  }
-
-		  body {
-			padding: 0;
-			flex-direction: column; /* Tampilkan konten secara vertikal */
-			justify-content: center; 
-			width: 100%; /* Lebar penuh untuk memastikan konten mengisi halaman */
-			height: 100%; /* Setengah tinggi halaman untuk setiap konten */
-			color: black !important;
-			-webkit-print-color-adjust: exact;
-		  }
-
-		  .container {
-			height: 145mm; /* Ketinggian halaman */
-			width: 200mm; /* Lebar halaman */
-			position: relative;
-			border: 1px solid grey;
-			page-break-after: always; /* Force page break after each container */
-		  }
-
-		  .img {
-				max-width: 100%;
-				height: auto;
-				display: block;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				z-index: -1; /* Letakkan di belakang konten utama */
-			}		
-
-		  .NameGroup {
-			position: absolute;
-			top: 50%; /* Adjust vertically */
-			left: 50%;
-			transform: translate(-50%, -50%);
-			text-align: center;
-			font-size: 88px;
-			font-family: 'Adumu';
-			line-height: 88px;
-			letter-spacing: 10px;
-		  }
-
-		  .BIBText {
-			position: absolute;
-			top: 95mm; /* Adjust vertically */
-			left: 2mm;
-			text-align: center;
-			font-size: 45px;
-			font-family: 'Adumu';
-			letter-spacing: 5px;
-		  }
-		</style>
-	</head>
-	<body>
-`);
-
-entries.forEach(function(entry, index) {
-    var qrCodeDiv = document.createElement('div');
-    // Setting style for qrCodeDiv...
-	qrCodeDiv.style.position = 'absolute'; // atau 'relative' tergantung dari kebutuhan layout
-	qrCodeDiv.style.top = '88mm'; // Atur posisi dari atas
-	qrCodeDiv.style.right = '2mm'; // Atur posisi dari left
-
-    new QRCode(qrCodeDiv, {
-        text: entry.nomorBIB,
-        width: 120,
-        height: 120,
-        colorDark: '#000000',
-        colorLight: 'rgba(255, 255, 255, 0)',
-        correctLevel: QRCode.CorrectLevel.H
-    });
-
-    // Membuat container untuk setiap entri
-    var containerDiv = document.createElement('div');
-    containerDiv.classList.add('container');
-    containerDiv.innerHTML = `
-        <div class="NameGroup">${entry.namaGeng}</div>
-        <div class="BIBText">${entry.nomorBIB}</div>
-    `;
-    containerDiv.appendChild(qrCodeDiv);
-
-	iframeDoc.body.appendChild(containerDiv);
-
-    // // Tambahkan page break setelah setiap dua konten
-    // if ((index + 1) % 2 === 0 && index !== entries.length - 1) {
-    //     var pageBreakDiv = document.createElement('div');
-    //     pageBreakDiv.style.pageBreakAfter = 'always';
-    //     iframeDoc.body.appendChild(pageBreakDiv);
-    // }
-});
-
-
-iframeDoc.write(`
-	</body>
-	</html>
-`);
-
-iframeDoc.close();
-
-iframe.onload = function() {
-	iframe.contentWindow.print();
-	setTimeout(function() {
-		document.body.removeChild(iframe);
-	}, 100);
-};
-}
+			<title>Print QR Codes</title>
+			<style>
+				@page { 
+					size: A4;
+					margin: 10mm; /* Adjust margins as necessary */
+				}
+				body {
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: space-around;
+					align-items: center;
+					padding: 0;
+					margin: 0;
+					height: 100%;
+				}
+				.container {
+					width: 45%; /* Adjust width to fit 2 per row */
+					margin: 5mm 0; /* Add margin for spacing */
+					text-align: center;
+					position: relative;
+				}
+				.qrCode {
+					margin: 0 auto;
+				}
+				.NameGroup, .BIBText {
+					font-family: 'Adumu';
+					margin-top: 5px;
+				}
+				.NameGroup {
+					font-size: 24px; /* Adjust size as needed */
+				}
+				.BIBText {
+					font-size: 18px; /* Adjust size as needed */
+				}
+			</style>
+		</head>
+		<body>
+		`);
+	
+		entries.forEach(function(entry) {
+			var containerDiv = document.createElement('div');
+			containerDiv.classList.add('container');
+	
+			var qrCodeDiv = document.createElement('div');
+			qrCodeDiv.classList.add('qrCode');
+	
+			new QRCode(qrCodeDiv, {
+				text: entry.nomorBIB,
+				width: 120,
+				height: 120,
+				colorDark: '#000000',
+				colorLight: 'rgba(255, 255, 255, 0)',
+				correctLevel: QRCode.CorrectLevel.H
+			});
+	
+			containerDiv.appendChild(qrCodeDiv);
+			var nameGroupDiv = document.createElement('div');
+			nameGroupDiv.className = 'NameGroup';
+			nameGroupDiv.textContent = entry.namaGeng;
+	
+			var bibTextDiv = document.createElement('div');
+			bibTextDiv.className = 'BIBText';
+			bibTextDiv.textContent = entry.nomorBIB;
+	
+			containerDiv.appendChild(nameGroupDiv);
+			containerDiv.appendChild(bibTextDiv);
+			iframeDoc.body.appendChild(containerDiv);
+		});
+	
+		iframeDoc.write(`
+		</body>
+		</html>
+		`);
+	
+		iframeDoc.close();
+	
+		iframe.onload = function() {
+			iframe.contentWindow.print();
+			setTimeout(function() {
+				document.body.removeChild(iframe);
+			}, 100);
+		};
+	}
+	
