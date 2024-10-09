@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li>
-            <a href="peserta.php">
+            <a href="kk.php">
                     <i class='bx bxs-group' ></i>
                     <span class="text">List KK</span>
                 </a>

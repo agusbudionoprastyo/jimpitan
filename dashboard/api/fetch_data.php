@@ -8,20 +8,13 @@ require '../../helper/connection.php';
 // Get database connection
 $conn = getDatabaseConnection();
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Prepare SQL statement
 $sql = "SELECT * FROM master_kk";
 $stmt = $conn->prepare($sql);
 
 if ($stmt) {
     $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Fetch data
-    $data = $result->fetch_all(MYSQLI_ASSOC);
+    $data = $stmt->fetchAll();
     echo json_encode($data);
     
     $stmt->close();
@@ -29,5 +22,5 @@ if ($stmt) {
     echo json_encode(["error" => "Failed to prepare statement."]);
 }
 
-$conn->close();
+$conn = null; // Close the connection
 ?>
