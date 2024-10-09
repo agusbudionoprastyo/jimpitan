@@ -53,6 +53,12 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <span class="text">List KK</span>
                 </a>
             </li>
+            <li>
+                <a href="report.php">
+                    <i class='bx bxs-dashboard' ></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
         </ul>
         <!-- <ul class="side-menu">
 			<li>
