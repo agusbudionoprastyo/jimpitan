@@ -103,7 +103,7 @@ $(document).ready(function() {
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>Print BIB</title>
+			<title>Print Qr</title>
 		<style>
 		@font-face {
 						font-family: 'Adumu'; /* Nama font yang akan digunakan */
@@ -181,7 +181,7 @@ entries.forEach(function(entry, index) {
         text: entry.nomorBIB,
         width: 80,
         height: 80,
-        colorDark: '#ffffff',
+        colorDark: '#000000',
         colorLight: 'rgba(255, 255, 255, 0)',
         correctLevel: QRCode.CorrectLevel.H
     });
@@ -190,7 +190,7 @@ entries.forEach(function(entry, index) {
     var containerDiv = document.createElement('div');
     containerDiv.classList.add('container');
     containerDiv.innerHTML = `
-        <img src="assets/bg.png" class="img">
+        // <img src="assets/bg.png" class="img">
         <div class="NameGroup">${entry.namaGeng}</div>
         <div class="BIBText">${entry.nomorBIB}</div>
     `;
