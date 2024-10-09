@@ -164,16 +164,16 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Input By</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody>
                             <?php
                                 if ($data) {
                                     foreach ($data as $row): ?>
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($row["kk_name"]); ?></td>
-                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($row["report_id"]); ?></td>
-                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
-                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($row["nominal"]); ?></td>
-                                            <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($row["collector"]); ?></td>
+                                            <td><?php echo htmlspecialchars($row["kk_name"]); ?></td>
+                                            <td><?php echo htmlspecialchars($row["report_id"]); ?></td>
+                                            <td><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
+                                            <td><?php echo htmlspecialchars($row["nominal"]); ?></td>
+                                            <td><?php echo htmlspecialchars($row["collector"]); ?></td>
                                         </tr>
                                     <?php endforeach; 
                                 } else {
