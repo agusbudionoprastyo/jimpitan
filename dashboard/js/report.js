@@ -16,7 +16,7 @@ $(document).ready(function() {
             }
         ],
         language: {
-            lengthMenu: "_MENU_ records per page",
+            lengthMenu: "_MENU_ data per halaman",
             zeroRecords: "No records found",
             info: "Showing page _PAGE_ of _PAGES_",
             infoEmpty: "No records available",
