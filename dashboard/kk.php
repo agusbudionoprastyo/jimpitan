@@ -123,19 +123,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-							<?php while($row = $result_data->fetch_assoc()): ?>
-                            <tr>
-                                <td>
-                                    <?php echo $row["NAMA_GENG"]; ?>
-                                </td>
-                                <td>
-									<?php echo $row["BIB_NUMBER"]; ?>
-								</td>
-                                <td>
-                                    <input type="checkbox" class="print-checkbox">    
-                                </td>
-                            </tr>
-                        	<?php endwhile; ?>
                             </tbody>
                     </table>
                 </div>
