@@ -24,7 +24,7 @@ $endDateFormatted = $endDate->format('Y-m-d');
 
 // Query untuk mengambil data
 $sql = "SELECT report_id, jimpitan_date, nominal, collector
-        FROM your_table_name
+        FROM report
         WHERE jimpitan_date BETWEEN :start_date AND :end_date
         AND report_id = 'RT0700001'";
 $stmt = $pdo->prepare($sql);
