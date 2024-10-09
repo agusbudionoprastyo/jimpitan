@@ -1,3 +1,7 @@
+<?php
+	require_once 'api/fetch_data.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +32,7 @@
     <section id="sidebar">
         <a href="#" class="brand">
             <i class='bx bx-medal'></i>
-            <span class="text">FunRun</span>
+            <span class="text">Jimpitan</span>
         </a>
         <ul class="side-menu top">
             <li>
@@ -40,7 +44,7 @@
             <li class="active">
             <a href="#">
                     <i class='bx bxs-group' ></i>
-                    <span class="text">List Runner's</span>
+                    <span class="text">List KK</span>
                 </a>
             </li>
         </ul>
@@ -98,7 +102,7 @@
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>List Runner's</h3>
+                        <h3>List KK</h3>
 						<button type="button" id="printSelectedBtn" class="btn-download">
 							<i class='bx bxs-printer' style="font-size:24px"></i>
 						</button>
@@ -107,11 +111,35 @@
                             <thead>
                                 <tr>
                                     <th style="text-align: left;">
-                                        Nama Geng
+                                        Nama KK
                                     </th>
                                     <th style="text-align: center;">
-										Nomor BIB
+										Code
 									</th>
+                                    <?php
+                                    // Setelah mendapatkan data dari database
+                                    $data = $stmt->fetchAll();
+
+                                    // Jika data ada, tampilkan dalam tabel
+                                    if ($data) {
+                                        foreach ($data as $row): ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row["kk_name"]); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row["code_id"]); ?>
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" class="print-checkbox">    
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; 
+                                    } else {
+                                        echo '<tr><td colspan="3">No data available</td></tr>';
+                                    }
+                                    ?>
+
                                     <th style="text-align: center;">
                                     <input type="checkbox" id="selectAllCheckbox" style="display:none">
 										<label for="selectAllCheckbox"  style="font-size:24px"><i class='bx bx-check-double'></i></label>
