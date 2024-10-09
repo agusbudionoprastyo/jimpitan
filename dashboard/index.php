@@ -118,10 +118,9 @@
             </ul>
 
 
-            <div class="table-data">
+            <!-- <div class="table-data">
 				<div class="order">
 					<div class="head">
-						<!-- <h3>Recent</h3> -->
                         <h3 id="current-time"></h3>
 					</div>
 					<table id="checkin-table">
@@ -135,7 +134,7 @@
 						<tbody id="checkin-table-body">
 						</tbody>
 					</table>
-                </div>
+                </div> -->
 
                     <div class="todo">
                         <div class="head">
