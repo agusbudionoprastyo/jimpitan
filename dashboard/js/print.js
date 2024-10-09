@@ -118,7 +118,7 @@ $(document).ready(function() {
 				}
 				.container {
 					width: 45%; /* Adjust width to fit 2 per row */
-					margin: 1.5mm; /* Add margin for spacing */
+					margin: 1.75mm; /* Add margin for spacing */
 					text-align: center;
 					position: relative;
 					border: 1px solid #000; /* Add border around each container */
@@ -160,7 +160,7 @@ $(document).ready(function() {
 				width: 120,
 				height: 120,
 				colorDark: '#000000',
-				colorLight: 'rgba(255, 255, 255, 0)',
+				// colorLight: 'rgba(255, 255, 255, 0)',
 				correctLevel: QRCode.CorrectLevel.H
 			});
 	
