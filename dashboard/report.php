@@ -100,7 +100,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </form>
             <input type="checkbox" id="switch-mode" hidden>
-            <!-- <label for="switch-mode" class="switch-mode"></label> -->
+            <label for="switch-mode" class="switch-mode"></label>
         </nav>
         <!-- NAVBAR -->
 
