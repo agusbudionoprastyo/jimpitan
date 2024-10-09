@@ -46,6 +46,11 @@ body.dark {
 	--dark: #454545;
 }
 
+/* Styles for dark mode header text */
+body.dark .dataTables_wrapper th {
+	color: #f7fafc; /* Light text color for headers */
+}
+
 body {
 	background: var(--grey);
 	overflow-x: hidden;
