@@ -157,11 +157,11 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <table id="example" class="min-w-full divide-y divide-gray-200" style="width:100%">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama KK</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jimpitan Tanggal</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nominal</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Input By</th>
+                                <th>Nama KK</th>
+                                <th>Code</th>
+                                <th>Jimpitan Tanggal</th>
+                                <th>Nominal</th>
+                                <th>Input By</th>
                             </tr>
                         </thead>
                         <tbody>
