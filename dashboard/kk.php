@@ -1,5 +1,11 @@
 <?php
-	require_once 'api/fetch_data.php';
+// Include the database connection
+include 'api/db.php';
+
+// Prepare and execute the SQL statement
+$stmt = $pdo->prepare("SELECT kk_name, code_id FROM master_kk"); // Update 'your_table'
+$stmt->execute();
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -119,11 +125,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            // Pastikan $stmt sudah dieksekusi sebelumnya
-                            $data = $stmt->fetchAll();
-
-                            // Jika data ada, tampilkan dalam tabel
+                        <?php
                             if ($data) {
                                 foreach ($data as $row): ?>
                                     <tr>
@@ -137,7 +139,7 @@
                             } else {
                                 echo '<tr><td colspan="3">No data available</td></tr>';
                             }
-                            ?>
+                        ?>
                         </tbody>
                     </table>
                 </div>
