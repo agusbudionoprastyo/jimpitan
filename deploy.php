@@ -1,20 +1,24 @@
 <?php
-$repository = 'https://github.com/agusbudionoprastyo/jimpitan.git';
-$targetDir = '/home/dafm5634/repositories/jimpitan';
+// deploy.php
 
-// Change to the target directory
-chdir($targetDir);
+// Get the raw POST data
+$payload = file_get_contents('php://input');
+file_put_contents('webhook.log', $payload, FILE_APPEND); // Log the payload
 
-// Pull the latest changes
-$output = [];
-$return_var = 0;
+// Decode the JSON data
+$data = json_decode($payload, true);
 
-exec("git pull $repository main 2>&1", $output, $return_var);
+// Check if the action is a push event
+if (isset($data['ref']) && strpos($data['ref'], 'refs/heads/') === 0) {
+    // Path to your repository
+    $repoPath = '/home/dafm5634/repositories/jimpitan';
 
-if ($return_var !== 0) {
-    // Jika ada kesalahan, tampilkan output
-    echo "Error pulling repository: " . implode("\n", $output);
-} else {
-    echo "Repository updated successfully.";
+    // Execute the git pull command
+    $output = shell_exec("cd $repoPath && git pull origin main 2>&1");
+    
+    // Log the output
+    file_put_contents('deploy.log', $output, FILE_APPEND);
 }
+
+http_response_code(200); // Respond with a 200 OK status
 ?>
