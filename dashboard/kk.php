@@ -163,6 +163,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <script src="js/script.js"></script>
     <script src="js/print.js"></script>
+    <script src="js/search.js"></script>
 	<script src="js/qrcode.min.js"></script>
 
     <script>

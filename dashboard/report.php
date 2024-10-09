@@ -156,7 +156,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.tailwindcss.js"></script>
 
     <script src="js/script.js"></script>
-    <script src="js/print.js"></script>
+    <script src="js/report.js"></script>
+    <script src="js/search.js"></script>
 
     <script>
         const searchButton = document.querySelector('#content nav form .form-input button');
