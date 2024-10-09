@@ -138,12 +138,17 @@ $(document).ready(function() {
 				.CodeText {
 					font-size: 18px; /* Adjust size as needed */
 				}
+				/* Page break style */
+				.page-break {
+					page-break-after: always; /* Add page break after this element */
+					display: block; /* Ensure it occupies space */
+				}
 			</style>
 		</head>
 		<body>
 		`);
 	
-		entries.forEach(function(entry) {
+		entries.forEach(function(entry, index) {
 			var containerDiv = document.createElement('div');
 			containerDiv.classList.add('container');
 	
@@ -164,13 +169,15 @@ $(document).ready(function() {
 			NamaKKDiv.className = 'NamaKK';
 			NamaKKDiv.textContent = entry.namaKK;
 	
-			// var CodeTextDiv = document.createElement('div');
-			// CodeTextDiv.className = 'CodeText';
-			// CodeTextDiv.textContent = entry.codeID;
-	
 			containerDiv.appendChild(NamaKKDiv);
-			// containerDiv.appendChild(CodeTextDiv);
 			iframeDoc.body.appendChild(containerDiv);
+	
+			// Insert a page break after every 8 entries
+			if ((index + 1) % 8 === 0) {
+				var pageBreakDiv = document.createElement('div');
+				pageBreakDiv.className = 'page-break';
+				iframeDoc.body.appendChild(pageBreakDiv);
+			}
 		});
 	
 		iframeDoc.write(`
@@ -186,4 +193,4 @@ $(document).ready(function() {
 				document.body.removeChild(iframe);
 			}, 100);
 		};
-	}	
+	}		
