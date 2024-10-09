@@ -126,8 +126,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="head">
                         <h3>Report</h3>
                     </div>
-                    <table id="example" class="min-w-full divide-y divide-gray-200" style="width:100%">
-                        <thead class="bg-gray-50">
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
                             <tr>
                                 <th>Nama KK</th>
                                 <th>Code</th>
