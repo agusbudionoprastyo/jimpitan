@@ -119,11 +119,11 @@
 
 
             <div class="table-data">
-				<div class="order">
+				<!-- <div class="order">
 					<div class="head">
                         <h3 id="current-time"></h3>
 					</div>
-					<!-- <table id="checkin-table">
+					<table id="checkin-table">
 						<thead>
 							<tr>
 								<th>KK NAME</th>
@@ -132,8 +132,8 @@
 						</thead>
 						<tbody id="checkin-table-body">
 						</tbody>
-					</table> -->
-                </div>
+					</table>
+                </div> -->
 
                     <div class="todo">
                         <div class="head">
