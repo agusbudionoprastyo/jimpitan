@@ -121,6 +121,9 @@ $(document).ready(function() {
 					margin: 5mm 0; /* Add margin for spacing */
 					text-align: center;
 					position: relative;
+					border: 2px solid #000; /* Add border around each container */
+					border-radius: 5px; /* Optional: add border radius */
+					padding: 10px; /* Add padding for spacing inside the border */
 				}
 				.qrCode {
 					margin: 0 auto;
