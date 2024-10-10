@@ -79,7 +79,7 @@ if (!isset($_SESSION['user'])) {
   <p>
     <?php
     date_default_timezone_set('Asia/Jakarta');
-    $tanggal_sekarang=date('d-m-Y');
+    $tanggal_sekarang=date('l, j F Y');
     echo"Tanggal: ".$tanggal_sekarang;
     ?>
   </p>
