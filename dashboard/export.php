@@ -2,32 +2,42 @@
 
 require 'vendor/autoload.php';
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Box\Spout\Common\Entity\Cell;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 
-// Buat objek Spreadsheet baru
-$spreadsheet = new Spreadsheet();
-$activeWorksheet = $spreadsheet->getActiveSheet();
-$activeWorksheet->setCellValue('A3', 'No !');
-$activeWorksheet->setCellValue('B3', 'Nama KK !');
+// Buat writer untuk file XLSX
+$writer = WriterEntityFactory::createXLSXWriter();
+$writer->openToBrowser('hello_world.xlsx');
 
-// Mulai mengisi tanggal dari kolom C (C3, D3, E3, ...)
+// Menulis header kolom
+$headerRow = [
+    WriterEntityFactory::createCell('No !'),
+    WriterEntityFactory::createCell('Nama KK !'),
+];
+
+// Menulis baris header ke file
+$writer->addRow($headerRow);
+
+// Mengisi tanggal dari 1 hingga 31 Oktober 2024
 $startDate = new DateTime('2024-10-01');
 $endDate = new DateTime('2024-10-31');
 
-// Atur header kolom untuk tanggal
-$column = 3; // Kolom C adalah kolom ke-3
+$dateRow = [];
 for ($date = $startDate; $date <= $endDate; $date->modify('+1 day')) {
-    $activeWorksheet->setCellValueByColumnAndRow($column, 3, $date->format('d/m/Y')); // Set tanggal di baris 3
-    $column++;
+    $dateRow[] = WriterEntityFactory::createCell($date->format('d/m/Y')); // Format tanggal
 }
 
-// Set header untuk mengunduh file
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="hello_world.xlsx"');
-header('Cache-Control: max-age=0');
+// Menulis baris tanggal ke file
+$writer->addRow($dateRow);
 
-// Buat writer dan simpan file ke output
-$writer = new Xlsx($spreadsheet);
-$writer->save('php://output');
-exit; // Pastikan tidak ada output lain yang dikirim
+// Menulis baris untuk "No" dan "Nama KK"
+for ($i = 1; $i <= 31; $i++) {
+    $dataRow = [
+        WriterEntityFactory::createCell($i), // No
+        WriterEntityFactory::createCell('Nama KK ' . $i), // Nama KK
+    ];
+    $writer->addRow($dataRow);
+}
+
+// Menutup writer
+$writer->close();
