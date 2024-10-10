@@ -38,14 +38,14 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         let total = 0;
 
         for (let i = 1; i <= 31; i++) {
-            const value = row[i] || ''; // Jika tidak ada nilai, gunakan string kosong
+            const value = row[i] !== null ? Number(row[i]) : null; // Konversi nilai menjadi angka, jika ada
             rowData.push(value);
             if (value) {
-                total += Number(value); // Hitung total jika ada nilai
+                total += value; // Hitung total jika ada nilai
             }
         }
         
-        rowData.push(total > 0 ? total : ''); // Tambahkan total ke akhir baris, hanya jika lebih dari 0
+        rowData.push(total > 0 ? total : null); // Tambahkan total sebagai angka, kosong jika 0
         const newRow = worksheet.addRow(rowData);
         
         // Atur alignment untuk setiap sel di baris data
