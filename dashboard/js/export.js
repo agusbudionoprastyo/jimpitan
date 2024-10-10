@@ -48,9 +48,9 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         worksheet.getColumn(i).width = 5; // Lebar kolom 5 karakter
     }
 
-    // Menambahkan border
+    // Menambahkan border mulai dari baris ke-4
     worksheet.eachRow((row, rowIndex) => {
-        if (rowIndex !== 2) { // Jangan tambahkan border untuk baris A2 (bulan dan tahun)
+        if (rowIndex >= 4) { // Mulai dari baris ke-4
             row.eachCell((cell) => {
                 cell.border = {
                     top: { style: 'thin', color: { argb: 'FF000000' } },
