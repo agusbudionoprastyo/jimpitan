@@ -67,13 +67,13 @@ $(document).ready(function() {
             
             // Atur alignment untuk setiap sel di baris data
             newRow.eachCell((cell) => {
-                cell.alignment = { horizontal: 'right', vertical: 'middle' }; // Align right
+                cell.alignment = { horizontal: 'middle', vertical: 'middle' }; // Align center
             });
         });
 
         // Atur lebar kolom
         worksheet.columns.forEach(column => {
-            column.width = 15; // Lebar kolom 15 karakter
+            column.width = 5; // Lebar kolom 15 karakter
         });
 
         // Menambahkan border
