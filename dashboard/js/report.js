@@ -65,13 +65,13 @@ $(document).ready(function() {
             const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
             
             // Set column widths (1 cm = 37.79 pixels, adjust as needed)
-            const colWidth = 37.79; // Approximate width in pixels
+            const colWidth = 27.79; // Approximate width in pixels
             worksheet['!cols'] = [
                 { wpx: 80 }, // Width for report_id
                 ...Array(31).fill({ wpx: colWidth }) // Width for days 1 to 31
             ];
     
-            // Add borders to all cells
+            // Adding borders using a workaround
             const range = XLSX.utils.decode_range(worksheet['!ref']); // Get the range of the worksheet
             for (let R = range.s.r; R <= range.e.r; ++R) {
                 for (let C = range.s.c; C <= range.e.c; ++C) {
@@ -79,13 +79,15 @@ $(document).ready(function() {
                     if (!cell) continue; // Skip empty cells
     
                     // Set border properties
-                    cell.s = {
-                        border: {
-                            top: { style: 'thin', color: { rgb: '000000' } },
-                            bottom: { style: 'thin', color: { rgb: '000000' } },
-                            left: { style: 'thin', color: { rgb: '000000' } },
-                            right: { style: 'thin', color: { rgb: '000000' } },
-                        },
+                    if (!cell.s) cell.s = {}; // Initialize cell style if not exists
+                    if (!cell.s.border) cell.s.border = {}; // Initialize border style
+    
+                    // Set borders
+                    cell.s.border = {
+                        top: { style: 'thin', color: { rgb: '000000' } },
+                        bottom: { style: 'thin', color: { rgb: '000000' } },
+                        left: { style: 'thin', color: { rgb: '000000' } },
+                        right: { style: 'thin', color: { rgb: '000000' } },
                     };
                 }
             }
