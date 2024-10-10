@@ -21,14 +21,14 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
 
     // Set header di baris ke-5
     const headerRow = worksheet.addRow(['report_id', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString())]);
-    worksheet.getRow(5).fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFCCCCCC' } // Warna abu-abu
-    };
 
-    // Atur alignment untuk header
+    // Atur warna latar belakang header menjadi abu-abu
     headerRow.eachCell((cell) => {
+        cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFCCCCCC' } // Warna abu-abu
+        };
         cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center
     });
 
