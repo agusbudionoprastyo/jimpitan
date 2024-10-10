@@ -20,7 +20,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('A3').value = '';
 
     // Set header di baris ke-5
-    const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString())]);
+    const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString()), 'Total']);
 
     // Atur warna latar belakang header menjadi abu-abu
     headerRow.eachCell((cell) => {
@@ -34,7 +34,20 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
 
     // Tambahkan data
     data.forEach(row => {
-        const newRow = worksheet.addRow([row.report_id, ...Array.from({ length: 31 }, (_, i) => row[i + 1] || 0)]);
+        const rowData = [row.report_id];
+        let total = 0;
+
+        for (let i = 1; i <= 31; i++) {
+            const value = row[i] || ''; // Jika tidak ada nilai, gunakan string kosong
+            rowData.push(value);
+
+            // Tambahkan ke total jika ada nilai
+            if (value) {
+                total += value;
+            }
+        }
+        rowData.push(total); // Tambahkan total ke akhir baris
+        const newRow = worksheet.addRow(rowData);
         
         // Atur alignment untuk setiap sel di baris data
         newRow.eachCell((cell) => {
@@ -44,7 +57,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
 
     // Atur lebar kolom
     worksheet.getColumn(1).width = 15; // Lebar kolom report_id
-    for (let i = 2; i <= 32; i++) { // Kolom 2 sampai 32 untuk hari 1-31
+    for (let i = 2; i <= 33; i++) { // Kolom 2 sampai 33 untuk hari 1-31 + Total
         worksheet.getColumn(i).width = 5; // Lebar kolom 5 karakter
     }
 
