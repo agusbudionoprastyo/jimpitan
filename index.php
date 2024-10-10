@@ -75,7 +75,7 @@ if (!isset($_SESSION['user'])) {
 
 <div class="container">
   <h1>Jimpitan</h1>
-  <p>RT07 SALATIG</p>
+  <p>RT07 SALATIGA</p>
   <div id="qr-reader"></div>
 </div>
 
