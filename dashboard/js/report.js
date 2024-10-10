@@ -66,7 +66,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     wsData.push(['No', 'Nama KK', ...dateRow]);
 
     // Mengambil data dari database
-    const response = await fetch('../api/fetch_reports.php');
+    const response = await fetch('../dashboard/api/fetch_reports.php');
     const reports = await response.json();
 
     // Menambahkan data "Nama KK" dan "Nominal" sesuai tanggal
