@@ -52,6 +52,16 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         newRow.eachCell((cell) => {
             cell.alignment = { horizontal: 'middle', vertical: 'middle' }; // Align center
         });
+
+        // Menambahkan border untuk setiap sel di baris data
+        newRow.eachCell((cell) => {
+            cell.border = {
+                top: { style: 'thin', color: { argb: 'FF000000' } },
+                left: { style: 'thin', color: { argb: 'FF000000' } },
+                bottom: { style: 'thin', color: { argb: 'FF000000' } },
+                right: { style: 'thin', color: { argb: 'FF000000' } }
+            };
+        });
     });
 
     // Atur lebar kolom
@@ -59,20 +69,6 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     for (let i = 2; i <= 33; i++) { // Kolom 2 sampai 33 untuk hari 1-31 + Total
         worksheet.getColumn(i).width = 5; // Lebar kolom 5 karakter
     }
-
-    // Menambahkan border mulai dari baris ke-4
-    worksheet.eachRow((row, rowIndex) => {
-        if (rowIndex >= 4) { // Mulai dari baris ke-4
-            row.eachCell((cell) => {
-                cell.border = {
-                    top: { style: 'thin', color: { argb: 'FF000000' } },
-                    left: { style: 'thin', color: { argb: 'FF000000' } },
-                    bottom: { style: 'thin', color: { argb: 'FF000000' } },
-                    right: { style: 'thin', color: { argb: 'FF000000' } }
-                };
-            });
-        }
-    });
 
     // Ekspor ke XLSX
     workbook.xlsx.writeBuffer().then((buffer) => {
