@@ -30,7 +30,7 @@ for ($date = $startDate; $date <= $endDate; $date->modify('+1 day')) {
 // Menulis baris tanggal ke file
 $writer->addRow($dateRow);
 
-// Menulis baris untuk "No" dan "Nama KK"
+// Menulis data untuk "No" dan "Nama KK"
 for ($i = 1; $i <= 31; $i++) {
     $dataRow = [
         WriterEntityFactory::createCell($i), // No
