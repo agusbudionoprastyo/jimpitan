@@ -47,20 +47,20 @@ $(document).ready(function() {
 	});
     
     document.getElementById('reportBtn').addEventListener('click', async function() {
-        const response = await fetch('../dashboard/api/fetch_reports.php');
+        const response = await fetch('../dashboard/api/fetch_reports.php'); // Ganti dengan path file PHP Anda
         const data = await response.json();
-    
+
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet('Reports');
-    
+
         // Set header
         const headerRow = worksheet.addRow(['report_id', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString())]);
-    
+
         // Atur alignment untuk header
         headerRow.eachCell((cell) => {
             cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center
         });
-    
+
         // Tambahkan data
         data.forEach(row => {
             const newRow = worksheet.addRow([row.report_id, ...Array.from({ length: 31 }, (_, i) => row[i + 1] || 0)]);
@@ -70,12 +70,12 @@ $(document).ready(function() {
                 cell.alignment = { horizontal: 'right', vertical: 'middle' }; // Align right
             });
         });
-    
+
         // Atur lebar kolom
         worksheet.columns.forEach(column => {
             column.width = 15; // Lebar kolom 15 karakter
         });
-    
+
         // Menambahkan border
         worksheet.eachRow((row) => {
             row.eachCell((cell) => {
@@ -87,7 +87,17 @@ $(document).ready(function() {
                 };
             });
         });
-    
+
         // Ekspor ke XLSX
-        await workbook.xlsx.writeFile('reports.xlsx');
-    });    
+        workbook.xlsx.writeBuffer().then((buffer) => {
+            const blob = new Blob([buffer], { type: 'application/octet-stream' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'reports.xlsx';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    });
