@@ -45,14 +45,11 @@ $(document).ready(function() {
         table.search('').draw(); // Mereset pencarian pada tabel
         });
 	});
-
+    
     document.getElementById('reportBtn').addEventListener('click', function() {
         // Membuat workbook dan worksheet
         const wb = XLSX.utils.book_new();
         const wsData = [];
-    
-        // Menulis header
-        wsData.push(['No', 'Nama KK']); // Header kolom A dan B
     
         // Mendapatkan tanggal awal dan akhir bulan ini
         const now = new Date();
@@ -65,9 +62,8 @@ $(document).ready(function() {
             dateRow.push((new Date(d)).toLocaleDateString('en-GB')); // Format dd/mm/yyyy
         }
     
-        // Menambahkan header tanggal di baris ketiga, mulai dari kolom C
-        wsData.push(['', '']); // Kosongkan baris kedua
-        wsData.push(['', '', ...dateRow]); // Gabungkan dengan tanggal di baris ketiga
+        // Menambahkan header di baris ketiga, termasuk tanggal
+        wsData.push(['No', 'Nama KK', ...dateRow]); // Header kolom A, B, dan C
     
         // Menambahkan data "No" dan "Nama KK" untuk setiap tanggal
         for (let i = 1; i <= dateRow.length; i++) {
@@ -81,4 +77,5 @@ $(document).ready(function() {
         // Mengunduh file Excel
         XLSX.writeFile(wb, 'hello_world.xlsx');
     });
+    
     
