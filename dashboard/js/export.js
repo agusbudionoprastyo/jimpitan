@@ -16,8 +16,16 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('A2').value = monthYear;
     worksheet.getCell('A2').alignment = { horizontal: 'center', vertical: 'middle' };
 
-    // Set header di baris ke-3
+    // Baris A3 dikosongkan
+    worksheet.getCell('A3').value = '';
+
+    // Set header di baris ke-5
     const headerRow = worksheet.addRow(['report_id', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString())]);
+    worksheet.getRow(5).fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'FFCCCCCC' } // Warna abu-abu
+    };
 
     // Atur alignment untuk header
     headerRow.eachCell((cell) => {
@@ -41,15 +49,17 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     }
 
     // Menambahkan border
-    worksheet.eachRow((row) => {
-        row.eachCell((cell) => {
-            cell.border = {
-                top: { style: 'thin', color: { argb: 'FF000000' } },
-                left: { style: 'thin', color: { argb: 'FF000000' } },
-                bottom: { style: 'thin', color: { argb: 'FF000000' } },
-                right: { style: 'thin', color: { argb: 'FF000000' } }
-            };
-        });
+    worksheet.eachRow((row, rowIndex) => {
+        if (rowIndex !== 2) { // Jangan tambahkan border untuk baris A2 (bulan dan tahun)
+            row.eachCell((cell) => {
+                cell.border = {
+                    top: { style: 'thin', color: { argb: 'FF000000' } },
+                    left: { style: 'thin', color: { argb: 'FF000000' } },
+                    bottom: { style: 'thin', color: { argb: 'FF000000' } },
+                    right: { style: 'thin', color: { argb: 'FF000000' } }
+                };
+            });
+        }
     });
 
     // Ekspor ke XLSX
