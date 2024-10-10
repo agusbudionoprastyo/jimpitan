@@ -45,37 +45,48 @@ $(document).ready(function() {
         table.search('').draw(); // Mereset pencarian pada tabel
         });
 	});
-    
-    document.getElementById('reportBtn').addEventListener('click', function() {
-        // Membuat workbook dan worksheet
-        const wb = XLSX.utils.book_new();
-        const wsData = [];
-    
-        // Mendapatkan tanggal awal dan akhir bulan ini
-        const now = new Date();
-        const startDate = new Date(now.getFullYear(), now.getMonth(), 1); // Tanggal 1 bulan ini
-        const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0); // Tanggal terakhir bulan ini
-    
-        // Menyimpan tanggal dalam format 'dd/mm/yyyy' mulai dari kolom C
-        const dateRow = [];
-        for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
-            dateRow.push((new Date(d)).toLocaleDateString('en-GB')); // Format dd/mm/yyyy
-        }
-    
-        // Menambahkan header di baris ketiga, termasuk tanggal
-        wsData.push(['No', 'Nama KK', ...dateRow]); // Header kolom A, B, dan C
-    
-        // Menambahkan data "No" dan "Nama KK" untuk setiap tanggal
-        for (let i = 1; i <= dateRow.length; i++) {
-            wsData.push([i, `Nama KK ${i}`, ...new Array(dateRow.length).fill('')]); // Kolom A dan B diisi, kolom C dan seterusnya kosong
-        }
-    
-        // Mengonversi data menjadi worksheet
-        const ws = XLSX.utils.aoa_to_sheet(wsData);
-        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    
-        // Mengunduh file Excel
-        XLSX.writeFile(wb, 'hello_world.xlsx');
+
+document.getElementById('reportBtn').addEventListener('click', async function() {
+    // Membuat workbook dan worksheet
+    const wb = XLSX.utils.book_new();
+    const wsData = [];
+
+    // Mendapatkan tanggal awal dan akhir bulan ini
+    const now = new Date();
+    const startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+    const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+    // Menyimpan tanggal dalam format 'dd/mm/yyyy'
+    const dateRow = [];
+    for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
+        dateRow.push((new Date(d)).toLocaleDateString('en-GB'));
+    }
+
+    // Menambahkan header di baris ketiga, termasuk tanggal
+    wsData.push(['No', 'Nama KK', ...dateRow]);
+
+    // Mengambil data dari database
+    const response = await fetch('../api/fetch_reports.php');
+    const reports = await response.json();
+
+    // Menambahkan data "Nama KK" dan "Nominal" sesuai tanggal
+    const reportMap = {};
+    reports.forEach(report => {
+        const date = new Date(report.jimpitan_date).toLocaleDateString('en-GB');
+        reportMap[date] = report.nominal; // Memetakan tanggal ke nominal
     });
-    
+
+    // Menambahkan data ke worksheet
+    for (let i = 1; i <= reports.length; i++) {
+        const nominal = reportMap[dateRow[i - 1]] || ''; // Ambil nominal sesuai tanggal, jika ada
+        wsData.push([i, `Nama KK ${i}`, ...dateRow.map(date => (date === dateRow[i - 1] ? nominal : ''))]);
+    }
+
+    // Mengonversi data menjadi worksheet
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    // Mengunduh file Excel
+    XLSX.writeFile(wb, 'hello_world.xlsx');
+});
     
