@@ -111,7 +111,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h1>Jimpitan - RT07 Salatiga</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="#">Report</a>
+                            <a href="dashboard/export.php">Report</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
