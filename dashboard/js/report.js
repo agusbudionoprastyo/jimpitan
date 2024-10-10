@@ -45,3 +45,35 @@ $(document).ready(function() {
         table.search('').draw(); // Mereset pencarian pada tabel
         });
 	});
+
+    document.getElementById('reportBtn').addEventListener('click', function() {
+        // Membuat workbook dan worksheet
+        const wb = XLSX.utils.book_new();
+        const wsData = [];
+
+        // Menulis header
+        wsData.push(['No !', 'Nama KK !']);
+
+        // Mengisi tanggal dari 1 hingga 31 Oktober 2024
+        const startDate = new Date('2024-10-01');
+        const endDate = new Date('2024-10-31');
+
+        // Menyimpan tanggal dalam format 'dd/mm/yyyy'
+        const dateRow = [];
+        for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
+            dateRow.push((new Date(d)).toLocaleDateString('en-GB')); // Format dd/mm/yyyy
+        }
+        wsData.push(dateRow); // Menambahkan baris tanggal
+
+        // Menambahkan data "No" dan "Nama KK"
+        for (let i = 1; i <= 31; i++) {
+            wsData.push([i, `Nama KK ${i}`]);
+        }
+
+        // Mengonversi data menjadi worksheet
+        const ws = XLSX.utils.aoa_to_sheet(wsData);
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        // Mengunduh file Excel
+        XLSX.writeFile(wb, 'hello_world.xlsx');
+    });
