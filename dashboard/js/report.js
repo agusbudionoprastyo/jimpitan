@@ -47,57 +47,50 @@ $(document).ready(function() {
 	});
     
     document.getElementById('reportBtn').addEventListener('click', async function() {
-        try {
-            const response = await fetch('../dashboard/api/fetch_reports.php'); // Ganti dengan path file PHP Anda
-            const data = await response.json();
+        const response = await fetch('../dashboard/api/fetch_reports.php');
+        const data = await response.json();
     
-            // Siapkan data untuk XLSX
-            const worksheetData = [];
-            // Set header
-            worksheetData.push(['report_id', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString())]);
+        const ExcelJS = require('exceljs'); // Pastikan Anda telah menginstal ExcelJS
     
-            // Tambahkan baris data
-            data.forEach(row => {
-                worksheetData.push([row.report_id, ...Array.from({ length: 31 }, (_, i) => row[i + 1] || 0)]);
-            });
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Reports');
     
-            // Buat worksheet dari data
-            const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+        // Set header
+        const headerRow = worksheet.addRow(['report_id', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString())]);
+    
+        // Atur alignment untuk header
+        headerRow.eachCell((cell) => {
+            cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center
+        });
+    
+        // Tambahkan data
+        data.forEach(row => {
+            const newRow = worksheet.addRow([row.report_id, ...Array.from({ length: 31 }, (_, i) => row[i + 1] || 0)]);
             
-            // Atur lebar kolom (1 cm ≈ 37.79 piksel)
-            const colWidth = 27.79; // Lebar kolom dalam piksel
-            worksheet['!cols'] = [
-                { wpx: 80 }, // Lebar untuk report_id
-                ...Array(31).fill({ wpx: colWidth }) // Lebar untuk hari 1 sampai 31
-            ];
+            // Atur alignment untuk setiap sel di baris data
+            newRow.eachCell((cell) => {
+                cell.alignment = { horizontal: 'right', vertical: 'middle' }; // Align right
+            });
+        });
     
-            // Menambahkan border ke setiap sel
-            const range = XLSX.utils.decode_range(worksheet['!ref']); // Dapatkan rentang worksheet
-            for (let R = range.s.r; R <= range.e.r; ++R) {
-                for (let C = range.s.c; C <= range.e.c; ++C) {
-                    const cell = worksheet[XLSX.utils.encode_cell({ r: R, c: C })];
-                    if (!cell) continue; // Lewati sel kosong
+        // Atur lebar kolom
+        worksheet.columns.forEach(column => {
+            column.width = 15; // Lebar kolom 15 karakter
+        });
     
-                    // Inisialisasi gaya sel jika belum ada
-                    if (!cell.s) cell.s = {};
-                    // Set border
-                    cell.s.border = {
-                        top: { style: 'thin', color: { rgb: '000000' } },
-                        bottom: { style: 'thin', color: { rgb: '000000' } },
-                        left: { style: 'thin', color: { rgb: '000000' } },
-                        right: { style: 'thin', color: { rgb: '000000' } },
-                    };
-                }
-            }
+        // Menambahkan border
+        worksheet.eachRow((row) => {
+            row.eachCell((cell) => {
+                cell.border = {
+                    top: { style: 'thin', color: { argb: 'FF000000' } },
+                    left: { style: 'thin', color: { argb: 'FF000000' } },
+                    bottom: { style: 'thin', color: { argb: 'FF000000' } },
+                    right: { style: 'thin', color: { argb: 'FF000000' } }
+                };
+            });
+        });
     
-            // Buat workbook dan tambahkan worksheet
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, 'Reports');
-    
-            // Ekspor ke XLSX
-            XLSX.writeFile(workbook, 'reports.xlsx');
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
+        // Ekspor ke XLSX
+        await workbook.xlsx.writeFile('reports.xlsx');
     });
     
