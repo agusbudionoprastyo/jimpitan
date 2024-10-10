@@ -25,8 +25,7 @@ $endDateFormatted = $endDate->format('Y-m-d');
 // Query untuk mengambil data
 $sql = "SELECT report_id, jimpitan_date, nominal, collector
         FROM report
-        WHERE jimpitan_date BETWEEN :start_date AND :end_date
-        AND report_id = 'RT0700001'";
+        WHERE jimpitan_date BETWEEN :start_date AND :end_date";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(['start_date' => $startDate->format('Y-m-d'), 'end_date' => $endDateFormatted]);
 
