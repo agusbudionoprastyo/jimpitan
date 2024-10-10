@@ -7,14 +7,14 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
 
     // Tambahkan judul di A1
     worksheet.getCell('A1').value = 'Jimpitan - RT07 Salatiga';
-    worksheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle' };
+    worksheet.getCell('A1').alignment = { horizontal: 'left', vertical: 'middle' };
     worksheet.getCell('A1').font = { bold: true, size: 14 }; // Set font bold dan ukuran
 
     // Tambahkan bulan dan tahun di A2
     const currentDate = new Date();
     const monthYear = currentDate.toLocaleString('default', { month: 'long', year: 'numeric' });
     worksheet.getCell('A2').value = monthYear;
-    worksheet.getCell('A2').alignment = { horizontal: 'center', vertical: 'middle' };
+    worksheet.getCell('A2').alignment = { horizontal: 'left', vertical: 'middle' };
 
     // Baris A3 dikosongkan
     worksheet.getCell('A3').value = '';
@@ -29,7 +29,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             pattern: 'solid',
             fgColor: { argb: 'FFCCCCCC' } // Warna abu-abu
         };
-        cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center
+        cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
     });
 
     // Tambahkan data
