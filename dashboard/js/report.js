@@ -50,8 +50,6 @@ $(document).ready(function() {
         const response = await fetch('../dashboard/api/fetch_reports.php');
         const data = await response.json();
     
-        const ExcelJS = require('exceljs'); // Pastikan Anda telah menginstal ExcelJS
-    
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet('Reports');
     
@@ -92,5 +90,4 @@ $(document).ready(function() {
     
         // Ekspor ke XLSX
         await workbook.xlsx.writeFile('reports.xlsx');
-    });
-    
+    });    
