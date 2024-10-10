@@ -20,7 +20,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('A3').value = '';
 
     // Set header di baris ke-5
-    const headerRow = worksheet.addRow(['report_id', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString())]);
+    const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString())]);
 
     // Atur warna latar belakang header menjadi abu-abu
     headerRow.eachCell((cell) => {
