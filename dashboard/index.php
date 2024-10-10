@@ -7,10 +7,9 @@ $currentDay = date('l'); // 'l' gives full textual representation of the day
 
 // Prepare the SQL statement to select only today's shift
 $stmt = $pdo->prepare("
-    SELECT master_kk.kk_name, users.shift 
+    SELECT user_name, shift 
     FROM users 
-    JOIN master_kk ON users.id_code = master_kk.code_id
-    WHERE users.shift = :currentDay
+    WHERE shift = :currentDay
 ");
 
 // Bind the parameter
