@@ -127,7 +127,7 @@ $(document).ready(function() {
 				}
 				.container {
 					width: 45%; /* Adjust width to fit 2 per row */
-					margin: 2mm; /* Add margin for spacing */
+					margin: 1mm; /* Add margin for spacing */
 					text-align: center;
 					position: relative;
 					border: 1px solid #000; /* Add border around each container */

@@ -76,6 +76,13 @@ if (!isset($_SESSION['user'])) {
 <div class="container">
   <h1>Jimpitan</h1>
   <p>RT07 SALATIGA</p>
+  <p>
+    <?php
+    date_default_timezone_set('Asia/Jakarta');
+    $tanggal_sekarang=date('l, j F Y');
+    echo"Tanggal: ".$tanggal_sekarang;
+    ?>
+  </p>
   <div id="qr-reader"></div>
 </div>
 
