@@ -22,7 +22,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Set header di baris ke-5
     const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString()), 'Total']);
 
-    // Atur warna latar belakang header menjadi abu-abu
+    // Atur warna latar belakang header menjadi abu-abu dan border
     headerRow.eachCell((cell) => {
         cell.fill = {
             type: 'pattern',
@@ -30,6 +30,14 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             fgColor: { argb: 'FFCCCCCC' } // Warna abu-abu
         };
         cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
+
+        // Menambahkan border untuk header
+        cell.border = {
+            top: { style: 'thin', color: { argb: 'FF000000' } },
+            left: { style: 'thin', color: { argb: 'FF000000' } },
+            bottom: { style: 'thin', color: { argb: 'FF000000' } },
+            right: { style: 'thin', color: { argb: 'FF000000' } }
+        };
     });
 
     // Tambahkan data
@@ -48,13 +56,11 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         rowData.push(total > 0 ? total : null); // Tambahkan total sebagai angka, kosong jika 0
         const newRow = worksheet.addRow(rowData);
         
-        // Atur alignment untuk setiap sel di baris data
+        // Atur alignment untuk setiap sel di baris data dan tambahkan border
         newRow.eachCell((cell) => {
             cell.alignment = { horizontal: 'middle', vertical: 'middle' }; // Align center
-        });
 
-        // Menambahkan border untuk setiap sel di baris data
-        newRow.eachCell((cell) => {
+            // Menambahkan border untuk setiap sel di baris data
             cell.border = {
                 top: { style: 'thin', color: { argb: 'FF000000' } },
                 left: { style: 'thin', color: { argb: 'FF000000' } },
