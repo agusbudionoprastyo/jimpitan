@@ -52,23 +52,26 @@ $(document).ready(function() {
         const wsData = [];
     
         // Menulis header
-        wsData.push(['No', 'Nama KK']);
+        wsData.push(['No', 'Nama KK']); // Kolom A dan B
     
         // Mendapatkan tanggal awal dan akhir bulan ini
         const now = new Date();
         const startDate = new Date(now.getFullYear(), now.getMonth(), 1); // Tanggal 1 bulan ini
         const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0); // Tanggal terakhir bulan ini
     
-        // Menyimpan tanggal dalam format 'dd/mm/yyyy'
+        // Menyimpan tanggal dalam format 'dd/mm/yyyy' mulai dari kolom C
         const dateRow = [];
         for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
             dateRow.push((new Date(d)).toLocaleDateString('en-GB')); // Format dd/mm/yyyy
         }
-        wsData.push(dateRow); // Menambahkan baris tanggal
     
-        // Menambahkan data "No" dan "Nama KK"
+        // Menambahkan baris tanggal di baris kedua, mulai dari kolom C
+        const headerRow = new Array(2).fill(''); // Membuat dua kolom kosong untuk A dan B
+        wsData.push(headerRow.concat(dateRow)); // Gabungkan dengan header yang kosong
+    
+        // Menambahkan data "No" dan "Nama KK" untuk setiap tanggal
         for (let i = 1; i <= dateRow.length; i++) {
-            wsData.push([i, `Nama KK ${i}`]);
+            wsData.push([i, `Nama KK ${i}`]); // Kolom A dan B
         }
     
         // Mengonversi data menjadi worksheet
@@ -77,5 +80,5 @@ $(document).ready(function() {
     
         // Mengunduh file Excel
         XLSX.writeFile(wb, 'hello_world.xlsx');
-    });
+    });    
     
