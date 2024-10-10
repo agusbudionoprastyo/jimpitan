@@ -48,41 +48,39 @@ $(document).ready(function() {
     
     document.getElementById('reportBtn').addEventListener('click', async function() {
         try {
-            const response = await fetch('../dashboard/api/fetch_reports.php'); // Update with your PHP file path
+            const response = await fetch('../dashboard/api/fetch_reports.php'); // Ganti dengan path file PHP Anda
             const data = await response.json();
     
-            // Prepare data for XLSX
+            // Siapkan data untuk XLSX
             const worksheetData = [];
-            // Set headers
+            // Set header
             worksheetData.push(['report_id', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString())]);
     
-            // Add rows of data
+            // Tambahkan baris data
             data.forEach(row => {
                 worksheetData.push([row.report_id, ...Array.from({ length: 31 }, (_, i) => row[i + 1] || 0)]);
             });
     
-            // Create worksheet from data
+            // Buat worksheet dari data
             const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
             
-            // Set column widths (1 cm = 37.79 pixels, adjust as needed)
-            const colWidth = 27.79; // Approximate width in pixels
+            // Atur lebar kolom (1 cm ≈ 37.79 piksel)
+            const colWidth = 27.79; // Lebar kolom dalam piksel
             worksheet['!cols'] = [
-                { wpx: 80 }, // Width for report_id
-                ...Array(31).fill({ wpx: colWidth }) // Width for days 1 to 31
+                { wpx: 80 }, // Lebar untuk report_id
+                ...Array(31).fill({ wpx: colWidth }) // Lebar untuk hari 1 sampai 31
             ];
     
-            // Adding borders using a workaround
-            const range = XLSX.utils.decode_range(worksheet['!ref']); // Get the range of the worksheet
+            // Menambahkan border ke setiap sel
+            const range = XLSX.utils.decode_range(worksheet['!ref']); // Dapatkan rentang worksheet
             for (let R = range.s.r; R <= range.e.r; ++R) {
                 for (let C = range.s.c; C <= range.e.c; ++C) {
                     const cell = worksheet[XLSX.utils.encode_cell({ r: R, c: C })];
-                    if (!cell) continue; // Skip empty cells
+                    if (!cell) continue; // Lewati sel kosong
     
-                    // Set border properties
-                    if (!cell.s) cell.s = {}; // Initialize cell style if not exists
-                    if (!cell.s.border) cell.s.border = {}; // Initialize border style
-    
-                    // Set borders
+                    // Inisialisasi gaya sel jika belum ada
+                    if (!cell.s) cell.s = {};
+                    // Set border
                     cell.s.border = {
                         top: { style: 'thin', color: { rgb: '000000' } },
                         bottom: { style: 'thin', color: { rgb: '000000' } },
@@ -92,11 +90,11 @@ $(document).ready(function() {
                 }
             }
     
-            // Create workbook and append the worksheet
+            // Buat workbook dan tambahkan worksheet
             const workbook = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(workbook, worksheet, 'Reports');
     
-            // Export to XLSX
+            // Ekspor ke XLSX
             XLSX.writeFile(workbook, 'reports.xlsx');
         } catch (error) {
             console.error('Error fetching data:', error);
