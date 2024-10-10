@@ -157,7 +157,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if ($data) {
                                 foreach ($data as $row): ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($row["kk_name"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["user_name"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["shift"]); ?></td>
                                     </tr>
                                 <?php endforeach; 
