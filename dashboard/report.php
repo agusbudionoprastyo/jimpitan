@@ -150,22 +150,9 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
                             <?php endfor; ?>
                         </select>
-                        <label for="month-year">Pilih Bulan dan Tahun:</label>
-<select id="month-year" name="month-year" class="custom-select">
-    <?php
-    // Display years from the current year to a specific range
-    $currentYear = date('Y');
-    $startYear = 2000; // Set your desired start year
-    for ($y = $currentYear; $y >= $startYear; $y--) {
-        for ($m = 1; $m <= 12; $m++) {
-            $monthName = date('F', mktime(0, 0, 0, $m, 1));
-            $value = $y . '-' . str_pad($m, 2, '0', STR_PAD_LEFT);
-            echo '<option value="' . $value . '" ' . (($m == date('n') && $y == $currentYear) ? 'selected' : '') . '>' . $monthName . ' ' . $y . '</option>';
-        }
-    }
-    ?>
-</select>
-
+                        <label for="month-year">Pilih Bulan dan Tahun </label>
+                        <input type="text" id="month-year" name="month-year" class="custom-input" placeholder="Pilih Bulan dan Tahun">
+                        
                             <button type="button" id="reportBtn" class="btn-download">
                                 <i class='bx bxs-file-export'></i> Unduh
                             </button>
@@ -203,7 +190,9 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </main>
         <!-- MAIN -->
     </section>
-    <!-- CONTENT -->    
+    <!-- CONTENT --> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>   
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -249,5 +238,17 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
         })
     </script>
+    <script>
+    flatpickr("#month-year", {
+        plugins: [
+            new monthSelectPlugin({
+                shorthand: true, // Show shorthand month names (Jan, Feb, etc.)
+                dateFormat: "Y-m", // Format the value as YYYY-MM
+                altFormat: "F Y" // Show full month name and year in the input
+            })
+        ],
+        allowInput: true // Allow user to type in the input
+    });
+</script>
 </body>
 </html>
