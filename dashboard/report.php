@@ -51,8 +51,9 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- sweetalert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/monthSelectPlugin.css">
     <title>Jimpitan</title>
 </head>
 <body>
@@ -192,7 +193,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <!-- MAIN -->
     </section>
     <!-- CONTENT --> 
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/monthSelectPlugin.js"></script> 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -208,16 +210,16 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
     <script>
-        flatpickr("#month-year", {
-            plugins: [
-                new monthSelectPlugin({
-                    shorthand: true,
-                    dateFormat: "Y-m",
-                    altFormat: "F Y"
-                })
-            ],
-            allowInput: true
-        });
+    flatpickr("#month-year", {
+        plugins: [
+            new monthSelectPlugin({
+                shorthand: true, // Show shorthand month names (Jan, Feb, etc.)
+                dateFormat: "Y-m", // Format the value as YYYY-MM
+                altFormat: "F Y" // Show full month name and year in the input
+            })
+        ],
+        allowInput: true // Allow user to type in the input
+    });
 
         const searchButton = document.querySelector('#content nav form .form-input button');
         const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
