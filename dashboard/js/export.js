@@ -72,46 +72,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     setMergedCell(worksheet, 'A3:A4', 'Nama');
     setMergedCell(worksheet, 'AG3:AG4', 'Total');    
 
-    // // Tambahkan data dengan warna baris bergantian
-    // data.forEach((row, index) => {
-    //     const rowData = [row.kk_name];
-    //     let total = 0;
-
-    //     for (let i = 1; i <= 31; i++) {
-    //         const value = row[i] !== null ? Number(row[i]) : ''; // Konversi nilai menjadi angka, jika ada
-    //         rowData.push(value);
-    //         if (value) {
-    //             total += value; // Hitung total jika ada nilai
-    //         }
-    //     }
-
-    //     rowData.push(total > 0 ? total : ''); // Tambahkan total sebagai angka, kosong jika 0
-    //     const newRow = worksheet.addRow(rowData);
-
-    //     // Tentukan warna latar belakang berdasarkan indeks baris
-    //     const fillColor = (index % 2 === 0) ? 'FFFFFFFF' : 'F5F5F5'; // Putih untuk baris genap, abu-abu untuk baris ganjil
-
-    //     // Atur style untuk setiap sel di baris data
-    //     newRow.eachCell((cell) => {
-    //         cell.alignment = { horizontal: 'middle', vertical: 'middle' }; // Align center
-    //         cell.border = {
-    //             top: { style: 'thin', color: { argb: 'FF000000' } },
-    //             left: { style: 'thin', color: { argb: 'FF000000' } },
-    //             bottom: { style: 'thin', color: { argb: 'FF000000' } },
-    //             right: { style: 'thin', color: { argb: 'FF000000' } }
-    //         };
-    //         cell.fill = {
-    //             type: 'pattern',
-    //             pattern: 'solid',
-    //             fgColor: { argb: fillColor } // Set warna latar belakang
-    //         };
-    //     });
-    // });
-
     // Atur lebar kolom
     worksheet.getColumn(1).width = 25; // Lebar kolom kk_name
     for (let i = 2; i <= 32; i++) { // Kolom 2 sampai 32 untuk hari 1-31 + Total
-        worksheet.getColumn(i).width = 8; // Lebar kolom 5 karakter
+        worksheet.getColumn(i).width = 6; // Lebar kolom 5 karakter
     }
 
     data.forEach((row, index) => {
@@ -155,7 +119,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             // Jika ini adalah kolom terakhir, set bold dan latar belakang
             if (colNumber === rowData.length) {
                 cell.font = { bold: true }; // Bold untuk kolom terakhir
-                cell.width = 10;
+                cell.width = 8;
                 cell.fill = {
                     type: 'pattern',
                     pattern: 'solid',
