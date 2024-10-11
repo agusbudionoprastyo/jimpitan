@@ -19,95 +19,47 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Baris A3 dikosongkan
     worksheet.getCell('A3').value = '';
 
-    // // Merge B3:AF3 dan set nilai 'Tanggal'
-    // worksheet.mergeCells('B3:AF3');
-    // worksheet.getCell('B3').value = 'Tanggal';
-    // worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-    // worksheet.getCell('B3').font = { bold: true }; // Bold font
-
-    // // Jika kamu masih ingin melakukan penggabungan sel untuk "Nama" dan "Total", pastikan tidak ada referensi ke mereka.
-
-    // worksheet.mergeCells('A3:A4');
-    // worksheet.getCell('A3').value = 'Nama';
-
-    // worksheet.mergeCells('AG3:AG4');
-    // worksheet.getCell('AG3').value = 'Total';
-
-    // // Set header di baris ke-5 tanpa 'Nama' dan 'Total'
-    // const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString()), 'Total']);
-
-    // // Atur warna latar belakang header menjadi biru dan border
-    // headerRow.eachCell((cell) => {
-    //     cell.fill = {
-    //         type: 'pattern',
-    //         pattern: 'solid',
-    //         fgColor: { argb: '8EACCD' } // bg header
-    //     };
-    //     cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
-        
-    //     // Set font bold
-    //     cell.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna hitam
-
-    //     // Menambahkan border untuk header
-    //     cell.border = {
-    //         top: { style: 'thin', color: { argb: 'FF000000' } },
-    //         left: { style: 'thin', color: { argb: 'FF000000' } },
-    //         bottom: { style: 'thin', color: { argb: 'FF000000' } },
-    //         right: { style: 'thin', color: { argb: 'FF000000' } }
-    //     };
-    // });
    // Merge B3:AF3 dan set nilai 'Tanggal'
-worksheet.mergeCells('B3:AF3');
-worksheet.getCell('B3').value = 'Tanggal';
-worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-worksheet.getCell('B3').font = { bold: true }; // Bold font
-worksheet.getCell('B3').fill = { 
-    type: 'pattern', 
-    pattern: 'solid', 
-    fgColor: { argb: 'FFFF00' } // Contoh warna latar belakang kuning
-};
+   worksheet.mergeCells('B3:AF3');
+   worksheet.getCell('B3').value = 'Tanggal';
+   worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+   worksheet.getCell('B3').font = { bold: true }; // Bold font
+   worksheet.getCell('B3').fill = { 
+       type: 'pattern', 
+       pattern: 'solid', 
+       fgColor: { argb: 'FFFF00' } // Contoh warna latar belakang kuning
+   };
+    // Jika kamu masih ingin melakukan penggabungan sel untuk "Nama" dan "Total", pastikan tidak ada referensi ke mereka.
 
-// Jika kamu masih ingin melakukan penggabungan sel untuk "Nama" dan "Total", pastikan tidak ada referensi ke mereka.
-worksheet.mergeCells('A3:A4');
-worksheet.getCell('A3').value = 'Nama';
+    worksheet.mergeCells('A3:A4');
+    worksheet.getCell('A3').value = 'Nama';
 
-worksheet.mergeCells('AG3:AG4');
-worksheet.getCell('AG3').value = 'Total';
+    worksheet.mergeCells('AG3:AG4');
+    worksheet.getCell('AG3').value = 'Total';
 
-// Pastikan baris 4 ada sebelum mengisi data
-if (!worksheet.getRow(4).hasValues) {
-    worksheet.getRow(4).commit(); // Pastikan row 4 terbuat
-}
+    // Set header di baris ke-5 tanpa 'Nama' dan 'Total'
+    const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString()), 'Total']);
 
-// Tambahkan angka 1 hingga 31 di bawah "Tanggal" dari B4 hingga AF4
-for (let i = 0; i < 31; i++) {
-    const column = String.fromCharCode(66 + i); // Kolom B (66) hingga AF (96)
-    const cell = worksheet.getCell(`${column}4`); // Mengambil sel yang sesuai
-    cell.value = i + 1; // Mengisi sel dengan angka 1 hingga 31
-    cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment for days
-    cell.fill = { 
-        type: 'pattern', 
-        pattern: 'solid', 
-        fgColor: { argb: 'D3D3D3' } // Contoh warna latar belakang abu-abu
-    };
+    // Atur warna latar belakang header menjadi biru dan border
+    headerRow.eachCell((cell) => {
+        cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: '8EACCD' } // bg header
+        };
+        cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
+        
+        // Set font bold
+        cell.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna hitam
 
-    // Menambahkan border
-    cell.border = {
-        top: { style: 'thin' },
-        left: { style: 'thin' },
-        bottom: { style: 'thin' },
-        right: { style: 'thin' },
-    };
-}
-
-// Menambahkan border untuk sel "Tanggal"
-worksheet.getCell('B3').border = {
-    top: { style: 'thin' },
-    left: { style: 'thin' },
-    bottom: { style: 'thin' },
-    right: { style: 'thin' },
-};
-
+        // Menambahkan border untuk header
+        cell.border = {
+            top: { style: 'thin', color: { argb: 'FF000000' } },
+            left: { style: 'thin', color: { argb: 'FF000000' } },
+            bottom: { style: 'thin', color: { argb: 'FF000000' } },
+            right: { style: 'thin', color: { argb: 'FF000000' } }
+        };
+    });
 
     // Tambahkan data dengan warna baris bergantian
     data.forEach((row, index) => {
