@@ -228,7 +228,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.mergeCells(`A4:A5`);
     // Merging from B4 to the last cell corresponding to the last day of the month
     const lastColumn = String.fromCharCode(66 + daysInMonth - 1); // 'B' is 66 in ASCII
-    worksheet.mergeCells(`B4:${lastColumn}4`);
+    worksheet.mergeCells(`B3:${lastColumn}4`);
     
     headerRow.eachCell((cell) => {
         cell.fill = {
