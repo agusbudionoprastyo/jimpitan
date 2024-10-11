@@ -225,9 +225,21 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Membuat baris header
     const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), 'Total']);
 
+    // Fungsi untuk mengonversi indeks kolom menjadi huruf kolom
+    function getColumnLetter(columnIndex) {
+        let temp;
+        let letter = '';
+        while (columnIndex > 0) {
+            temp = (columnIndex - 1) % 26;
+            letter = String.fromCharCode(temp + 65) + letter;
+            columnIndex = Math.floor((columnIndex - temp) / 26);
+        }
+        return letter;
+    }
+
     // Menghitung huruf kolom terakhir berdasarkan jumlah hari
     const lastColumnIndex = daysInMonth + 1; // +1 untuk 'Total'
-    const lastColumnLetter = ExcelJS.utils.getColumnLetter(lastColumnIndex);
+    const lastColumnLetter = getColumnLetter(lastColumnIndex);
 
     // Menggabungkan sel di baris header
     worksheet.mergeCells(`B1:${lastColumnLetter}1`);
