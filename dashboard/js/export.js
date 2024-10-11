@@ -40,24 +40,8 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         };
     });
 
-    // Define the style for data rows
-    const rowStyle = {
-        alignment: { horizontal: 'middle', vertical: 'middle' },
-        border: {
-            top: { style: 'thin', color: { argb: 'FF000000' } },
-            left: { style: 'thin', color: { argb: 'FF000000' } },
-            bottom: { style: 'thin', color: { argb: 'FF000000' } },
-            right: { style: 'thin', color: { argb: 'FF000000' } }
-        },
-        fill: {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'FFFFFFFF' } // Warna latar belakang putih
-        }
-    };
-
-    // Tambahkan data
-    data.forEach(row => {
+    // Tambahkan data dengan warna baris bergantian
+    data.forEach((row, index) => {
         const rowData = [row.kk_name];
         let total = 0;
 
@@ -72,11 +56,23 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         rowData.push(total > 0 ? total : ''); // Tambahkan total sebagai angka, kosong jika 0
         const newRow = worksheet.addRow(rowData);
 
+        // Tentukan warna latar belakang berdasarkan indeks baris
+        const fillColor = (index % 2 === 0) ? 'FFFFFFFF' : 'FFCCCCCC'; // Putih untuk baris genap, abu-abu untuk baris ganjil
+
         // Atur style untuk setiap sel di baris data
         newRow.eachCell((cell) => {
-            cell.alignment = rowStyle.alignment; // Align center
-            cell.border = rowStyle.border; // Set border
-            cell.fill = rowStyle.fill; // Set fill color
+            cell.alignment = { horizontal: 'middle', vertical: 'middle' }; // Align center
+            cell.border = {
+                top: { style: 'thin', color: { argb: 'FF000000' } },
+                left: { style: 'thin', color: { argb: 'FF000000' } },
+                bottom: { style: 'thin', color: { argb: 'FF000000' } },
+                right: { style: 'thin', color: { argb: 'FF000000' } }
+            };
+            cell.fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: fillColor } // Set warna latar belakang
+            };
         });
     });
 
