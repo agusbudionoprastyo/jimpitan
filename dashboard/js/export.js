@@ -182,7 +182,6 @@
 //     });
 
 // });
-
 document.getElementById('reportBtn').addEventListener('click', async function() {
     const monthPicker = document.getElementById('monthPicker').value; // Format "Oct 2024"
     if (!monthPicker) {
@@ -219,22 +218,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
 
     const headerRow = worksheet.addRow(['', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), '']);
     
-    // Langsung menggabungkan sel tanpa fungsi tambahan
-    worksheet.mergeCells(`B3:${String.fromCharCode(65 + daysInMonth)}3`); // Untuk tanggal
+    // Tambahkan judul tanpa penggabungan sel
     worksheet.getCell('B3').value = 'Tanggal';
-    worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' };
-    worksheet.getCell('B3').font = { bold: true };
-    
-    worksheet.mergeCells('A3:A4'); // Untuk Nama
     worksheet.getCell('A3').value = 'Nama';
-    worksheet.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' };
-    worksheet.getCell('A3').font = { bold: true };
-
-    const totalColumn = String.fromCharCode(65 + daysInMonth + 1); // Total column setelah kolom hari terakhir
-    worksheet.mergeCells(`${totalColumn}3:${totalColumn}4`); // Sesuaikan sel Total
-    worksheet.getCell(`${totalColumn}3`).value = 'Total';
-    worksheet.getCell(`${totalColumn}3`).alignment = { horizontal: 'center', vertical: 'middle' };
-    worksheet.getCell(`${totalColumn}3`).font = { bold: true };
+    worksheet.getCell(String.fromCharCode(65 + daysInMonth + 1) + '3').value = 'Total'; // Total
 
     headerRow.eachCell((cell) => {
         cell.fill = {
