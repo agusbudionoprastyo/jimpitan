@@ -5,6 +5,19 @@ require 'db.php';
 header('Content-Type: application/json');
 
 try {
+    // Ambil bulan dan tahun dari query parameter
+    $month = isset($_GET['month']) ? (int)$_GET['month'] : date('m');
+    $year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
+
+    // Pastikan bulan dan tahun valid
+    if ($month < 1 || $month > 12 || $year < 2000) {
+        throw new Exception('Invalid month or year.');
+    }
+
+    // Format tanggal untuk query
+    $startDate = "$year-$month-01";
+    $endDate = date("Y-m-t", strtotime($startDate));
+
     // Ambil data dari tabel report
     $sql = "SELECT 
     m.kk_name,
@@ -45,8 +58,8 @@ FROM
 JOIN 
     master_kk m ON r.report_id = m.code_id
 WHERE 
-    jimpitan_date >= DATE_FORMAT(CURDATE(), '%Y-%m-01') 
-    AND jimpitan_date <= LAST_DAY(CURDATE())
+    jimpitan_date >= :start_date 
+    AND jimpitan_date <= :end_date
 GROUP BY 
     r.report_id
 
@@ -89,10 +102,13 @@ SELECT
 FROM 
     report r
 WHERE 
-    jimpitan_date >= DATE_FORMAT(CURDATE(), '%Y-%m-01') 
-    AND jimpitan_date <= LAST_DAY(CURDATE());
+    jimpitan_date >= :start_date 
+    AND jimpitan_date <= :end_date;
 ";
+
     $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':start_date', $startDate);
+    $stmt->bindParam(':end_date', $endDate);
     $stmt->execute();
 
     $reports = $stmt->fetchAll(PDO::FETCH_ASSOC);

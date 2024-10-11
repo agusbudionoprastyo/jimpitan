@@ -1,5 +1,7 @@
 document.getElementById('reportBtn').addEventListener('click', async function() {
-    const response = await fetch('../dashboard/api/fetch_reports.php'); // Ganti dengan path file PHP Anda
+    const month = document.getElementById('month').value;
+    const year = document.getElementById('year').value;
+    const response = await fetch(`../dashboard/api/fetch_reports.php?month=${month}&year=${year}`); // Ganti dengan path file PHP Anda
     const data = await response.json();
 
     const workbook = new ExcelJS.Workbook();
@@ -11,8 +13,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('A1').font = { bold: true, size: 14 }; // Set font bold dan ukuran
 
     // Tambahkan bulan dan tahun di A2
-    const currentDate = new Date();
-    const monthYear = currentDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+    const monthYear = `${month}/${year}`;
     worksheet.getCell('A2').value = monthYear;
     worksheet.getCell('A2').alignment = { horizontal: 'left', vertical: 'middle' };
 
@@ -47,7 +48,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             cell.numFmt = '0'; // Set number format
         }
     });
- 
+
     function setMergedCell(worksheet, cellRange, value) {
         worksheet.mergeCells(cellRange);
         const cell = worksheet.getCell(cellRange.split(':')[0]);
