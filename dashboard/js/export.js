@@ -182,6 +182,7 @@
 //     });
 
 // });
+
 document.getElementById('reportBtn').addEventListener('click', async function() {
     const monthPicker = document.getElementById('monthPicker').value; // Format "Oct 2024"
     if (!monthPicker) {
@@ -214,14 +215,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('A2').value = monthYear;
     worksheet.getCell('A2').alignment = { horizontal: 'left', vertical: 'middle' };
 
+    // Determine the number of days in the selected month
     const daysInMonth = new Date(year, monthNumber, 0).getDate();
 
-    const headerRow = worksheet.addRow(['', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), '']);
-    
-    // Tambahkan judul tanpa penggabungan sel
-    worksheet.getCell('B3').value = 'Tanggal';
-    worksheet.getCell('A3').value = 'Nama';
-    worksheet.getCell(String.fromCharCode(65 + daysInMonth + 1) + '3').value = 'Total'; // Total
+    const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), 'Total']);
 
     headerRow.eachCell((cell) => {
         cell.fill = {
@@ -241,6 +238,29 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             cell.numFmt = '0';
         }
     });
+
+    function setMergedCell(worksheet, cellRange, value) {
+        worksheet.mergeCells(cellRange);
+        const cell = worksheet.getCell(cellRange.split(':')[0]);
+        cell.value = value;
+        cell.alignment = { horizontal: 'center', vertical: 'middle' };
+        cell.font = { bold: true };
+        cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'D8D2C2' }
+        };
+        worksheet.getCell(cellRange).border = {
+            top: { style: 'thin', color: { argb: 'FF000000' } },
+            left: { style: 'thin', color: { argb: 'FF000000' } },
+            bottom: { style: 'thin', color: { argb: 'FF000000' } },
+            right: { style: 'thin', color: { argb: 'FF000000' } }
+        };
+    }
+
+    // setMergedCell(worksheet, 'B3:AF3', 'Tanggal');
+    // setMergedCell(worksheet, 'A3:A4', 'Nama');
+    // setMergedCell(worksheet, 'AG3:AG4', 'Total');
 
     worksheet.getColumn(1).width = 25;
     for (let i = 2; i <= (daysInMonth + 1); i++) {
