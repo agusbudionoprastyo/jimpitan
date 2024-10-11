@@ -226,15 +226,9 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
 
     // Merging the "Nama" cell with the cell above it
     // worksheet.mergeCells(`A4:A5`);
-
-    // Merging from B3 to the last cell corresponding to the last day of the month
+    // Merging from B4 to the last cell corresponding to the last day of the month
     const lastColumn = String.fromCharCode(66 + daysInMonth - 1); // 'B' is 66 in ASCII
-    const mergeRange = `B3:${lastColumn}3`; // Merging in row 3
-
-    // Check if the cells are already merged to avoid errors
-    if (!worksheet.mergedCells.includes(mergeRange)) {
-        worksheet.mergeCells(mergeRange);
-    }
+    worksheet.mergeCells(`B3:${lastColumn}4`);
     
     headerRow.eachCell((cell) => {
         cell.fill = {
