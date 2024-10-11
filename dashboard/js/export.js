@@ -219,6 +219,13 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     const daysInMonth = new Date(year, monthNumber, 0).getDate();
 
     const headerRow = worksheet.addRow(['', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), '']);
+    // Set merged cells for headers based on the number of days
+    setMergedCell(worksheet, `B3:${String.fromCharCode(65 + daysInMonth)}3`, 'Tanggal'); // For days
+    setMergedCell(worksheet, 'A3:A4', 'Nama');
+
+    // Calculate the column for Total based on the days
+    const totalColumn = String.fromCharCode(65 + daysInMonth + 1); // Total column is after the last day column
+    setMergedCell(worksheet, `${totalColumn}3:${totalColumn}4`, 'Total'); // Adjust Total cell
 
     headerRow.eachCell((cell) => {
         cell.fill = {
@@ -259,7 +266,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     }
 
     // setMergedCell(worksheet, 'B3:AF3', 'Tanggal');
-    setMergedCell(worksheet, 'A3:A4', 'Nama');
+    // setMergedCell(worksheet, 'A3:A4', 'Nama');
     // setMergedCell(worksheet, 'AG3:AG4', 'Total');
 
     worksheet.getColumn(1).width = 25;
