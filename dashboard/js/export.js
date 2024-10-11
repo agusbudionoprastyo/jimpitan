@@ -41,7 +41,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
-    const monthYear = `${monthNames[month - 1]} ${year}`; // Menggunakan nama bulan penuh
+    const monthYear = `${monthNames[monthNumber- 1]} ${year}`; // Menggunakan nama bulan penuh
     worksheet.getCell('A2').value = monthYear;
     worksheet.getCell('A2').alignment = { horizontal: 'left', vertical: 'middle' };
 
@@ -166,7 +166,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     });
 
     // Ekspor ke XLSX
-    const monthName = monthNames[month - 1]; // Ambil nama bulan penuh
+    const monthName = monthNames[monthNumber- 1]; // Ambil nama bulan penuh
     const fileName = `Report_${monthName}_${year}.xlsx`; // Format nama file
 
     workbook.xlsx.writeBuffer().then((buffer) => {
