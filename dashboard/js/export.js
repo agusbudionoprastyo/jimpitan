@@ -40,13 +40,13 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
 
     // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
-    const headerRow = worksheet.addRow(Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
+    const headerRow = worksheet.addRow(...Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
 
     // Pindahkan setiap sel header ke kolom B (kolom kedua)
     headerRow.eachCell((cell, index) => {
         // Pindah ke kolom B
         const columnIndex = index + 2; // Menambahkan 2 untuk mulai dari kolom B
-        const cellB = worksheet.getCell(4, columnIndex);
+        const cellB = worksheet.getCell(3, columnIndex);
         
         cellB.value = cell.value; // Set nilai header
 
