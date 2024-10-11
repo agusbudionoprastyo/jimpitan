@@ -25,8 +25,8 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
     worksheet.getCell('B3').font = { bold: true }; // Bold font
 
-    // Set header di baris ke-5
-    const headerRow = worksheet.addRow([Array.from({ length: 31 }, (_, i) => (i + 1).toString())]);
+    // Set header di baris ke-5 tanpa 'Nama' dan 'Total'
+    const headerRow = worksheet.addRow(Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
 
     // Atur warna latar belakang header menjadi biru dan border
     headerRow.eachCell((cell) => {
@@ -48,6 +48,8 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             right: { style: 'thin', color: { argb: 'FF000000' } }
         };
     });
+
+    // Jika kamu masih ingin melakukan penggabungan sel untuk "Nama" dan "Total", pastikan tidak ada referensi ke mereka.
 
     worksheet.mergeCells('A3:A4');
     worksheet.getCell('A3').value = 'Nama';
