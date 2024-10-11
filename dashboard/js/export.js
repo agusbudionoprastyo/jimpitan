@@ -110,8 +110,8 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
 
     // Atur lebar kolom
     worksheet.getColumn(1).width = 25; // Lebar kolom kk_name
-    for (let i = 2; i <= 32; i++) { // Kolom 2 sampai 33 untuk hari 1-31 + Total
-        worksheet.getColumn(i).width = 5; // Lebar kolom 5 karakter
+    for (let i = 2; i <= 32; i++) { // Kolom 2 sampai 32 untuk hari 1-31 + Total
+        worksheet.getColumn(i).width = 8; // Lebar kolom 5 karakter
     }
 
     data.forEach((row, index) => {
