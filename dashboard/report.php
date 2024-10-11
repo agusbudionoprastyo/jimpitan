@@ -140,7 +140,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="order">
                     <div class="head">
                         <h3>Report</h3>
-                        <select id="month" name="month" class="custom-select">
+                        <!-- <select id="month" name="month" class="custom-select">
                             <?php for ($i = 1; $i <= 12; $i++): ?>
                                 <option value="<?= $i ?>" <?= ($i == date('n')) ? 'selected' : '' ?>>
                                     <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
@@ -151,8 +151,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?php for ($y = date('Y'); $y >= 2000; $y--): ?>
                                 <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
                             <?php endfor; ?>
-                        </select>
-                        <label for="monthPicker">Export </label>
+                        </select> -->
                         <input type="text" id="monthPicker" name="month-year" class="custom-select" placeholder="Pilih Bulan & Tahun">
                         
                             <button type="button" id="reportBtn" class="btn-download">

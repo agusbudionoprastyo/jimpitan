@@ -744,7 +744,7 @@ body {
 .flatpickr-monthSelect-months {
     display: grid;
     grid-template-columns: repeat(6, 1fr); /* Tiga kolom */
-    gap: 30px; /* Jarak antar bulan */
+    gap: 25px; /* Jarak antar bulan */
     padding: 10px; /* Padding */
     justify-items: center; /* Pusatkan item di dalam grid */
     margin: 0 auto; /* Pusatkan kontainer secara horizontal */
