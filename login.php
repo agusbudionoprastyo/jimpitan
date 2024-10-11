@@ -7,26 +7,28 @@ $error = ''; // Initialize the error variable
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_name = $_POST['user_name'] ?? '';
     $password = $_POST['password'] ?? '';
-    $role = $_POST['role'] ?? 'user'; // Default to 'user'
     $redirect_option = $_POST['redirect_option'] ?? 'scan_app'; // Default to 'scan_app'
 
     try {
         $pdo = getDatabaseConnection();
 
-        $stmt = $pdo->prepare('SELECT * FROM users WHERE user_name = ? AND role = ?');
-        $stmt->execute([$user_name, $role]);
+        $stmt = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
+        $stmt->execute([$user_name]);
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
-            // If the user is an admin, skip shift validation
-            if ($role === 'admin' || in_array(date('l'), explode(',', $user['shift']))) {
+            // Get the current day of the week
+            $currentDay = date('l'); // e.g., "Monday", "Tuesday", etc.
+
+            // Check if the current day is in the user's shift (skip for admin)
+            if ($user['role'] === 'admin' || in_array($currentDay, explode(',', $user['shift']))) {
                 $_SESSION['user'] = $user;
 
-                // Redirect based on the chosen option
-                if ($redirect_option === 'scan_app') {
-                    header('Location: index.php'); // Redirect to Scan App
-                } else {
+                // Redirect based on the selected option
+                if ($redirect_option === 'dashboard') {
                     header('Location: /dashboard'); // Redirect to Dashboard
+                } else {
+                    header('Location: index.php'); // Redirect to Scan App
                 }
                 exit;
             } else {
@@ -58,22 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="screen-1">
     <h3>Scan App Login</h3>
 
-    <div class="role-selection">
-        <label>
-            <input type="radio" name="role" value="user" checked> User
-        </label>
-        <label>
-            <input type="radio" name="role" value="admin"> Admin
-        </label>
-    </div>
-
     <div class="redirect-option">
-        <label>
-            <input type="radio" name="redirect_option" value="scan_app" checked> Scan App
-        </label>
-        <label>
-            <input type="radio" name="redirect_option" value="dashboard"> Dashboard
-        </label>
+        <label for="redirect_option">Choose Redirect:</label>
+        <select name="redirect_option" id="redirect_option" required>
+            <option value="scan_app" selected>Scan App</option>
+            <option value="dashboard">Dashboard</option>
+        </select>
     </div>
 
     <div class="email">
