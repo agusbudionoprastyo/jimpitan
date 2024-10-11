@@ -149,6 +149,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             // Jika ini adalah kolom terakhir, set bold dan latar belakang
             if (colNumber === rowData.length) {
                 cell.font = { bold: true }; // Bold untuk kolom terakhir
+                cell.width = 8;
                 cell.fill = {
                     type: 'pattern',
                     pattern: 'solid',
