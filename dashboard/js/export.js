@@ -142,10 +142,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         newRow.eachCell((cell, colNumber) => {
             cell.alignment = { horizontal: 'middle', vertical: 'middle' };
             cell.border = {
-                top: { style: 'thin', color: { argb: 'FF000000' } },
-                left: { style: 'thin', color: { argb: 'FF000000' } },
-                bottom: { style: 'thin', color: { argb: 'FF000000' } },
-                right: { style: 'thin', color: { argb: 'FF000000' } }
+                top: { style: 'thin', color: { argb: 'ffffff' } },
+                left: { style: 'thin', color: { argb: 'ffffff' } },
+                bottom: { style: 'thin', color: { argb: 'ffffff' } },
+                right: { style: 'thin', color: { argb: 'ffffff' } }
             };
             cell.fill = {
                 type: 'pattern',
@@ -159,7 +159,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
                 cell.fill = {
                     type: 'pattern',
                     pattern: 'solid',
-                    // fgColor: { argb: 'D8D2C2' }
+                    fgColor: { argb: fillColor }
                 };
             }
         });
