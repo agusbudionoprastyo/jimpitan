@@ -138,18 +138,18 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="order">
                     <div class="head">
                         <h3>Report</h3>
-                            <select id="month" name="month">
-                                <?php for ($i = 1; $i <= 12; $i++): ?>
-                                    <option value="<?= $i ?>" <?= ($i == date('n')) ? 'selected' : '' ?>>
-                                        <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
-                                    </option>
-                                <?php endfor; ?>
-                            </select>
-                            <select id="year" name="year">
-                                <?php for ($y = date('Y'); $y >= 2000; $y--): ?>
-                                    <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
-                                <?php endfor; ?>
-                            </select>
+                        <select id="month" name="month" class="custom-select">
+                            <?php for ($i = 1; $i <= 12; $i++): ?>
+                                <option value="<?= $i ?>" <?= ($i == date('n')) ? 'selected' : '' ?>>
+                                    <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
+                                </option>
+                            <?php endfor; ?>
+                        </select>
+                        <select id="year" name="year" class="custom-select">
+                            <?php for ($y = date('Y'); $y >= 2000; $y--): ?>
+                                <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
+                            <?php endfor; ?>
+                        </select>
                             <button type="button" id="reportBtn" class="btn-download">
                                 <i class='bx bxs-file-export' style="font-size:24px"></i> Unduh
                             </button>
