@@ -30,69 +30,37 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         fgColor: { argb: 'FFFF00' } // Contoh warna latar belakang kuning
     };
 
-    // Merge sel untuk "Nama" dan "Total"
-    worksheet.mergeCells('A3:A4');
-    worksheet.getCell('A3').value = 'Nama';
-    worksheet.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-
-    worksheet.mergeCells('AG3:AG4');
-    worksheet.getCell('AG3').value = 'Total';
-    worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-
     // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
-    const headerRow = worksheet.addRow(...Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
+    const headerRow = worksheet.addRow(['', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString()),'']);
 
-    // Pindahkan setiap sel header ke kolom B (kolom kedua)
-    headerRow.eachCell((cell, index) => {
-        // Pindah ke kolom B
-        const columnIndex = index + 2; // Menambahkan 2 untuk mulai dari kolom B
-        const cellB = worksheet.getCell(3, columnIndex);
-        
-        cellB.value = cell.value; // Set nilai header
-
-        // Atur warna latar belakang header
-        cellB.fill = {
+    // Atur warna latar belakang header
+    headerRow.eachCell((cell) => {
+        cell.fill = {
             type: 'pattern',
             pattern: 'solid',
             fgColor: { argb: '8EACCD' } // bg header
         };
-        cellB.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
+        cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
         
         // Set font bold
-        cellB.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna hitam
+        cell.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna hitam
 
         // Menambahkan border untuk header
-        cellB.border = {
+        cell.border = {
             top: { style: 'thin', color: { argb: 'FF000000' } },
             left: { style: 'thin', color: { argb: 'FF000000' } },
             bottom: { style: 'thin', color: { argb: 'FF000000' } },
             right: { style: 'thin', color: { argb: 'FF000000' } }
         };
     });
-
-    // // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
-    // const headerRow = worksheet.addRow(Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
-
-    // // Atur warna latar belakang header
-    // headerRow.eachCell((cell) => {
-    //     cell.fill = {
-    //         type: 'pattern',
-    //         pattern: 'solid',
-    //         fgColor: { argb: '8EACCD' } // bg header
-    //     };
-    //     cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
-        
-    //     // Set font bold
-    //     cell.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna hitam
-
-    //     // Menambahkan border untuk header
-    //     cell.border = {
-    //         top: { style: 'thin', color: { argb: 'FF000000' } },
-    //         left: { style: 'thin', color: { argb: 'FF000000' } },
-    //         bottom: { style: 'thin', color: { argb: 'FF000000' } },
-    //         right: { style: 'thin', color: { argb: 'FF000000' } }
-    //     };
-    // });
+        // Merge sel untuk "Nama" dan "Total"
+        worksheet.mergeCells('A3:A4');
+        worksheet.getCell('A3').value = 'Nama';
+        worksheet.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+    
+        worksheet.mergeCells('AG3:AG4');
+        worksheet.getCell('AG3').value = 'Total';
+        worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
 
     // Tambahkan data dengan warna baris bergantian
     data.forEach((row, index) => {
