@@ -53,7 +53,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/monthSelectPlugin.css">
     <title>Jimpitan</title>
 </head>
 <body>
@@ -152,8 +151,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
                             <?php endfor; ?>
                         </select>
-                        <label for="month-year">Pilih Bulan dan Tahun </label>
-                        <input type="text" id="month-year" name="month-year" class="custom-input" placeholder="Pilih Bulan dan Tahun">
+                        <label for="month-year">Export </label>
+                        <input type="text" id="month-year" name="month-year" class="custom-input" placeholder="Pilih Bulan & Tahun">
                         
                             <button type="button" id="reportBtn" class="btn-download">
                                 <i class='bx bxs-file-export'></i> Unduh
@@ -194,7 +193,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
     <!-- CONTENT --> 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest/dist/plugins/monthSelect/monthSelectPlugin.js"></script>
+    <script src="js/monthSelectPlugin.js"></script>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
