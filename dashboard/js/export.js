@@ -47,57 +47,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             cell.numFmt = '0'; // Set number format
         }
     });
-
-    // // Merge B3:AF3 dan set nilai 'Tanggal'
-    // worksheet.mergeCells('B3:AF3');
-    // worksheet.getCell('B3').value = 'Tanggal';
-    // worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-    // worksheet.getCell('B3').font = { bold: true }; // Bold font
-    // worksheet.getCell('B3').fill = { 
-    //     type: 'pattern', 
-    //     pattern: 'solid', 
-    //     fgColor: { argb: 'EDDFE0' } // bg color
-    // };
-    // worksheet.getCell('B3:AF3').border = { // Moved border definition here
-    //     top: { style: 'thin', color: { argb: 'FF000000' } },
-    //     left: { style: 'thin', color: { argb: 'FF000000' } },
-    //     bottom: { style: 'thin', color: { argb: 'FF000000' } },
-    //     right: { style: 'thin', color: { argb: 'FF000000' } }
-    // }; 
-
-    // // Merge sel untuk "Nama" dan "Total"
-    // worksheet.mergeCells('A3:A4');
-    // worksheet.getCell('A3').value = 'Nama';
-    // worksheet.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-    // worksheet.getCell('A3').font = { bold: true }; // Bold font
-    // worksheet.getCell('A3').fill = { 
-    //     type: 'pattern', 
-    //     pattern: 'solid', 
-    //     fgColor: { argb: 'EDDFE0' } // bg color
-    // };
-    // worksheet.getCell('A3:A4').border = { // Moved border definition here
-    //     top: { style: 'thin', color: { argb: 'FF000000' } },
-    //     left: { style: 'thin', color: { argb: 'FF000000' } },
-    //     bottom: { style: 'thin', color: { argb: 'FF000000' } },
-    //     right: { style: 'thin', color: { argb: 'FF000000' } }
-    // }; 
-
-    // worksheet.mergeCells('AG3:AG4');
-    // worksheet.getCell('AG3').value = 'Total';
-    // worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-    // worksheet.getCell('AG3').font = { bold: true }; // Bold font
-    // worksheet.getCell('AG3').fill = { 
-    //     type: 'pattern', 
-    //     pattern: 'solid', 
-    //     fgColor: { argb: 'EDDFE0' }, // Corrected to use an object
-    // };
-
-    // worksheet.getCell('AG3:AG4').border = { // Moved border definition here
-    //     top: { style: 'thin', color: { argb: 'FF000000' } },
-    //     left: { style: 'thin', color: { argb: 'FF000000' } },
-    //     bottom: { style: 'thin', color: { argb: 'FF000000' } },
-    //     right: { style: 'thin', color: { argb: 'FF000000' } }
-    // };    
+ 
     function setMergedCell(worksheet, cellRange, value) {
         worksheet.mergeCells(cellRange);
         const cell = worksheet.getCell(cellRange.split(':')[0]);

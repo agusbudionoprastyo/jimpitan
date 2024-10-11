@@ -39,7 +39,7 @@ try {
     SUM(CASE WHEN DAY(jimpitan_date) = 29 THEN nominal END) AS '29',
     SUM(CASE WHEN DAY(jimpitan_date) = 30 THEN nominal END) AS '30',
     SUM(CASE WHEN DAY(jimpitan_date) = 31 THEN nominal END) AS '31',
-    SUM(nominal) AS total -- Menambahkan total nominal untuk semua tanggal
+    SUM(nominal) AS total
 FROM 
     report r
 JOIN 
@@ -48,7 +48,49 @@ WHERE
     jimpitan_date >= DATE_FORMAT(CURDATE(), '%Y-%m-01') 
     AND jimpitan_date <= LAST_DAY(CURDATE())
 GROUP BY 
-    r.report_id;
+    r.report_id
+
+UNION ALL
+
+SELECT 
+    'Total' AS kk_name,
+    SUM(CASE WHEN DAY(jimpitan_date) = 1 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 2 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 3 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 4 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 5 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 6 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 7 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 8 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 9 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 10 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 11 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 12 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 13 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 14 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 15 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 16 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 17 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 18 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 19 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 20 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 21 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 22 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 23 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 24 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 25 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 26 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 27 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 28 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 29 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 30 THEN nominal END),
+    SUM(CASE WHEN DAY(jimpitan_date) = 31 THEN nominal END),
+    SUM(nominal) AS total
+FROM 
+    report r
+WHERE 
+    jimpitan_date >= DATE_FORMAT(CURDATE(), '%Y-%m-01') 
+    AND jimpitan_date <= LAST_DAY(CURDATE());
 ";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
