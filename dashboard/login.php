@@ -53,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- <div class="logo">
     </div> -->
     <h3>Dashboard Login</h3>
-    <a href="../index.php" style="color: black; font-size: 14px; text-decoration: none;">Go to Scan App</a>
     <div class="email">
         <label for="user_name">User</label>
         <div class="sec-2">
@@ -74,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($error): ?>
             <div class="error-message" style="color: red;"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
+        <a href="../index.php" style="color: black; font-size: 14px; text-decoration: none;">Go to Scan App</a>
     </div>
 </div>
 </form>

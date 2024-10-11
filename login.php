@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- <div class="logo">
         <img src="icon-192x192.png" alt="Logo" />
     </div> -->
+    <h3>Scan App Login</h3>
     <div class="email">
         <label for="user_name">User</label>
         <div class="sec-2">
