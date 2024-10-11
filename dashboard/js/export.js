@@ -143,7 +143,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
 
     // Ekspor ke XLSX
     const monthName = monthNames[month - 1]; // Ambil nama bulan penuh
-    const fileName = `reports_${monthName}_${year}.xlsx`; // Format nama file
+    const fileName = `Report_${monthName}_${year}.xlsx`; // Format nama file
 
     workbook.xlsx.writeBuffer().then((buffer) => {
         const blob = new Blob([buffer], { type: 'application/octet-stream' });
