@@ -19,45 +19,25 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Baris A3 dikosongkan
     worksheet.getCell('A3').value = '';
 
-   // Pastikan worksheet sudah ada dan bersih
-const rowNumber = 4; // Baris ke-4
+    // Merge B3:AF3 dan set nilai 'Tanggal'
+    worksheet.mergeCells('B3:AF3');
+    worksheet.getCell('B3').value = 'Tanggal';
+    worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+    worksheet.getCell('B3').font = { bold: true }; // Bold font
+    worksheet.getCell('B3').fill = { 
+        type: 'pattern', 
+        pattern: 'solid', 
+        fgColor: { argb: 'FFFF00' } // Contoh warna latar belakang kuning
+    };
 
-// Jika baris ke-4 belum ada, buat dan inisialisasi
-if (!worksheet.getRow(rowNumber).values) {
-    worksheet.getRow(rowNumber).values = [];
-}
+    // Merge sel untuk "Nama" dan "Total"
+    worksheet.mergeCells('A3:A4');
+    worksheet.getCell('A3').value = 'Nama';
+    worksheet.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
 
-// Merge B3:AF3 dan set nilai 'Tanggal'
-worksheet.mergeCells('B3:AF3');
-worksheet.getCell('B3').value = 'Tanggal';
-worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-worksheet.getCell('B3').font = { bold: true }; // Bold font
-worksheet.getCell('B3').fill = { 
-    type: 'pattern', 
-    pattern: 'solid', 
-    fgColor: { argb: 'FFFF00' } // Contoh warna latar belakang kuning
-};
-
-// Merge sel untuk "Nama" dan "Total"
-worksheet.mergeCells('A3:A4');
-worksheet.getCell('A3').value = 'Nama';
-worksheet.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-
-worksheet.mergeCells('AG3:AG4');
-worksheet.getCell('AG3').value = 'Total';
-worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-
-// Mengisi sel B4:AF4 dengan angka dari 1 hingga 31
-for (let day = 1; day <= 31; day++) {
-    const column = String.fromCharCode(66 + (day - 1)); // Menghitung huruf kolom B, C, D, dst.
-    const cell = worksheet.getCell(`${column}${rowNumber}`); // Mengambil sel yang sesuai
-    cell.value = day; // Mengisi nilai hari ke kolom yang sesuai
-    cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-}
-
-// Setelah selesai, simpan atau render worksheet sesuai kebutuhan
-
-
+    worksheet.mergeCells('AG3:AG4');
+    worksheet.getCell('AG3').value = 'Total';
+    worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
 
     // // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
     // const headerRow = worksheet.addRow(Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
