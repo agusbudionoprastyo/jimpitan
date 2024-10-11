@@ -3,13 +3,13 @@ session_start();
 
 // Check if user is logged in
 if (!isset($_SESSION['user'])) {
-    header('Location: ../login.php'); // Redirect to login page
+    header('Location: login.php'); // Redirect to login page
     exit;
 }
 
 // Check if user is admin
 if ($_SESSION['user']['role'] !== 'admin') {
-    header('Location: ../login.php'); // Redirect to unauthorized page
+    header('Location: login.php'); // Redirect to unauthorized page
     exit;
 }
 // Include the database connection
