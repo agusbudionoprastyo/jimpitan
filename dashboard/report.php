@@ -138,7 +138,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="order">
                     <div class="head">
                         <h3>Report</h3>
-                        <label for="month">Unduh Report</label>
                             <select id="month" name="month">
                                 <?php for ($i = 1; $i <= 12; $i++): ?>
                                     <option value="<?= $i ?>" <?= ($i == date('n')) ? 'selected' : '' ?>>
@@ -152,7 +151,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <?php endfor; ?>
                             </select>
                             <button type="button" id="reportBtn" class="btn-download">
-                                <i class='bx bxs-file-export' style="font-size:24px"></i>
+                                Unduh <i class='bx bxs-file-export' style="font-size:24px"></i>
                             </button>
                     </div>
                     <table id="example" class="display" style="width:100%">
