@@ -51,7 +51,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- sweetalert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <title>Jimpitan</title>
 </head>
 <body>
@@ -191,7 +192,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <!-- MAIN -->
     </section>
     <!-- CONTENT --> 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>   
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -211,14 +211,14 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         flatpickr("#month-year", {
             plugins: [
                 new monthSelectPlugin({
-                    shorthand: true, // Show shorthand month names (Jan, Feb, etc.)
-                    dateFormat: "Y-m", // Format the value as YYYY-MM
-                    altFormat: "F Y" // Show full month name and year in the input
+                    shorthand: true,
+                    dateFormat: "Y-m",
+                    altFormat: "F Y"
                 })
             ],
-            allowInput: true // Allow user to type in the input
+            allowInput: true
         });
-        
+
         const searchButton = document.querySelector('#content nav form .form-input button');
         const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
         const searchForm = document.querySelector('#content nav form');
