@@ -716,7 +716,7 @@ body {
     background-color: #fff; /* Optional: background color */
     appearance: none; /* Removes default styling in some browsers */
     text-align: center; /* Center text */
-    width: 100%; /* Optional: makes the select fill the container */
+    width: 20%; /* Optional: makes the select fill the container */
 }
 
 /* Optional: Style for better visibility on focus */
