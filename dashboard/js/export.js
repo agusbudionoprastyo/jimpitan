@@ -125,6 +125,11 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     
         // Tentukan warna latar belakang berdasarkan indeks baris
         const fillColor = (index % 2 === 0) ? 'FFFFFFFF' : 'F5F5F5'; // Putih untuk baris genap, abu-abu untuk baris ganjil
+
+        // Jika ini adalah baris terakhir, atur warna latar belakang khusus
+        if (index === data.length - 1) {
+            fillColor = 'EDDFE0'; // Warna latar belakang khusus untuk baris terakhir
+        }
     
         // Atur style untuk setiap sel di baris data
         newRow.eachCell((cell, colNumber) => {
