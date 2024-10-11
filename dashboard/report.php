@@ -151,7 +151,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?php endfor; ?>
                         </select>
                             <button type="button" id="reportBtn" class="btn-download">
-                                <i class='bx bxs-file-export' style="font-size:24px"></i> Unduh
+                                <i class='bx bxs-file-export'></i> Unduh
                             </button>
                     </div>
                     <table id="example" class="display" style="width:100%">
