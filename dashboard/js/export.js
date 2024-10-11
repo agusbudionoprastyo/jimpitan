@@ -219,16 +219,18 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('A3').value = '';
 
 
-    // Determine the number of days in the selected month
+    // Menentukan jumlah hari dalam bulan yang dipilih
     const daysInMonth = new Date(year, monthNumber, 0).getDate();
 
+    // Membuat baris header
     const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), 'Total']);
 
-    // Merging the "Nama" cell with the cell above it
-    // worksheet.mergeCells(`A4:A5`);
-    // Merging from B4 to the last cell corresponding to the last day of the month
-    const lastColumn = `B${daysInMonth}`; 
-    worksheet.mergeCells(`B8:${lastColumn}8`);
+    // Menghitung huruf kolom terakhir berdasarkan jumlah hari
+    const lastColumnIndex = daysInMonth + 1; // +1 untuk 'Total'
+    const lastColumnLetter = ExcelJS.utils.getColumnLetter(lastColumnIndex);
+
+    // Menggabungkan sel di baris header
+    worksheet.mergeCells(`B1:${lastColumnLetter}1`);
     
     headerRow.eachCell((cell) => {
         cell.fill = {
