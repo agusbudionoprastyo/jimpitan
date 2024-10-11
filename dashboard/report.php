@@ -208,6 +208,17 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
     <script>
+        flatpickr("#month-year", {
+            plugins: [
+                new monthSelectPlugin({
+                    shorthand: true, // Show shorthand month names (Jan, Feb, etc.)
+                    dateFormat: "Y-m", // Format the value as YYYY-MM
+                    altFormat: "F Y" // Show full month name and year in the input
+                })
+            ],
+            allowInput: true // Allow user to type in the input
+        });
+        
         const searchButton = document.querySelector('#content nav form .form-input button');
         const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
         const searchForm = document.querySelector('#content nav form');
@@ -238,17 +249,5 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
         })
     </script>
-    <script>
-    flatpickr("#month-year", {
-        plugins: [
-            new monthSelectPlugin({
-                shorthand: true, // Show shorthand month names (Jan, Feb, etc.)
-                dateFormat: "Y-m", // Format the value as YYYY-MM
-                altFormat: "F Y" // Show full month name and year in the input
-            })
-        ],
-        allowInput: true // Allow user to type in the input
-    });
-</script>
 </body>
 </html>
