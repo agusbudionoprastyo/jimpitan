@@ -77,7 +77,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input class="pas" type="password" name="password" placeholder="********" required/>
         </div>
     </div>
+
+    <div class="password">
     <label><input type="checkbox" name="redirect_option" value="dashboard"> Go To Dashboard</label>
+    </div>
+    
     <button class="login">Login</button>
     <div class="footer">
         <?php if ($error): ?>
