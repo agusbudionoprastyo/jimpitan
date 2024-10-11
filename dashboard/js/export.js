@@ -53,6 +53,12 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         pattern: 'solid', 
         fgColor: { argb: 'EDDFE0' } // bg color
     };
+    worksheet.getCell('B3:AF3').border = { // Moved border definition here
+        top: { style: 'thin', color: { argb: 'FF000000' } },
+        left: { style: 'thin', color: { argb: 'FF000000' } },
+        bottom: { style: 'thin', color: { argb: 'FF000000' } },
+        right: { style: 'thin', color: { argb: 'FF000000' } }
+    }; 
 
     // Merge sel untuk "Nama" dan "Total"
     worksheet.mergeCells('A3:A4');
@@ -64,6 +70,12 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         pattern: 'solid', 
         fgColor: { argb: 'EDDFE0' } // bg color
     };
+    worksheet.getCell('A3:A4').border = { // Moved border definition here
+        top: { style: 'thin', color: { argb: 'FF000000' } },
+        left: { style: 'thin', color: { argb: 'FF000000' } },
+        bottom: { style: 'thin', color: { argb: 'FF000000' } },
+        right: { style: 'thin', color: { argb: 'FF000000' } }
+    }; 
 
     worksheet.mergeCells('AG3:AG4');
     worksheet.getCell('AG3').value = 'Total';
@@ -75,7 +87,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         fgColor: { argb: 'EDDFE0' }, // Corrected to use an object
     };
 
-    worksheet.getCell('A3:AG4').border = { // Moved border definition here
+    worksheet.getCell('AG3:AG4').border = { // Moved border definition here
         top: { style: 'thin', color: { argb: 'FF000000' } },
         left: { style: 'thin', color: { argb: 'FF000000' } },
         bottom: { style: 'thin', color: { argb: 'FF000000' } },
