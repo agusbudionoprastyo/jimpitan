@@ -56,7 +56,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     //         right: { style: 'thin', color: { argb: 'FF000000' } }
     //     };
     // });
-    // Merge B3:AF3 dan set nilai 'Tanggal'
+   // Merge B3:AF3 dan set nilai 'Tanggal'
 worksheet.mergeCells('B3:AF3');
 worksheet.getCell('B3').value = 'Tanggal';
 worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
@@ -74,10 +74,15 @@ worksheet.getCell('A3').value = 'Nama';
 worksheet.mergeCells('AG3:AG4');
 worksheet.getCell('AG3').value = 'Total';
 
+// Pastikan baris 4 ada sebelum mengisi data
+if (!worksheet.getRow(4).hasValues) {
+    worksheet.getRow(4).commit(); // Pastikan row 4 terbuat
+}
+
 // Tambahkan angka 1 hingga 31 di bawah "Tanggal" dari B4 hingga AF4
 for (let i = 0; i < 31; i++) {
-    const cellAddress = `B4:${String.fromCharCode(66 + i)}4`; // Menghitung alamat sel dari B4 hingga AF4
-    const cell = worksheet.getCell(`${String.fromCharCode(66 + i)}4`); // Mengambil sel yang sesuai
+    const column = String.fromCharCode(66 + i); // Kolom B (66) hingga AF (96)
+    const cell = worksheet.getCell(`${column}4`); // Mengambil sel yang sesuai
     cell.value = i + 1; // Mengisi sel dengan angka 1 hingga 31
     cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment for days
     cell.fill = { 
