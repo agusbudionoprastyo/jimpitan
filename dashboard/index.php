@@ -79,7 +79,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </a>
             </li>
             <li>
-            <a href="report.php">
+            <a href="keuangan.php">
                     <i class='bx bxs-report'></i>
                     <span class="text">Keuangan</span>
                 </a>
