@@ -51,10 +51,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     });
 
     // Merge "Nama" cell with the cell above it (for example, if this is row 5 and you want to merge with row 4)
-    worksheet.mergeCells(`A5:A6`); // Adjust row numbers as necessary
+    worksheet.mergeCells(`A4:A5`); // Adjust row numbers as necessary
 
     // Merge "Total" cell with the cell above it
-    worksheet.mergeCells(`AF5:AF6`); // Adjust column letters and row numbers as necessary
+    worksheet.mergeCells(`AG4:AG5`); // Adjust column letters and row numbers as necessary
 
     // Tambahkan data dengan warna baris bergantian
     data.forEach((row, index) => {
