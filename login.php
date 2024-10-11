@@ -80,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
     <label>
-        <input type="radio" name="redirect_option" value="scan_app" checked> Scan
         <input type="radio" name="redirect_option" value="dashboard"> Dashboard
     </label>
     
