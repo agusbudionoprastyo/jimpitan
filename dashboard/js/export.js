@@ -1,8 +1,23 @@
 document.getElementById('reportBtn').addEventListener('click', async function() {
-    const month = document.getElementById('month').value;
-    const year = document.getElementById('year').value;
-    const response = await fetch(`../dashboard/api/fetch_reports.php?month=${month}&year=${year}`); // Ganti dengan path file PHP Anda
-    const data = await response.json();
+    // const month = document.getElementById('month').value;
+    // const year = document.getElementById('year').value;
+    // const response = await fetch(`../dashboard/api/fetch_reports.php?month=${month}&year=${year}`); // Ganti dengan path file PHP Anda
+    // const data = await response.json();
+        // Ambil nilai dari monthPicker
+        const monthPicker = document.getElementById('monthPicker').value; // Format YYYY-MM
+        if (!monthYear) {
+            alert('Please select a month');
+            return;
+        }
+    
+        const [year, month] = monthPicker.split(' '); // Pecah menjadi tahun dan bulan
+    
+        console.log('Selected Month:', month);
+        console.log('Selected Year:', year);
+    
+        const response = await fetch(`../dashboard/api/fetch_reports.php?month=${month}&year=${year}`);
+        const data = await response.json();
+    
 
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Reports');
