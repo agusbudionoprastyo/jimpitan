@@ -241,10 +241,14 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     const lastColumnIndex = daysInMonth + 1; // +1 untuk 'Total'
     const lastColumnLetter = getColumnLetter(lastColumnIndex);
 
+    // Menghitung huruf kolom terakhir berdasarkan jumlah hari
+    const totalColumnIndex = daysInMonth + 2; // +1 untuk 'Total'
+    const totalColumnLetter = getColumnLetter(totalColumnIndex);
+
     // Menggabungkan sel "Nama" dengan sel di atasnya
     worksheet.mergeCells(`B3:${lastColumnLetter}3`); // Menggabungkan header bulan
     worksheet.mergeCells('A3:A4'); // Menggabungkan sel untuk "Nama"
-    // worksheet.mergeCells(`${lastColumnLetter}3:${lastColumnLetter}4`); // Menggabungkan sel untuk "Total"
+    worksheet.mergeCells(`${totalColumnLetter}3:${totalColumnLetter}4`); // Menggabungkan sel untuk "Total"
     
     headerRow.eachCell((cell) => {
         cell.fill = {
