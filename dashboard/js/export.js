@@ -220,51 +220,18 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
 
     const headerRow = worksheet.addRow(['', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), '']);
 
-    headerRow.eachCell((cell) => {
-        cell.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'D8D2C2' }
-        };
-        cell.alignment = { horizontal: 'center', vertical: 'middle' };
-        cell.font = { bold: true, color: { argb: '000000' } };
-        cell.border = {
-            top: { style: 'thin', color: { argb: 'FF000000' } },
-            left: { style: 'thin', color: { argb: 'FF000000' } },
-            bottom: { style: 'thin', color: { argb: 'FF000000' } },
-            right: { style: 'thin', color: { argb: 'FF000000' } }
-        };
-        if (cell.value !== '') {
-            cell.numFmt = '0';
-        }
-    });
-
-    function setMergedCell(worksheet, cellRange, value) {
-        worksheet.mergeCells(cellRange);
-        const cell = worksheet.getCell(cellRange.split(':')[0]);
-        cell.value = value;
-        cell.alignment = { horizontal: 'center', vertical: 'middle' };
-        cell.font = { bold: true };
-        cell.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'D8D2C2' }
-        };
-        worksheet.getCell(cellRange).border = {
-            top: { style: 'thin', color: { argb: 'FF000000' } },
-            left: { style: 'thin', color: { argb: 'FF000000' } },
-            bottom: { style: 'thin', color: { argb: 'FF000000' } },
-            right: { style: 'thin', color: { argb: 'FF000000' } }
-        };
-    }
-
-    setMergedCell(worksheet, 'B3:AF3', 'Tanggal');
+    // Set merged cells for headers based on the number of days
+    setMergedCell(worksheet, `B3:${String.fromCharCode(65 + daysInMonth)}3`, 'Tanggal'); // For days
     setMergedCell(worksheet, 'A3:A4', 'Nama');
-    setMergedCell(worksheet, 'AG3:AG4', 'Total');
 
-    worksheet.getColumn(1).width = 25;
+    // Calculate the column for Total based on the days
+    const totalColumn = String.fromCharCode(65 + daysInMonth + 1); // Total column is after the last day column
+    setMergedCell(worksheet, `${totalColumn}3:${totalColumn}4`, 'Total'); // Adjust Total cell
+
+    // Atur lebar kolom
+    worksheet.getColumn(1).width = 25; // Lebar kolom untuk 'Nama'
     for (let i = 2; i <= (daysInMonth + 1); i++) {
-        worksheet.getColumn(i).width = 6; // Set width for days
+        worksheet.getColumn(i).width = 6; // Lebar kolom untuk hari
     }
 
     data.forEach((row, index) => {
@@ -333,4 +300,25 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     });
+
 });
+
+// Helper function for merged cells
+function setMergedCell(worksheet, cellRange, value) {
+    worksheet.mergeCells(cellRange);
+    const cell = worksheet.getCell(cellRange.split(':')[0]);
+    cell.value = value;
+    cell.alignment = { horizontal: 'center', vertical: 'middle' };
+    cell.font = { bold: true };
+    cell.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'D8D2C2' } // Background color
+    };
+    worksheet.getCell(cellRange).border = {
+        top: { style: 'thin', color: { argb: 'FF000000' } },
+        left: { style: 'thin', color: { argb: 'FF000000' } },
+        bottom: { style: 'thin', color: { argb: 'FF000000' } },
+        right: { style: 'thin', color: { argb: 'FF000000' } }
+    };
+}
