@@ -133,10 +133,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         rowData.push(total > 0 ? total : '');
         const newRow = worksheet.addRow(rowData);
 
-        let fillColor = (index % 2 === 0) ? 'F5F5F7' : 'B7B7B7';
+        let fillColor = (index % 2 === 0) ? 'F5F5F7' : 'D2E0FB';
 
         if (index === data.length - 1) {
-            fillColor = '705C53';
+            fillColor = '6A9AB0';
         }
 
         newRow.eachCell((cell, colNumber) => {
