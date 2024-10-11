@@ -140,9 +140,9 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
                                 <?php endfor; ?>
                             </select>
-                        <button type="button" id="reportBtn" class="btn-download">
-                            <i class='bx bxs-file-export' style="font-size:24px"></i>
-						</button>
+                            <button type="button" id="reportBtn" class="btn-download">
+                                <i class='bx bxs-file-export' style="font-size:24px"></i>
+                            </button>
                     </div>
                     <table id="example" class="display" style="width:100%">
                         <thead>
