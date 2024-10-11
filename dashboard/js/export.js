@@ -19,6 +19,11 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Baris A3 dikosongkan
     worksheet.getCell('A3').value = '';
 
+// Pastikan worksheet sudah ada
+// Menggunakan worksheet.addRow jika belum ada baris
+const row = worksheet.getRow(4); // Mengambil baris ke-4 (B4:AF4)
+row.values = []; // Inisialisasi baris jika belum ada
+
 // Merge B3:AF3 dan set nilai 'Tanggal'
 worksheet.mergeCells('B3:AF3');
 worksheet.getCell('B3').value = 'Tanggal';
@@ -42,9 +47,13 @@ worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' 
 // Mengisi sel B4:AF4 dengan angka dari 1 hingga 31
 for (let day = 1; day <= 31; day++) {
     const column = String.fromCharCode(66 + (day - 1)); // Menghitung huruf kolom B, C, D, dst.
-    worksheet.getCell(`${column}4`).value = day; // Mengisi nilai hari ke kolom yang sesuai
-    worksheet.getCell(`${column}4`).alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+    const cell = worksheet.getCell(`${column}4`);
+    cell.value = day; // Mengisi nilai hari ke kolom yang sesuai
+    cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
 }
+
+// Setelah selesai, pastikan untuk merender worksheet atau menyimpannya
+
 
     // // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
     // const headerRow = worksheet.addRow(Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
