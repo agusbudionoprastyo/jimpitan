@@ -22,12 +22,12 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Set header di baris ke-5
     const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString()), 'Total']);
 
-    // Atur warna latar belakang header menjadi abu-abu dan border
+    // Atur warna latar belakang header menjadi biru dan border
     headerRow.eachCell((cell) => {
         cell.fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFCCCCCC' } // Warna abu-abu
+            fgColor: { argb: 'FF007BFF' } // Warna biru
         };
         cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
 
