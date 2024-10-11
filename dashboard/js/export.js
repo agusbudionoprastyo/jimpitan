@@ -149,11 +149,11 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             // Jika ini adalah kolom terakhir, set bold dan latar belakang
             if (colNumber === rowData.length) {
                 cell.font = { bold: true }; // Bold untuk kolom terakhir
-                cell.width = 8;
+                cell.width = 10;
                 cell.fill = {
                     type: 'pattern',
                     pattern: 'solid',
-                    fgColor: { argb: 'EDDFE0' } // Latar belakang untuk kolom terakhir
+                    fgColor: { argb: 'EDE8DC' } // Latar belakang untuk kolom terakhir
                 };
             }
         });
