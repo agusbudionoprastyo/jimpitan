@@ -42,48 +42,25 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
     const headerRow = worksheet.addRow(Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
 
-    // // Atur warna latar belakang header menjadi biru dan border
-    // headerRow.eachCell((cell) => {
-    //     cell.fill = {
-    //         type: 'pattern',
-    //         pattern: 'solid',
-    //         fgColor: { argb: '8EACCD' } // bg header
-    //     };
-    //     cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
+    // Atur warna latar belakang header
+    headerRow.eachCell((cell) => {
+        cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: '8EACCD' } // bg header
+        };
+        cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
         
-    //     // Set font bold
-    //     cell.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna hitam
+        // Set font bold
+        cell.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna hitam
 
-    //     // Menambahkan border untuk header
-    //     cell.border = {
-    //         top: { style: 'thin', color: { argb: 'FF000000' } },
-    //         left: { style: 'thin', color: { argb: 'FF000000' } },
-    //         bottom: { style: 'thin', color: { argb: 'FF000000' } },
-    //         right: { style: 'thin', color: { argb: 'FF000000' } }
-    //     };
-    // });
-    
-    // Atur warna latar belakang header menjadi biru dan border
-    headerRow.eachCell({ includeEmpty: true }, (cell, index) => {
-        if (index >= 2) { // Mulai dari kolom B
-            cell.fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: { argb: '8EACCD' } // bg header
-            };
-            cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
-            
-            // Set font bold
-            cell.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna hitam
-
-            // Menambahkan border untuk header
-            cell.border = {
-                top: { style: 'thin', color: { argb: 'FF000000' } },
-                left: { style: 'thin', color: { argb: 'FF000000' } },
-                bottom: { style: 'thin', color: { argb: 'FF000000' } },
-                right: { style: 'thin', color: { argb: 'FF000000' } }
-            };
-        }
+        // Menambahkan border untuk header
+        cell.border = {
+            top: { style: 'thin', color: { argb: 'FF000000' } },
+            left: { style: 'thin', color: { argb: 'FF000000' } },
+            bottom: { style: 'thin', color: { argb: 'FF000000' } },
+            right: { style: 'thin', color: { argb: 'FF000000' } }
+        };
     });
 
     // Tambahkan data dengan warna baris bergantian
