@@ -151,8 +151,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
                             <?php endfor; ?>
                         </select>
-                        <label for="month-year">Export </label>
-                        <input type="text" id="month-year" name="month-year" class="custom-input" placeholder="Pilih Bulan & Tahun">
+                        <label for="monthPicker">Export </label>
+                        <input type="text" id="monthPicker" name="month-year" class="custom-input" placeholder="Pilih Bulan & Tahun">
                         
                             <button type="button" id="reportBtn" class="btn-download">
                                 <i class='bx bxs-file-export'></i> Unduh
