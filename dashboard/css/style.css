@@ -724,11 +724,11 @@ body {
 }
 
 .btn-download {
-    background-color: #007bff; /* Change to your desired background color */
+    background-color: #3c91e6; /* Change to your desired background color */
     color: #fff; /* Text color */
     border: none; /* Remove default border */
     border-radius: 5px; /* Optional: add border radius */
-    padding: 10px 20px; /* Adjust padding */
+    padding: 5px; /* Adjust padding */
     cursor: pointer; /* Change cursor on hover */
     font-size: 16px; /* Font size */
     transition: background-color 0.3s; /* Smooth transition */
