@@ -19,38 +19,38 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Baris A3 dikosongkan
     worksheet.getCell('A3').value = '';
 
-   // Merge B3:AF3 dan set nilai 'Tanggal'
-   worksheet.mergeCells('B3:AF3');
-   worksheet.getCell('B3').value = 'Tanggal';
-   worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-   worksheet.getCell('B3').font = { bold: true }; // Bold font
-   worksheet.getCell('B3').fill = { 
-       type: 'pattern', 
-       pattern: 'solid', 
-       fgColor: { argb: 'FFFF00' } // Contoh warna latar belakang kuning
-   };
-    // Jika kamu masih ingin melakukan penggabungan sel untuk "Nama" dan "Total", pastikan tidak ada referensi ke mereka.
+// Merge B3:AF3 dan set nilai 'Tanggal'
+worksheet.mergeCells('B3:AF3');
+worksheet.getCell('B3').value = 'Tanggal';
+worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+worksheet.getCell('B3').font = { bold: true }; // Bold font
+worksheet.getCell('B3').fill = { 
+    type: 'pattern', 
+    pattern: 'solid', 
+    fgColor: { argb: 'FFFF00' } // Contoh warna latar belakang kuning
+};
 
-    worksheet.mergeCells('A3:A4');
-    worksheet.getCell('A3').value = 'Nama';
-    worksheet.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+// Merge sel untuk "Nama" dan "Total"
+worksheet.mergeCells('A3:A4');
+worksheet.getCell('A3').value = 'Nama';
+worksheet.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
 
-    worksheet.mergeCells('AG3:AG4');
-    worksheet.getCell('AG3').value = 'Total';
-    worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+worksheet.mergeCells('AG3:AG4');
+worksheet.getCell('AG3').value = 'Total';
+worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
 
-    // Mengisi sel B4:AF4 dengan tanggal 1 hingga akhir bulan
-    const endDate = new Date(); // Menggunakan tanggal saat ini
-    endDate.setMonth(endDate.getMonth() + 1); // Mengatur ke bulan berikutnya
-    endDate.setDate(0); // Mengatur ke hari terakhir bulan ini
-    const totalDays = endDate.getDate(); // Total hari dalam bulan ini
+// Mengisi sel B4:AF4 dengan tanggal 1 hingga akhir bulan
+const endDate = new Date();
+endDate.setMonth(endDate.getMonth() + 1);
+endDate.setDate(0); // Mengatur ke hari terakhir bulan ini
+const totalDays = endDate.getDate(); // Total hari dalam bulan ini
 
-    // Mengisi tanggal ke sel B4 hingga AF4
-    for (let day = 1; day <= totalDays; day++) {
-        const cell = worksheet.getCell(`B4`).getCell(`B4:${String.fromCharCode(65 + day - 1)}4`);
-        cell.value = day;
-        cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-    }
+// Mengisi tanggal ke sel B4 hingga AF4
+for (let day = 1; day <= totalDays; day++) {
+    const cell = worksheet.getCell(`B4:${String.fromCharCode(66 + day - 1)}4`);
+    cell.value = day;
+    cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+}
 
 
     // // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
