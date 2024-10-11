@@ -84,7 +84,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         cell.fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'EDDFE0' }
+            fgColor: { argb: '001F3F' }
         };
         worksheet.getCell(cellRange).border = {
             top: { style: 'thin', color: { argb: 'FF000000' } },
@@ -98,10 +98,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         cell.fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'EDDFE0' }
+            fgColor: { argb: '001F3F' }
         };
         cell.alignment = { horizontal: 'center', vertical: 'middle' };
-        cell.font = { bold: true, color: { argb: '000000' } };
+        cell.font = { bold: true, color: { argb: 'ffffff' } };
         cell.border = {
             top: { style: 'thin', color: { argb: 'FF000000' } },
             left: { style: 'thin', color: { argb: 'FF000000' } },
