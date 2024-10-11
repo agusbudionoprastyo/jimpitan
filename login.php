@@ -25,12 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user'] = $user;
 
                 // Redirect based on the selected option
-                if ($redirect_option === 'dashboard') {
-                    header('Location: /dashboard'); // Redirect to Dashboard
+                if ($redirect_option === 'dashboard' && $user['role'] === 'user') {
+                    $error = 'You do not have permission to access the Dashboard.';
                 } else {
-                    header('Location: index.php'); // Redirect to Scan App
+                    if ($redirect_option === 'dashboard') {
+                        header('Location: /dashboard'); // Redirect to Dashboard
+                    } else {
+                        header('Location: index.php'); // Redirect to Scan App
+                    }
+                    exit;
                 }
-                exit;
             } else {
                 $error = 'Login gagal! Hari ini bukan jadwalmu jaga';
             }
@@ -58,14 +62,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <form action="login.php" method="POST">
 <div class="screen-1">
-    <h3>Scan App Login</h3>
+    <h3>Login</h3>
 
     <div class="redirect-option">
-        <label for="redirect_option">Choose Redirect:</label>
-        <select name="redirect_option" id="redirect_option" required>
-            <option value="scan_app" selected>Scan App</option>
-            <option value="dashboard">Dashboard</option>
-        </select>
+        <label>
+            <input type="radio" name="redirect_option" value="scan_app" checked> Scan QR
+        </label>
+        <label>
+            <input type="radio" name="redirect_option" value="dashboard"> Dashboard
+        </label>
     </div>
 
     <div class="email">
