@@ -50,9 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <form action="login.php" method="POST">
 <div class="screen-1">
-    <!-- <div class="logo">
-        <img src="icon-192x192.png" alt="Logo" />
-    </div> -->
+    <div class="logo">
+    <a href="../index.php" style="color: black; font-size: 14px; text-decoration: none;">Go to Scan App</a>
+    </div>
     <div class="email">
         <label for="user_name">User</label>
         <div class="sec-2">
@@ -73,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($error): ?>
             <div class="error-message" style="color: red;"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
-        <a href="../index.php" style="color: black; font-size: 14px; text-decoration: none;">Go to Scan App</a>
     </div>
 </div>
 </form>
