@@ -39,6 +39,37 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('AG3').value = 'Total';
     worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
 
+    // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
+    const headerRow = worksheet.addRow(Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
+
+    // Pindahkan setiap sel header ke kolom B (kolom kedua)
+    headerRow.eachCell((cell, index) => {
+        // Pindah ke kolom B
+        const columnIndex = index + 2; // Menambahkan 2 untuk mulai dari kolom B
+        const cellB = worksheet.getCell(4, columnIndex);
+        
+        cellB.value = cell.value; // Set nilai header
+
+        // Atur warna latar belakang header
+        cellB.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: '8EACCD' } // bg header
+        };
+        cellB.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
+        
+        // Set font bold
+        cellB.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna hitam
+
+        // Menambahkan border untuk header
+        cellB.border = {
+            top: { style: 'thin', color: { argb: 'FF000000' } },
+            left: { style: 'thin', color: { argb: 'FF000000' } },
+            bottom: { style: 'thin', color: { argb: 'FF000000' } },
+            right: { style: 'thin', color: { argb: 'FF000000' } }
+        };
+    });
+
     // // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
     // const headerRow = worksheet.addRow(Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
 
