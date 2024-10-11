@@ -87,10 +87,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             fgColor: { argb: '001F3F' }
         };
         worksheet.getCell(cellRange).border = {
-            top: { style: 'thin', color: { argb: 'FF000000' } },
-            left: { style: 'thin', color: { argb: 'FF000000' } },
-            bottom: { style: 'thin', color: { argb: 'FF000000' } },
-            right: { style: 'thin', color: { argb: 'FF000000' } }
+            top: { style: 'thin', color: { argb: 'ffffff' } },
+            left: { style: 'thin', color: { argb: 'ffffff' } },
+            bottom: { style: 'thin', color: { argb: 'ffffff' } },
+            right: { style: 'thin', color: { argb: 'ffffff' } }
         };
     }
     
@@ -103,10 +103,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         cell.alignment = { horizontal: 'center', vertical: 'middle' };
         cell.font = { bold: true, color: { argb: 'ffffff' } };
         cell.border = {
-            top: { style: 'thin', color: { argb: 'FF000000' } },
-            left: { style: 'thin', color: { argb: 'FF000000' } },
-            bottom: { style: 'thin', color: { argb: 'FF000000' } },
-            right: { style: 'thin', color: { argb: 'FF000000' } }
+            top: { style: 'thin', color: { argb: 'ffffff' } },
+            left: { style: 'thin', color: { argb: 'ffffff' } },
+            bottom: { style: 'thin', color: { argb: 'ffffff' } },
+            right: { style: 'thin', color: { argb: 'ffffff' } }
         };
         if (cell.value !== '') {
             cell.numFmt = '0';
@@ -159,7 +159,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
                 cell.fill = {
                     type: 'pattern',
                     pattern: 'solid',
-                    fgColor: { argb: 'D8D2C2' }
+                    // fgColor: { argb: 'D8D2C2' }
                 };
             }
         });
