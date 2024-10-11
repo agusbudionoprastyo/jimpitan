@@ -216,6 +216,8 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('A2').alignment = { horizontal: 'left', vertical: 'middle' };
     worksheet.getCell('A2').font = { bold: true, size: 12 };
 
+    worksheet.getCell('A3:A4').value = '';
+
 
     // Determine the number of days in the selected month
     const daysInMonth = new Date(year, monthNumber, 0).getDate();
