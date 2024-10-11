@@ -5,7 +5,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // const data = await response.json();
         // Ambil nilai dari monthPicker
         const monthPicker = document.getElementById('monthPicker').value; // Format YYYY-MM
-        if (!monthYear) {
+        if (!monthPicker) {
             alert('Please select a month');
             return;
         }
