@@ -215,23 +215,61 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('A2').value = monthYear;
     worksheet.getCell('A2').alignment = { horizontal: 'left', vertical: 'middle' };
 
-    // Tentukan jumlah hari dalam bulan yang dipilih
+    // Determine the number of days in the selected month
     const daysInMonth = new Date(year, monthNumber, 0).getDate();
 
     const headerRow = worksheet.addRow(['', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), '']);
 
-    // Set merged cells untuk headers berdasarkan jumlah hari
-    setMergedCell(worksheet, `B3:${String.fromCharCode(65 + daysInMonth)}3`, 'Tanggal'); // Untuk hari
-    setMergedCell(worksheet, 'A3:A4', 'Nama');
+    headerRow.eachCell((cell) => {
+        cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'D8D2C2' }
+        };
+        cell.alignment = { horizontal: 'center', vertical: 'middle' };
+        cell.font = { bold: true, color: { argb: '000000' } };
+        cell.border = {
+            top: { style: 'thin', color: { argb: 'FF000000' } },
+            left: { style: 'thin', color: { argb: 'FF000000' } },
+            bottom: { style: 'thin', color: { argb: 'FF000000' } },
+            right: { style: 'thin', color: { argb: 'FF000000' } }
+        };
+        if (cell.value !== '') {
+            cell.numFmt = '0';
+        }
+    });
 
-    // Hitung kolom untuk Total berdasarkan jumlah hari
-    const totalColumn = String.fromCharCode(65 + daysInMonth + 1); // Kolom Total setelah kolom terakhir hari
-    setMergedCell(worksheet, `${totalColumn}3:${totalColumn}4`, 'Total'); // Sesuaikan kolom Total
+    function setMergedCell(worksheet, cellRange, value) {
+        worksheet.mergeCells(cellRange);
+        const cell = worksheet.getCell(cellRange.split(':')[0]);
+        cell.value = value;
+        cell.alignment = { horizontal: 'center', vertical: 'middle' };
+        cell.font = { bold: true };
+        cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'D8D2C2' }
+        };
+        worksheet.getCell(cellRange).border = {
+            top: { style: 'thin', color: { argb: 'FF000000' } },
+            left: { style: 'thin', color: { argb: 'FF000000' } },
+            bottom: { style: 'thin', color: { argb: 'FF000000' } },
+            right: { style: 'thin', color: { argb: 'FF000000' } }
+        };
+    }
 
-    // Atur lebar kolom
-    worksheet.getColumn(1).width = 25; // Lebar kolom untuk 'Nama'
+// Set merged cells for headers based on the number of days
+setMergedCell(worksheet, `B3:${String.fromCharCode(65 + daysInMonth)}3`, 'Tanggal'); // For days
+setMergedCell(worksheet, 'A3:A4', 'Nama');
+
+// Calculate the column for Total based on the days
+const totalColumn = String.fromCharCode(65 + daysInMonth + 1); // Total column is after the last day column
+setMergedCell(worksheet, `${totalColumn}3:${totalColumn}4`, 'Total'); // Adjust Total cell
+
+
+    worksheet.getColumn(1).width = 25;
     for (let i = 2; i <= (daysInMonth + 1); i++) {
-        worksheet.getColumn(i).width = 6; // Lebar kolom untuk hari
+        worksheet.getColumn(i).width = 6; // Set width for days
     }
 
     data.forEach((row, index) => {
@@ -300,28 +338,4 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     });
-
 });
-
-// Fungsi untuk menggabungkan sel
-function setMergedCell(worksheet, cellRange, value) {
-    const range = worksheet.getCell(cellRange.split(':')[0]);
-    if (!range.isMerged) {  // Cek apakah sel sudah digabung
-        worksheet.mergeCells(cellRange);
-        const cell = worksheet.getCell(cellRange.split(':')[0]);
-        cell.value = value;
-        cell.alignment = { horizontal: 'center', vertical: 'middle' };
-        cell.font = { bold: true };
-        cell.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'D8D2C2' } // Warna latar belakang
-        };
-        worksheet.getCell(cellRange).border = {
-            top: { style: 'thin', color: { argb: 'FF000000' } },
-            left: { style: 'thin', color: { argb: 'FF000000' } },
-            bottom: { style: 'thin', color: { argb: 'FF000000' } },
-            right: { style: 'thin', color: { argb: 'FF000000' } }
-        };
-    }
-}
