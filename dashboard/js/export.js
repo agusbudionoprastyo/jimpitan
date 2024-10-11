@@ -245,10 +245,33 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     const totalColumnIndex = daysInMonth + 2; // +1 untuk 'Total'
     const totalColumnLetter = getColumnLetter(totalColumnIndex);
 
-    // Menggabungkan sel "Nama" dengan sel di atasnya
-    worksheet.mergeCells(`B3:${lastColumnLetter}3`); // Menggabungkan header bulan
-    worksheet.mergeCells('A3:A4'); // Menggabungkan sel untuk "Nama"
-    worksheet.mergeCells(`${totalColumnLetter}3:${totalColumnLetter}4`); // Menggabungkan sel untuk "Total"
+    // // Menggabungkan sel "Nama" dengan sel di atasnya
+    // worksheet.mergeCells(`B3:${lastColumnLetter}3`); // Menggabungkan header bulan
+    // worksheet.mergeCells('A3:A4'); // Menggabungkan sel untuk "Nama"
+    // worksheet.mergeCells(`${totalColumnLetter}3:${totalColumnLetter}4`); // Menggabungkan sel untuk "Total"
+
+    setMergedCell(worksheet, `B3:${lastColumnLetter}3`, 'Tanggal');
+    setMergedCell(worksheet, 'A3:A4', 'Nama');
+    setMergedCell(worksheet, `${totalColumnLetter}3:${totalColumnLetter}4`, 'Total');
+
+    function setMergedCell(worksheet, cellRange, value) {
+        worksheet.mergeCells(cellRange);
+        const cell = worksheet.getCell(cellRange.split(':')[0]);
+        cell.value = value;
+        cell.alignment = { horizontal: 'center', vertical: 'middle' };
+        cell.font = { bold: true };
+        cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'D8D2C2' }
+        };
+        worksheet.getCell(cellRange).border = {
+            top: { style: 'thin', color: { argb: 'FF000000' } },
+            left: { style: 'thin', color: { argb: 'FF000000' } },
+            bottom: { style: 'thin', color: { argb: 'FF000000' } },
+            right: { style: 'thin', color: { argb: 'FF000000' } }
+        };
+    }
     
     headerRow.eachCell((cell) => {
         cell.fill = {
@@ -268,30 +291,6 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             cell.numFmt = '0';
         }
     });
-    
-
-    // function setMergedCell(worksheet, cellRange, value) {
-    //     worksheet.mergeCells(cellRange);
-    //     const cell = worksheet.getCell(cellRange.split(':')[0]);
-    //     cell.value = value;
-    //     cell.alignment = { horizontal: 'center', vertical: 'middle' };
-    //     cell.font = { bold: true };
-    //     cell.fill = {
-    //         type: 'pattern',
-    //         pattern: 'solid',
-    //         fgColor: { argb: 'D8D2C2' }
-    //     };
-    //     worksheet.getCell(cellRange).border = {
-    //         top: { style: 'thin', color: { argb: 'FF000000' } },
-    //         left: { style: 'thin', color: { argb: 'FF000000' } },
-    //         bottom: { style: 'thin', color: { argb: 'FF000000' } },
-    //         right: { style: 'thin', color: { argb: 'FF000000' } }
-    //     };
-    // }
-
-    // setMergedCell(worksheet, 'B3:AF3', 'Tanggal');
-    // setMergedCell(worksheet, 'A3:A4', 'Nama');
-    // setMergedCell(worksheet, 'AG3:AG4', 'Total');
 
     worksheet.getColumn(1).width = 25;
     for (let i = 2; i <= (daysInMonth + 1); i++) {
