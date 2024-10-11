@@ -40,6 +40,22 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         };
     });
 
+    // Define the style for data rows
+    const rowStyle = {
+        alignment: { horizontal: 'middle', vertical: 'middle' },
+        border: {
+            top: { style: 'thin', color: { argb: 'FF000000' } },
+            left: { style: 'thin', color: { argb: 'FF000000' } },
+            bottom: { style: 'thin', color: { argb: 'FF000000' } },
+            right: { style: 'thin', color: { argb: 'FF000000' } }
+        },
+        fill: {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' } // Warna latar belakang putih
+        }
+    };
+
     // Tambahkan data
     data.forEach(row => {
         const rowData = [row.kk_name];
@@ -52,21 +68,15 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
                 total += value; // Hitung total jika ada nilai
             }
         }
-        
+
         rowData.push(total > 0 ? total : ''); // Tambahkan total sebagai angka, kosong jika 0
         const newRow = worksheet.addRow(rowData);
-        
-        // Atur alignment untuk setiap sel di baris data dan tambahkan border
-        newRow.eachCell((cell) => {
-            cell.alignment = { horizontal: 'middle', vertical: 'middle' }; // Align center
 
-            // Menambahkan border untuk setiap sel di baris data
-            cell.border = {
-                top: { style: 'thin', color: { argb: 'FF000000' } },
-                left: { style: 'thin', color: { argb: 'FF000000' } },
-                bottom: { style: 'thin', color: { argb: 'FF000000' } },
-                right: { style: 'thin', color: { argb: 'FF000000' } }
-            };
+        // Atur style untuk setiap sel di baris data
+        newRow.eachCell((cell) => {
+            cell.alignment = rowStyle.alignment; // Align center
+            cell.border = rowStyle.border; // Set border
+            cell.fill = rowStyle.fill; // Set fill color
         });
     });
 
