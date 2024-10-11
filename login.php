@@ -76,10 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <ion-icon name="lock-closed-outline"></ion-icon>
             <input class="pas" type="password" name="password" placeholder="********" required/>
         </div>
-        <hr>
-        <label><input type="checkbox" name="redirect_option" value="dashboard"> Go To Dashboard</label>
     </div>
-    
+    <label><input type="checkbox" name="redirect_option" value="dashboard"> Go To Dashboard</label>
     <button class="login">Login</button>
     <div class="footer">
         <?php if ($error): ?>
