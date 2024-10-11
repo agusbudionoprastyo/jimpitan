@@ -50,9 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <form action="login.php" method="POST">
 <div class="screen-1">
-    <div class="logo">
+    <!-- <div class="logo">
+    </div> -->
+    <h3>Dashboard Login</h3>
     <a href="../index.php" style="color: black; font-size: 14px; text-decoration: none;">Go to Scan App</a>
-    </div>
     <div class="email">
         <label for="user_name">User</label>
         <div class="sec-2">
