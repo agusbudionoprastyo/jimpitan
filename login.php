@@ -62,7 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <form action="login.php" method="POST">
 <div class="screen-1">
-    <h3><input type="radio" name="redirect_option" value="dashboard"> Dashboard</h3>
+    <label>
+        <input type="checkbox" name="redirect_option" value="dashboard">
+        <h3>Dashboard</h3>
+    </label>
 
     <div class="email">
         <label for="user_name">User</label>
