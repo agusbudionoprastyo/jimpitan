@@ -710,7 +710,7 @@ body {
 }
 
 .custom-select {
-    border-radius: 25px; /* Adjust the value for more or less roundness */
+    border-radius: 15px; /* Adjust the value for more or less roundness */
     border: 1px solid #ccc; /* Optional: add a border */
     padding: 5px 10px; /* Adjust padding for better appearance */
     background-color: #fff; /* Optional: background color */
@@ -730,7 +730,7 @@ body {
     background-color: #3c91e6; /* Change to your desired background color */
     color: #fff; /* Text color */
     border: none; /* Remove default border */
-    border-radius: 25px; /* Optional: add border radius */
+    border-radius: 15px; /* Optional: add border radius */
     padding: 5px 10px; /* Adjust padding */
     cursor: pointer; /* Change cursor on hover */
     font-size: 16px; /* Font size */
