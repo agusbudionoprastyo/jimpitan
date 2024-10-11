@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($error): ?>
             <div class="error-message" style="color: red;"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
-        <a href="/dashboard" style="color: blue; text-decoration: underline;">Go to Dashboard</a>
+        <a href="/dashboard" style="color: black; font-size: 14px; text-decoration: none;">Go to Dashboard</a>
     </div>
 </div>
 </form>
