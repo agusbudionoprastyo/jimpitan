@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'helper/connection.php'; // Assuming this includes the getDatabaseConnection function
+require '../helper/connection.php'; // Assuming this includes the getDatabaseConnection function
 
 $error = ''; // Initialize the error variable
 
