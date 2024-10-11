@@ -218,11 +218,13 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     const daysInMonth = new Date(year, monthNumber, 0).getDate();
 
     const headerRow = worksheet.addRow(['', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), '']);
-    setMergedCell(worksheet, `B3:${String.fromCharCode(65 + daysInMonth)}3`, 'Tanggal'); // For days
-    setMergedCell(worksheet, 'A3:A4', 'Nama');
+    const mergedCells = []; // Array to track merged cells
+
+    setMergedCell(worksheet, `B3:${String.fromCharCode(65 + daysInMonth)}3`, 'Tanggal', mergedCells); // For days
+    setMergedCell(worksheet, 'A3:A4', 'Nama', mergedCells);
 
     const totalColumn = String.fromCharCode(65 + daysInMonth + 1); // Total column is after the last day column
-    setMergedCell(worksheet, `${totalColumn}3:${totalColumn}4`, 'Total'); // Adjust Total cell
+    setMergedCell(worksheet, `${totalColumn}3:${totalColumn}4`, 'Total', mergedCells); // Adjust Total cell
 
     headerRow.eachCell((cell) => {
         cell.fill = {
@@ -243,11 +245,11 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         }
     });
 
-    function setMergedCell(worksheet, cellRange, value) {
-        const cell = worksheet.getCell(cellRange.split(':')[0]);
-        // Cek apakah sel sudah ter-gabung
-        if (!cell.isMerged) {
+    function setMergedCell(worksheet, cellRange, value, mergedCells) {
+        if (!mergedCells.includes(cellRange)) {
             worksheet.mergeCells(cellRange);
+            mergedCells.push(cellRange);
+            const cell = worksheet.getCell(cellRange.split(':')[0]);
             cell.value = value;
             cell.alignment = { horizontal: 'center', vertical: 'middle' };
             cell.font = { bold: true };
@@ -337,3 +339,4 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         URL.revokeObjectURL(url);
     });
 });
+
