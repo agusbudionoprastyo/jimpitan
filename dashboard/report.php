@@ -150,6 +150,18 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
                             <?php endfor; ?>
                         </select>
+                        <label for="month-year">Pilih Bulan dan Tahun:</label>
+<select id="month-year" name="month-year" class="custom-select">
+    <?php
+    for ($y = date('Y'); $y >= 2000; $y--) {
+        for ($m = 1; $m <= 12; $m++) {
+            $monthName = date('F', mktime(0, 0, 0, $m, 1));
+            echo '<option value="' . $y . '-' . str_pad($m, 2, '0', STR_PAD_LEFT) . '" ' . (($m == date('n') && $y == date('Y')) ? 'selected' : '') . '>' . $monthName . ' ' . $y . '</option>';
+        }
+    }
+    ?>
+</select>
+
                             <button type="button" id="reportBtn" class="btn-download">
                                 <i class='bx bxs-file-export'></i> Unduh
                             </button>
