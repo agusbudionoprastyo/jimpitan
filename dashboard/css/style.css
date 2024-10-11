@@ -740,3 +740,18 @@ body {
 .btn-download:hover {
     background-color: #0056b3; /* Darker shade on hover */
 }
+
+.flatpickr-monthSelect-months {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Tiga kolom */
+    gap: 30px; /* Jarak antar bulan */
+    padding: 10px; /* Padding */
+    justify-items: center; /* Pusatkan item di dalam grid */
+    margin: 0 auto; /* Pusatkan kontainer secara horizontal */
+}
+
+.flatpickr-monthSelect-month {
+    text-align: center; /* Pusatkan teks bulan */
+    cursor: pointer; /* Ubah kursor saat hover */
+    width: 100%; /* Pastikan bulan mengisi lebar kontainer */
+}
