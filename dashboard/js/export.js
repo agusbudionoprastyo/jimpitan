@@ -19,19 +19,19 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Baris A3 dikosongkan
     worksheet.getCell('A3').value = '';
 
-    // Merge B3:AF3 dan set nilai 'Tanggal'
-    worksheet.mergeCells('B3:AF3');
-    worksheet.getCell('B3').value = 'Tanggal';
-    worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
-    worksheet.getCell('B3').font = { bold: true }; // Bold font
+    // // Merge B3:AF3 dan set nilai 'Tanggal'
+    // worksheet.mergeCells('B3:AF3');
+    // worksheet.getCell('B3').value = 'Tanggal';
+    // worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+    // worksheet.getCell('B3').font = { bold: true }; // Bold font
 
-    // Jika kamu masih ingin melakukan penggabungan sel untuk "Nama" dan "Total", pastikan tidak ada referensi ke mereka.
+    // // Jika kamu masih ingin melakukan penggabungan sel untuk "Nama" dan "Total", pastikan tidak ada referensi ke mereka.
 
-    worksheet.mergeCells('A3:A4');
-    worksheet.getCell('A3').value = 'Nama';
+    // worksheet.mergeCells('A3:A4');
+    // worksheet.getCell('A3').value = 'Nama';
 
-    worksheet.mergeCells('AG3:AG4');
-    worksheet.getCell('AG3').value = 'Total';
+    // worksheet.mergeCells('AG3:AG4');
+    // worksheet.getCell('AG3').value = 'Total';
 
     // // Set header di baris ke-5 tanpa 'Nama' dan 'Total'
     // const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString()), 'Total']);
@@ -56,6 +56,52 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     //         right: { style: 'thin', color: { argb: 'FF000000' } }
     //     };
     // });
+    // Merge B3:AF3 dan set nilai 'Tanggal'
+worksheet.mergeCells('B3:AF3');
+worksheet.getCell('B3').value = 'Tanggal';
+worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+worksheet.getCell('B3').font = { bold: true }; // Bold font
+worksheet.getCell('B3').fill = { 
+    type: 'pattern', 
+    pattern: 'solid', 
+    fgColor: { argb: 'FFFF00' } // Contoh warna latar belakang kuning
+};
+
+// Jika kamu masih ingin melakukan penggabungan sel untuk "Nama" dan "Total", pastikan tidak ada referensi ke mereka.
+worksheet.mergeCells('A3:A4');
+worksheet.getCell('A3').value = 'Nama';
+
+worksheet.mergeCells('AG3:AG4');
+worksheet.getCell('AG3').value = 'Total';
+
+// Tambahkan angka 1 hingga 31 di bawah "Tanggal"
+for (let i = 1; i <= 31; i++) {
+    const cellAddress = `B${3 + i}`; // Menghitung alamat sel untuk B4 sampai B34
+    const cell = worksheet.getCell(cellAddress);
+    cell.value = i; // Mengisi sel dengan angka
+    cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment for days
+    cell.fill = { 
+        type: 'pattern', 
+        pattern: 'solid', 
+        fgColor: { argb: 'D3D3D3' } // Contoh warna latar belakang abu-abu
+    };
+    
+    // Menambahkan border
+    cell.border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' },
+    };
+}
+
+// Menambahkan border untuk sel "Tanggal"
+worksheet.getCell('B3').border = {
+    top: { style: 'thin' },
+    left: { style: 'thin' },
+    bottom: { style: 'thin' },
+    right: { style: 'thin' },
+};
 
     // Tambahkan data dengan warna baris bergantian
     data.forEach((row, index) => {
