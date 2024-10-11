@@ -7,24 +7,27 @@ $error = ''; // Initialize the error variable
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_name = $_POST['user_name'] ?? '';
     $password = $_POST['password'] ?? '';
+    $role = $_POST['role'] ?? 'user'; // Default to 'user'
+    $redirect_option = $_POST['redirect_option'] ?? 'scan_app'; // Default to 'scan_app'
 
     try {
         $pdo = getDatabaseConnection();
 
-        $stmt = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
-        $stmt->execute([$user_name]);
+        $stmt = $pdo->prepare('SELECT * FROM users WHERE user_name = ? AND role = ?');
+        $stmt->execute([$user_name, $role]);
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
-            // Get the current day of the week
-            $currentDay = date('l'); // e.g., "Monday", "Tuesday", etc.
-
-            // Check if the current day is in the user's shift
-            $shifts = explode(',', $user['shift']); // Assuming shifts are stored as a comma-separated string
-
-            if (in_array($currentDay, $shifts)) {
+            // If the user is an admin, skip shift validation
+            if ($role === 'admin' || in_array(date('l'), explode(',', $user['shift']))) {
                 $_SESSION['user'] = $user;
-                header('Location: index.php'); // Redirect to the index page
+
+                // Redirect based on the chosen option
+                if ($redirect_option === 'scan_app') {
+                    header('Location: index.php'); // Redirect to Scan App
+                } else {
+                    header('Location: /dashboard'); // Redirect to Dashboard
+                }
                 exit;
             } else {
                 $error = 'Login gagal! Hari ini bukan jadwalmu jaga';
@@ -53,10 +56,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <form action="login.php" method="POST">
 <div class="screen-1">
-    <!-- <div class="logo">
-        <img src="icon-192x192.png" alt="Logo" />
-    </div> -->
     <h3>Scan App Login</h3>
+
+    <div class="role-selection">
+        <label>
+            <input type="radio" name="role" value="user" checked> User
+        </label>
+        <label>
+            <input type="radio" name="role" value="admin"> Admin
+        </label>
+    </div>
+
+    <div class="redirect-option">
+        <label>
+            <input type="radio" name="redirect_option" value="scan_app" checked> Scan App
+        </label>
+        <label>
+            <input type="radio" name="redirect_option" value="dashboard"> Dashboard
+        </label>
+    </div>
+
     <div class="email">
         <label for="user_name">User</label>
         <div class="sec-2">
@@ -64,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="user_name" placeholder="********" required/>
         </div>
     </div>
+    
     <div class="password">
         <label for="password">Password</label>
         <div class="sec-2">
@@ -71,12 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input class="pas" type="password" name="password" placeholder="********" required/>
         </div>
     </div>
+    
     <button class="login">Login</button>
     <div class="footer">
         <?php if ($error): ?>
-            <div class="error-message" style="color: red;"><?php echo htmlspecialchars($error); ?></div>
+            <div class="error-message" style="color: red; font-size: 12px;"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
-        <a href="/dashboard" style="color: black; font-size: 14px; text-decoration: none;">Go to Dashboard</a>
     </div>
 </div>
 </form>
