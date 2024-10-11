@@ -244,7 +244,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Menggabungkan sel "Nama" dengan sel di atasnya
     worksheet.mergeCells(`B3:${lastColumnLetter}3`); // Menggabungkan header bulan
     worksheet.mergeCells('A3:A4'); // Menggabungkan sel untuk "Nama"
-    worksheet.mergeCells(`${lastColumnLetter}3:${lastColumnLetter}4`); // Menggabungkan sel untuk "Total"
+    // worksheet.mergeCells(`${lastColumnLetter}3:${lastColumnLetter}4`); // Menggabungkan sel untuk "Total"
     
     headerRow.eachCell((cell) => {
         cell.fill = {
