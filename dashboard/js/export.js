@@ -41,16 +41,18 @@ worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' 
 
 // Mengisi sel B4:AF4 dengan tanggal 1 hingga akhir bulan
 const endDate = new Date();
-endDate.setMonth(endDate.getMonth() + 1);
-endDate.setDate(0); // Mengatur ke hari terakhir bulan ini
+endDate.setMonth(endDate.getMonth() + 1); // Bulan depan
+endDate.setDate(0); // Hari terakhir bulan ini
 const totalDays = endDate.getDate(); // Total hari dalam bulan ini
 
 // Mengisi tanggal ke sel B4 hingga AF4
 for (let day = 1; day <= totalDays; day++) {
-    const cell = worksheet.getCell(`B4:${String.fromCharCode(66 + day - 1)}4`);
-    cell.value = day;
-    cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+    const cell = worksheet.getCell(`B4`); // Sel B4
+    const column = String.fromCharCode(66 + (day - 1)); // Menghitung huruf kolom B, C, D, dst.
+    worksheet.getCell(`${column}4`).value = day; // Mengisi nilai hari ke kolom yang sesuai
+    worksheet.getCell(`${column}4`).alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
 }
+
 
 
     // // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
