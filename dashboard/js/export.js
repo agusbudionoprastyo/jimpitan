@@ -13,9 +13,14 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('A1').font = { bold: true, size: 14 }; // Set font bold dan ukuran
 
     // Tambahkan bulan dan tahun di A2
-    const monthYear = `${month}/${year}`;
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    const monthYear = `${monthNames[month - 1]} ${year}`; // Menggunakan nama bulan penuh
     worksheet.getCell('A2').value = monthYear;
     worksheet.getCell('A2').alignment = { horizontal: 'left', vertical: 'middle' };
+
 
     // Baris A3 dikosongkan
     worksheet.getCell('A3').value = '';
@@ -137,15 +142,18 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     });
 
     // Ekspor ke XLSX
+    const fileName = `reports_${monthName}_${year}.xlsx`; // Format nama file
+
     workbook.xlsx.writeBuffer().then((buffer) => {
         const blob = new Blob([buffer], { type: 'application/octet-stream' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'reports.xlsx';
+        a.download = fileName; // Gunakan nama file yang sesuai
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     });
+
 });
