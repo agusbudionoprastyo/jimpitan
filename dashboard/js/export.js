@@ -25,6 +25,39 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
     worksheet.getCell('B3').font = { bold: true }; // Bold font
 
+    // Merge A4 untuk 'Nama'
+    worksheet.mergeCells('A4:A5');
+    worksheet.getCell('A4').value = 'Nama';
+    worksheet.getCell('A4').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+    worksheet.getCell('A4').font = { bold: true }; // Bold font
+    worksheet.getCell('A4').fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: '8EACCD' } // Warna latar belakang yang sama dengan header
+    };
+    worksheet.getCell('A4').border = {
+        top: { style: 'thin', color: { argb: 'FF000000' } },
+        left: { style: 'thin', color: { argb: 'FF000000' } },
+        bottom: { style: 'thin', color: { argb: 'FF000000' } },
+        right: { style: 'thin', color: { argb: 'FF000000' } }
+    };
+
+    // Merge AG4 untuk 'Total'
+    worksheet.mergeCells('AG4:AG5');
+    worksheet.getCell('AG4').value = 'Total';
+    worksheet.getCell('AG4').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+    worksheet.getCell('AG4').font = { bold: true }; // Bold font
+    worksheet.getCell('AG4').fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: '8EACCD' } // Warna latar belakang yang sama dengan header
+    };
+    worksheet.getCell('AG4').border = {
+        top: { style: 'thin', color: { argb: 'FF000000' } },
+        left: { style: 'thin', color: { argb: 'FF000000' } },
+        bottom: { style: 'thin', color: { argb: 'FF000000' } },
+        right: { style: 'thin', color: { argb: 'FF000000' } }
+    };
 
     // Set header di baris ke-5
     const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString()), 'Total']);
