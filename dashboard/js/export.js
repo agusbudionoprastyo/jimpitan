@@ -72,11 +72,46 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     setMergedCell(worksheet, 'A3:A4', 'Nama');
     setMergedCell(worksheet, 'AG3:AG4', 'Total');    
 
-    // Tambahkan data dengan warna baris bergantian
+    // // Tambahkan data dengan warna baris bergantian
+    // data.forEach((row, index) => {
+    //     const rowData = [row.kk_name];
+    //     let total = 0;
+
+    //     for (let i = 1; i <= 31; i++) {
+    //         const value = row[i] !== null ? Number(row[i]) : ''; // Konversi nilai menjadi angka, jika ada
+    //         rowData.push(value);
+    //         if (value) {
+    //             total += value; // Hitung total jika ada nilai
+    //         }
+    //     }
+
+    //     rowData.push(total > 0 ? total : ''); // Tambahkan total sebagai angka, kosong jika 0
+    //     const newRow = worksheet.addRow(rowData);
+
+    //     // Tentukan warna latar belakang berdasarkan indeks baris
+    //     const fillColor = (index % 2 === 0) ? 'FFFFFFFF' : 'F5F5F5'; // Putih untuk baris genap, abu-abu untuk baris ganjil
+
+    //     // Atur style untuk setiap sel di baris data
+    //     newRow.eachCell((cell) => {
+    //         cell.alignment = { horizontal: 'middle', vertical: 'middle' }; // Align center
+    //         cell.border = {
+    //             top: { style: 'thin', color: { argb: 'FF000000' } },
+    //             left: { style: 'thin', color: { argb: 'FF000000' } },
+    //             bottom: { style: 'thin', color: { argb: 'FF000000' } },
+    //             right: { style: 'thin', color: { argb: 'FF000000' } }
+    //         };
+    //         cell.fill = {
+    //             type: 'pattern',
+    //             pattern: 'solid',
+    //             fgColor: { argb: fillColor } // Set warna latar belakang
+    //         };
+    //     });
+    // });
+
     data.forEach((row, index) => {
         const rowData = [row.kk_name];
         let total = 0;
-
+    
         for (let i = 1; i <= 31; i++) {
             const value = row[i] !== null ? Number(row[i]) : ''; // Konversi nilai menjadi angka, jika ada
             rowData.push(value);
@@ -84,15 +119,15 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
                 total += value; // Hitung total jika ada nilai
             }
         }
-
+    
         rowData.push(total > 0 ? total : ''); // Tambahkan total sebagai angka, kosong jika 0
         const newRow = worksheet.addRow(rowData);
-
+    
         // Tentukan warna latar belakang berdasarkan indeks baris
         const fillColor = (index % 2 === 0) ? 'FFFFFFFF' : 'F5F5F5'; // Putih untuk baris genap, abu-abu untuk baris ganjil
-
+    
         // Atur style untuk setiap sel di baris data
-        newRow.eachCell((cell) => {
+        newRow.eachCell((cell, colNumber) => {
             cell.alignment = { horizontal: 'middle', vertical: 'middle' }; // Align center
             cell.border = {
                 top: { style: 'thin', color: { argb: 'FF000000' } },
@@ -105,8 +140,24 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
                 pattern: 'solid',
                 fgColor: { argb: fillColor } // Set warna latar belakang
             };
+    
+            // Jika ini adalah kolom terakhir, set bold dan latar belakang
+            if (colNumber === rowData.length) {
+                cell.font = { bold: true }; // Bold untuk kolom terakhir
+                cell.fill = {
+                    type: 'pattern',
+                    pattern: 'solid',
+                    fgColor: { argb: 'EDDFE0' } // Latar belakang untuk kolom terakhir
+                };
+            }
         });
     });
+    
+    // Untuk baris terakhir, set bold untuk semua sel
+    const lastRow = worksheet.lastRow;
+    lastRow.eachCell((cell) => {
+        cell.font = { bold: true }; // Bold untuk baris terakhir
+    });    
 
     // Atur lebar kolom
     worksheet.getColumn(1).width = 25; // Lebar kolom kk_name
