@@ -72,10 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <button class="login">Login</button>
     <div class="footer">
-        <!-- <span></span> -->
         <?php if ($error): ?>
             <div class="error-message" style="color: red;"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
+        <a href="/dashboard" style="color: blue; text-decoration: underline;">Go to Dashboard</a>
     </div>
 </div>
 </form>
