@@ -39,29 +39,43 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('AG3').value = 'Total';
     worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
 
-    // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
-    const headerRow = worksheet.addRow(Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
+    // Mengisi sel B4:AF4 dengan tanggal 1 hingga akhir bulan
+    const endDate = new Date(); // Menggunakan tanggal saat ini
+    endDate.setMonth(endDate.getMonth() + 1); // Mengatur ke bulan berikutnya
+    endDate.setDate(0); // Mengatur ke hari terakhir bulan ini
+    const totalDays = endDate.getDate(); // Total hari dalam bulan ini
 
-    // Atur warna latar belakang header
-    headerRow.eachCell((cell) => {
-        cell.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: '8EACCD' } // bg header
-        };
-        cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
+    // Mengisi tanggal ke sel B4 hingga AF4
+    for (let day = 1; day <= totalDays; day++) {
+        const cell = worksheet.getCell(`B4`).getCell(`B4:${String.fromCharCode(65 + day - 1)}4`);
+        cell.value = day;
+        cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+    }
+
+
+    // // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
+    // const headerRow = worksheet.addRow(Array.from({ length: 31 }, (_, i) => (i + 1).toString()));
+
+    // // Atur warna latar belakang header
+    // headerRow.eachCell((cell) => {
+    //     cell.fill = {
+    //         type: 'pattern',
+    //         pattern: 'solid',
+    //         fgColor: { argb: '8EACCD' } // bg header
+    //     };
+    //     cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
         
-        // Set font bold
-        cell.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna hitam
+    //     // Set font bold
+    //     cell.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna hitam
 
-        // Menambahkan border untuk header
-        cell.border = {
-            top: { style: 'thin', color: { argb: 'FF000000' } },
-            left: { style: 'thin', color: { argb: 'FF000000' } },
-            bottom: { style: 'thin', color: { argb: 'FF000000' } },
-            right: { style: 'thin', color: { argb: 'FF000000' } }
-        };
-    });
+    //     // Menambahkan border untuk header
+    //     cell.border = {
+    //         top: { style: 'thin', color: { argb: 'FF000000' } },
+    //         left: { style: 'thin', color: { argb: 'FF000000' } },
+    //         bottom: { style: 'thin', color: { argb: 'FF000000' } },
+    //         right: { style: 'thin', color: { argb: 'FF000000' } }
+    //     };
+    // });
 
     // Tambahkan data dengan warna baris bergantian
     data.forEach((row, index) => {
