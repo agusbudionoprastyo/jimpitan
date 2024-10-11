@@ -27,7 +27,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         cell.fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'EDDFE0' } // bg header
+            fgColor: { argb: 'D8D2C2' } // bg header
         };
         cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
         
@@ -57,7 +57,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         cell.fill = { 
             type: 'pattern', 
             pattern: 'solid', 
-            fgColor: { argb: 'EDDFE0' } // Background color
+            fgColor: { argb: 'D8D2C2' } // Background color
         };
         worksheet.getCell(cellRange).border = {
             top: { style: 'thin', color: { argb: 'FF000000' } },
@@ -108,6 +108,12 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     //     });
     // });
 
+    // Atur lebar kolom
+    worksheet.getColumn(1).width = 25; // Lebar kolom kk_name
+    for (let i = 2; i <= 33; i++) { // Kolom 2 sampai 33 untuk hari 1-31 + Total
+        worksheet.getColumn(i).width = 5; // Lebar kolom 5 karakter
+    }
+
     data.forEach((row, index) => {
         const rowData = [row.kk_name];
         let total = 0;
@@ -128,7 +134,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     
         // Jika ini adalah baris terakhir, atur warna latar belakang khusus
         if (index === data.length - 1) {
-            fillColor = 'EDDFE0'; // Warna latar belakang khusus untuk baris terakhir
+            fillColor = 'D8D2C2'; // Warna latar belakang khusus untuk baris terakhir
         }
     
         // Atur style untuk setiap sel di baris data
@@ -164,13 +170,6 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     lastRow.eachCell((cell) => {
         cell.font = { bold: true }; // Bold untuk baris terakhir
     });
-        
-
-    // Atur lebar kolom
-    worksheet.getColumn(1).width = 25; // Lebar kolom kk_name
-    for (let i = 2; i <= 33; i++) { // Kolom 2 sampai 33 untuk hari 1-31 + Total
-        worksheet.getColumn(i).width = 5; // Lebar kolom 5 karakter
-    }
 
     // Ekspor ke XLSX
     workbook.xlsx.writeBuffer().then((buffer) => {
