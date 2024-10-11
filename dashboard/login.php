@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($user && password_verify($password, $user['password'])) {
             // Assuming roles are stored as an array in the database, e.g., $user['roles']
-            $roles = explode(',', $user['roles']); // Split roles if stored as comma-separated
+            $role = explode(',', $user['role']); // Split roles if stored as comma-separated
 
-            if (in_array('admin', $roles)) {
+            if (in_array('admin', $role)) {
                 $_SESSION['user'] = $user;
                 header('Location: index.php'); // Redirect to the index page
                 exit;
