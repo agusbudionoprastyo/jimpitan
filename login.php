@@ -64,14 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="screen-1">
     <h3>Login</h3>
 
-    <div class="redirect-option">
         <label>
             <input type="radio" name="redirect_option" value="scan_app" checked> Scan QR
         </label>
         <label>
             <input type="radio" name="redirect_option" value="dashboard"> Dashboard
         </label>
-    </div>
 
     <div class="email">
         <label for="user_name">User</label>
