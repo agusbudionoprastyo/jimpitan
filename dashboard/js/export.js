@@ -1,16 +1,25 @@
 document.getElementById('reportBtn').addEventListener('click', async function() {
     const monthPicker = document.getElementById('monthPicker').value; // Format "Oct 2024"
     if (!monthPicker) {
-        alert('Please select a month');
+        swal({
+            text: 'Please select a month',
+            buttons: false,
+            timer: 3000 // menampilkan pesan selama 2 detik
+        });
         return;
     }
     
     const [month, year] = monthPicker.split(' ');
     const monthNumber = new Date(Date.parse(month + " 1, 2024")).getMonth() + 1;
+    
     if (isNaN(monthNumber) || monthNumber < 1 || monthNumber > 12) {
-        alert('Invalid month selected');
+        swal({
+            text: 'Invalid month selected',
+            buttons: false,
+            timer: 3000 // menampilkan pesan selama 2 detik
+        });
         return;
-    }
+    }    
     
     const response = await fetch(`../dashboard/api/fetch_reports.php?month=${monthNumber}&year=${year}`);
     const data = await response.json();
