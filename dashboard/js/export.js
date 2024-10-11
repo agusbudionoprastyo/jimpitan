@@ -75,17 +75,17 @@ worksheet.mergeCells('AG3:AG4');
 worksheet.getCell('AG3').value = 'Total';
 
 // Tambahkan angka 1 hingga 31 di bawah "Tanggal" dari B4 hingga AF4
-for (let i = 1; i <= 31; i++) {
-    const cellAddress = `B${4}`; // Menghitung alamat sel untuk B4
-    const cell = worksheet.getCell(cellAddress);
-    cell.value = i; // Mengisi sel dengan angka
+for (let i = 0; i < 31; i++) {
+    const cellAddress = `B4:${String.fromCharCode(66 + i)}4`; // Menghitung alamat sel dari B4 hingga AF4
+    const cell = worksheet.getCell(`${String.fromCharCode(66 + i)}4`); // Mengambil sel yang sesuai
+    cell.value = i + 1; // Mengisi sel dengan angka 1 hingga 31
     cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment for days
     cell.fill = { 
         type: 'pattern', 
         pattern: 'solid', 
         fgColor: { argb: 'D3D3D3' } // Contoh warna latar belakang abu-abu
     };
-    
+
     // Menambahkan border
     cell.border = {
         top: { style: 'thin' },
@@ -93,10 +93,6 @@ for (let i = 1; i <= 31; i++) {
         bottom: { style: 'thin' },
         right: { style: 'thin' },
     };
-
-    // Set the value for the corresponding column
-    const column = String.fromCharCode(66 + i - 1); // B = 66 in ASCII
-    worksheet.getCell(`${column}4`).value = i; // Fill in the day
 }
 
 // Menambahkan border untuk sel "Tanggal"
