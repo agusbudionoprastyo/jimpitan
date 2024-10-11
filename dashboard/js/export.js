@@ -5,7 +5,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             icon: 'warning',
             title: 'Ooops!',
             text: 'Silakan pilih tanggal & tahun laporan yg akan di unduh',
-            timer: 3000,
+            timer: 10000,
             timerProgressBar: true,
             customClass: {
                 popup: 'rounded',

@@ -755,3 +755,18 @@ body {
     cursor: pointer; /* Ubah kursor saat hover */
     width: 100%; /* Pastikan bulan mengisi lebar kontainer */
 }
+.roundedBtn {
+	border-radius: 25px;
+	background-color: #14505c;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+}
+.custom-timer-progress-bar {
+	height: 4px; /* Height of the progress bar */
+	background-color: #FF8A8A; /* Color of the progress bar */
+	width: 80%; /* Adjust width as needed */
+	margin: 0 auto; /* Center the progress bar horizontally */
+}
