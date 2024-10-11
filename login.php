@@ -62,8 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <form action="login.php" method="POST">
 <div class="screen-1">
-    <label><input type="checkbox" name="redirect_option" value="dashboard"> Dashboard</label>
     <div class="email">
+        <label><input type="checkbox" name="redirect_option" value="dashboard">Go To Dashboard</label>
         <label for="user_name">User</label>
         <div class="sec-2">
             <ion-icon name="person-outline"></ion-icon>
