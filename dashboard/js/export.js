@@ -214,6 +214,8 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     const monthYear = `${monthNames[monthNumber - 1]} ${year}`;
     worksheet.getCell('A2').value = monthYear;
     worksheet.getCell('A2').alignment = { horizontal: 'left', vertical: 'middle' };
+    worksheet.getCell('A2').font = { bold: true, size: 12 };
+
 
     // Determine the number of days in the selected month
     const daysInMonth = new Date(year, monthNumber, 0).getDate();
@@ -239,24 +241,24 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         }
     });
 
-    function setMergedCell(worksheet, cellRange, value) {
-        worksheet.mergeCells(cellRange);
-        const cell = worksheet.getCell(cellRange.split(':')[0]);
-        cell.value = value;
-        cell.alignment = { horizontal: 'center', vertical: 'middle' };
-        cell.font = { bold: true };
-        cell.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'D8D2C2' }
-        };
-        worksheet.getCell(cellRange).border = {
-            top: { style: 'thin', color: { argb: 'FF000000' } },
-            left: { style: 'thin', color: { argb: 'FF000000' } },
-            bottom: { style: 'thin', color: { argb: 'FF000000' } },
-            right: { style: 'thin', color: { argb: 'FF000000' } }
-        };
-    }
+    // function setMergedCell(worksheet, cellRange, value) {
+    //     worksheet.mergeCells(cellRange);
+    //     const cell = worksheet.getCell(cellRange.split(':')[0]);
+    //     cell.value = value;
+    //     cell.alignment = { horizontal: 'center', vertical: 'middle' };
+    //     cell.font = { bold: true };
+    //     cell.fill = {
+    //         type: 'pattern',
+    //         pattern: 'solid',
+    //         fgColor: { argb: 'D8D2C2' }
+    //     };
+    //     worksheet.getCell(cellRange).border = {
+    //         top: { style: 'thin', color: { argb: 'FF000000' } },
+    //         left: { style: 'thin', color: { argb: 'FF000000' } },
+    //         bottom: { style: 'thin', color: { argb: 'FF000000' } },
+    //         right: { style: 'thin', color: { argb: 'FF000000' } }
+    //     };
+    // }
 
     // setMergedCell(worksheet, 'B3:AF3', 'Tanggal');
     // setMergedCell(worksheet, 'A3:A4', 'Nama');
