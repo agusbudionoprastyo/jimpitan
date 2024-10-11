@@ -16,9 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
-            $roles = 'admin'
+            // Assuming roles are stored as an array in the database, e.g., $user['roles']
+            $roles = explode(',', $user['roles']); // Split roles if stored as comma-separated
 
-            if (in_array($roles, $role)) {
+            if (in_array('admin', $roles)) {
                 $_SESSION['user'] = $user;
                 header('Location: index.php'); // Redirect to the index page
                 exit;
@@ -26,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = 'Maaf anda bukan admin';
             }
         } else {
-            $error = 'username atau password salah!';
+            $error = 'Username atau password salah!';
         }
     } catch (PDOException $e) {
         $error = 'Database error: ' . $e->getMessage();
