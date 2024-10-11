@@ -27,7 +27,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('B3').fill = { 
         type: 'pattern', 
         pattern: 'solid', 
-        fgColor: { argb: 'FFFF00' } // Contoh warna latar belakang kuning
+        fgColor: { argb: 'EDDFE0' } // bg color
     };
 
     // Set header di baris ke-4 tanpa 'Nama' dan 'Total'
@@ -38,7 +38,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         cell.fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: '8EACCD' } // bg header
+            fgColor: { argb: 'EDDFE0' } // bg header
         };
         cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
         
@@ -57,10 +57,22 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         worksheet.mergeCells('A3:A4');
         worksheet.getCell('A3').value = 'Nama';
         worksheet.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+        worksheet.getCell('A3').font = { bold: true }; // Bold font
+        worksheet.getCell('A3').fill = { 
+            type: 'pattern', 
+            pattern: 'solid', 
+            fgColor: { argb: 'EDDFE0' } // bg color
+        };
     
         worksheet.mergeCells('AG3:AG4');
         worksheet.getCell('AG3').value = 'Total';
         worksheet.getCell('AG3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+        worksheet.getCell('AG3').font = { bold: true }; // Bold font
+        worksheet.getCell('AG3').fill = { 
+            type: 'pattern', 
+            pattern: 'solid', 
+            fgColor: { argb: 'EDDFE0' } // bg color
+        };
 
     // Tambahkan data dengan warna baris bergantian
     data.forEach((row, index) => {
@@ -79,7 +91,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         const newRow = worksheet.addRow(rowData);
 
         // Tentukan warna latar belakang berdasarkan indeks baris
-        const fillColor = (index % 2 === 0) ? 'FFFFFFFF' : 'FFCCCCCC'; // Putih untuk baris genap, abu-abu untuk baris ganjil
+        const fillColor = (index % 2 === 0) ? 'FFFFFFFF' : 'F5F5F5'; // Putih untuk baris genap, abu-abu untuk baris ganjil
 
         // Atur style untuk setiap sel di baris data
         newRow.eachCell((cell) => {
