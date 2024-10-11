@@ -218,13 +218,23 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     const daysInMonth = new Date(year, monthNumber, 0).getDate();
 
     const headerRow = worksheet.addRow(['', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), '']);
-    const mergedCells = []; // Array to track merged cells
+    
+    // Langsung menggabungkan sel tanpa fungsi tambahan
+    worksheet.mergeCells(`B3:${String.fromCharCode(65 + daysInMonth)}3`); // Untuk tanggal
+    worksheet.getCell('B3').value = 'Tanggal';
+    worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' };
+    worksheet.getCell('B3').font = { bold: true };
+    
+    worksheet.mergeCells('A3:A4'); // Untuk Nama
+    worksheet.getCell('A3').value = 'Nama';
+    worksheet.getCell('A3').alignment = { horizontal: 'center', vertical: 'middle' };
+    worksheet.getCell('A3').font = { bold: true };
 
-    setMergedCell(worksheet, `B3:${String.fromCharCode(65 + daysInMonth)}3`, 'Tanggal', mergedCells); // For days
-    setMergedCell(worksheet, 'A3:A4', 'Nama', mergedCells);
-
-    const totalColumn = String.fromCharCode(65 + daysInMonth + 1); // Total column is after the last day column
-    setMergedCell(worksheet, `${totalColumn}3:${totalColumn}4`, 'Total', mergedCells); // Adjust Total cell
+    const totalColumn = String.fromCharCode(65 + daysInMonth + 1); // Total column setelah kolom hari terakhir
+    worksheet.mergeCells(`${totalColumn}3:${totalColumn}4`); // Sesuaikan sel Total
+    worksheet.getCell(`${totalColumn}3`).value = 'Total';
+    worksheet.getCell(`${totalColumn}3`).alignment = { horizontal: 'center', vertical: 'middle' };
+    worksheet.getCell(`${totalColumn}3`).font = { bold: true };
 
     headerRow.eachCell((cell) => {
         cell.fill = {
@@ -244,28 +254,6 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             cell.numFmt = '0';
         }
     });
-
-    function setMergedCell(worksheet, cellRange, value, mergedCells) {
-        if (!mergedCells.includes(cellRange)) {
-            worksheet.mergeCells(cellRange);
-            mergedCells.push(cellRange);
-            const cell = worksheet.getCell(cellRange.split(':')[0]);
-            cell.value = value;
-            cell.alignment = { horizontal: 'center', vertical: 'middle' };
-            cell.font = { bold: true };
-            cell.fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: { argb: 'D8D2C2' }
-            };
-            worksheet.getCell(cellRange).border = {
-                top: { style: 'thin', color: { argb: 'FF000000' } },
-                left: { style: 'thin', color: { argb: 'FF000000' } },
-                bottom: { style: 'thin', color: { argb: 'FF000000' } },
-                right: { style: 'thin', color: { argb: 'FF000000' } }
-            };
-        }
-    }
 
     worksheet.getColumn(1).width = 25;
     for (let i = 2; i <= (daysInMonth + 1); i++) {
@@ -339,4 +327,3 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         URL.revokeObjectURL(url);
     });
 });
-
