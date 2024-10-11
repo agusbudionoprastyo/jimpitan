@@ -80,7 +80,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         const cell = worksheet.getCell(cellRange.split(':')[0]);
         cell.value = value;
         cell.alignment = { horizontal: 'center', vertical: 'middle' };
-        cell.font = { bold: true };
+        cell.font = {
+            bold: true,
+            color: { argb: 'FFFFFF' } // Set warna font menjadi putih
+        };
         cell.fill = {
             type: 'pattern',
             pattern: 'solid',
@@ -136,7 +139,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         let fillColor = (index % 2 === 0) ? 'F5F5F7' : 'D2E0FB';
 
         if (index === data.length - 1) {
-            fillColor = '6A9AB0';
+            fillColor = 'EAD8B1';
         }
 
         newRow.eachCell((cell, colNumber) => {
