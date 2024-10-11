@@ -26,7 +26,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('B3').font = { bold: true }; // Bold font
 
     // Set header di baris ke-5
-    const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString()), 'Total']);
+    const headerRow = worksheet.addRow([Array.from({ length: 31 }, (_, i) => (i + 1).toString())]);
 
     // Atur warna latar belakang header menjadi biru dan border
     headerRow.eachCell((cell) => {
@@ -48,11 +48,13 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             right: { style: 'thin', color: { argb: 'FF000000' } }
         };
     });
-        // Merge "Nama" cell with the cell above it (for example, if this is row 5 and you want to merge with row 4)
-        worksheet.mergeCells(`A3:A4`).value = 'Nama'; // Adjust row numbers as necessary
 
-        // Merge "Total" cell with the cell above it
-        worksheet.mergeCells(`AG3:AG4`).value = 'Total'; // Adjust column letters and row numbers as necessary
+    worksheet.mergeCells('A3:A4');
+    worksheet.getCell('A3').value = 'Nama';
+
+    worksheet.mergeCells('AG3:AG4');
+    worksheet.getCell('AG3').value = 'Total';
+
 
     // Tambahkan data dengan warna baris bergantian
     data.forEach((row, index) => {
