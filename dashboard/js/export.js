@@ -124,8 +124,8 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         const newRow = worksheet.addRow(rowData);
     
         // Tentukan warna latar belakang berdasarkan indeks baris
-        const fillColor = (index % 2 === 0) ? 'FFFFFFFF' : 'F5F5F5'; // Putih untuk baris genap, abu-abu untuk baris ganjil
-
+        let fillColor = (index % 2 === 0) ? 'FFFFFFFF' : 'F5F5F5'; // Putih untuk baris genap, abu-abu untuk baris ganjil
+    
         // Jika ini adalah baris terakhir, atur warna latar belakang khusus
         if (index === data.length - 1) {
             fillColor = 'EDDFE0'; // Warna latar belakang khusus untuk baris terakhir
@@ -162,7 +162,8 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     const lastRow = worksheet.lastRow;
     lastRow.eachCell((cell) => {
         cell.font = { bold: true }; // Bold untuk baris terakhir
-    });    
+    });
+        
 
     // Atur lebar kolom
     worksheet.getColumn(1).width = 25; // Lebar kolom kk_name
