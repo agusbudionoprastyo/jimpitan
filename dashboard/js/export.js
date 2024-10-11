@@ -225,10 +225,16 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), 'Total']);
 
     // Merging the "Nama" cell with the cell above it
-    worksheet.mergeCells(`A4:A5`);
-    // Merging from B4 to the last cell corresponding to the last day of the month
+    // worksheet.mergeCells(`A4:A5`);
+
+    // Merging from B3 to the last cell corresponding to the last day of the month
     const lastColumn = String.fromCharCode(66 + daysInMonth - 1); // 'B' is 66 in ASCII
-    worksheet.mergeCells(`B3:${lastColumn}4`);
+    const mergeRange = `B3:${lastColumn}3`; // Merging in row 3
+
+    // Check if the cells are already merged to avoid errors
+    if (!worksheet.mergedCells.includes(mergeRange)) {
+        worksheet.mergeCells(mergeRange);
+    }
     
     headerRow.eachCell((cell) => {
         cell.fill = {
