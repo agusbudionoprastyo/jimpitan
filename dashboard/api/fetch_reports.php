@@ -7,7 +7,7 @@ header('Content-Type: application/json');
 try {
     // Ambil data dari tabel report
     $sql = "SELECT 
-    report_id,
+    m.kk_name,
     SUM(CASE WHEN DAY(jimpitan_date) = 1 THEN nominal END) AS '1',
     SUM(CASE WHEN DAY(jimpitan_date) = 2 THEN nominal END) AS '2',
     SUM(CASE WHEN DAY(jimpitan_date) = 3 THEN nominal END) AS '3',
@@ -39,14 +39,16 @@ try {
     SUM(CASE WHEN DAY(jimpitan_date) = 29 THEN nominal END) AS '29',
     SUM(CASE WHEN DAY(jimpitan_date) = 30 THEN nominal END) AS '30',
     SUM(CASE WHEN DAY(jimpitan_date) = 31 THEN nominal END) AS '31',
-    SUM(nominal) AS total-- Menambahkan total nominal untuk semua tanggal
+    SUM(nominal) AS total -- Menambahkan total nominal untuk semua tanggal
 FROM 
-    report
+    report r
+JOIN 
+    master_kk m ON r.report_id = m.code_id
 WHERE 
     jimpitan_date >= DATE_FORMAT(CURDATE(), '%Y-%m-01') 
     AND jimpitan_date <= LAST_DAY(CURDATE())
 GROUP BY 
-    report_id;
+    r.report_id;
 ";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
