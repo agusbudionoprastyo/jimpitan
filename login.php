@@ -7,6 +7,7 @@ $error = ''; // Initialize the error variable
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_name = $_POST['user_name'] ?? '';
     $password = $_POST['password'] ?? '';
+    $redirect_option = $_POST['redirect_option'] ?? 'scan_app'; // Default to 'scan_app'
 
     try {
         $pdo = getDatabaseConnection();
@@ -19,13 +20,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Get the current day of the week
             $currentDay = date('l'); // e.g., "Monday", "Tuesday", etc.
 
-            // Check if the current day is in the user's shift
-            $shifts = explode(',', $user['shift']); // Assuming shifts are stored as a comma-separated string
-
-            if (in_array($currentDay, $shifts)) {
+            // Check if the current day is in the user's shift (skip for admin)
+            if ($user['role'] === 'admin' || in_array($currentDay, explode(',', $user['shift']))) {
                 $_SESSION['user'] = $user;
-                header('Location: index.php'); // Redirect to the index page
-                exit;
+
+                // Redirect based on the selected option
+                if ($redirect_option === 'dashboard' && $user['role'] === 'user') {
+                    $error = 'Maaf kamu bukan Administrator';
+                } else {
+                    if ($redirect_option === 'dashboard') {
+                        header('Location: /dashboard'); // Redirect to Dashboard
+                    } else {
+                        header('Location: index.php'); // Redirect to Scan App
+                    }
+                    exit;
+                }
             } else {
                 $error = 'Login gagal! Hari ini bukan jadwalmu jaga';
             }
@@ -53,9 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <form action="login.php" method="POST">
 <div class="screen-1">
-    <!-- <div class="logo">
-        <img src="icon-192x192.png" alt="Logo" />
-    </div> -->
     <div class="email">
         <label for="user_name">User</label>
         <div class="sec-2">
@@ -63,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="user_name" placeholder="********" required/>
         </div>
     </div>
+    
     <div class="password">
         <label for="password">Password</label>
         <div class="sec-2">
@@ -70,11 +77,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input class="pas" type="password" name="password" placeholder="********" required/>
         </div>
     </div>
+
+    <div class="password">
+    <label><input type="checkbox" name="redirect_option" value="dashboard"> Go To Dashboard</label>
+    </div>
+
     <button class="login">Login</button>
     <div class="footer">
-        <!-- <span></span> -->
         <?php if ($error): ?>
-            <div class="error-message" style="color: red;"><?php echo htmlspecialchars($error); ?></div>
+            <div class="error-message" style="color: red; font-size: 12px;"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
     </div>
 </div>

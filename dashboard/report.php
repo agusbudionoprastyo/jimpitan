@@ -1,4 +1,17 @@
 <?php
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['user'])) {
+    header('Location: ../login.php'); // Redirect to login page
+    exit;
+}
+
+// Check if user is admin
+if ($_SESSION['user']['role'] !== 'admin') {
+    header('Location: ../login.php'); // Redirect to unauthorized page
+    exit;
+}
 // Include the database connection
 include 'api/db.php';
 
@@ -39,6 +52,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
     <title>Jimpitan</title>
 </head>
 <body>
@@ -78,7 +93,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				</a>
 			</li> -->
 			<li>
-				<a href="#" class="logout">
+				<a href="logout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
@@ -125,9 +140,23 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="order">
                     <div class="head">
                         <h3>Report</h3>
-                        <button type="button" id="reportBtn" class="btn-download">
-                            <i class='bx bxs-file-export' style="font-size:24px"></i>
-						</button>
+                        <!-- <select id="month" name="month" class="custom-select">
+                            <?php for ($i = 1; $i <= 12; $i++): ?>
+                                <option value="<?= $i ?>" <?= ($i == date('n')) ? 'selected' : '' ?>>
+                                    <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
+                                </option>
+                            <?php endfor; ?>
+                        </select>
+                        <select id="year" name="year" class="custom-select">
+                            <?php for ($y = date('Y'); $y >= 2000; $y--): ?>
+                                <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
+                            <?php endfor; ?>
+                        </select> -->
+                        <input type="text" id="monthPicker" name="month-year" class="custom-select" placeholder="Pilih Bulan & Tahun">
+                        
+                            <button type="button" id="reportBtn" class="btn-download">
+                                <i class='bx bxs-file-export'></i> Unduh
+                            </button>
                     </div>
                     <table id="example" class="display" style="width:100%">
                         <thead>
@@ -162,7 +191,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </main>
         <!-- MAIN -->
     </section>
-    <!-- CONTENT -->    
+    <!-- CONTENT --> 
+    <script src="js/monthSelectPlugin.js"></script>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -172,8 +202,25 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <script src="js/script.js"></script>
     <script src="js/report.js"></script>
+    <script src="js/export.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.2.1/exceljs.min.js"></script>
+
 
     <script>
+        flatpickr("#monthPicker", {
+            plugins: [
+                new monthSelectPlugin({
+                    shorthand: true, // Gunakan nama bulan singkat (Jan, Feb, Mar, dll.)
+                    dateFormat: "F Y", // Format untuk nilai yang dikembalikan
+                    altFormat: "F Y", // Format untuk tampilan input
+                })
+            ],
+            onChange: function(selectedDates, dateStr, instance) {
+                console.log("Bulan dan tahun yang dipilih:", dateStr);
+            }
+        });
+
         const searchButton = document.querySelector('#content nav form .form-input button');
         const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
         const searchForm = document.querySelector('#content nav form');

@@ -1,4 +1,17 @@
 <?php
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['user'])) {
+    header('Location: ../login.php'); // Redirect to login page
+    exit;
+}
+
+// Check if user is admin
+if ($_SESSION['user']['role'] !== 'admin') {
+    header('Location: ../login.php'); // Redirect to unauthorized page
+    exit;
+}
 // Include the database connection
 include 'api/db.php';
 
@@ -68,7 +81,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				</a>
 			</li> -->
 			<li>
-				<a href="#" class="logout">
+				<a href="logout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>

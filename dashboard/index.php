@@ -1,4 +1,17 @@
 <?php
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['user'])) {
+    header('Location: ../login.php'); // Redirect to login page
+    exit;
+}
+
+// Check if user is admin
+if ($_SESSION['user']['role'] !== 'admin') {
+    header('Location: ../login.php'); // Redirect to unauthorized page
+    exit;
+}
 // Include the database connection
 include 'api/db.php';
 
@@ -7,10 +20,9 @@ $currentDay = date('l'); // 'l' gives full textual representation of the day
 
 // Prepare the SQL statement to select only today's shift
 $stmt = $pdo->prepare("
-    SELECT master_kk.kk_name, users.shift 
+    SELECT user_name, shift 
     FROM users 
-    JOIN master_kk ON users.id_code = master_kk.code_id
-    WHERE users.shift = :currentDay
+    WHERE shift = :currentDay
 ");
 
 // Bind the parameter
@@ -23,6 +35,7 @@ $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
+
 
 
 <!DOCTYPE html>
@@ -80,7 +93,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				</a>
 			</li> -->
 			<li>
-				<a href="#" class="logout">
+				<a href="logout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
@@ -164,7 +177,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if ($data) {
                                 foreach ($data as $row): ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($row["kk_name"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["user_name"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["shift"]); ?></td>
                                     </tr>
                                 <?php endforeach; 
