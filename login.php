@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Redirect based on the selected option
                 if ($redirect_option === 'dashboard' && $user['role'] === 'user') {
-                    $error = 'You do not have permission to access the Dashboard.';
+                    $error = 'Maaf kamu bukan Administrator';
                 } else {
                     if ($redirect_option === 'dashboard') {
                         header('Location: /dashboard'); // Redirect to Dashboard
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="password">
     <label><input type="checkbox" name="redirect_option" value="dashboard"> Go To Dashboard</label>
     </div>
-    
+
     <button class="login">Login</button>
     <div class="footer">
         <?php if ($error): ?>
