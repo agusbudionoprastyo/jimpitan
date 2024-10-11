@@ -209,16 +209,18 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
     <script>
-        {
+        flatpickr("#monthPicker", {
             plugins: [
                 new monthSelectPlugin({
-                shorthand: true, //defaults to false
-                dateFormat: "m.y", //defaults to "F Y"
-                altFormat: "F Y", //defaults to "F Y"
-                theme: "dark" // defaults to "light"
+                    shorthand: true, // Gunakan nama bulan singkat (Jan, Feb, Mar, dll.)
+                    dateFormat: "F Y", // Format untuk nilai yang dikembalikan
+                    altFormat: "F Y", // Format untuk tampilan input
                 })
-            ]
-        };
+            ],
+            onChange: function(selectedDates, dateStr, instance) {
+                console.log("Bulan dan tahun yang dipilih:", dateStr);
+            }
+        });
 
         const searchButton = document.querySelector('#content nav form .form-input button');
         const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
