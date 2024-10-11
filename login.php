@@ -63,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form action="login.php" method="POST">
 <div class="screen-1">
     <div class="email">
-        <label><input type="checkbox" name="redirect_option" value="dashboard">Go To Dashboard</label>
         <label for="user_name">User</label>
         <div class="sec-2">
             <ion-icon name="person-outline"></ion-icon>
@@ -77,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <ion-icon name="lock-closed-outline"></ion-icon>
             <input class="pas" type="password" name="password" placeholder="********" required/>
         </div>
+        <label><input type="checkbox" name="redirect_option" value="dashboard"> Go To Dashboard</label>
     </div>
     
     <button class="login">Login</button>
