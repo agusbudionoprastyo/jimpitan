@@ -84,7 +84,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         cell.fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'D8D2C2' }
+            fgColor: { argb: 'EDDFE0' }
         };
         worksheet.getCell(cellRange).border = {
             top: { style: 'thin', color: { argb: 'FF000000' } },
@@ -98,7 +98,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         cell.fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'D8D2C2' }
+            fgColor: { argb: 'EDDFE0' }
         };
         cell.alignment = { horizontal: 'center', vertical: 'middle' };
         cell.font = { bold: true, color: { argb: '000000' } };
@@ -133,10 +133,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         rowData.push(total > 0 ? total : '');
         const newRow = worksheet.addRow(rowData);
 
-        let fillColor = (index % 2 === 0) ? 'FFFFFFFF' : 'E4E0E1';
+        let fillColor = (index % 2 === 0) ? 'F5F5F7' : 'B7B7B7';
 
         if (index === data.length - 1) {
-            fillColor = 'D8D2C2';
+            fillColor = '705C53';
         }
 
         newRow.eachCell((cell, colNumber) => {

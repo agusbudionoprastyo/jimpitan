@@ -755,6 +755,9 @@ body {
     cursor: pointer; /* Ubah kursor saat hover */
     width: 100%; /* Pastikan bulan mengisi lebar kontainer */
 }
+.rounded {
+	border-radius: 25px;
+}
 .roundedBtn {
 	border-radius: 25px;
 	background-color: #14505c;
