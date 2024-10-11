@@ -19,17 +19,17 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Baris A3 dikosongkan
     worksheet.getCell('A3').value = '';
 
-    // Set header di baris ke-5
-    const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString()), 'Total']);
-
     // Atur warna latar belakang header menjadi biru dan border
     headerRow.eachCell((cell) => {
         cell.fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FF007BFF' } // Warna biru
+            fgColor: { argb: '8EACCD' } // Warna biru
         };
         cell.alignment = { horizontal: 'center', vertical: 'middle' }; // Align center untuk header
+        
+        // Set font bold
+        cell.font = { bold: true, color: { argb: '000000' } }; // Font bold dan warna putih
 
         // Menambahkan border untuk header
         cell.border = {
