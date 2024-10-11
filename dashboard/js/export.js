@@ -80,7 +80,10 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         const cell = worksheet.getCell(cellRange.split(':')[0]);
         cell.value = value;
         cell.alignment = { horizontal: 'center', vertical: 'middle' };
-        cell.font = { bold: true };
+        cell.font = {
+            bold: true,
+            color: { argb: 'FFFFFF' } // Set warna font menjadi putih
+        };
         cell.fill = {
             type: 'pattern',
             pattern: 'solid',
