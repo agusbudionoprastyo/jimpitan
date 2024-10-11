@@ -4,19 +4,28 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // const response = await fetch(`../dashboard/api/fetch_reports.php?month=${month}&year=${year}`); // Ganti dengan path file PHP Anda
     // const data = await response.json();
         // Ambil nilai dari monthPicker
-        const monthPicker = document.getElementById('monthPicker').value; // Format YYYY-MM
+        const monthPicker = document.getElementById('monthPicker').value; // Format "Oct 2024"
         if (!monthPicker) {
             alert('Please select a month');
             return;
         }
-    
-        const [year, month] = monthPicker.split(' '); // Pecah menjadi tahun dan bulan
-    
-        console.log('Selected Month:', month);
+        
+        // Split the string by space to get the month name and year
+        const [month, year] = monthPicker.split(' ');
+        
+        // Convert the month name to a number
+        const monthNumber = new Date(Date.parse(month + " 1, 2024")).getMonth() + 1; // Adding 1 because getMonth() returns 0-11
+        if (isNaN(monthNumber) || monthNumber < 1 || monthNumber > 12) {
+            alert('Invalid month selected');
+            return;
+        }
+        
+        console.log('Selected Month:', monthNumber);
         console.log('Selected Year:', year);
-    
-        const response = await fetch(`../dashboard/api/fetch_reports.php?month=${month}&year=${year}`);
+        
+        const response = await fetch(`../dashboard/api/fetch_reports.php?month=${monthNumber}&year=${year}`);
         const data = await response.json();
+        
     
 
     const workbook = new ExcelJS.Workbook();
