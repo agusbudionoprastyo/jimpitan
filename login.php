@@ -62,14 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <form action="login.php" method="POST">
 <div class="screen-1">
-    <h3>Login</h3>
-
-        <label>
-            <input type="radio" name="redirect_option" value="scan_app" checked> Scan QR
-        </label>
-        <label>
-            <input type="radio" name="redirect_option" value="dashboard"> Dashboard
-        </label>
+    <h3>Jimpitan</h3>
 
     <div class="email">
         <label for="user_name">User</label>
@@ -86,6 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input class="pas" type="password" name="password" placeholder="********" required/>
         </div>
     </div>
+    <label>
+        <input type="radio" name="redirect_option" value="scan_app" checked> App Scan
+        <input type="radio" name="redirect_option" value="dashboard"> Dashboard
+    </label>
     
     <button class="login">Login</button>
     <div class="footer">
