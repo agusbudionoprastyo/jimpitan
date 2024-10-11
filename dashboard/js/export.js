@@ -19,6 +19,13 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     // Baris A3 dikosongkan
     worksheet.getCell('A3').value = '';
 
+    // Merge B3:AF3 dan set nilai 'Tanggal'
+    worksheet.mergeCells('B3:AF3');
+    worksheet.getCell('B3').value = 'Tanggal';
+    worksheet.getCell('B3').alignment = { horizontal: 'center', vertical: 'middle' }; // Center alignment
+    worksheet.getCell('B3').font = { bold: true }; // Bold font
+
+
     // Set header di baris ke-5
     const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString()), 'Total']);
 
