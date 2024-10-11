@@ -216,7 +216,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     worksheet.getCell('A2').alignment = { horizontal: 'left', vertical: 'middle' };
     worksheet.getCell('A2').font = { bold: true, size: 12 };
 
-    worksheet.getCell('A3:A4').value = '';
+    worksheet.getCell('A3').value = '';
 
 
     // Determine the number of days in the selected month
@@ -224,6 +224,9 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
 
     const headerRow = worksheet.addRow(['Nama', ...Array.from({ length: daysInMonth }, (_, i) => i + 1), 'Total']);
 
+    // Merging the "Nama" cell with the cell above it
+    worksheet.mergeCells(`A4:A5`);
+    
     headerRow.eachCell((cell) => {
         cell.fill = {
             type: 'pattern',
@@ -242,6 +245,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
             cell.numFmt = '0';
         }
     });
+    
 
     // function setMergedCell(worksheet, cellRange, value) {
     //     worksheet.mergeCells(cellRange);
