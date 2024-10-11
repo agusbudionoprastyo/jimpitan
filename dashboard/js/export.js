@@ -42,7 +42,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
 
     // Tambahkan data
     data.forEach(row => {
-        const rowData = [row.report_id];
+        const rowData = [row.kk_name];
         let total = 0;
 
         for (let i = 1; i <= 31; i++) {
@@ -71,7 +71,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
     });
 
     // Atur lebar kolom
-    worksheet.getColumn(1).width = 15; // Lebar kolom report_id
+    worksheet.getColumn(1).width = 15; // Lebar kolom kk_name
     for (let i = 2; i <= 33; i++) { // Kolom 2 sampai 33 untuk hari 1-31 + Total
         worksheet.getColumn(i).width = 5; // Lebar kolom 5 karakter
     }
