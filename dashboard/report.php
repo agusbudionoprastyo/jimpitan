@@ -138,7 +138,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="order">
                     <div class="head">
                         <h3>Report</h3>
-                        <label for="month">Bulan</label>
+                        <label for="month">Unduh Report</label>
                             <select id="month" name="month">
                                 <?php for ($i = 1; $i <= 12; $i++): ?>
                                     <option value="<?= $i ?>" <?= ($i == date('n')) ? 'selected' : '' ?>>
@@ -146,8 +146,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     </option>
                                 <?php endfor; ?>
                             </select>
-
-                            <label for="year">Tahun</label>
                             <select id="year" name="year">
                                 <?php for ($y = date('Y'); $y >= 2000; $y--): ?>
                                     <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
