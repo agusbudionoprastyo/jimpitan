@@ -139,7 +139,7 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         let fillColor = (index % 2 === 0) ? 'F5F5F7' : 'D2E0FB';
 
         if (index === data.length - 1) {
-            fillColor = '6A9AB0';
+            fillColor = 'EAD8B1';
         }
 
         newRow.eachCell((cell, colNumber) => {
