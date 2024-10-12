@@ -269,12 +269,16 @@ function stopScanning() {
 }
 
 function toggleFlash() {
+    if (isScanning) {
+        stopScanning(); // Stop scanning to toggle flash
+    }
+
+    isFlashOn = !isFlashOn; // Toggle flash status
+
     const constraints = {
         facingMode: 'environment',
         torch: isFlashOn
     };
-
-    html5QrCode.clear(); // Clear existing scanner instance
 
     html5QrCode.start(
         constraints,
@@ -285,9 +289,8 @@ function toggleFlash() {
         onScanSuccess,
         onScanError
     ).then(() => {
-        isFlashOn = !isFlashOn;
         document.getElementById('toggleFlashButton').innerText = isFlashOn ? 'Turn Off Flash' : 'Turn On Flash';
-    }).catch(err => console.error('Error starting the QR code scanning:', err));
+    }).catch(err => console.error('Error starting the QR code scanning with flash:', err));
 }
 
 // Initialize the QR code scanner instance
