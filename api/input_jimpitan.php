@@ -1,39 +1,39 @@
 <?php
-header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
 
 // Include the connection file
 require '../helper/connection.php';
 
-// Get the raw POST data
-$input = json_decode(file_get_contents('php://input'), true);
+// Get input data
+$data = json_decode(file_get_contents("php://input"));
 
-// Check if data is set
-if (isset($input['report_id'], $input['jimpitan_date'], $input['nominal'], $input['collector'])) {
-    $report_id = $input['report_id'];
-    $jimpitan_date = $input['jimpitan_date'];
-    $nominal = $input['nominal'];
-    $collector = $input['collector'];
+// Pastikan semua data yang diperlukan ada
+if (isset($data->report_id) && isset($data->jimpitan_date) && isset($data->nominal) && isset($data->collector)) {
+    $report_id = $data->report_id;
+    $jimpitan_date = $data->jimpitan_date;
+    $nominal = $data->nominal;
+    $collector = $data->collector;
 
-    // Prepare the SQL statement
-    $stmt = $conn->prepare("INSERT INTO report (report_id, jimpitan_date, nominal, collector) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssis", $report_id, $jimpitan_date, $nominal, $collector);
+    // Dapatkan koneksi database
+    $conn = getDatabaseConnection();
 
-    // Execute the statement
-    if ($stmt->execute()) {
-        // Success response
-        echo json_encode(['success' => true, 'message' => 'Data inserted successfully.']);
+    // Siapkan pernyataan SQL untuk penyisipan
+    $sql = "INSERT INTO report (report_id, jimpitan_date, nominal, collector) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        // Eksekusi pernyataan
+        $stmt->execute([$report_id, $jimpitan_date, $nominal, $collector]);
+        
+        // Respons sukses
+        echo json_encode(['success' => true, 'message' => 'Data berhasil disisipkan']);
     } else {
-        // Error response
-        echo json_encode(['success' => false, 'message' => 'Database error: ' . $stmt->error]);
+        // Respons gagal untuk persiapan pernyataan
+        echo json_encode(['success' => false, 'message' => 'Gagal menyiapkan pernyataan']);
     }
-
-    // Close the statement
-    $stmt->close();
 } else {
-    // Missing data response
-    echo json_encode(['success' => false, 'message' => 'Invalid input data.']);
+    // Respons jika data tidak lengkap
+    echo json_encode(['success' => false, 'message' => 'Data tidak lengkap']);
 }
-
-// Close the database connection
-$conn->close();
 ?>
