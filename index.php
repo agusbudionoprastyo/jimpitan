@@ -68,9 +68,9 @@ if (!isset($_SESSION['user'])) {
 
     .floating-button {
       position: fixed;
-      bottom: 20px; /* Jarak dari bawah */
+      top: 20px; /* Jarak dari atas */
       right: 20px; /* Jarak dari kanan */
-      background-color: #14505c; /* Warna latar belakang */
+      background-color: rgba(20, 80, 92, 0.8); /* Warna latar belakang dengan transparansi */
       border-radius: 50%; /* Membuat tombol bulat */
       width: 60px; /* Lebar tombol */
       height: 60px; /* Tinggi tombol */
@@ -86,6 +86,7 @@ if (!isset($_SESSION['user'])) {
       font-size: 24px; /* Ukuran teks */
       text-decoration: none; /* Menghilangkan garis bawah */
   }
+
   </style>
 </head>
 <body>
@@ -106,7 +107,7 @@ if (!isset($_SESSION['user'])) {
     ?>
   </p>
   <div class="floating-button">
-    <a href="dashboard/logout.php"><i class='bx bxs-log-out-circle' ></i></a>
+    <a href="dashboard/logout.php"><i class='bx bxl-log-out-circle' ></i></a>
   </div>
   <div id="qr-reader"></div>
 </div>
