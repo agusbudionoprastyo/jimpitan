@@ -384,15 +384,25 @@ function onScanSuccess(decodedText) {
                 icon: 'success',
                 title: 'Sukses',
                 text: data.message,
-                confirmButton: 'OK'
+                    customClass: {
+                    popup: 'rounded',
+                    timerProgressBar: 'custom-timer-progress-bar',
+                    confirmButton: 'roundedBtn'
+                },
+                willClose: startScanning // Mulai pemindaian ulang saat dialog ditutup
             });
         } else {
             // Tampilkan pesan error
             Swal.fire({
-                icon: 'error',
-                title: 'Kesalahan',
+                icon: 'warning',
+                title: 'Ooops!',
                 text: data.message,
-                confirmButton: 'OK'
+                customClass: {
+                    popup: 'rounded',
+                    timerProgressBar: 'custom-timer-progress-bar',
+                    confirmButton: 'roundedBtn'
+                },
+                willClose: startScanning // Mulai pemindaian ulang saat dialog ditutup
             });
         }
     })

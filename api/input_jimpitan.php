@@ -34,7 +34,7 @@ if (isset($data->report_id) && isset($data->jimpitan_date) && isset($data->nomin
     $exists = $checkStmt->fetchColumn();
 
     if ($exists > 0) {
-        echo json_encode(['success' => false, 'message' => 'Data sudah ada']);
+        echo json_encode(['success' => false, 'message' => 'Jimpitan tanggal ' . $jimpitan_date . ' dengan ID ' . $report_id . ' sudah ada, mau di hapus?']);
         exit; // Hentikan eksekusi jika data sudah ada
     }
 
@@ -47,7 +47,7 @@ if (isset($data->report_id) && isset($data->jimpitan_date) && isset($data->nomin
         $stmt->execute([$report_id, $jimpitan_date, $nominal, $collector]);
         
         // Respons sukses
-        echo json_encode(['success' => true, 'message' => 'Data berhasil disisipkan']);
+        echo json_encode(['success' => true, 'message' => 'Jimpitan tanggal ' . $jimpitan_date . ' tercatat dengan nominal ' . $nominal]);
     } else {
         // Respons gagal untuk persiapan pernyataan
         echo json_encode(['success' => false, 'message' => 'Gagal menyiapkan pernyataan']);
