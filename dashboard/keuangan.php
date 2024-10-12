@@ -99,13 +99,13 @@ if (isset($_POST['tanggal'])) {
                 <div class="order">
                     <div class="head">
                         <h3>Keuangan</h3>
+                        <button type="button" id="addcreditdebBtn" class="btn-download">
+                            <i class='bx bxs-add-to-queue'></i> Data
+                        </button>
                         <button type="button" id="resetFilterBtn" class="btn-download">
                             <i class="bx bx-x-circle" style="font-size : 20px;"></i>
                         </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
-                        <!-- <button type="button" id="reportBtn" class="btn-download">
-                            <i class='bx bxs-file-export'></i> Unduh
-                        </button> -->
                     </div>
                     <table id="example" class="display" style="width:100%">
                         <thead>
@@ -128,7 +128,7 @@ if (isset($_POST['tanggal'])) {
                                             <td><?php echo htmlspecialchars($row["reff"]); ?></td>
                                             <td><?php echo htmlspecialchars($row["description"]); ?></td>
                                             <td><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
-                                            <td><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td>
+                                            <td><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
                                         </tr>
                                     <?php endforeach; 
                                 } else {
