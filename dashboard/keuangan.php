@@ -25,7 +25,6 @@ if (isset($_POST['tanggal'])) {
     echo "<div class='alert alert-success mt-3'>Tanggal yang dipilih: <strong>$tanggal</strong></div>";
 }
 
-
 ?>
 
 <!DOCTYPE html>
