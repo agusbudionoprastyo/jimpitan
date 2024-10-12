@@ -120,7 +120,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h1>Keuangan - RT07 Salatiga</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="#">Kas Umum</a>
+                            <a href="#">KK</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
@@ -133,8 +133,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>KK</h3>
-                        <button type="button" name="submit" class="btn-add" href="add_kas_umum.php">Transaksi baru</button>
+                        <h3>Kas Umum</h3>
+                        <a href="add_kas_umum.php" class="btn-add">Transaksi baru</a>
 						<button type="button" id="printSelectedBtn" class="btn-download">
 							<i class='bx bxs-printer' style="font-size:24px"></i>
 						</button>
