@@ -124,8 +124,8 @@ if (!isset($_SESSION['user'])) {
   <div id="qr-reader"></div>
   <button id="startButton" class="roundedBtn">Start Scan</button>
   <button id="stopButton" class="roundedBtn" disabled>Stop Scan</button>
-  <input type="file" id="qr-input-file" class="roundedBtn" accept="image/*" capture><i class='bx bxs-camera'></input>
-
+  <label for="qr-input-file" class="roundedBtn"><i class='bx bxs-camera'></i></label>
+  <input type="file" id="qr-input-file" accept="image/*" capture hidden>
 </div>
 
 <audio id="audio" src="assets/audio/interface.wav"></audio>
