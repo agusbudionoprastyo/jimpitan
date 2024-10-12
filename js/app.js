@@ -401,7 +401,7 @@ function onScanSuccess(decodedText) {
                 cancelButtonText: 'Batal',
                 customClass: {
                     popup: 'rounded',
-                    confirmButton: 'roundedBtn',
+                    confirmButton: 'stopBtn',
                     cancelButton: 'roundedBtn'
                 }
             }).then((result) => {
