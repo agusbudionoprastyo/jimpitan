@@ -61,7 +61,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="#">
+                <a href="/dashboard">
                     <i class='bx bxs-dashboard' ></i>
                     <span class="text">Dashboard</span>
                 </a>
@@ -86,7 +86,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </li>
             <li>
             <a href="keuangan.php">
-                    <i class='bx bxs-report'></i>
+                    <i class='bx bx-money-withdraw' ></i>
                     <span class="text">Keuangan</span>
                 </a>
             </li>
