@@ -152,14 +152,8 @@ function updateLandscapeBlocker() {
 }
 
 // Start scanning when document is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    updateLandscapeBlocker();
-});
-
-// Handle orientation change
-window.addEventListener('orientationchange', function() {
-    updateLandscapeBlocker();
-});
+document.addEventListener('DOMContentLoaded', updateLandscapeBlocker);
+window.addEventListener('orientationchange', updateLandscapeBlocker);
 
 // Function to play audio
 function playAudio() {
@@ -169,7 +163,8 @@ function playAudio() {
     }
 }
 
-function onScanSuccess(decodedText, decodedResult) {
+// Handle successful scan
+function onScanSuccess(decodedText) {
     const id = decodedText; // Get ID from QR code
     playAudio();
 
@@ -181,9 +176,8 @@ function onScanSuccess(decodedText, decodedResult) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ id: id })
-    })
-    .then(response => console.log('Data sent to GAS:', id))
-    .catch(error => console.error('Error sending data to GAS:', error));
+    }).then(() => console.log('Data sent to GAS:', id))
+      .catch(error => console.error('Error sending data to GAS:', error));
 
     // Fetch from API to get name
     fetch('../api/get_kk.php', {
@@ -192,45 +186,43 @@ function onScanSuccess(decodedText, decodedResult) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ code_id: id })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success && data.kk_name) {
-            const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-            const nominal = 'Rp500';
-            Swal.fire({
-                icon: 'success',
-                title: `${data.kk_name}`,
-                text: `Jimpitan tanggal ${today} tercatat dengan nominal ${nominal}`,
-                timer: 10000,
-                timerProgressBar: true,
-                customClass: {
-                    popup: 'rounded',
-                    timerProgressBar: 'custom-timer-progress-bar',
-                    confirmButton: 'roundedBtn'
-                },
-                willClose: startScanning
-            });
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Not Found',
-                text: 'No record found for the scanned ID.',
-                confirmButton: 'OK',
-                willClose: startScanning
-            });
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Fetch Error',
-            text: 'Could not retrieve data from server.',
-            confirmButton: 'OK',
-            willClose: startScanning
-        });
-    });
+    }).then(response => response.json())
+      .then(data => {
+          const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+          const nominal = 'Rp500';
+          if (data.success && data.kk_name) {
+              Swal.fire({
+                  icon: 'success',
+                  title: `${data.kk_name}`,
+                  text: `Jimpitan tanggal ${today} tercatat dengan nominal ${nominal}`,
+                  timer: 10000,
+                  timerProgressBar: true,
+                  customClass: {
+                      popup: 'rounded',
+                      timerProgressBar: 'custom-timer-progress-bar',
+                      confirmButton: 'roundedBtn'
+                  },
+                  willClose: startScanning
+              });
+          } else {
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Not Found',
+                  text: 'No record found for the scanned ID.',
+                  confirmButton: 'OK',
+                  willClose: startScanning
+              });
+          }
+      }).catch(error => {
+          console.error('Error fetching data:', error);
+          Swal.fire({
+              icon: 'error',
+              title: 'Fetch Error',
+              text: 'Could not retrieve data from server.',
+              confirmButton: 'OK',
+              willClose: startScanning
+          });
+      });
 
     // start scanning after successful read
     startScanning();
@@ -245,67 +237,52 @@ function startScanning() {
         isScanning = true;
         html5QrCode.start(
             { facingMode: "environment" },
-            {
-                fps: 20,
-                qrbox: 200
-            },
+            { fps: 20, qrbox: 200 },
             onScanSuccess,
             onScanError
-        ).then(() => {
-            // // Show the stop button and hide the start button
-            // document.getElementById("stopButton").style.display = "inline"; // atau "block"
-            // document.getElementById("startButton").style.display = "none"; // Sembunyikan tombol start
-            
-        }).catch(err => console.error('Error starting the QR code scanning:', err));
+        ).catch(err => console.error('Error starting the QR code scanning:', err));
     }
 }
 
 function stopScanning() {
     if (isScanning) {
         isScanning = false;
-        html5QrCode.stop().then(() => {
-            // // Hide the stop button and show the start button
-            // document.getElementById("stopButton").style.display = "none"; // Sembunyikan tombol stop
-            // document.getElementById("startButton").style.display = "inline"; // Tampilkan tombol start
-        }).catch(err => console.error('Error stopping the QR code scanning:', err));
+        html5QrCode.stop().catch(err => console.error('Error stopping the QR code scanning:', err));
     }
 }
 
-// File based scanning
 const fileinput = document.getElementById('qr-input-file');
 const fileInputLabel = document.getElementById('fileInputLabel');
 
 fileInputLabel.addEventListener('click', (e) => {
-    e.preventDefault(); // Mencegah perilaku default
-
-    // Hentikan pemindaian yang sedang berjalan
+    e.preventDefault();
     stopScanning();
-
-    // Setelah menghentikan, buka dialog pemilihan file
-    setTimeout(() => {
-        fileinput.click();
-    }, 100); // Delay sedikit untuk memastikan pemindaian berhenti
+    fileinput.click();
 });
 
 fileinput.addEventListener('change', e => {
-    if (e.target.files.length == 0) {
-        // No file selected, ignore 
+    if (e.target.files.length === 0) {
+        startScanning();
         return;
     }
 
-    // Use the first item in the list
     const imageFile = e.target.files[0];
-    html5QrCode.scanFile(imageFile, showImage = false)
-    .then(qrCodeMessage => {
-        onScanSuccess(qrCodeMessage);
-    })
-    .catch(err => {
-        // failure, handle it.
-        console.log(`Error scanning file. Reason: ${err}`);
-    });
+    if (imageFile.type.startsWith('image/')) {
+        html5QrCode.scanFile(imageFile, false)
+            .then(qrCodeMessage => {
+                onScanSuccess(qrCodeMessage);
+            })
+            .catch(err => {
+                console.error(`Error scanning file. Reason: ${err}`);
+                alert('Failed to scan QR code. Please try again.');
+            });
+    } else {
+        alert('Please upload a valid image file.');
+    }
+
+    // Reset file input for the next scan
+    fileinput.value = '';
 });
+
 // Start scanning with the camera
 startScanning();
-// // Event listeners for buttons
-// document.getElementById('startButton').addEventListener('click', startScanning);
-// document.getElementById('stopButton').addEventListener('click', stopScanning);
