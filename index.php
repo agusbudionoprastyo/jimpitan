@@ -14,6 +14,7 @@ if (!isset($_SESSION['user'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jimpitan</title>
+  <link rel="manifest" href="manifest.json">
   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
@@ -131,5 +132,19 @@ if (!isset($_SESSION['user'])) {
 <audio id="audio" src="assets/audio/interface.wav"></audio>
 
 <script src="js/app.js"></script>
+  <script>
+        // Register the service worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+            });
+        });
+    }
+  </script>
 </body>
 </html>
