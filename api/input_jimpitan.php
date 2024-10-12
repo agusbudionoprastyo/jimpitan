@@ -23,20 +23,23 @@ if (isset($data->report_id) && isset($data->jimpitan_date) && isset($data->nomin
     $report_id = $data->report_id;
     $jimpitan_date = $data->jimpitan_date;
     $nominal = $data->nominal;
-    $kk_name = $result['kk_name'] ?? null; // Jika kk_name tidak ada, set ke null
 
     // Dapatkan koneksi database
     $conn = getDatabaseConnection();
 
     // Periksa apakah data sudah ada
-    $checkSql = "    SELECT COUNT(*) AS count, m.kk_name 
-    FROM report r
-    JOIN master_kk m ON r.report_id = m.code_id 
-    WHERE r.report_id = ? AND r.jimpitan_date = ?";
-
+    $checkSql = "
+        SELECT COUNT(*) AS count, m.kk_name 
+        FROM report r
+        JOIN master_kk m ON r.report_id = m.code_id 
+        WHERE r.report_id = ? AND r.jimpitan_date = ?
+    ";
     $checkStmt = $conn->prepare($checkSql);
     $checkStmt->execute([$report_id, $jimpitan_date]);
-    $exists = $checkStmt->fetchColumn();
+    $result = $checkStmt->fetch(PDO::FETCH_ASSOC);
+
+    $exists = $result['count'];
+    $kk_name = $result['kk_name'] ?? null; // Jika kk_name tidak ada, set ke null
 
     if ($exists > 0) {
         echo json_encode(['success' => false, 'message' => 'Jimpitan tanggal ' . $jimpitan_date . ', Nama ' . $kk_name . ' sudah ada, mau di hapus?']);
@@ -52,7 +55,7 @@ if (isset($data->report_id) && isset($data->jimpitan_date) && isset($data->nomin
         $stmt->execute([$report_id, $jimpitan_date, $nominal, $collector]);
         
         // Respons sukses
-        echo json_encode(['success' => true, 'message' => 'Jimpitan tanggal ' . $jimpitan_date . ', Nama ' . $kk_name ', tercatat dengan nominal Rp' . $nominal]);
+        echo json_encode(['success' => true, 'message' => 'Jimpitan tanggal ' . $jimpitan_date . ', Nama ' . $kk_name . ', tercatat dengan nominal Rp' . $nominal]);
     } else {
         // Respons gagal untuk persiapan pernyataan
         echo json_encode(['success' => false, 'message' => 'Gagal menyiapkan pernyataan']);
