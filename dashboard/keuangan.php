@@ -127,8 +127,8 @@ if (isset($_POST['tanggal'])) {
                                         <td><?php echo htmlspecialchars($row["date_trx"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["reff"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["description"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["debit"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["credit"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["debet"]); ?></td> 
+                                        <td><?php echo htmlspecialchars($row["kredit"]); ?></td> <!-- asem variable billingual wkwkwkw -->
                                     </tr>
                                 <?php endforeach; 
                             } else {
