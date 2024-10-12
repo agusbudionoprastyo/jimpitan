@@ -2,10 +2,11 @@
   "name": "Jimpitan",
   "short_name": "Jimpitan",
   "description": "A QR Code scanning application",
-  "start_url": ".",
+  "start_url": "./index.php",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
+  "scope": "/",
   "icons": [
     {
       "src": "assets/image/icon-192x192.png",
