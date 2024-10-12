@@ -85,19 +85,19 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </li>
             <li>
             <a href="keuangan.php">
-                    <i class='bx bxs-report'></i>
+                    <i class='bx bxs-wallet' ></i>
                     <span class="text">Keuangan</span>
                 </a>
             </li>
         </ul>
 
         <ul class="side-menu">
-			<!-- <li>
-				<a href="#">
+			<li>
+				<a href="setting.php">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
 				</a>
-			</li> -->
+			</li>
 			<li>
 				<a href="logout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>

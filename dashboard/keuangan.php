@@ -89,12 +89,12 @@ if (isset($_POST['tanggal'])) {
         </ul>
 
         <ul class="side-menu">
-			<!-- <li>
-				<a href="#">
+			<li>
+                <a href="setting.php">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
 				</a>
-			</li> -->
+			</li>
 			<li>
 				<a href="logout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
