@@ -77,8 +77,8 @@ if (isset($_POST['tanggal'])) {
                     <span class="text">Dashboard</span>
                 </a>
             </li>
-            <li class="active">
-            <a href="#">
+            <li>
+            <a href="kk.php">
                     <i class='bx bxs-group' ></i>
                     <span class="text">KK</span>
                 </a>
@@ -89,8 +89,8 @@ if (isset($_POST['tanggal'])) {
                     <span class="text">Report</span>
                 </a>
             </li>
-            <li>
-                <a href="keuangan.php">
+            <li class="active">
+                <a href="#">
                     <i class='bx bxs-report'></i>
                     <span class="text">Keuangan</span>
                 </a>
