@@ -173,9 +173,11 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         cell.font = { bold: true };
     });
 
+    const now = new Date();
+    const timestamp = now.toTimeString().split(' ')[0].replace(/:/g, ''); // Format HHMMSS
     const monthName = monthNames[monthNumber - 1];
-    const fileName = `Report_${monthName}_${year}.xlsx`;
-
+    const fileName = `Report_${monthName}_${year}_${timestamp}.xlsx`;
+    
     workbook.xlsx.writeBuffer().then((buffer) => {
         const blob = new Blob([buffer], { type: 'application/octet-stream' });
         const url = URL.createObjectURL(blob);
@@ -186,5 +188,5 @@ document.getElementById('reportBtn').addEventListener('click', async function() 
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-    });
+    });    
 });
