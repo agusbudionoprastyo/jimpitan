@@ -121,6 +121,7 @@ if (!isset($_SESSION['user'])) {
   </p>
   <div class="floating-button">
     <a href="dashboard/logout.php"><i class="bx bx-log-out-circle bx-tada bx-flip-horizontal" style="font-size:24px" ></i></a>
+    <button id="clearCacheButton" class="roundedBtn"><i class='bx bx-refresh'></i></button>
   </div>
   <div id="qr-reader"></div>
   <button id="startButton" class="roundedBtn">Start Scan</button>
@@ -133,6 +134,20 @@ if (!isset($_SESSION['user'])) {
 
 <script src="js/app.js"></script>
   <script>
+        // Clear cache and reload
+        document.getElementById('clearCacheButton').addEventListener('click', function() {
+        if (caches) {
+            caches.keys().then(function(cacheNames) {
+                cacheNames.forEach(function(cacheName) {
+                    caches.delete(cacheName);
+                });
+            }).then(function() {
+                location.reload(true); // Force reload
+            });
+        } else {
+            location.reload(); // Fallback if caches are not supported
+        }
+    });
         // Register the service worker
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
