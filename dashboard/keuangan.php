@@ -100,10 +100,10 @@ if (isset($_POST['tanggal'])) {
                     <div class="head">
                         <h3>Keuangan</h3>
                         <button type="button" id="addcreditdebBtn" class="btn-download">
-                            <i class='bx bxs-add-to-queue'></i> Data
+                            <i class='bx bxs-add-to-queue'></i> Deb/Credit
                         </button>
-                        <button type="button" id="resetFilterBtn" class="btn-download">
-                            <i class="bx bx-x-circle" style="font-size : 20px;"></i>
+                        <button type="button" id="resetFilterBtn">
+                            <i class="bx bx-x-circle" style="font-size : 24px;"></i>
                         </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
                     </div>
