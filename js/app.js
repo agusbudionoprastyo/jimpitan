@@ -135,33 +135,35 @@
 //   // Start scanning with the camera
 //   startScanning();
 
-let isScanning = false; // Menandakan apakah pemindaian aktif
-const html5QrCode = new Html5Qrcode("qr-reader"); // Inisialisasi pemindai QR
+// let isScanning = false; // Menandakan apakah pemindaian aktif
+// const html5QrCode = new Html5Qrcode("qr-reader"); // Inisialisasi pemindai QR
 
-// Fungsi untuk menampilkan atau menyembunyikan blokir orientasi
-function updateLandscapeBlocker() {
-    const landscapeBlocker = document.getElementById('landscapeBlocker');
-    if (landscapeBlocker) {
-        if (window.orientation === 90 || window.orientation === -90) {
-            landscapeBlocker.style.display = 'flex'; // Tampilkan blokir jika dalam mode lanskap
-            stopScanning(); // Hentikan pemindaian
-        } else {
-            landscapeBlocker.style.display = 'none'; // Sembunyikan blokir
-        }
-    }
-}
+// // Fungsi untuk menampilkan atau menyembunyikan blokir orientasi
+// function updateLandscapeBlocker() {
+//     const landscapeBlocker = document.getElementById('landscapeBlocker');
+//     if (landscapeBlocker) {
+//         if (window.orientation === 90 || window.orientation === -90) {
+//             landscapeBlocker.style.display = 'flex'; // Tampilkan blokir jika dalam mode lanskap
+//             stopScanning(); // Hentikan pemindaian
+//         } else {
+//             landscapeBlocker.style.display = 'none'; // Sembunyikan blokir
+//         }
+//     }
+// }
 
-// Mulai pemindaian saat dokumen dimuat
-document.addEventListener('DOMContentLoaded', updateLandscapeBlocker);
-window.addEventListener('orientationchange', updateLandscapeBlocker);
+// // Mulai pemindaian saat dokumen dimuat
+// document.addEventListener('DOMContentLoaded', updateLandscapeBlocker);
+// window.addEventListener('orientationchange', updateLandscapeBlocker);
 
-// Fungsi untuk memutar audio
-function playAudio() {
-    const audio = document.getElementById('audio');
-    if (audio) {
-        audio.play().catch(error => console.error('Error playing audio:', error));
-    }
-}
+// // Fungsi untuk memutar audio
+// function playAudio() {
+//     const audio = document.getElementById('audio');
+//     if (audio) {
+//         audio.play().catch(error => console.error('Error playing audio:', error));
+//     }
+// }
+
+// // Fungsi untuk menangani hasil pemindaian
 // function onScanSuccess(decodedText) {
 //     console.log('Teks yang dipindai:', decodedText);
 //     const id = decodedText; // Ambil ID dari kode QR
@@ -196,35 +198,18 @@ function playAudio() {
 //         }
 //         return response.json();
 //     })
-//     .then(data => {
-//         if (data.success) {
-//             console.log('Data berhasil dikirim:', data);
-//             // Lanjutkan ambil nama dari API
-//             return fetch('../api/get_kk.php', {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify({ code_id: id })
-//             });
-//         } else {
-//             // Tampilkan SweetAlert jika data sudah ada
-//             Swal.fire({
-//                 icon: 'warning',
-//                 title: 'Data Sudah Ada',
-//                 text: data.message,
-//                 confirmButton: 'OK',
-//                 willClose: startScanning // Mulai pemindaian ulang saat dialog ditutup
-//             });
-//             stopScanning(); // Hentikan pemindaian
-//         }
+//     .then(data => console.log('Data berhasil dikirim:', data))
+//     .catch(error => console.error('Error mengirim data:', error));
+
+//     // Ambil nama dari API
+//     fetch('../api/get_kk.php', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ code_id: id })
 //     })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error('Respon jaringan tidak ok');
-//         }
-//         return response.json();
-//     })
+//     .then(response => response.json())
 //     .then(data => {
 //         const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 //         const nominalFormatted = 'Rp500';
@@ -264,8 +249,98 @@ function playAudio() {
 //     });
 
 //     // Hentikan pemindaian setelah pemindaian sukses
-//     // stopScanning(); // Hapus ini, karena sudah dihentikan di tempat yang tepat
+//     stopScanning();
 // }
+
+// function onScanError(errorMessage) {
+//     console.warn(`Kesalahan pemindaian: ${errorMessage}`);
+// }
+
+// function startScanning() {
+//     if (!isScanning) {
+//         isScanning = true;
+//         html5QrCode.start(
+//             { facingMode: "environment" }, // Menggunakan kamera belakang
+//             { fps: 20, qrbox: 200 }, // Pengaturan pemindaian
+//             onScanSuccess,
+//             onScanError
+//         ).catch(err => console.error('Kesalahan memulai pemindaian QR code:', err));
+//     }
+// }
+
+// function stopScanning() {
+//     if (isScanning) {
+//         isScanning = false;
+//         html5QrCode.stop().catch(err => console.error('Kesalahan menghentikan pemindaian QR code:', err));
+//     }
+// }
+
+// // Mengelola pemilihan file
+// const fileinput = document.getElementById('qr-input-file');
+// const fileInputLabel = document.getElementById('fileInputLabel');
+
+// fileInputLabel.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     stopScanning(); // Hentikan pemindaian saat ini
+//     fileinput.click(); // Buka dialog pemilihan file
+// });
+
+// fileinput.addEventListener('change', e => {
+//     // Cek apakah ada file yang dipilih
+//     if (e.target.files.length === 0) {
+//         // Tidak ada file dipilih, mulai pemindaian kamera
+//         startScanning();
+//         return;
+//     }
+
+//     const imageFile = e.target.files[0];
+//     if (imageFile.type.startsWith('image/')) { // Memeriksa apakah file adalah gambar
+//         html5QrCode.scanFile(imageFile, false)
+//             .then(qrCodeMessage => {
+//                 onScanSuccess(qrCodeMessage); // Jika pemindaian sukses
+//             })
+//             .catch(err => {
+//                 console.error(`Kesalahan pemindaian file. Alasan: ${err}`);
+//                 alert('Gagal memindai kode QR. Silakan coba lagi.');
+//             });
+//     } else {
+//         alert('Silakan unggah file gambar yang valid.'); // Berikan umpan balik jika bukan gambar
+//     }
+
+//     // Reset file input untuk pemindaian berikutnya
+//     fileinput.value = '';
+// });
+
+// // Mulai pemindaian dengan kamera
+// startScanning();
+
+let isScanning = false; // Menandakan apakah pemindaian aktif
+const html5QrCode = new Html5Qrcode("qr-reader"); // Inisialisasi pemindai QR
+
+// Fungsi untuk menampilkan atau menyembunyikan blokir orientasi
+function updateLandscapeBlocker() {
+    const landscapeBlocker = document.getElementById('landscapeBlocker');
+    if (landscapeBlocker) {
+        if (window.orientation === 90 || window.orientation === -90) {
+            landscapeBlocker.style.display = 'flex'; // Tampilkan blokir jika dalam mode lanskap
+            stopScanning(); // Hentikan pemindaian
+        } else {
+            landscapeBlocker.style.display = 'none'; // Sembunyikan blokir
+        }
+    }
+}
+
+// Mulai pemindaian saat dokumen dimuat
+document.addEventListener('DOMContentLoaded', updateLandscapeBlocker);
+window.addEventListener('orientationchange', updateLandscapeBlocker);
+
+// Fungsi untuk memutar audio
+function playAudio() {
+    const audio = document.getElementById('audio');
+    if (audio) {
+        audio.play().catch(error => console.error('Error playing audio:', error));
+    }
+}
 
 // Fungsi untuk menangani hasil pemindaian
 function onScanSuccess(decodedText) {
@@ -283,7 +358,13 @@ function onScanSuccess(decodedText) {
 
     playAudio(); // Putar audio
 
-    // Kirim data ke input_jimpitan.php
+    // Log data yang akan dikirim
+    console.log('Data yang akan dikirim:', {
+        report_id: id,
+        jimpitan_date: formattedDate,
+        nominal: nominal
+    });
+
     fetch('../api/input_jimpitan.php', {
         method: 'POST',
         headers: {
@@ -293,64 +374,29 @@ function onScanSuccess(decodedText) {
             report_id: id,
             jimpitan_date: formattedDate,
             nominal: nominal
-            // collector: collector
         })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Respon jaringan tidak ok');
-        }
-        return response.json();
-    })
-    .then(data => console.log('Data berhasil dikirim:', data))
-    .catch(error => console.error('Error mengirim data:', error));
-
-    // Ambil nama dari API
-    fetch('../api/get_kk.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ code_id: id })
     })
     .then(response => response.json())
     .then(data => {
-        const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-        const nominalFormatted = 'Rp500';
-        if (data.success && data.kk_name) {
+        if (data.success) {
+            // Tampilkan pesan sukses
             Swal.fire({
                 icon: 'success',
-                title: `${data.kk_name}`,
-                text: `Jimpitan tanggal ${today} tercatat dengan nominal ${nominalFormatted}`,
-                timer: 10000,
-                timerProgressBar: true,
-                customClass: {
-                    popup: 'rounded',
-                    timerProgressBar: 'custom-timer-progress-bar',
-                    confirmButton: 'roundedBtn'
-                },
-                willClose: startScanning // Mulai pemindaian ulang saat dialog ditutup
+                title: 'Sukses',
+                text: data.message,
+                confirmButton: 'OK'
             });
         } else {
+            // Tampilkan pesan error
             Swal.fire({
                 icon: 'error',
-                title: 'Tidak Ditemukan',
-                text: 'Tidak ada catatan untuk ID yang dipindai.',
-                confirmButton: 'OK',
-                willClose: startScanning
+                title: 'Kesalahan',
+                text: data.message,
+                confirmButton: 'OK'
             });
         }
     })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Kesalahan Fetch',
-            text: 'Tidak dapat mengambil data dari server.',
-            confirmButton: 'OK',
-            willClose: startScanning
-        });
-    });
+    .catch(error => console.error('Kesalahan Fetch:', error));
 
     // Hentikan pemindaian setelah pemindaian sukses
     stopScanning();
