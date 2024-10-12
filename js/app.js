@@ -279,6 +279,9 @@ fileinput.addEventListener('change', e => {
         return;
     }
 
+    // Stop any ongoing scanning before processing the file
+    stopScanning();
+
     // Use the first item in the list
     const imageFile = e.target.files[0];
     html5QrCode.scanFile(imageFile, showImage = false)
