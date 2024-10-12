@@ -13,7 +13,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 // Dapatkan informasi pengguna dari sesi
-$collector = $_SESSION['user']; // Misalnya, Anda menyimpan nama pengguna di sesi
+$collector = $_SESSION['user']['user_name'];
 
 // Dapatkan input data
 $data = json_decode(file_get_contents("php://input"));
