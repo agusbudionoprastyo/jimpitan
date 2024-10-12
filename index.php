@@ -18,6 +18,7 @@ if (!isset($_SESSION['user'])) {
   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
   <style>
     body, html {
         margin: 10px;
@@ -105,7 +106,7 @@ if (!isset($_SESSION['user'])) {
     ?>
   </p>
   <div class="floating-button">
-    <a href="dashboard/logout.php">Logout</a>
+    <a href="dashboard/logout.php"><i class='bx bxs-log-out-circle' ></i></a>
   </div>
   <div id="qr-reader"></div>
 </div>
