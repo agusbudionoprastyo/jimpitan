@@ -134,7 +134,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="order">
                     <div class="head">
                         <h3>KK</h3>
-                        <button type="submit" name="submit" class="btn-add" href="add_kas_umum.php">Transaksi baru</button>
+                        <button type="button" name="submit" class="btn-add" href="add_kas_umum.php">Transaksi baru</button>
 						<button type="button" id="printSelectedBtn" class="btn-download">
 							<i class='bx bxs-printer' style="font-size:24px"></i>
 						</button>
