@@ -135,7 +135,7 @@
 //   // Start scanning with the camera
 //   startScanning();
 
-let isScanning = true;
+let isScanning = false;
 const html5QrCode = new Html5Qrcode("qr-reader");
 
 // Function to show or hide the landscape blocker
@@ -304,7 +304,8 @@ fileinput.addEventListener('change', e => {
         console.log(`Error scanning file. Reason: ${err}`);
     });
 });
-
+// Start scanning with the camera
+startScanning();
 // // Event listeners for buttons
 // document.getElementById('startButton').addEventListener('click', startScanning);
 // document.getElementById('stopButton').addEventListener('click', stopScanning);
