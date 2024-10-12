@@ -273,14 +273,20 @@ function stopScanning() {
 
 // File based scanning
 const fileinput = document.getElementById('qr-input-file');
+const fileInputLabel = document.getElementById('fileInputLabel');
+
+fileInputLabel.addEventListener('click', (e) => {
+    e.preventDefault(); // Mencegah perilaku default
+
+    // Hentikan pemindaian yang sedang berjalan
+    stopScanning();
+});
+
 fileinput.addEventListener('change', e => {
     if (e.target.files.length == 0) {
         // No file selected, ignore 
         return;
     }
-
-    // Stop any ongoing scanning before processing the file
-    stopScanning();
 
     // Use the first item in the list
     const imageFile = e.target.files[0];
