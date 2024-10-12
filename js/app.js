@@ -280,6 +280,11 @@ fileInputLabel.addEventListener('click', (e) => {
 
     // Hentikan pemindaian yang sedang berjalan
     stopScanning();
+
+    // Setelah menghentikan, buka dialog pemilihan file
+    setTimeout(() => {
+        fileinput.click();
+    }, 100); // Delay sedikit untuk memastikan pemindaian berhenti
 });
 
 fileinput.addEventListener('change', e => {
