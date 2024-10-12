@@ -27,6 +27,17 @@ if (isset($data->report_id) && isset($data->jimpitan_date) && isset($data->nomin
     // Dapatkan koneksi database
     $conn = getDatabaseConnection();
 
+    // Periksa apakah data sudah ada
+    $checkSql = "SELECT COUNT(*) FROM report WHERE report_id = ? AND jimpitan_date = ?";
+    $checkStmt = $conn->prepare($checkSql);
+    $checkStmt->execute([$report_id, $jimpitan_date]);
+    $exists = $checkStmt->fetchColumn();
+
+    if ($exists > 0) {
+        echo json_encode(['success' => false, 'message' => 'Data sudah ada']);
+        exit; // Hentikan eksekusi jika data sudah ada
+    }
+
     // Siapkan pernyataan SQL untuk penyisipan
     $sql = "INSERT INTO report (report_id, jimpitan_date, nominal, collector) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
