@@ -128,10 +128,10 @@ if (!isset($_SESSION['user'])) {
     echo"Tanggal: ".$tanggal_sekarang;
     ?>
   </p>
-  <div class="floating-button">
+  <div class="floating-button" style="margin-right : 70px;">
     <a href="dashboard/logout.php"><i class="bx bx-log-out-circle bx-tada bx-flip-horizontal" style="font-size:24px" ></i></a>
   </div>
-  <div class="floating-button" style="margin-left : 20px;">
+  <div class="floating-button">
       <label for="qr-input-file" id="fileInputLabel" style="color: white;">
         <i class="bx bxs-camera" style="font-size:24px; color: white;"></i>
       </label>
