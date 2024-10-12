@@ -134,20 +134,15 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="order">
                     <div class="head">
                         <h3>Kas Umum</h3>
-                        <!-- <select id="month" name="month" class="custom-select">
-                        <?php for ($i = 1; $i <= 12; $i++): ?>
-                                <option value="<?= $i ?>" <?= ($i == date('n')) ? 'selected' : '' ?>>
-                                    <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
-                                </option>
-                            <?php endfor; ?>
-                        </select>
-                        <select id="year" name="year" class="custom-select">
-                            <?php for ($y = date('Y'); $y >= 2000; $y--): ?>
-                                <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
-                            <?php endfor; ?>
-                        </select> -->
-                        <input type="text" id="monthPicker" name="month-year" class="custom-select" placeholder="Pilih Bulan & Tahun">
 
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="tanggal" class="form-label">Pilih Tanggal:</label>
+                                <input type="text" class="form-control datepicker" id="tanggal" name="tanggal" placeholder="Pilih tanggal" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+                        
 						<button type="button" id="printSelectedBtn" class="btn-download">
 							<i class='bx bxs-printer' style="font-size:24px"></i>
 						</button>
