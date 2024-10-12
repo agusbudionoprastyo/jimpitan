@@ -119,22 +119,22 @@ if (isset($_POST['tanggal'])) {
                             </tr>
                         </thead>
                         <tbody>
-                        <?php
-                            if ($data) {
-                                foreach ($data as $row): ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars($row["coa_code"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["date_trx"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["reff"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["description"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["debet"]); ?></td> 
-                                        <td><?php echo htmlspecialchars($row["kredit"]); ?></td> <!-- asem variable billingual wkwkwkw -->
-                                    </tr>
-                                <?php endforeach; 
-                            } else {
-                                echo '<tr><td colspan="6" style="text-align:center;">No data available</td></tr>';
-                            }
-                        ?>
+                            <?php
+                                if ($data) {
+                                    foreach ($data as $row): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($row["coa_code"]); ?></td>
+                                            <td><?php echo htmlspecialchars($row["date_trx"]); ?></td>
+                                            <td><?php echo htmlspecialchars($row["reff"]); ?></td>
+                                            <td><?php echo htmlspecialchars($row["description"]); ?></td>
+                                            <td><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
+                                            <td><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td>
+                                        </tr>
+                                    <?php endforeach; 
+                                } else {
+                                    echo '<tr><td colspan="6" style="text-align:center;">No data available</td></tr>';
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>
