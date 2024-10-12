@@ -172,12 +172,15 @@ function onScanSuccess(decodedText) {
     // const collector = 'Ag'; // Ambil pengguna yang sedang login
     // const jimpitanDate = new Date().toISOString().split('T')[0]; // Ambil tanggal hari ini dalam format YYYY-MM-DD
         // Ambil tanggal hari ini dalam format YYYY-MM-DD
-        const today = new Date();
-        const jimpitanDate = today.toLocaleDateString('id-ID', {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric'
-        });
+    // Ambil tanggal hari ini dalam format YYYY-MM-DD
+    const today = new Date();
+    const jimpitanDate = today.toLocaleDateString('id-ID', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+    const [day, month, year] = jimpitanDate.split('/');
+    const formattedDate = `${year}-${month}-${day}`; // Format ke YYYY-MM-DD
 
     playAudio(); // Putar audio
 
@@ -189,7 +192,7 @@ function onScanSuccess(decodedText) {
         },
         body: JSON.stringify({
             report_id: id,
-            jimpitan_date: jimpitanDate,
+            jimpitan_date: formattedDate,
             nominal: nominal
             // collector: collector
         })
