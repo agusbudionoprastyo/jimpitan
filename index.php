@@ -107,7 +107,7 @@ if (!isset($_SESSION['user'])) {
     ?>
   </p>
   <div class="floating-button">
-    <a href="dashboard/logout.php"><i class='bx bxl-log-out-circle' ></i></a>
+    <a href="dashboard/logout.php"><i class='bx bx-log-out-circle bx-burst' ></i></a>
   </div>
   <div id="qr-reader"></div>
 </div>
