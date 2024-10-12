@@ -53,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="manifest" href="manifest.json">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -90,5 +91,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 </form>
+    <script>
+        // Register the service worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+            });
+        });
+    }
+  </script>
 </body>
 </html>
