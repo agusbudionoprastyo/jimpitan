@@ -99,6 +99,9 @@ if (isset($_POST['tanggal'])) {
                 <div class="order">
                     <div class="head">
                         <h3>Keuangan</h3>
+                        <button type="button" id="resetFilterBtn" class="btn-reset">
+                            <i class='bx bx-reset'></i> Filter
+                        </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
                         <!-- <button type="button" id="reportBtn" class="btn-download">
                             <i class='bx bxs-file-export'></i> Unduh
@@ -149,28 +152,37 @@ if (isset($_POST['tanggal'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.2.1/exceljs.min.js"></script>
 
     <script>
-        // Initialize Flatpickr for the date input
+        // Inisialisasi Flatpickr untuk input tanggal
         flatpickr("#datePicker", {
-            dateFormat: "Y-m-d", // Format for the date
+            dateFormat: "Y-m-d", // Format untuk tanggal
             onChange: function(selectedDates, dateStr) {
-                filterTableByDate(dateStr); // Call the filter function on date change
+                filterTableByDate(dateStr); // Panggil fungsi filter saat tanggal berubah
             }
         });
 
-        // Function to filter the table rows based on the selected date
+        // Fungsi untuk menyaring baris tabel berdasarkan tanggal yang dipilih
         function filterTableByDate(selectedDate) {
             const table = document.getElementById("example");
             const rows = table.querySelectorAll("tbody tr");
 
             rows.forEach(row => {
-                const dateCell = row.cells[1].textContent; // Assuming the date is in the second column
+                const dateCell = row.cells[1].textContent; // Mengasumsikan tanggal ada di kolom kedua
                 if (dateCell === selectedDate) {
-                    row.style.display = ""; // Show row if date matches
+                    row.style.display = ""; // Tampilkan baris jika tanggal cocok
                 } else {
-                    row.style.display = "none"; // Hide row if date doesn't match
+                    row.style.display = "none"; // Sembunyikan baris jika tidak cocok
                 }
             });
         }
+
+        // Pendengar acara untuk tombol reset filter
+        document.getElementById("resetFilterBtn").addEventListener("click", function() {
+            document.getElementById("datePicker")._flatpickr.clear(); // Hapus input tanggal
+            const rows = document.querySelectorAll("#example tbody tr");
+            rows.forEach(row => {
+                row.style.display = ""; // Tampilkan semua baris
+            });
+        });
     </script>
 </body>
 </html>
