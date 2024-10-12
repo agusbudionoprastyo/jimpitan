@@ -162,112 +162,6 @@ function playAudio() {
         audio.play().catch(error => console.error('Error playing audio:', error));
     }
 }
-function onScanSuccess(decodedText) {
-    console.log('Teks yang dipindai:', decodedText);
-    const id = decodedText; // Ambil ID dari kode QR
-    const nominal = 500; // Tetapkan nilai nominal
-    const today = new Date();
-    const jimpitanDate = today.toLocaleDateString('id-ID', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit'
-    });
-    const [day, month, year] = jimpitanDate.split('/');
-    const formattedDate = `${year}-${month}-${day}`; // Format ke YYYY-MM-DD
-
-    playAudio(); // Putar audio
-
-    // Kirim data ke input_jimpitan.php
-    fetch('../api/input_jimpitan.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            report_id: id,
-            jimpitan_date: formattedDate,
-            nominal: nominal
-            // collector: collector
-        })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Respon jaringan tidak ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.success) {
-            console.log('Data berhasil dikirim:', data);
-            // Lanjutkan ambil nama dari API
-            return fetch('../api/get_kk.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ code_id: id })
-            });
-        } else {
-            // Tampilkan SweetAlert jika data sudah ada
-            Swal.fire({
-                icon: 'warning',
-                title: 'Data Sudah Ada',
-                text: data.message,
-                confirmButton: 'OK',
-                willClose: startScanning // Mulai pemindaian ulang saat dialog ditutup
-            });
-            stopScanning(); // Hentikan pemindaian
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Respon jaringan tidak ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-        const nominalFormatted = 'Rp500';
-        if (data.success && data.kk_name) {
-            Swal.fire({
-                icon: 'success',
-                title: `${data.kk_name}`,
-                text: `Jimpitan tanggal ${today} tercatat dengan nominal ${nominalFormatted}`,
-                timer: 10000,
-                timerProgressBar: true,
-                customClass: {
-                    popup: 'rounded',
-                    timerProgressBar: 'custom-timer-progress-bar',
-                    confirmButton: 'roundedBtn'
-                },
-                willClose: startScanning // Mulai pemindaian ulang saat dialog ditutup
-            });
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Tidak Ditemukan',
-                text: 'Tidak ada catatan untuk ID yang dipindai.',
-                confirmButton: 'OK',
-                willClose: startScanning
-            });
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Kesalahan Fetch',
-            text: 'Tidak dapat mengambil data dari server.',
-            confirmButton: 'OK',
-            willClose: startScanning
-        });
-    });
-
-    // Hentikan pemindaian setelah pemindaian sukses
-    // stopScanning(); // Hapus ini, karena sudah dihentikan di tempat yang tepat
-}
-
-// // Fungsi untuk menangani hasil pemindaian
 // function onScanSuccess(decodedText) {
 //     console.log('Teks yang dipindai:', decodedText);
 //     const id = decodedText; // Ambil ID dari kode QR
@@ -302,18 +196,35 @@ function onScanSuccess(decodedText) {
 //         }
 //         return response.json();
 //     })
-//     .then(data => console.log('Data berhasil dikirim:', data))
-//     .catch(error => console.error('Error mengirim data:', error));
-
-//     // Ambil nama dari API
-//     fetch('../api/get_kk.php', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ code_id: id })
+//     .then(data => {
+//         if (data.success) {
+//             console.log('Data berhasil dikirim:', data);
+//             // Lanjutkan ambil nama dari API
+//             return fetch('../api/get_kk.php', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify({ code_id: id })
+//             });
+//         } else {
+//             // Tampilkan SweetAlert jika data sudah ada
+//             Swal.fire({
+//                 icon: 'warning',
+//                 title: 'Data Sudah Ada',
+//                 text: data.message,
+//                 confirmButton: 'OK',
+//                 willClose: startScanning // Mulai pemindaian ulang saat dialog ditutup
+//             });
+//             stopScanning(); // Hentikan pemindaian
+//         }
 //     })
-//     .then(response => response.json())
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Respon jaringan tidak ok');
+//         }
+//         return response.json();
+//     })
 //     .then(data => {
 //         const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 //         const nominalFormatted = 'Rp500';
@@ -353,12 +264,96 @@ function onScanSuccess(decodedText) {
 //     });
 
 //     // Hentikan pemindaian setelah pemindaian sukses
-//     stopScanning();
+//     // stopScanning(); // Hapus ini, karena sudah dihentikan di tempat yang tepat
 // }
 
-// Fungsi untuk mendapatkan pengguna saat ini
-function getCurrentUser() {
-    return sessionStorage.getItem('username'); // Contoh: mengambil dari session storage
+// Fungsi untuk menangani hasil pemindaian
+function onScanSuccess(decodedText) {
+    console.log('Teks yang dipindai:', decodedText);
+    const id = decodedText; // Ambil ID dari kode QR
+    const nominal = 500; // Tetapkan nilai nominal
+    const today = new Date();
+    const jimpitanDate = today.toLocaleDateString('id-ID', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+    const [day, month, year] = jimpitanDate.split('/');
+    const formattedDate = `${year}-${month}-${day}`; // Format ke YYYY-MM-DD
+
+    playAudio(); // Putar audio
+
+    // Kirim data ke input_jimpitan.php
+    fetch('../api/input_jimpitan.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            report_id: id,
+            jimpitan_date: formattedDate,
+            nominal: nominal
+            // collector: collector
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Respon jaringan tidak ok');
+        }
+        return response.json();
+    })
+    .then(data => console.log('Data berhasil dikirim:', data))
+    .catch(error => console.error('Error mengirim data:', error));
+
+    // Ambil nama dari API
+    fetch('../api/get_kk.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code_id: id })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+        const nominalFormatted = 'Rp500';
+        if (data.success && data.kk_name) {
+            Swal.fire({
+                icon: 'success',
+                title: `${data.kk_name}`,
+                text: `Jimpitan tanggal ${today} tercatat dengan nominal ${nominalFormatted}`,
+                timer: 10000,
+                timerProgressBar: true,
+                customClass: {
+                    popup: 'rounded',
+                    timerProgressBar: 'custom-timer-progress-bar',
+                    confirmButton: 'roundedBtn'
+                },
+                willClose: startScanning // Mulai pemindaian ulang saat dialog ditutup
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Ditemukan',
+                text: 'Tidak ada catatan untuk ID yang dipindai.',
+                confirmButton: 'OK',
+                willClose: startScanning
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Kesalahan Fetch',
+            text: 'Tidak dapat mengambil data dari server.',
+            confirmButton: 'OK',
+            willClose: startScanning
+        });
+    });
+
+    // Hentikan pemindaian setelah pemindaian sukses
+    stopScanning();
 }
 
 function onScanError(errorMessage) {
