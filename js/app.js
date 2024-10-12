@@ -138,22 +138,22 @@
 let isScanning = false;
 const html5QrCode = new Html5Qrcode("qr-reader");
 
-// // Function to show or hide the landscape blocker
-// function updateLandscapeBlocker() {
-//     const landscapeBlocker = document.getElementById('landscapeBlocker');
-//     if (landscapeBlocker) {
-//         if (window.orientation === 90 || window.orientation === -90) {
-//             landscapeBlocker.style.display = 'flex';
-//             stopScanning();
-//         } else {
-//             landscapeBlocker.style.display = 'none';
-//         }
-//     }
-// }
+// Function to show or hide the landscape blocker
+function updateLandscapeBlocker() {
+    const landscapeBlocker = document.getElementById('landscapeBlocker');
+    if (landscapeBlocker) {
+        if (window.orientation === 90 || window.orientation === -90) {
+            landscapeBlocker.style.display = 'flex';
+            stopScanning();
+        } else {
+            landscapeBlocker.style.display = 'none';
+        }
+    }
+}
 
-// // Start scanning when document is loaded
-// document.addEventListener('DOMContentLoaded', updateLandscapeBlocker);
-// window.addEventListener('orientationchange', updateLandscapeBlocker);
+// Start scanning when document is loaded
+document.addEventListener('DOMContentLoaded', updateLandscapeBlocker);
+window.addEventListener('orientationchange', updateLandscapeBlocker);
 
 // Function to play audio
 function playAudio() {
@@ -163,21 +163,35 @@ function playAudio() {
     }
 }
 
-// Handle successful scan
 function onScanSuccess(decodedText) {
     const id = decodedText; // Get ID from QR code
+    const nominal = 500; // Set nominal value
+    const collector = getCurrentUser(); // Function to get the logged-in user (implement this)
+    const jimpitanDate = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+
     playAudio();
 
-    // Send ID to server
-    fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
+    // Send data to input_jimpitan.php
+    fetch('api/input_jimpitan.php', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ id: id })
-    }).then(() => console.log('Data sent to GAS:', id))
-      .catch(error => console.error('Error sending data to GAS:', error));
+        body: JSON.stringify({
+            report_id: id,
+            jimpitan_date: jimpitanDate,
+            nominal: nominal,
+            collector: collector
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => console.log('Data sent successfully:', data))
+    .catch(error => console.error('Error sending data:', error));
 
     // Fetch from API to get name
     fetch('../api/get_kk.php', {
@@ -226,6 +240,12 @@ function onScanSuccess(decodedText) {
 
     // Stop scanning after successful read
     stopScanning();
+}
+
+// Function to get the current user (implement according to your authentication logic)
+function getCurrentUser() {
+    // Replace with your logic to retrieve the logged-in user's information
+    return sessionStorage.getItem('username'); // Example: retrieving from session storage
 }
 
 function onScanError(errorMessage) {
