@@ -59,6 +59,15 @@ if (!isset($_SESSION['user'])) {
         cursor: pointer;
         font-size: 16px;
     }
+    .stopBtn {
+        border-radius: 25px;
+        background-color: #F95454;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
     .custom-timer-progress-bar {
         height: 4px; /* Height of the progress bar */
         background-color: #FF8A8A; /* Color of the progress bar */
@@ -68,7 +77,7 @@ if (!isset($_SESSION['user'])) {
 
     .floating-button {
       position: fixed;
-      top: 20px; /* Jarak dari atas */
+      bottom: 20px; /* Jarak dari bawah */
       right: 20px; /* Jarak dari kanan */
       background-color: #14505c; /* Warna latar belakang dengan transparansi */
       border-radius: 50%; /* Membuat tombol bulat */
@@ -85,6 +94,19 @@ if (!isset($_SESSION['user'])) {
       color: white; /* Warna teks */
       font-size: 24px; /* Ukuran teks */
       text-decoration: none; /* Menghilangkan garis bawah */
+  }
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #14505c;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
   }
 
   </style>
@@ -106,8 +128,14 @@ if (!isset($_SESSION['user'])) {
     echo"Tanggal: ".$tanggal_sekarang;
     ?>
   </p>
-  <div class="floating-button">
+  <div class="floating-button" style="margin-right : 70px;">
     <a href="dashboard/logout.php"><i class="bx bx-log-out-circle bx-tada bx-flip-horizontal" style="font-size:24px" ></i></a>
+  </div>
+  <div class="floating-button">
+      <label for="qr-input-file" id="fileInputLabel" style="color: white;">
+        <i class="bx bxs-camera" style="font-size:24px; color: white;"></i>
+      </label>
+      <input type="file" id="qr-input-file" accept="image/*" capture hidden>
   </div>
   <div id="qr-reader"></div>
 </div>
@@ -115,5 +143,19 @@ if (!isset($_SESSION['user'])) {
 <audio id="audio" src="assets/audio/interface.wav"></audio>
 
 <script src="js/app.js"></script>
+  <script>
+    // Register the service worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+            });
+        });
+    }
+  </script>
 </body>
 </html>
