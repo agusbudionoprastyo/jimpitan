@@ -18,6 +18,7 @@ if (!isset($_SESSION['user'])) {
   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
   <style>
     body, html {
         margin: 10px;
@@ -64,6 +65,28 @@ if (!isset($_SESSION['user'])) {
         width: 80%; /* Adjust width as needed */
         margin: 0 auto; /* Center the progress bar horizontally */
     }
+
+    .floating-button {
+      position: fixed;
+      top: 20px; /* Jarak dari atas */
+      right: 20px; /* Jarak dari kanan */
+      background-color: rgba(20, 80, 92, 0.8); /* Warna latar belakang dengan transparansi */
+      border-radius: 50%; /* Membuat tombol bulat */
+      width: 60px; /* Lebar tombol */
+      height: 60px; /* Tinggi tombol */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Bayangan */
+      z-index: 1000; /* Pastikan di atas elemen lain */
+  }
+
+  .floating-button a {
+      color: white; /* Warna teks */
+      font-size: 24px; /* Ukuran teks */
+      text-decoration: none; /* Menghilangkan garis bawah */
+  }
+
   </style>
 </head>
 <body>
@@ -74,7 +97,7 @@ if (!isset($_SESSION['user'])) {
 </div>
 
 <div class="container">
-  <h1>Jimpitan</h1>
+  <h3>Jimpitan</h3>
   <p>RT07 SALATIGA</p>
   <p>
     <?php
@@ -83,6 +106,9 @@ if (!isset($_SESSION['user'])) {
     echo"Tanggal: ".$tanggal_sekarang;
     ?>
   </p>
+  <div class="floating-button">
+    <a href="dashboard/logout.php"><i class='bx bx-log-out-circle bx-burst' ></i></a>
+  </div>
   <div id="qr-reader"></div>
 </div>
 
