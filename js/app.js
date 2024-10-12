@@ -209,7 +209,7 @@ function onScanSuccess(decodedText, decodedResult) {
                     timerProgressBar: 'custom-timer-progress-bar',
                     confirmButton: 'roundedBtn'
                 },
-                willClose: startScanning
+                willClose: stopScanning
             });
         } else {
             Swal.fire({
@@ -217,7 +217,7 @@ function onScanSuccess(decodedText, decodedResult) {
                 title: 'Not Found',
                 text: 'No record found for the scanned ID.',
                 confirmButton: 'OK',
-                willClose: startScanning
+                willClose: stopScanning
             });
         }
     })
@@ -228,7 +228,7 @@ function onScanSuccess(decodedText, decodedResult) {
             title: 'Fetch Error',
             text: 'Could not retrieve data from server.',
             confirmButton: 'OK',
-            willClose: startScanning
+            willClose: stopScanning
         });
     });
 
