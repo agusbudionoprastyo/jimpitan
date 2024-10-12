@@ -77,7 +77,7 @@ if (!isset($_SESSION['user'])) {
 
     .floating-button {
       position: fixed;
-      top: 20px; /* Jarak dari atas */
+      bottom: 20px; /* Jarak dari bawah */
       right: 20px; /* Jarak dari kanan */
       background-color: #14505c; /* Warna latar belakang dengan transparansi */
       border-radius: 50%; /* Membuat tombol bulat */
@@ -131,7 +131,7 @@ if (!isset($_SESSION['user'])) {
   <div class="floating-button">
     <a href="dashboard/logout.php"><i class="bx bx-log-out-circle bx-tada bx-flip-horizontal" style="font-size:24px" ></i></a>
   </div>
-  <div class="floating-button" style="margin-right : 80px;">
+  <div class="floating-button" style="margin-left : 20px;">
       <label for="qr-input-file" id="fileInputLabel" style="color: white;">
         <i class="bx bxs-camera" style="font-size:24px; color: white;"></i>
       </label>
