@@ -172,7 +172,7 @@ function onScanSuccess(decodedText) {
     playAudio();
 
     // Send data to input_jimpitan.php
-    fetch('api/input_jimpitan.php', {
+    fetch('../api/input_jimpitan.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
