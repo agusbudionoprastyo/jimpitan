@@ -170,10 +170,19 @@ function playAudio() {
 }
 
 function onScanSuccess(decodedText, decodedResult) {
-    const id = decodedText; // Get ID from QR code
-    playAudio();
+    let id;
+    let isImageFile = false;
 
-    // Send ID to server
+    // Check if decodedText is actually a file input (imageFile)
+    if (typeof decodedText !== 'string' && decodedText instanceof File) {
+        id = 'imageFile'; // Set a placeholder ID for image file
+        isImageFile = true;
+    } else {
+        id = decodedText; // Get ID from QR code
+        playAudio();
+    }
+
+    // Send ID to server (GAS endpoint)
     fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
         method: 'POST',
         mode: 'no-cors',
@@ -182,57 +191,79 @@ function onScanSuccess(decodedText, decodedResult) {
         },
         body: JSON.stringify({ id: id })
     })
-    .then(response => console.log('Data sent to GAS:', id))
-    .catch(error => console.error('Error sending data to GAS:', error));
-
-    // Fetch from API to get name
-    fetch('../api/get_kk.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ code_id: id })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success && data.kk_name) {
-            const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-            const nominal = 'Rp500';
+    .then(response => {
+        console.log('Data sent to GAS:', id);
+        if (isImageFile) {
             Swal.fire({
                 icon: 'success',
-                title: `${data.kk_name}`,
-                text: `Jimpitan tanggal ${today} tercatat dengan nominal ${nominal}`,
-                timer: 10000,
-                timerProgressBar: true,
-                customClass: {
-                    popup: 'rounded',
-                    timerProgressBar: 'custom-timer-progress-bar',
-                    confirmButton: 'roundedBtn'
-                },
-                willClose: stopScanning
-            });
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Not Found',
-                text: 'No record found for the scanned ID.',
+                title: 'File Scan Success',
+                text: 'QR code from image file scanned successfully.',
                 confirmButton: 'OK',
                 willClose: stopScanning
             });
         }
     })
     .catch(error => {
-        console.error('Error fetching data:', error);
+        console.error('Error sending data to GAS:', error);
         Swal.fire({
             icon: 'error',
-            title: 'Fetch Error',
-            text: 'Could not retrieve data from server.',
+            title: 'Send Error',
+            text: 'Failed to send data to server.',
             confirmButton: 'OK',
             willClose: stopScanning
         });
     });
 
-    // Stop scanning after successful read
+    // If scanned from QR code (not file input), fetch additional data
+    if (!isImageFile) {
+        fetch('../api/get_kk.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ code_id: id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.kk_name) {
+                const today = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+                const nominal = 'Rp500';
+                Swal.fire({
+                    icon: 'success',
+                    title: `${data.kk_name}`,
+                    text: `Jimpitan tanggal ${today} tercatat dengan nominal ${nominal}`,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    customClass: {
+                        popup: 'rounded',
+                        timerProgressBar: 'custom-timer-progress-bar',
+                        confirmButton: 'roundedBtn'
+                    },
+                    willClose: stopScanning
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Not Found',
+                    text: 'No record found for the scanned ID.',
+                    confirmButton: 'OK',
+                    willClose: stopScanning
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Fetch Error',
+                text: 'Could not retrieve data from server.',
+                confirmButton: 'OK',
+                willClose: stopScanning
+            });
+        });
+    }
+
+    // Stop scanning after successful read (for camera scan)
     stopScanning();
 }
 
@@ -280,7 +311,7 @@ fileinput.addEventListener('change', e => {
     const imageFile = e.target.files[0];
     html5QrCode.scanFile(imageFile, showImage = false)
     .then(qrCodeMessage => {
-        onScanSuccess(qrCodeMessage);
+        onScanSuccess(imageFile); // Pass the imageFile to handle as a scan result
     })
     .catch(err => {
         // failure, handle it.
