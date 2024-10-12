@@ -120,7 +120,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h1>Keuangan - RT07 Salatiga</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="#">KK</a>
+                            <a href="#">Kas Umum</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
@@ -134,7 +134,20 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="order">
                     <div class="head">
                         <h3>Kas Umum</h3>
-                        <a href="add_kas_umum.php" class="btn-add">Transaksi baru</a>
+                        <!-- <select id="month" name="month" class="custom-select">
+                        <?php for ($i = 1; $i <= 12; $i++): ?>
+                                <option value="<?= $i ?>" <?= ($i == date('n')) ? 'selected' : '' ?>>
+                                    <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
+                                </option>
+                            <?php endfor; ?>
+                        </select>
+                        <select id="year" name="year" class="custom-select">
+                            <?php for ($y = date('Y'); $y >= 2000; $y--): ?>
+                                <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
+                            <?php endfor; ?>
+                        </select> -->
+                        <input type="text" id="monthPicker" name="month-year" class="custom-select" placeholder="Pilih Bulan & Tahun">
+
 						<button type="button" id="printSelectedBtn" class="btn-download">
 							<i class='bx bxs-printer' style="font-size:24px"></i>
 						</button>
