@@ -80,9 +80,9 @@ if (isset($_POST['tanggal'])) {
                     <span class="text">Report</span>
                 </a>
             </li>
-            <li>
-            <a href="#" class="active">
-                    <i class='bx bxs-report'></i>
+            <li class="active">
+            <a href="#">
+                    <i class='bx bxs-wallet' ></i>
                     <span class="text">Keuangan</span>
                 </a>
             </li>
