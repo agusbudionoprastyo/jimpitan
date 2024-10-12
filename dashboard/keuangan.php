@@ -16,7 +16,7 @@ if ($_SESSION['user']['role'] !== 'admin') {
 include 'api/db.php';
 
 // Prepare and execute the SQL statement
-$stmt = $pdo->prepare("SELECT * FROM kas_umum order by date_trx asc for date_trx between date('m')" ); // Update 'your_table'
+$stmt = $pdo->prepare("SELECT * FROM kas_umum order by date_trx asc" ); // Update 'your_table'
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
