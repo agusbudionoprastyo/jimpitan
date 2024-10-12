@@ -59,6 +59,15 @@ if (!isset($_SESSION['user'])) {
         cursor: pointer;
         font-size: 16px;
     }
+    .stopBtn {
+        border-radius: 25px;
+        background-color: #F95454;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
     .custom-timer-progress-bar {
         height: 4px; /* Height of the progress bar */
         background-color: #FF8A8A; /* Color of the progress bar */
@@ -125,7 +134,7 @@ if (!isset($_SESSION['user'])) {
   </div>
   <div id="qr-reader"></div>
   <button id="startButton" class="roundedBtn">Start Scan</button>
-  <button id="stopButton" class="roundedBtn" style="display: none;">Stop Scan</button>
+  <button id="stopButton" class="stopBtn" style="display: none;">Stop Scan</button>
   <label for="qr-input-file" class="roundedBtn"><i class='bx bxs-camera'></i></label>
   <input type="file" id="qr-input-file" accept="image/*" capture hidden>
 </div>
