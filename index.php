@@ -124,6 +124,8 @@ if (!isset($_SESSION['user'])) {
   <div id="qr-reader"></div>
   <button id="startButton" class="roundedBtn">Start Scan</button>
   <button id="stopButton" class="roundedBtn" disabled>Stop Scan</button>
+  <button id="toggleFlashButton" class="roundedBtn" onclick="toggleFlash()"><i class='bx bxs-bulb'></i></button>
+
 </div>
 
 <audio id="audio" src="assets/audio/interface.wav"></audio>

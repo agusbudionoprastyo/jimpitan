@@ -135,7 +135,29 @@
 //   // Start scanning with the camera
 //   startScanning();
 
-let isScanning = false;
+let isFlashOn = false;
+
+function toggleFlash() {
+    const constraints = {
+        facingMode: 'environment',
+        video: { facingMode: { exact: 'environment' }, torch: isFlashOn }
+    };
+
+    html5QrCode.clear(); // Clear existing scanner instance
+
+    html5QrCode.start(
+        constraints,
+        {
+            fps: 10,
+            qrbox: 250
+        },
+        onScanSuccess,
+        onScanError
+    ).then(() => {
+        isFlashOn = !isFlashOn;
+        document.getElementById('toggleFlashButton').innerText = isFlashOn ? 'Turn Off Flash' : 'Turn On Flash';
+    }).catch(err => console.error('Error starting the QR code scanning:', err));
+}
 
 // Function to show or hide the landscape blocker
 function updateLandscapeBlocker() {
