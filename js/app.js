@@ -224,8 +224,8 @@ function onScanSuccess(decodedText) {
           });
       });
 
-    // start scanning after successful read
-    startScanning();
+    // Stop scanning after successful read
+    stopScanning();
 }
 
 function onScanError(errorMessage) {
