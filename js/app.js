@@ -384,25 +384,71 @@ function onScanSuccess(decodedText) {
                 icon: 'success',
                 title: 'Sukses',
                 text: data.message,
-                    customClass: {
+                customClass: {
                     popup: 'rounded',
-                    timerProgressBar: 'custom-timer-progress-bar',
                     confirmButton: 'roundedBtn'
                 },
                 willClose: startScanning // Mulai pemindaian ulang saat dialog ditutup
             });
         } else {
-            // Tampilkan pesan error
+            // Tampilkan pesan error dengan konfirmasi untuk menghapus
             Swal.fire({
                 icon: 'warning',
                 title: 'Ooops!',
                 text: data.message,
+                showCancelButton: true,
+                confirmButtonText: 'Hapus Data',
+                cancelButtonText: 'Batal',
                 customClass: {
                     popup: 'rounded',
-                    timerProgressBar: 'custom-timer-progress-bar',
-                    confirmButton: 'roundedBtn'
-                },
-                willClose: startScanning // Mulai pemindaian ulang saat dialog ditutup
+                    confirmButton: 'roundedBtn',
+                    cancelButton: 'roundedBtn'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Panggil endpoint untuk menghapus data yang sudah ada
+                    fetch('../api/delete_jimpitan.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            report_id: id,
+                            jimpitan_date: formattedDate
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(deleteData => {
+                        if (deleteData.success) {
+                            // Tampilkan pesan sukses jika data dihapus
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Data Dihapus',
+                                text: 'Data yang sudah ada telah dihapus',
+                                customClass: {
+                                    popup: 'rounded',
+                                    confirmButton: 'roundedBtn'
+                                },
+                                willClose: startScanning // Mulai pemindaian ulang saat dialog ditutup
+                            });
+                        } else {
+                            // Tampilkan pesan error jika penghapusan gagal
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Kesalahan',
+                                text: deleteData.message,
+                                customClass: {
+                                    popup: 'rounded',
+                                    confirmButton: 'roundedBtn'
+                                },
+                                willClose: startScanning
+                            });
+                        }
+                    });
+                } else {
+                    // Jika batal, kembali ke pemindaian
+                    startScanning();
+                }
             });
         }
     })
