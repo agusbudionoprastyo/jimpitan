@@ -76,28 +76,28 @@ if (!isset($_SESSION['user'])) {
     }
 
     .floating-button {
-    position: fixed;
-    top: 20px; /* Jarak dari atas */
-    right: 20px; /* Jarak dari kanan */
-    background-color: #14505c; /* Warna latar belakang dengan transparansi */
-    border-radius: 50%; /* Membuat tombol bulat */
-    width: 60px; /* Lebar tombol */
-    height: 60px; /* Tinggi tombol */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Bayangan */
-    z-index: 1000; /* Pastikan di atas elemen lain */
-}
+      position: fixed;
+      top: 20px; /* Jarak dari atas */
+      right: 20px; /* Jarak dari kanan */
+      background-color: #14505c; /* Warna latar belakang dengan transparansi */
+      border-radius: 50%; /* Membuat tombol bulat */
+      width: 60px; /* Lebar tombol */
+      height: 60px; /* Tinggi tombol */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Bayangan */
+      z-index: 1000; /* Pastikan di atas elemen lain */
+  }
 
-.floating-button a,
-.floating-button label {
-    color: white; /* Warna teks */
-    font-size: 24px; /* Ukuran teks */
-    text-decoration: none; /* Menghilangkan garis bawah */
-    display: flex;
-    align-items: center; /* Vertically center icons */
-}
+  .floating-button a,
+  .floating-button label {
+      color: white; /* Warna teks */
+      font-size: 24px; /* Ukuran teks */
+      text-decoration: none; /* Menghilangkan garis bawah */
+      display: flex;
+      align-items: center; /* Vertically center icons */
+  }
   button {
     margin: 10px;
     padding: 10px 20px;
@@ -135,7 +135,7 @@ if (!isset($_SESSION['user'])) {
       <a href="dashboard/logout.php">
           <i class="bx bx-log-out-circle bx-tada bx-flip-horizontal" style="font-size:24px"></i>
       </a>
-      <label for="qr-input-file" id="fileInputLabel" style="margin-left: 10px;">
+      <label for="qr-input-file" id="fileInputLabel" style="margin-left: 50px;">
           <i class='bx bxs-camera' style="font-size: 24px; color: white;"></i>
       </label>
       <input type="file" id="qr-input-file" accept="image/*" capture hidden>

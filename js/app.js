@@ -256,31 +256,33 @@ const fileInputLabel = document.getElementById('fileInputLabel');
 
 fileInputLabel.addEventListener('click', (e) => {
     e.preventDefault();
-    stopScanning();
-    fileinput.click();
+    stopScanning(); // Hentikan pemindaian saat ini
+    fileinput.click(); // Buka dialog pemilihan file
 });
 
 fileinput.addEventListener('change', e => {
+    // Cek apakah ada file yang dipilih
     if (e.target.files.length === 0) {
+        // Tidak ada file dipilih, mulai pemindaian kamera
         startScanning();
         return;
     }
 
     const imageFile = e.target.files[0];
-    if (imageFile.type.startsWith('image/')) {
+    if (imageFile.type.startsWith('image/')) { // Memeriksa apakah file adalah gambar
         html5QrCode.scanFile(imageFile, false)
             .then(qrCodeMessage => {
-                onScanSuccess(qrCodeMessage);
+                onScanSuccess(qrCodeMessage); // Jika pemindaian sukses
             })
             .catch(err => {
                 console.error(`Error scanning file. Reason: ${err}`);
                 alert('Failed to scan QR code. Please try again.');
             });
     } else {
-        alert('Please upload a valid image file.');
+        alert('Please upload a valid image file.'); // Berikan umpan balik jika bukan gambar
     }
 
-    // Reset file input for the next scan
+    // Reset file input untuk pemindaian berikutnya
     fileinput.value = '';
 });
 
