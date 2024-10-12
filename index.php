@@ -131,8 +131,10 @@ if (!isset($_SESSION['user'])) {
   <div class="floating-button">
     <a href="dashboard/logout.php"><i class="bx bx-log-out-circle bx-tada bx-flip-horizontal" style="font-size:24px" ></i></a>
   </div>
-  <div class="floating-button" style="margin-right : 50px;">
-  <label for="qr-input-file" id="fileInputLabel"><i class="bx bxs-camera" style="font-size:24px"></i></label>
+  <div class="floating-button" style="margin-right : 80px;">
+      <label for="qr-input-file" id="fileInputLabel" style="color: white;">
+        <i class="bx bxs-camera" style="font-size:24px; color: white;"></i>
+      </label>
       <input type="file" id="qr-input-file" accept="image/*" capture hidden>
   </div>
   <div id="qr-reader"></div>
