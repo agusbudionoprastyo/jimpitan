@@ -135,29 +135,8 @@
 //   // Start scanning with the camera
 //   startScanning();
 
+let isScanning = false;
 let isFlashOn = false;
-
-function toggleFlash() {
-    const constraints = {
-        facingMode: 'environment',
-        video: { facingMode: { exact: 'environment' }, torch: isFlashOn }
-    };
-
-    html5QrCode.clear(); // Clear existing scanner instance
-
-    html5QrCode.start(
-        constraints,
-        {
-            fps: 10,
-            qrbox: 250
-        },
-        onScanSuccess,
-        onScanError
-    ).then(() => {
-        isFlashOn = !isFlashOn;
-        document.getElementById('toggleFlashButton').innerText = isFlashOn ? 'Turn Off Flash' : 'Turn On Flash';
-    }).catch(err => console.error('Error starting the QR code scanning:', err));
-}
 
 // Function to show or hide the landscape blocker
 function updateLandscapeBlocker() {
@@ -191,10 +170,10 @@ function playAudio() {
 }
 
 function onScanSuccess(decodedText, decodedResult) {
-    const id = decodedText; // Ambil ID dari QR code
+    const id = decodedText; // Get ID from QR code
     playAudio();
 
-    // Kirim ID ke server GAS
+    // Send ID to server
     fetch('https://script.google.com/macros/s/AKfycbxD7iXEFOCCOrX5Ryln_NrzptYjtWf6Ia_WJu-j8Gtfgv3cefqdHIg4KL9N-5U4n60d/exec', {
         method: 'POST',
         mode: 'no-cors',
@@ -206,7 +185,7 @@ function onScanSuccess(decodedText, decodedResult) {
     .then(response => console.log('Data sent to GAS:', id))
     .catch(error => console.error('Error sending data to GAS:', error));
 
-    // Fetch ke API get_kk.php untuk mendapatkan nama
+    // Fetch from API to get name
     fetch('../api/get_kk.php', {
         method: 'POST',
         headers: {
@@ -289,9 +268,32 @@ function stopScanning() {
     }
 }
 
+function toggleFlash() {
+    const constraints = {
+        facingMode: 'environment',
+        torch: isFlashOn
+    };
+
+    html5QrCode.clear(); // Clear existing scanner instance
+
+    html5QrCode.start(
+        constraints,
+        {
+            fps: 10,
+            qrbox: 250
+        },
+        onScanSuccess,
+        onScanError
+    ).then(() => {
+        isFlashOn = !isFlashOn;
+        document.getElementById('toggleFlashButton').innerText = isFlashOn ? 'Turn Off Flash' : 'Turn On Flash';
+    }).catch(err => console.error('Error starting the QR code scanning:', err));
+}
+
 // Initialize the QR code scanner instance
 const html5QrCode = new Html5Qrcode("qr-reader");
 
 // Event listeners for buttons
 document.getElementById('startButton').addEventListener('click', startScanning);
 document.getElementById('stopButton').addEventListener('click', stopScanning);
+document.getElementById('toggleFlashButton').addEventListener('click', toggleFlash);
