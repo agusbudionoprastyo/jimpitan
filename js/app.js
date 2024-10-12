@@ -135,7 +135,7 @@
 //   // Start scanning with the camera
 //   startScanning();
 
-let isScanning = false;
+let isScanning = true;
 const html5QrCode = new Html5Qrcode("qr-reader");
 
 // Function to show or hide the landscape blocker
@@ -209,7 +209,7 @@ function onScanSuccess(decodedText, decodedResult) {
                     timerProgressBar: 'custom-timer-progress-bar',
                     confirmButton: 'roundedBtn'
                 },
-                willClose: stopScanning
+                willClose: startScanning
             });
         } else {
             Swal.fire({
@@ -217,7 +217,7 @@ function onScanSuccess(decodedText, decodedResult) {
                 title: 'Not Found',
                 text: 'No record found for the scanned ID.',
                 confirmButton: 'OK',
-                willClose: stopScanning
+                willClose: startScanning
             });
         }
     })
@@ -228,12 +228,12 @@ function onScanSuccess(decodedText, decodedResult) {
             title: 'Fetch Error',
             text: 'Could not retrieve data from server.',
             confirmButton: 'OK',
-            willClose: stopScanning
+            willClose: startScanning
         });
     });
 
-    // Stop scanning after successful read
-    stopScanning();
+    // start scanning after successful read
+    startScanning();
 }
 
 function onScanError(errorMessage) {
@@ -252,9 +252,9 @@ function startScanning() {
             onScanSuccess,
             onScanError
         ).then(() => {
-            // Show the stop button and hide the start button
-            document.getElementById("stopButton").style.display = "inline"; // atau "block"
-            document.getElementById("startButton").style.display = "none"; // Sembunyikan tombol start
+            // // Show the stop button and hide the start button
+            // document.getElementById("stopButton").style.display = "inline"; // atau "block"
+            // document.getElementById("startButton").style.display = "none"; // Sembunyikan tombol start
             
         }).catch(err => console.error('Error starting the QR code scanning:', err));
     }
@@ -264,9 +264,9 @@ function stopScanning() {
     if (isScanning) {
         isScanning = false;
         html5QrCode.stop().then(() => {
-            // Hide the stop button and show the start button
-            document.getElementById("stopButton").style.display = "none"; // Sembunyikan tombol stop
-            document.getElementById("startButton").style.display = "inline"; // Tampilkan tombol start
+            // // Hide the stop button and show the start button
+            // document.getElementById("stopButton").style.display = "none"; // Sembunyikan tombol stop
+            // document.getElementById("startButton").style.display = "inline"; // Tampilkan tombol start
         }).catch(err => console.error('Error stopping the QR code scanning:', err));
     }
 }
@@ -305,6 +305,6 @@ fileinput.addEventListener('change', e => {
     });
 });
 
-// Event listeners for buttons
-document.getElementById('startButton').addEventListener('click', startScanning);
-document.getElementById('stopButton').addEventListener('click', stopScanning);
+// // Event listeners for buttons
+// document.getElementById('startButton').addEventListener('click', startScanning);
+// document.getElementById('stopButton').addEventListener('click', stopScanning);

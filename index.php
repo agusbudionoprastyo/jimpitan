@@ -133,8 +133,8 @@ if (!isset($_SESSION['user'])) {
     <!-- <button id="clearCacheButton"><i class='bx bx-refresh'></i></button> -->
   </div>
   <div id="qr-reader"></div>
-  <button id="startButton" class="roundedBtn">Start Scan</button>
-  <button id="stopButton" class="stopBtn" style="display: none;">Stop Scan</button>
+  <!-- <button id="startButton" class="roundedBtn">Start Scan</button> -->
+  <!-- <button id="stopButton" class="stopBtn" style="display: none;">Stop Scan</button> -->
   <label for="qr-input-file" class="roundedBtn" id="fileInputLabel"><i class='bx bxs-camera'></i></label>
   <input type="file" id="qr-input-file" accept="image/*" capture hidden>
 </div>
