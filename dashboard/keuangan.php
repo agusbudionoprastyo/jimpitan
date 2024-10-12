@@ -46,7 +46,7 @@ if (isset($_POST['tanggal'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
-    <title>Report</title>
+    <title>Keuangan</title>
 </head>
 <body>
 
@@ -99,8 +99,8 @@ if (isset($_POST['tanggal'])) {
                 <div class="order">
                     <div class="head">
                         <h3>Keuangan</h3>
-                        <button type="button" id="resetFilterBtn" class="btn-reset">
-                            <i class='bx bx-reset'></i> Filter
+                        <button type="button" id="resetFilterBtn" class="btn-download">
+                            <i class='bx bx-x-circle'></i>
                         </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
                         <!-- <button type="button" id="reportBtn" class="btn-download">
