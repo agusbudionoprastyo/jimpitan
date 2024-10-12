@@ -252,8 +252,10 @@ function startScanning() {
             onScanSuccess,
             onScanError
         ).then(() => {
-            document.getElementById('startButton').disabled = true;
-            document.getElementById('stopButton').disabled = false;
+            // Show the stop button and hide the start button
+            document.getElementById("stopButton").style.display = "inline"; // atau "block"
+            document.getElementById("startButton").style.display = "none"; // Sembunyikan tombol start
+            
         }).catch(err => console.error('Error starting the QR code scanning:', err));
     }
 }
@@ -262,8 +264,9 @@ function stopScanning() {
     if (isScanning) {
         isScanning = false;
         html5QrCode.stop().then(() => {
-            document.getElementById('startButton').disabled = false;
-            document.getElementById('stopButton').disabled = true;
+            // Hide the stop button and show the start button
+            document.getElementById("stopButton").style.display = "none"; // Sembunyikan tombol stop
+            document.getElementById("startButton").style.display = "inline"; // Tampilkan tombol start
         }).catch(err => console.error('Error stopping the QR code scanning:', err));
     }
 }
