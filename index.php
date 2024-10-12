@@ -64,6 +64,27 @@ if (!isset($_SESSION['user'])) {
         width: 80%; /* Adjust width as needed */
         margin: 0 auto; /* Center the progress bar horizontally */
     }
+
+    .floating-button {
+      position: fixed;
+      bottom: 20px; /* Jarak dari bawah */
+      right: 20px; /* Jarak dari kanan */
+      background-color: #14505c; /* Warna latar belakang */
+      border-radius: 50%; /* Membuat tombol bulat */
+      width: 60px; /* Lebar tombol */
+      height: 60px; /* Tinggi tombol */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Bayangan */
+      z-index: 1000; /* Pastikan di atas elemen lain */
+  }
+
+  .floating-button a {
+      color: white; /* Warna teks */
+      font-size: 24px; /* Ukuran teks */
+      text-decoration: none; /* Menghilangkan garis bawah */
+  }
   </style>
 </head>
 <body>
@@ -74,7 +95,7 @@ if (!isset($_SESSION['user'])) {
 </div>
 
 <div class="container">
-  <h1>Jimpitan</h1>
+  <h3>Jimpitan</h3>
   <p>RT07 SALATIGA</p>
   <p>
     <?php
@@ -83,6 +104,9 @@ if (!isset($_SESSION['user'])) {
     echo"Tanggal: ".$tanggal_sekarang;
     ?>
   </p>
+  <div class="floating-button">
+    <a href="dashboard/logout.php">Logout</a>
+  </div>
   <div id="qr-reader"></div>
 </div>
 
