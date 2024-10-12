@@ -54,7 +54,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
-    <title>Jimpitan</title>
+    <title>Report</title>
 </head>
 <body>
 
