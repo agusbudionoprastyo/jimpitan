@@ -169,7 +169,7 @@ function onScanSuccess(decodedText) {
     const id = decodedText; // Ambil ID dari kode QR
     const nominal = 500; // Tetapkan nilai nominal
     // const collector = getCurrentUser(); // Ambil pengguna yang sedang login
-    const collector = 'Ag'; // Ambil pengguna yang sedang login
+    // const collector = 'Ag'; // Ambil pengguna yang sedang login
     const jimpitanDate = new Date().toISOString().split('T')[0]; // Ambil tanggal hari ini dalam format YYYY-MM-DD
 
     playAudio(); // Putar audio
@@ -183,8 +183,8 @@ function onScanSuccess(decodedText) {
         body: JSON.stringify({
             report_id: id,
             jimpitan_date: jimpitanDate,
-            nominal: nominal,
-            collector: collector
+            nominal: nominal
+            // collector: collector
         })
     })
     .then(response => {

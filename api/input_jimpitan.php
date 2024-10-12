@@ -1,19 +1,28 @@
 <?php
+session_start(); // Memulai sesi
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 // Include the connection file
 require '../helper/connection.php';
 
-// Get input data
+// Pastikan pengguna sudah login
+if (!isset($_SESSION['user'])) {
+    echo json_encode(['success' => false, 'message' => 'Pengguna tidak terautentikasi']);
+    exit; // Hentikan eksekusi jika pengguna tidak terautentikasi
+}
+
+// Dapatkan informasi pengguna dari sesi
+$collector = $_SESSION['user']; // Misalnya, Anda menyimpan nama pengguna di sesi
+
+// Dapatkan input data
 $data = json_decode(file_get_contents("php://input"));
 
 // Pastikan semua data yang diperlukan ada
-if (isset($data->report_id) && isset($data->jimpitan_date) && isset($data->nominal) && isset($data->collector)) {
+if (isset($data->report_id) && isset($data->jimpitan_date) && isset($data->nominal)) {
     $report_id = $data->report_id;
     $jimpitan_date = $data->jimpitan_date;
     $nominal = $data->nominal;
-    $collector = $data->collector;
 
     // Dapatkan koneksi database
     $conn = getDatabaseConnection();
