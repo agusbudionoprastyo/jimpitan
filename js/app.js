@@ -136,7 +136,6 @@
 //   startScanning();
 
 let isScanning = false;
-let isFlashOn = false;
 
 // Function to show or hide the landscape blocker
 function updateLandscapeBlocker() {
@@ -268,30 +267,26 @@ function stopScanning() {
     }
 }
 
-function toggleFlash() {
-    if (isScanning) {
-        stopScanning(); // Stop scanning to toggle flash
-    }
+// File based scanning
+const fileinput = document.getElementById('qr-input-file');
+fileinput.addEventListener('change', e => {
+  if (e.target.files.length == 0) {
+    // No file selected, ignore 
+    return;
+  }
 
-    isFlashOn = !isFlashOn; // Toggle flash status
-
-    const constraints = {
-        facingMode: 'environment',
-        torch: isFlashOn
-    };
-
-    html5QrCode.start(
-        constraints,
-        {
-            fps: 10,
-            qrbox: 250
-        },
-        onScanSuccess,
-        onScanError
-    ).then(() => {
-        document.getElementById('toggleFlashButton').innerText = isFlashOn ? 'Turn Off Flash' : 'Turn On Flash';
-    }).catch(err => console.error('Error starting the QR code scanning with flash:', err));
-}
+  // Use the first item in the list
+  const imageFile = e.target.files[0];
+  html5QrCode.scanFile(imageFile, /* showImage= */true)
+  .then(qrCodeMessage => {
+    onScanSuccess,
+    onScanError
+  })
+  .catch(err => {
+    // failure, handle it.
+    console.log(`Error scanning file. Reason: ${err}`)
+  });
+});
 
 // Initialize the QR code scanner instance
 const html5QrCode = new Html5Qrcode("qr-reader");
@@ -299,4 +294,3 @@ const html5QrCode = new Html5Qrcode("qr-reader");
 // Event listeners for buttons
 document.getElementById('startButton').addEventListener('click', startScanning);
 document.getElementById('stopButton').addEventListener('click', stopScanning);
-document.getElementById('toggleFlashButton').addEventListener('click', toggleFlash);
