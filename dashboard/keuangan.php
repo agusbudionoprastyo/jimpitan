@@ -100,7 +100,7 @@ if (isset($_POST['tanggal'])) {
                     <div class="head">
                         <h3>Keuangan</h3>
                         <button type="button" id="resetFilterBtn" class="btn-download">
-                            <i class="bx bx-x-circle" style="font-size : 24px;"></i>
+                            <i class="bx bx-x-circle" style="font-size : 20px;"></i>
                         </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
                         <!-- <button type="button" id="reportBtn" class="btn-download">
