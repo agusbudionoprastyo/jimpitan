@@ -138,22 +138,22 @@
 let isScanning = false;
 const html5QrCode = new Html5Qrcode("qr-reader");
 
-// Function to show or hide the landscape blocker
-function updateLandscapeBlocker() {
-    const landscapeBlocker = document.getElementById('landscapeBlocker');
-    if (landscapeBlocker) {
-        if (window.orientation === 90 || window.orientation === -90) {
-            landscapeBlocker.style.display = 'flex';
-            stopScanning();
-        } else {
-            landscapeBlocker.style.display = 'none';
-        }
-    }
-}
+// // Function to show or hide the landscape blocker
+// function updateLandscapeBlocker() {
+//     const landscapeBlocker = document.getElementById('landscapeBlocker');
+//     if (landscapeBlocker) {
+//         if (window.orientation === 90 || window.orientation === -90) {
+//             landscapeBlocker.style.display = 'flex';
+//             stopScanning();
+//         } else {
+//             landscapeBlocker.style.display = 'none';
+//         }
+//     }
+// }
 
-// Start scanning when document is loaded
-document.addEventListener('DOMContentLoaded', updateLandscapeBlocker);
-window.addEventListener('orientationchange', updateLandscapeBlocker);
+// // Start scanning when document is loaded
+// document.addEventListener('DOMContentLoaded', updateLandscapeBlocker);
+// window.addEventListener('orientationchange', updateLandscapeBlocker);
 
 // Function to play audio
 function playAudio() {
