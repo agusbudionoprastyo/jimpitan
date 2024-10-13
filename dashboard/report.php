@@ -180,14 +180,14 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </tbody>
                     </table> -->
                     <div class="m-4"> <!-- Margin di sekitar tabel -->
-                    <table id="example" class="min-w-full" style="width:100%">
+                    <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="w-1/2 px-4 py-2 text-left">Nama KK</th> <!-- Kolom pertama rata kiri -->
-                                <th class="w-1/6 px-4 py-2 text-center">Code</th>
-                                <th class="w-1/6 px-4 py-2 text-center">Tanggal</th>
-                                <th class="w-1/6 px-4 py-2 text-center">Nominal</th>
-                                <th class="w-1/6 px-4 py-2 text-center">Input By</th>
+                                <th class="w-1/2 px-4 py-2">Nama KK</th> <!-- Kolom pertama rata kiri -->
+                                <th style="text-align: center;">Code</th>
+                                <th style="text-align: center;">Tanggal</th>
+                                <th style="text-align: center;">Nominal</th>
+                                <th style="text-align: center;">Input By</th>
                             </tr>
                         </thead>
                         <tbody>
