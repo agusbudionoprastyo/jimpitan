@@ -166,18 +166,21 @@ if (isset($_POST['tanggal'])) {
                                     <label for="kode" class="form-label">Kode</label>
                                     <input type="text" class="form-control" id="kode" name="kode" required>
                                 </div>
+                                    <!-- Dropdown -->
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Pilih Opsi
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Debet</a></li>
+                                        <li><a class="dropdown-item" href="#">Kredit</a></li>
+                                    </ul>
+                                </div>
                                 <div class="mb-3">
                                     <label for="reff" class="form-label">Reff</label>
                                     <input type="text" class="form-control" id="reff" name="reff" required>
                                 </div>
-                                <div class="dropdown">
-                                    <button>Pilih Opsi</button>
-                                    <div class="dropdown-content">
-                                        <a href="#">Debet</a>
-                                        <a href="#">Kredit</a>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
+                                    <div class="mb-3">
                                     <label for="keterangan" class="form-label">Keterangan</label>
                                     <input type="text" class="form-control" id="keterangan" name="keterangan" required>
                                 </div>
