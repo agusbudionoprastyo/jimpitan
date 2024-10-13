@@ -179,6 +179,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             ?>
                         </tbody>
                     </table> -->
+                    <div class="m-4"> <!-- Margin di sekitar tabel -->
                     <table id="example" class="min-w-full" style="width:100%">
                         <thead>
                             <tr>
@@ -207,6 +208,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             ?>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </main>
