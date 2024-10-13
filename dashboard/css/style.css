@@ -773,3 +773,6 @@ body {
 	width: 80%; /* Adjust width as needed */
 	margin: 0 auto; /* Center the progress bar horizontally */
 }
+.custom-row-height {
+    padding: 10px 10px; /* Mengatur padding atas-bawah */
+}
