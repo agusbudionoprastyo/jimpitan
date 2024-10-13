@@ -169,7 +169,7 @@ if (isset($_POST['tanggal'])) {
                                 <!-- Dropdown -->
                                 <div class="mb-3">
                                     <label for="dropdown" class="form-label">Reff:</label>
-                                    <select id="dropdown" class="form-select" name="dropdown">
+                                    <select id="dropdown" class="form-select">
                                         <option value="Opsi 1">Debet</option>
                                         <option value="Opsi 2">Kredit</option>
                                     </select>
@@ -183,11 +183,11 @@ if (isset($_POST['tanggal'])) {
 
                                 <div class="mb-3" id="debitbox" style="display: block">
                                     <label for="debet" class="form-label">Debet</label>
-                                    <input type="number" class="form-control" id="debet" name="debet" required>
+                                    <input type="number" class="form-control" id="debetbox">
                                 </div>
                                 <div class="mb-3" id="kreditbox" style="display: none">
                                     <label for="kredit" class="form-label">Kredit</label>
-                                    <input type="number" class="form-control" id="kredit" name="kredit" required>
+                                    <input type="number" class="form-control" id="kreditbox">
                                 </div>
 
                                 <button type="submit" class="btn btn-success">Simpan</button>
