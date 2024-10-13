@@ -168,19 +168,13 @@ if (isset($_POST['tanggal'])) {
                                 </div>
                                 <!-- Dropdown -->
                                 <div class="mb-3">
-                                    <label for="dropdown" class="form-label">Pilih Opsi:</label>
+                                    <label for="dropdown" class="form-label">Reff:</label>
                                     <select id="dropdown" class="form-select">
-                                        <option value="">-- Pilih Opsi --</option>
                                         <option value="Opsi 1">Debet</option>
                                         <option value="Opsi 2">Kredit</option>
                                     </select>
                                 </div>
 
-                                <!-- Textbox -->
-                                <div class="mb-3">
-                                    <label for="reff" class="form-label">Isi disini:</label>
-                                    <input type="text" id="reff" class="form-control" placeholder="Hasil akan muncul di sini..." readonly>
-                                </div>
                                 <div class="mb-3">
                                     <label for="keterangan" class="form-label">Keterangan</label>
                                     <input type="text" class="form-control" id="keterangan" name="keterangan" required>
