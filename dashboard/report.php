@@ -182,11 +182,11 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <table id="example" class="min-w-full" style="width:100%">
     <thead>
         <tr>
-            <th class="w-1/4 px-4 py-2">Nama KK</th>
-            <th class="w-1/4 px-4 py-2">Code</th>
-            <th class="w-1/4 px-4 py-2">Tanggal</th>
-            <th class="w-1/4 px-4 py-2">Nominal</th>
-            <th class="w-1/4 px-4 py-2">Input By</th>
+            <th class="w-1/2 px-4 py-2">Nama KK</th> <!-- Kolom pertama lebih lebar -->
+            <th class="w-1/6 px-4 py-2">Code</th>
+            <th class="w-1/6 px-4 py-2">Tanggal</th>
+            <th class="w-1/6 px-4 py-2">Nominal</th>
+            <th class="w-1/6 px-4 py-2">Input By</th>
         </tr>
     </thead>
     <tbody>
@@ -207,6 +207,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
     </tbody>
 </table>
+
 
                 </div>
             </div>
