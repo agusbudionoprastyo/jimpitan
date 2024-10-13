@@ -4,17 +4,7 @@ $(document).ready(function() {
         pageLength: 10, // Set the default number of records per page to 10
         lengthMenu: [10, 25, 50, 100], // Options for the dropdown
         searching: true, // Enable searching
-        order: [[1, 'asc']], // Sort by the second column (index 1), ascending order
-        columnDefs: [
-            { 
-                orderable: false, 
-                targets: [0] // Disable ordering for the first column (index 0)
-            },
-            { 
-                targets: 1,  // Second column (index starting from 0)
-                className: "text-left" 
-            }
-        ],
+        order: [[2, 'desc']], // Sort by the third column (index 2), descanding order
         language: {
             lengthMenu: "_MENU_ Entri per halaman",
             zeroRecords: "No records found",

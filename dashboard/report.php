@@ -54,6 +54,22 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+    <style>
+        #example th:nth-child(1),
+        #example td:nth-child(1) {
+            width: 100px; /* Lebar kolom pertama */
+        }
+
+        #example th:nth-child(2),
+        #example td:nth-child(2) {
+            width: 200px; /* Lebar kolom kedua */
+        }
+
+        #example th:nth-child(3),
+        #example td:nth-child(3) {
+            width: 150px; /* Lebar kolom ketiga */
+        }
+    </style>
     <title>Report</title>
 </head>
 <body>
