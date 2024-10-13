@@ -58,7 +58,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         /* Mengatur lebar maksimum kolom tabel */
     #example th,
     #example td {
-        max-width: 100px; /* Lebar maksimum 100px untuk semua kolom */
+        max-width: 50px; /* Lebar maksimum 50px untuk semua kolom */
         overflow: hidden;  /* Menyembunyikan teks yang meluap */
         text-overflow: ellipsis; /* Menambahkan elipsis jika teks terlalu panjang */
         white-space: nowrap; /* Mencegah teks membungkus ke baris baru */
@@ -156,20 +156,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="order">
                     <div class="head">
                         <h3>Report</h3>
-                        <!-- <select id="month" name="month" class="custom-select">
-                            <?php for ($i = 1; $i <= 12; $i++): ?>
-                                <option value="<?= $i ?>" <?= ($i == date('n')) ? 'selected' : '' ?>>
-                                    <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
-                                </option>
-                            <?php endfor; ?>
-                        </select>
-                        <select id="year" name="year" class="custom-select">
-                            <?php for ($y = date('Y'); $y >= 2000; $y--): ?>
-                                <option value="<?= $y ?>" <?= ($y == date('Y')) ? 'selected' : '' ?>><?= $y ?></option>
-                            <?php endfor; ?>
-                        </select> -->
-                        <input type="text" id="monthPicker" name="month-year" class="custom-select" placeholder="Pilih Bulan & Tahun">
-                        
+                            <input type="text" id="monthPicker" name="month-year" class="custom-select" placeholder="Pilih Bulan & Tahun">
                             <button type="button" id="reportBtn" class="btn-download">
                                 <i class='bx bxs-file-export'></i> Unduh
                             </button>
