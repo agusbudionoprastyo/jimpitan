@@ -185,7 +185,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <th>Nama KK</th>
                                 <th>Code</th>
-                                <th>Jimpitan Tanggal</th>
+                                <th>Tanggal</th>
                                 <th>Nominal</th>
                                 <th>Input By</th>
                             </tr>
