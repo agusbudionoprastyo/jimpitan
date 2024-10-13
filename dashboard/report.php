@@ -178,7 +178,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <i class='bx bxs-file-export'></i> Unduh
                             </button>
                     </div>
-                    <table id="example" class="display" style="width:100%">
+                    <!-- <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Nama KK</th>
@@ -205,7 +205,36 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 }
                             ?>
                         </tbody>
-                    </table>
+                    </table> -->
+                    <table id="example" class="min-w-full border-collapse" style="width:100%">
+    <thead>
+        <tr>
+            <th class="w-1/4 px-4 py-2 border">Nama KK</th>
+            <th class="w-1/4 px-4 py-2 border">Code</th>
+            <th class="w-1/4 px-4 py-2 border">Tanggal</th>
+            <th class="w-1/4 px-4 py-2 border">Nominal</th>
+            <th class="w-1/4 px-4 py-2 border">Input By</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            if ($data) {
+                foreach ($data as $row): ?>
+                    <tr>
+                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row["kk_name"]); ?></td>
+                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row["report_id"]); ?></td>
+                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
+                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row["nominal"]); ?></td>
+                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row["collector"]); ?></td>
+                    </tr>
+                <?php endforeach; 
+            } else {
+                echo '<tr><td colspan="5" class="border px-6 py-4 text-center">No data available</td></tr>';
+            }
+        ?>
+    </tbody>
+</table>
+
                 </div>
             </div>
         </main>
