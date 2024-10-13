@@ -13,7 +13,7 @@ $(document).ready(function() {
             { 
                 targets: 1,  // Second column (index starting from 0)
                 className: "text-left" 
-            }
+            },
 
             {
                 targets: '_all',  // Terapkan ke semua kolom
