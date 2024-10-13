@@ -169,7 +169,7 @@ if (isset($_POST['tanggal'])) {
                                 <!-- Dropdown -->
                                 <div class="mb-3">
                                     <label for="dropdown" class="form-label">Reff:</label>
-                                    <select id="dropdown" class="form-select">
+                                    <select id="dropdown" class="form-select" name="textbox">
                                         <option value="Opsi 1">Debet</option>
                                         <option value="Opsi 2">Kredit</option>
                                     </select>
@@ -181,11 +181,11 @@ if (isset($_POST['tanggal'])) {
                                 </div>
 
 
-                                <div class="mb-3" id:"debitbox" style="display: none">
+                                <div class="mb-3" id="debitbox" style="display: none">
                                     <label for="debet" class="form-label">Debet</label>
                                     <input type="number" class="form-control" id="debet" name="debet" required>
                                 </div>
-                                <div class="mb-3" id:"kreditbox" style="display: none">
+                                <div class="mb-3" id="kreditbox" style="display: none">
                                     <label for="kredit" class="form-label">Kredit</label>
                                     <input type="number" class="form-control" id="kredit" name="kredit" required>
                                 </div>
@@ -329,5 +329,28 @@ if (isset($_POST['tanggal'])) {
             });
         });
     </script>
+
+    <!-- JavaScript -->
+    <script>
+        const dropdown = document.getElementById('dropdown');
+        const textbox = document.getElementById('textbox');
+        const debitBox = document.getElementById('debitBox');
+        const kreditBox = document.getElementById('kreditBox');
+
+        dropdown.addEventListener('change', function () {
+            const selectedValue = dropdown.value;
+            textbox.value = selectedValue;
+
+            // Tampilkan textbox debit jika pilihan adalah 'debit'
+            if (selectedValue === 'debit') {
+                debitBox.style.display = 'block'; // Munculkan textbox debit
+                kreditbox.style.display ='none';
+            } else {
+                debitBox.style.display = 'none'; // Sembunyikan jika bukan debit
+                kreditbox.style.display ='block';
+            }
+        });
+    </script>
+
 </body>
 </html>
