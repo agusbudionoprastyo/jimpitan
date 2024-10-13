@@ -107,7 +107,7 @@ if (isset($_POST['tanggal'])) {
                             Tambah Transaksi
                         </button>
 
-                        <button type="button" id="addcreditdebBtn" class="btn-download">
+                        <button type="button" id="addcreditdebBtn" class="btn-download" data-bs-toggle="modal" data-bs-target="#inputModal">
                             <i class='bx bxs-add-to-queue'></i> Deb/Cr
                         </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
