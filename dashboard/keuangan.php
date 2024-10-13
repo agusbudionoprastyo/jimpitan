@@ -170,6 +170,7 @@ if (isset($_POST['tanggal'])) {
                                 <div class="mb-3">
                                     <label for="dropdown" class="form-label">Reff:</label>
                                     <select id="dropdown" class="form-select">
+                                        <option value="">-- Pilih Opsi --</option>
                                         <option value="Opsi 1">Debet</option>
                                         <option value="Opsi 2">Kredit</option>
                                     </select>
@@ -179,15 +180,16 @@ if (isset($_POST['tanggal'])) {
                                     <label for="keterangan" class="form-label">Keterangan</label>
                                     <input type="text" class="form-control" id="keterangan" name="keterangan" required>
                                 </div>
-
-
-                                <div class="mb-3" id="debitbox" style="display: block">
-                                    <label for="debet" class="form-label">Debet</label>
-                                    <input type="number" class="form-control" id="debetbox">
+                                <!-- Textbox Debit (disembunyikan secara default) -->
+                                <div class="mb-3" id="debitBox" style="display: none;">
+                                    <label for="debitTextbox" class="form-label">Debit:</label>
+                                    <input type="text" id="debitTextbox" class="form-control" placeholder="Isi detail debit...">
                                 </div>
-                                <div class="mb-3" id="kreditbox" style="display: none">
-                                    <label for="kredit" class="form-label">Kredit</label>
-                                    <input type="number" class="form-control" id="kreditbox">
+
+                                <!-- Textbox Kredit (disembunyikan secara default) -->
+                                <div class="mb-3" id="kreditBox" style="display: none;">
+                                    <label for="kreditTextbox" class="form-label">Kredit:</label>
+                                    <input type="text" id="kreditTextbox" class="form-control" placeholder="Isi detail kredit...">
                                 </div>
 
                                 <button type="submit" class="btn btn-success">Simpan</button>
@@ -343,13 +345,17 @@ if (isset($_POST['tanggal'])) {
 
             // Tampilkan textbox debit jika pilihan adalah 'debit'
             if (selectedValue === 'Debit') {
-                debitBox.style.display = 'block'; // Munculkan textbox debit
-                kreditbox.style.display ='none';
-            } else {
-                debitBox.style.display = 'none'; // Sembunyikan jika bukan debit
-                kreditbox.style.display ='block';
-            }
-        });
+                    debitBox.style.display = 'block';  // Tampilkan textbox Debit
+                    kreditBox.style.display = 'none';  // Sembunyikan textbox Kredit
+                } else if (selectedValue === 'Kredit') {
+                    kreditBox.style.display = 'block'; // Tampilkan textbox Kredit
+                    debitBox.style.display = 'none';   // Sembunyikan textbox Debit
+                } else {
+                    // Sembunyikan kedua textbox jika bukan Debit atau Kredit
+                    debitBox.style.display = 'none';
+                    kreditBox.style.display = 'none';
+                }
+            });
     </script>
 
 </body>
