@@ -55,14 +55,31 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
     <style>
-        /* Mengatur lebar maksimum kolom tabel */
-    #example th,
-    #example td {
-        max-width: 50px; /* Lebar maksimum 50px untuk semua kolom */
-        overflow: hidden;  /* Menyembunyikan teks yang meluap */
-        text-overflow: ellipsis; /* Menambahkan elipsis jika teks terlalu panjang */
-        white-space: nowrap; /* Mencegah teks membungkus ke baris baru */
-    }
+        /* Mengatur lebar kolom tabel */
+        #example th:nth-child(1),
+        #example td:nth-child(1) {
+            width: 300px; /* Lebar kolom pertama */
+        }
+
+        #example th:nth-child(2),
+        #example td:nth-child(2) {
+            width: 100px; /* Lebar kolom kedua */
+        }
+
+        #example th:nth-child(3),
+        #example td:nth-child(3) {
+            width: 100px; /* Lebar kolom ketiga */
+        }
+
+        #example th:nth-child(4),
+        #example td:nth-child(4) {
+            width: 100px; /* Lebar kolom keempat */
+        }
+
+        #example th:nth-child(5),
+        #example td:nth-child(5) {
+            width: 100px; /* Lebar kolom kelima */
+        }
     </style>
     <title>Report</title>
 </head>
