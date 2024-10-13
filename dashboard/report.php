@@ -180,35 +180,33 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </tbody>
                     </table> -->
                     <table id="example" class="min-w-full" style="width:100%">
-    <thead>
-        <tr>
-            <th class="w-1/2 px-4 py-2">Nama KK</th> <!-- Kolom pertama lebih lebar -->
-            <th class="w-1/6 px-4 py-2">Code</th>
-            <th class="w-1/6 px-4 py-2">Tanggal</th>
-            <th class="w-1/6 px-4 py-2">Nominal</th>
-            <th class="w-1/6 px-4 py-2">Input By</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-            if ($data) {
-                foreach ($data as $row): ?>
-                    <tr>
-                        <td class="px-4 py-2"><?php echo htmlspecialchars($row["kk_name"]); ?></td>
-                        <td class="px-4 py-2"><?php echo htmlspecialchars($row["report_id"]); ?></td>
-                        <td class="px-4 py-2"><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
-                        <td class="px-4 py-2"><?php echo htmlspecialchars($row["nominal"]); ?></td>
-                        <td class="px-4 py-2"><?php echo htmlspecialchars($row["collector"]); ?></td>
-                    </tr>
-                <?php endforeach; 
-            } else {
-                echo '<tr><td colspan="5" class="px-6 py-4 text-center">No data available</td></tr>';
-            }
-        ?>
-    </tbody>
-</table>
-
-
+                        <thead>
+                            <tr>
+                                <th class="w-1/2 px-4 py-2 text-left">Nama KK</th> <!-- Kolom pertama rata kiri -->
+                                <th class="w-1/6 px-4 py-2 text-center">Code</th>
+                                <th class="w-1/6 px-4 py-2 text-center">Tanggal</th>
+                                <th class="w-1/6 px-4 py-2 text-center">Nominal</th>
+                                <th class="w-1/6 px-4 py-2 text-center">Input By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                if ($data) {
+                                    foreach ($data as $row): ?>
+                                        <tr>
+                                            <td class="px-4 py-2 text-left"><?php echo htmlspecialchars($row["kk_name"]); ?></td> <!-- Rata kiri -->
+                                            <td class="px-4 py-2 text-center"><?php echo htmlspecialchars($row["report_id"]); ?></td> <!-- Rata tengah -->
+                                            <td class="px-4 py-2 text-center"><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
+                                            <td class="px-4 py-2 text-center"><?php echo htmlspecialchars($row["nominal"]); ?></td>
+                                            <td class="px-4 py-2 text-center"><?php echo htmlspecialchars($row["collector"]); ?></td>
+                                        </tr>
+                                    <?php endforeach; 
+                                } else {
+                                    echo '<tr><td colspan="5" class="px-6 py-4 text-center">No data available</td></tr>';
+                                }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
