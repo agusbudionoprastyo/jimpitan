@@ -47,6 +47,10 @@ if (isset($_POST['tanggal'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
     <title>Keuangan</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -99,7 +103,11 @@ if (isset($_POST['tanggal'])) {
                 <div class="order">
                     <div class="head">
                         <h3>Keuangan</h3>
-                        <button type="button" id="addcreditdebBtn" class="btn-download" onclick="window.location.href='add_trx.php'">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inputModal">
+                            Tambah Transaksi
+                        </button>
+
+                        <button type="button" id="addcreditdebBtn" class="btn-download">
                             <i class='bx bxs-add-to-queue'></i> Deb/Cr
                         </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
@@ -139,8 +147,62 @@ if (isset($_POST['tanggal'])) {
                     </table>
                 </div>  
             </div>
+                        <!-- Modal -->
+            <div class="modal fade" id="inputModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel">Form Tambah Data</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="dataForm">
+                                <div class="mb-3">
+                                    <label for="nama" class="form-label">Nama</label>
+                                    <input type="text" class="form-control" id="nama" name="nama" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="umur" class="form-label">Umur</label>
+                                    <input type="number" class="form-control" id="umur" name="umur" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="alamat" class="form-label">Alamat</label>
+                                    <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </section>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+
+    <!-- jQuery (Optional for extra functionality) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // Event listener untuk form submit
+        $('#dataForm').on('submit', function(e) {
+            e.preventDefault();  // Mencegah refresh halaman
+
+            // Ambil data input dari form
+            const nama = $('#nama').val();
+            const umur = $('#umur').val();
+            const alamat = $('#alamat').val();
+
+            // Tampilkan data di konsol (bisa disesuaikan)
+            console.log(`Nama: ${nama}, Umur: ${umur}, Alamat: ${alamat}`);
+
+            // Reset form dan tutup modal
+            $(this).trigger('reset');
+            $('#inputModal').modal('hide');
+        });
+    </script>
 
     <script src="js/monthSelectPlugin.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
