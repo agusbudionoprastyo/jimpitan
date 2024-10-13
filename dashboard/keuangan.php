@@ -333,12 +333,13 @@ if (isset($_POST['tanggal'])) {
     <!-- JavaScript -->
     <script>
         const dropdown = document.getElementById('dropdown');
-        const debitBox = document.getElementById('debitBox');
-        const kreditBox = document.getElementById('kreditBox');
+        const debitbox = document.getElementById('debitbox');
+        const kreditbox = document.getElementById('kreditbox');
+
 
         dropdown.addEventListener('change', function () {
-            const selectedValue = dropdown.value;
-            textbox.value = selectedValue;
+        const selectedValue = dropdown.value;
+
 
             // Tampilkan textbox debit jika pilihan adalah 'debit'
             if (selectedValue === 'Debit') {
