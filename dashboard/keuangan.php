@@ -169,7 +169,7 @@ if (isset($_POST['tanggal'])) {
                                 <!-- Dropdown -->
                                 <div class="mb-3">
                                     <label for="dropdown" class="form-label">Reff:</label>
-                                    <select id="dropdown" class="form-select" name="textbox">
+                                    <select id="dropdown" class="form-select" name="dropdown">
                                         <option value="Opsi 1">Debet</option>
                                         <option value="Opsi 2">Kredit</option>
                                     </select>
@@ -181,7 +181,7 @@ if (isset($_POST['tanggal'])) {
                                 </div>
 
 
-                                <div class="mb-3" id="debitbox" style="display: none">
+                                <div class="mb-3" id="debitbox" style="display: block">
                                     <label for="debet" class="form-label">Debet</label>
                                     <input type="number" class="form-control" id="debet" name="debet" required>
                                 </div>
@@ -333,7 +333,6 @@ if (isset($_POST['tanggal'])) {
     <!-- JavaScript -->
     <script>
         const dropdown = document.getElementById('dropdown');
-        const textbox = document.getElementById('textbox');
         const debitBox = document.getElementById('debitBox');
         const kreditBox = document.getElementById('kreditBox');
 
@@ -342,7 +341,7 @@ if (isset($_POST['tanggal'])) {
             textbox.value = selectedValue;
 
             // Tampilkan textbox debit jika pilihan adalah 'debit'
-            if (selectedValue === 'debit') {
+            if (selectedValue === 'Debit') {
                 debitBox.style.display = 'block'; // Munculkan textbox debit
                 kreditbox.style.display ='none';
             } else {
