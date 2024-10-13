@@ -158,17 +158,31 @@ if (isset($_POST['tanggal'])) {
                         <div class="modal-body">
                             <form id="dataForm">
                                 <div class="mb-3">
-                                    <label for="nama" class="form-label">Nama</label>
-                                    <input type="text" class="form-control" id="nama" name="nama" required>
+                                    <label for="tanggal" class="form-label">Tanggal</label>
+                                    <!--<input type="text" class="form-control" id="nama" name="nama" required>-->
+                                    <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal" name="tanggal" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="umur" class="form-label">Umur</label>
-                                    <input type="number" class="form-control" id="umur" name="umur" required>
+                                    <label for="kode" class="form-label">Kode</label>
+                                    <input type="text" class="form-control" id="kode" name="kode" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="alamat" class="form-label">Alamat</label>
-                                    <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
+                                    <label for="reff" class="form-label">Reff</label>
+                                    <textarea class="form-control" id="reff" name="reff" rows="3" required></textarea>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="keterangan" class="form-label">Keterangan</label>
+                                    <textarea class="form-control" id="keterangan" name="keterangan" rows="3" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="debet" class="form-label">Debet</label>
+                                    <input type="number" class="form-control" id="debet" name="debet" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="kredit" class="form-label">Kredit</label>
+                                    <input type="number" class="form-control" id="kredit" name="kredit" required>
+                                </div>
+
                                 <button type="submit" class="btn btn-success">Simpan</button>
                             </form>
                         </div>
