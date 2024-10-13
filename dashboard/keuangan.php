@@ -112,9 +112,9 @@ if (isset($_POST['tanggal'])) {
                             <tr>
                                 <th style="text-align: left;">Kode</th>
                                 <th style="text-align: center;">Tanggal</th>
-                                <th style="text-align: left;">Reff</th>
+                                <th style="text-align: center;">Reff</th>
                                 <th style="text-align: center;">Keterangan</th>
-                                <th style="text-align: left;">Debet</th>
+                                <th style="text-align: center;">Debet</th>
                                 <th style="text-align: center;">Kredit</th>
                             </tr>
                         </thead>
