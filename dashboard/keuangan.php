@@ -99,7 +99,7 @@ if (isset($_POST['tanggal'])) {
                 <div class="order">
                     <div class="head">
                         <h3>Keuangan</h3>
-                        <button type="button" id="addcreditdebBtn" class="btn-download" href="add_trx.php">
+                        <button type="button" id="addcreditdebBtn" class="btn-download" onclick="window.location.href='add_trx.php'">
                             <i class='bx bxs-add-to-queue'></i> Deb/Cr
                         </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
