@@ -26,6 +26,10 @@ $(document).ready(function() {
 			{ 
 				"targets": 4,  // Kolom ke-5 (indeks mulai dari 0)
 				"className": "text-center" 
+			},
+			{ 
+				"targets": 5,  // Kolom ke-6 (indeks mulai dari 0)
+				"className": "text-center" 
 			}
 		],
         language: {
