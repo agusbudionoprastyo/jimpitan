@@ -54,33 +54,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
-    <style>
-        /* Mengatur lebar kolom tabel */
-        #example th:nth-child(1),
-        #example td:nth-child(1) {
-            width: 300px; /* Lebar kolom pertama */
-        }
-
-        #example th:nth-child(2),
-        #example td:nth-child(2) {
-            width: 100px; /* Lebar kolom kedua */
-        }
-
-        #example th:nth-child(3),
-        #example td:nth-child(3) {
-            width: 100px; /* Lebar kolom ketiga */
-        }
-
-        #example th:nth-child(4),
-        #example td:nth-child(4) {
-            width: 100px; /* Lebar kolom keempat */
-        }
-
-        #example th:nth-child(5),
-        #example td:nth-child(5) {
-            width: 100px; /* Lebar kolom kelima */
-        }
-    </style>
     <title>Report</title>
 </head>
 <body>
@@ -206,14 +179,14 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             ?>
                         </tbody>
                     </table> -->
-                    <table id="example" class="min-w-full border-collapse" style="width:100%">
+                    <table id="example" class="min-w-full" style="width:100%">
     <thead>
         <tr>
-            <th class="w-1/4 px-4 py-2 border">Nama KK</th>
-            <th class="w-1/4 px-4 py-2 border">Code</th>
-            <th class="w-1/4 px-4 py-2 border">Tanggal</th>
-            <th class="w-1/4 px-4 py-2 border">Nominal</th>
-            <th class="w-1/4 px-4 py-2 border">Input By</th>
+            <th class="w-1/4 px-4 py-2">Nama KK</th>
+            <th class="w-1/4 px-4 py-2">Code</th>
+            <th class="w-1/4 px-4 py-2">Tanggal</th>
+            <th class="w-1/4 px-4 py-2">Nominal</th>
+            <th class="w-1/4 px-4 py-2">Input By</th>
         </tr>
     </thead>
     <tbody>
@@ -221,15 +194,15 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if ($data) {
                 foreach ($data as $row): ?>
                     <tr>
-                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row["kk_name"]); ?></td>
-                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row["report_id"]); ?></td>
-                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
-                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row["nominal"]); ?></td>
-                        <td class="border px-4 py-2"><?php echo htmlspecialchars($row["collector"]); ?></td>
+                        <td class="px-4 py-2"><?php echo htmlspecialchars($row["kk_name"]); ?></td>
+                        <td class="px-4 py-2"><?php echo htmlspecialchars($row["report_id"]); ?></td>
+                        <td class="px-4 py-2"><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
+                        <td class="px-4 py-2"><?php echo htmlspecialchars($row["nominal"]); ?></td>
+                        <td class="px-4 py-2"><?php echo htmlspecialchars($row["collector"]); ?></td>
                     </tr>
                 <?php endforeach; 
             } else {
-                echo '<tr><td colspan="5" class="border px-6 py-4 text-center">No data available</td></tr>';
+                echo '<tr><td colspan="5" class="px-6 py-4 text-center">No data available</td></tr>';
             }
         ?>
     </tbody>
