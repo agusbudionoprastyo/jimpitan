@@ -288,7 +288,6 @@ if (isset($_POST['tanggal'])) {
             flatpickr("#modalDatePicker", {
                 dateFormat: "Y-m-d",
                 onChange: function(selectedDates, dateStr) {
-                    filterTableByDate(dateStr);
                 }
             });
 
