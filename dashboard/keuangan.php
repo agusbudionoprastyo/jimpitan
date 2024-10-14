@@ -295,7 +295,7 @@ if (isset($_POST['tanggal'])) {
 
             const dataToSend = {
                 tanggal: $('#modalDatePicker').val(),
-                kode: $('#kode').val(),
+                kode: generateCode(), // Call function to generate the correct code
                 reff: $('#dropdown').val(),
                 keterangan: $('#keterangan').val(),
                 debit: $('#debitTextbox').val() || '0', // Default to 0 if not filled
@@ -327,9 +327,29 @@ if (isset($_POST['tanggal'])) {
         // Dropdown logic for debit/kredit
         $('#dropdown').change(function() {
             const selectedValue = $(this).val();
-            $('#debitBox').toggle(selectedValue === "IN"); // Adjusted for your dropdown values
-            $('#kreditBox').toggle(selectedValue === "OUT");
+            $('#debitBox').toggle(selectedValue === "IN"); // Debit IN corresponds to "IN"
+            $('#kreditBox').toggle(selectedValue === "OUT"); // Kredit OUT corresponds to "OUT"
         });
+
+        // Function to generate the code based on the selected option
+        function generateCode() {
+            const selectedValue = $('#dropdown').val();
+            let baseCode;
+
+            if (selectedValue === "IN") { // For Debit IN
+                baseCode = "100-000-00"; // Base code for debit
+            } else if (selectedValue === "OUT") { // For Kredit OUT
+                baseCode = "400-100-00"; // Base code for kredit
+            } else {
+                return null; // No valid option selected
+            }
+
+            // Get the current count of entries to generate the next code
+            let count = 2; // Replace this with a dynamic count from your database
+
+            return `${baseCode}${String(count).padStart(3, '0')}`; // Generate the code with leading zeros
+        }
+
         });
     </script>
 
