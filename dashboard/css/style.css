@@ -87,7 +87,7 @@ body {
 	top: 0;
 	left: 0;
 	background: var(--light);
-	z-index: 500;
+	z-index: 40;
 	padding-bottom: 20px;
 	box-sizing: content-box;
 }
