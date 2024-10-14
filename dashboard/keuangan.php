@@ -187,7 +187,7 @@ if (isset($_POST['tanggal'])) {
                 </form>
             </div>
         </div>
-    </div>
+    </div> 
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
