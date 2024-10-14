@@ -286,9 +286,7 @@ if (isset($_POST['tanggal'])) {
 
             // Date picker initialization
             flatpickr("#modalDatePicker", {
-                dateFormat: "Y-m-d",
-                onChange: function(selectedDates, dateStr) {
-                }
+                dateFormat: "Y-m-d"
             });
 
             // Form submission handling
