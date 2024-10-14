@@ -795,7 +795,7 @@ table .dataTable {
 
 .modal-container {
     position: relative;
-	margin-top: 20px;
+	/* margin-top: 20px; */
     z-index: 50; /* Higher than the overlay */
 }
 
