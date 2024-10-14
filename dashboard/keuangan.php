@@ -277,10 +277,9 @@ if (isset($_POST['tanggal'])) {
             $('#inputModal').removeClass('hidden');
         });
 
-        // Close modal
-        $('#inputModal').on('click', '.close-modal, .modal-overlay', function() {
-            console.log('Modal closed'); // Debug log
-            $('#inputModal').addClass('hidden');
+        // Optionally, close the modal when clicking outside of it
+        document.querySelector('.modal-overlay').addEventListener('click', () => {
+            document.getElementById('inputModal').classList.add('hidden');
         });
 
         // Form submission handling
