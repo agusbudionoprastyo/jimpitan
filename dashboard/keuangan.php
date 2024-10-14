@@ -32,159 +32,117 @@ if (isset($_POST['tanggal'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- DataTables CSS -->
-    <link href="https://cdn.datatables.net/2.0.8/css/dataTables.tailwindcss.css" rel="stylesheet">
-    <!-- Boxicons -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <!-- My CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- sweetalert2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
     <title>Keuangan</title>
-
-    <!-- Bootstrap CSS -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"> framework tailwindcss + bootstrap ngrusak styling-->
-
 </head>
-<body>
+<body class="bg-gray-100">
 
     <!-- SIDEBAR -->
-    <section id="sidebar">
-        <a href="#" class="brand">
+    <section id="sidebar" class="bg-white shadow-md w-64 h-screen fixed">
+        <a href="#" class="brand p-4 flex items-center">
             <i class='bx bx-square-rounded'></i>
-            <span class="text">Jimpitan</span>
+            <span class="text-xl font-semibold">Jimpitan</span>
         </a>
-        <ul class="side-menu top">
-            <li><a href="index.php"><i class='bx bxs-dashboard'></i><span class="text">Dashboard</span></a></li>
-            <li><a href="kk.php"><i class='bx bxs-group'></i><span class="text">KK</span></a></li>
-            <li><a href="report.php"><i class='bx bxs-report'></i><span class="text">Report</span></a></li>
-            <li class="active"><a href="#"><i class='bx bxs-wallet'></i><span class="text">Keuangan</span></a></li>
+        <ul class="side-menu mt-4">
+            <li><a href="index.php" class="block p-4">Dashboard</a></li>
+            <li><a href="kk.php" class="block p-4">KK</a></li>
+            <li><a href="report.php" class="block p-4">Report</a></li>
+            <li class="active"><a href="#" class="block p-4">Keuangan</a></li>
         </ul>
-        <ul class="side-menu">
-            <li><a href="setting.php"><i class='bx bxs-cog'></i><span class="text">Settings</span></a></li>
-            <li><a href="logout.php" class="logout"><i class='bx bxs-log-out-circle'></i><span class="text">Logout</span></a></li>
+        <ul class="side-menu mt-4">
+            <li><a href="setting.php" class="block p-4">Settings</a></li>
+            <li><a href="logout.php" class="block p-4">Logout</a></li>
         </ul>
     </section>
     <!-- SIDEBAR -->
 
     <!-- CONTENT -->
-    <section id="content">
-        <nav>
-            <i class='bx bx-menu'></i>
-            <form action="#">
-                <div class="form-input">
-                    <input type="search" id="search-input" placeholder="Search...">
-                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
-                </div>
-            </form>
-            <input type="checkbox" id="switch-mode" hidden>
-            <label for="switch-mode" class="switch-mode"></label>
+    <section id="content" class="ml-64 p-4">
+        <nav class="flex justify-between items-center bg-white p-4 shadow">
+            <h1 class="text-xl font-semibold">Jimpitan - RT07 Salatiga</h1>
+            <input type="search" id="search-input" placeholder="Search..." class="border border-gray-300 rounded p-2">
         </nav>
 
-        <main>
-            <div class="head-title">
-                <div class="left">
-                    <h1>Jimpitan - RT07 Salatiga</h1>
-                    <ul class="breadcrumb">
-                        <li><a href="#">Keuangan</a></li>
-                        <li><i class='bx bx-chevron-right'></i></li>
-                        <li><a class="active" href="index.php">Home</a></li>
-                    </ul>
-                </div>
+        <main class="mt-4">
+            <div class="head-title flex justify-between items-center">
+                <h1 class="text-2xl font-semibold">Keuangan</h1>
+                <button type="button" class="bg-blue-500 text-white rounded p-2" onclick="toggleModal()">
+                    Tambah Transaksi
+                </button>
             </div>
 
-            <div class="table-data">
-                <div class="order">
-                    <div class="head">
-                        <h3>Keuangan</h3>
-                        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inputModal">
-                            Tambah Transaksi
-                        </button> -->
-
-                        <button type="button" id="addcreditdebBtn" class="btn-download" data-bs-toggle="modal" data-bs-target="#inputModal">
-                            <i class='bx bxs-add-to-queue'></i> Transaksi
-                        </button>
-                        <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
-                            <button type="button" id="resetFilterBtn">
-                            <i class="bx bx-x-circle" style="font-size: 24px; color: red;"></i>
-                            </button>
-                    </div>
-                    <table id="example" class="display" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th style="text-align: left;">Kode</th>
-                                <th style="text-align: center;">Tanggal</th>
-                                <th style="text-align: center;">Reff</th>
-                                <th style="text-align: center;">Keterangan</th>
-                                <th style="text-align: center;">Debet</th>
-                                <th style="text-align: center;">Kredit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                if ($data) {
-                                    foreach ($data as $row): ?>
-                                        <tr>
-                                            <td><?php echo htmlspecialchars($row["coa_code"]); ?></td>
-                                            <td><?php echo htmlspecialchars($row["date_trx"]); ?></td>
-                                            <td><?php echo htmlspecialchars($row["reff"]); ?></td>
-                                            <td><?php echo htmlspecialchars($row["description"]); ?></td>
-                                            <td><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
-                                            <td><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
-                                        </tr>
-                                    <?php endforeach; 
-                                } else {
-                                    echo '<tr><td colspan="6" style="text-align:center;">No data available</td></tr>';
-                                }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>  
+            <div class="table-data mt-4">
+                <table class="min-w-full bg-white shadow-md rounded">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b">Kode</th>
+                            <th class="py-2 px-4 border-b">Tanggal</th>
+                            <th class="py-2 px-4 border-b">Reff</th>
+                            <th class="py-2 px-4 border-b">Keterangan</th>
+                            <th class="py-2 px-4 border-b">Debet</th>
+                            <th class="py-2 px-4 border-b">Kredit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($data) {
+                            foreach ($data as $row): ?>
+                                <tr>
+                                    <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($row["coa_code"]); ?></td>
+                                    <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($row["date_trx"]); ?></td>
+                                    <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($row["reff"]); ?></td>
+                                    <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($row["description"]); ?></td>
+                                    <td class="py-2 px-4 border-b"><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td>
+                                    <td class="py-2 px-4 border-b"><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td>
+                                </tr>
+                            <?php endforeach; 
+                        } else {
+                            echo '<tr><td colspan="6" class="py-2 px-4 border-b text-center">No data available</td></tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
+
             <!-- Modal -->
-            <div id="inputModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-                <div class="bg-white rounded-lg shadow-lg w-1/3 p-6">
-                    <div class="flex justify-between items-center">
-                        <h5 class="text-lg font-bold">Form Tambah Data</h5>
+            <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/3">
+                    <div class="modal-header flex justify-between items-center p-4 border-b">
+                        <h5 class="text-lg font-semibold">Form Tambah Data</h5>
                         <button type="button" class="text-gray-500" onclick="toggleModal()">&times;</button>
                     </div>
-                    <form id="dataForm">
-                        <div class="mb-4">
-                            <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
-                            <input type="text" id="datePicker" class="mt-1 block w-full border-gray-300 rounded-md" placeholder="Pilih Tanggal" name="tanggal" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="kode" class="block text-sm font-medium text-gray-700">Kode</label>
-                            <input type="text" class="mt-1 block w-full border-gray-300 rounded-md" id="kode" name="kode" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="dropdown" class="block text-sm font-medium text-gray-700">Reff:</label>
-                            <select id="dropdown" class="mt-1 block w-full border-gray-300 rounded-md">
-                                <option value="">-- Pilih Opsi --</option>
-                                <option value="Debit">Debet</option>
-                                <option value="Kredit">Kredit</option>
-                            </select>
-                        </div>
-                        <div class="mb-4">
-                            <label for="keterangan" class="block text-sm font-medium text-gray-700">Keterangan</label>
-                            <input type="text" class="mt-1 block w-full border-gray-300 rounded-md" id="keterangan" name="keterangan" required>
-                        </div>
-                        <div class="mb-4 hidden" id="debitBox">
-                            <label for="debitTextbox" class="block text-sm font-medium text-gray-700">Debit:</label>
-                            <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md" placeholder="Isi detail debit...">
-                        </div>
-                        <div class="mb-4 hidden" id="kreditBox">
-                            <label for="kreditTextbox" class="block text-sm font-medium text-gray-700">Kredit:</label>
-                            <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md" placeholder="Isi detail kredit...">
-                        </div>
-                        <button type="submit" class="bg-green-500 text-white rounded p-2">Simpan</button>
-                    </form>
+                    <div class="modal-body p-4">
+                        <form id="dataForm">
+                            <div class="mb-3">
+                                <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
+                                <input type="text" id="datePicker" class="mt-1 block w-full border border-gray-300 rounded-md p-2" placeholder="Pilih Tanggal" name="tanggal" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="kode" class="block text-sm font-medium">Kode</label>
+                                <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md p-2" id="kode" name="kode" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dropdown" class="block text-sm font-medium">Reff:</label>
+                                <select id="dropdown" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+                                    <option value="">-- Pilih Opsi --</option>
+                                    <option value="Debit">Debet</option>
+                                    <option value="Kredit">Kredit</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 hidden" id="debitBox">
+                                <label for="debitTextbox" class="block text-sm font-medium">Debit:</label>
+                                <input type="text" id="debitTextbox" class="mt-1 block w-full border border-gray-300 rounded-md p-2" placeholder="Isi detail debit...">
+                            </div>
+                            <div class="mb-3 hidden" id="kreditBox">
+                                <label for="kreditTextbox" class="block text-sm font-medium">Kredit:</label>
+                                <input type="text" id="kreditTextbox" class="mt-1 block w-full border border-gray-300 rounded-md p-2" placeholder="Isi detail kredit...">
+                            </div>
+                            <button type="submit" class="mt-4 w-full bg-green-500 text-white font-semibold py-2 rounded-md">Simpan</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </main>
