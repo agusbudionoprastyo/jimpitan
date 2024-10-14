@@ -156,17 +156,17 @@ if (isset($_POST['tanggal'])) {
             </div>
             <div class="modal-body p-4">
                 <form id="dataForm">
-                    <div class="mb-4">
-                        <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
-                        <input type="text" id="modalDatePicker" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12" placeholder="Pilih Tanggal" name="tanggal" required>
+                <div class="mb-4">
+                    <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
+                    <input type="text" id="modalDatePicker" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 mb-4" placeholder="Pilih Tanggal" name="tanggal" required>
                     </div>
                     <div class="mb-4">
                         <label for="kode" class="block text-sm font-medium">Kode</label>
-                        <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12" id="kode" name="kode" required>
+                        <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 mb-4" id="kode" name="kode" required>
                     </div>
                     <div class="mb-4">
                         <label for="dropdown" class="block text-sm font-medium">Reff</label>
-                        <select id="dropdown" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12" required>
+                        <select id="dropdown" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 mb-4" required>
                             <option value="" disabled selected>-- Pilih Opsi --</option>
                             <option value="Opsi 1">Debet</option>
                             <option value="Opsi 2">Kredit</option>
@@ -174,15 +174,15 @@ if (isset($_POST['tanggal'])) {
                     </div>
                     <div class="mb-4" id="debitBox" style="display: none;">
                         <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
-                        <input type="text" id="debitTextbox" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12" placeholder="Detail debit">
+                        <input type="text" id="debitTextbox" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 mb-4" placeholder="Detail debit">
                     </div>
                     <div class="mb-4" id="kreditBox" style="display: none;">
                         <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
-                        <input type="text" id="kreditTextbox" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12" placeholder="Detail kredit">
+                        <input type="text" id="kreditTextbox" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 mb-4" placeholder="Detail kredit">
                     </div>
                     <div class="mb-4">
                         <label for="keterangan" class="block text-sm font-medium">Keterangan</label>
-                        <textarea id="keterangan" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Isi keterangan" rows="4" required></textarea>
+                        <textarea id="keterangan" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Isi keterangan" rows="4" required></textarea>
                     </div>
                     <button type="submit" class="w-full text-white py-2" style="background-color: #3c91e6; border-radius: 15px;">Simpan</button>
                 </form>
