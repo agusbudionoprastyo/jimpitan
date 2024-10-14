@@ -158,7 +158,7 @@ if (isset($_POST['tanggal'])) {
                 <form id="dataForm">
                     <div class="mb-4">
                         <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
-                        <input type="text" id="datePicker" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Pilih Tanggal" name="tanggal" required>
+                        <input type="text" id="modalDatePicker" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Pilih Tanggal" name="tanggal" required>
                     </div>
                     <div class="mb-4">
                         <label for="kode" class="block text-sm font-medium">Kode</label>
