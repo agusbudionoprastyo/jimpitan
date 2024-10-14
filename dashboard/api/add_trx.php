@@ -17,7 +17,7 @@ $debet = !empty($data['debit']) ? $data['debit'] : 0; // Default to 0 if not set
 $kredit = !empty($data['kredit']) ? $data['kredit'] : 0; // Default to 0 if not set
 
 // Basic validation for required fields
-if (empty($coa_code) || empty($date_trx) || empty($reff) || empty($Disc_trx)) {
+if (empty($coa_code) || empty($date_trx) || empty($Disc_trx)) {
     echo json_encode(['success' => false, 'message' => 'Semua field harus diisi.']);
     exit;
 }
