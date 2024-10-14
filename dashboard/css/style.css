@@ -789,7 +789,7 @@ table .dataTable {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
     z-index: 40; /* Should be below the modal but above other content */
 }
 
