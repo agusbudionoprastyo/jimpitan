@@ -796,6 +796,12 @@ table .dataTable {
 .modal-container {
     position: relative;
     z-index: 50; /* Higher than overlay */
+    max-width: 600px; /* Optional: set a max width */
+    width: 90%; /* Responsive width */
+    margin: auto; /* Center horizontally */
+    padding: 20px; /* Add some padding */
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Optional: shadow effect */
 }
 
 .hidden {
