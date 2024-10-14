@@ -49,7 +49,7 @@ if (isset($_POST['tanggal'])) {
     <title>Keuangan</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"> framework tailwindcss + bootstrap ngrusak styling-->
 
 </head>
 <body>
@@ -103,12 +103,12 @@ if (isset($_POST['tanggal'])) {
                 <div class="order">
                     <div class="head">
                         <h3>Keuangan</h3>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inputModal">
+                        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inputModal">
                             Tambah Transaksi
-                        </button>
+                        </button> -->
 
                         <button type="button" id="addcreditdebBtn" class="btn-download" data-bs-toggle="modal" data-bs-target="#inputModal">
-                            <i class='bx bxs-add-to-queue'></i> Deb/Cr
+                            <i class='bx bxs-add-to-queue'></i> Transaksi
                         </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
                             <button type="button" id="resetFilterBtn">
@@ -147,55 +147,44 @@ if (isset($_POST['tanggal'])) {
                     </table>
                 </div>  
             </div>
-                        <!-- Modal -->
-            <div class="modal fade" id="inputModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalLabel">Form Tambah Data</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="dataForm">
-                                <div class="mb-3">
-                                    <label for="tanggal" class="form-label">Tanggal</label>
-                                    <!--<input type="text" class="form-control" id="nama" name="nama" required>-->
-                                    <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal" name="tanggal" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="kode" class="form-label">Kode</label>
-                                    <input type="text" class="form-control" id="kode" name="kode" required>
-                                </div>
-                                <!-- Dropdown -->
-                                <div class="mb-3">
-                                    <label for="dropdown" class="form-label">Reff:</label>
-                                    <select id="dropdown" class="form-select">
-                                        <option value="">-- Pilih Opsi --</option>
-                                        <option value="Opsi 1">Debet</option>
-                                        <option value="Opsi 2">Kredit</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="keterangan" class="form-label">Keterangan</label>
-                                    <input type="text" class="form-control" id="keterangan" name="keterangan" required>
-                                </div>
-                                <!-- Textbox Debit (disembunyikan secara default) -->
-                                <div class="mb-3" id="debitBox" style="display: none;">
-                                    <label for="debitTextbox" class="form-label">Debit:</label>
-                                    <input type="text" id="debitTextbox" class="form-control" placeholder="Isi detail debit...">
-                                </div>
-
-                                <!-- Textbox Kredit (disembunyikan secara default) -->
-                                <div class="mb-3" id="kreditBox" style="display: none;">
-                                    <label for="kreditTextbox" class="form-label">Kredit:</label>
-                                    <input type="text" id="kreditTextbox" class="form-control" placeholder="Isi detail kredit...">
-                                </div>
-
-                                <button type="submit" class="btn btn-success">Simpan</button>
-                            </form>
-                        </div>
+            <!-- Modal -->
+            <div id="inputModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+                <div class="bg-white rounded-lg shadow-lg w-1/3 p-6">
+                    <div class="flex justify-between items-center">
+                        <h5 class="text-lg font-bold">Form Tambah Data</h5>
+                        <button type="button" class="text-gray-500" onclick="toggleModal()">&times;</button>
                     </div>
+                    <form id="dataForm">
+                        <div class="mb-4">
+                            <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
+                            <input type="text" id="datePicker" class="mt-1 block w-full border-gray-300 rounded-md" placeholder="Pilih Tanggal" name="tanggal" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="kode" class="block text-sm font-medium text-gray-700">Kode</label>
+                            <input type="text" class="mt-1 block w-full border-gray-300 rounded-md" id="kode" name="kode" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="dropdown" class="block text-sm font-medium text-gray-700">Reff:</label>
+                            <select id="dropdown" class="mt-1 block w-full border-gray-300 rounded-md">
+                                <option value="">-- Pilih Opsi --</option>
+                                <option value="Debit">Debet</option>
+                                <option value="Kredit">Kredit</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="keterangan" class="block text-sm font-medium text-gray-700">Keterangan</label>
+                            <input type="text" class="mt-1 block w-full border-gray-300 rounded-md" id="keterangan" name="keterangan" required>
+                        </div>
+                        <div class="mb-4 hidden" id="debitBox">
+                            <label for="debitTextbox" class="block text-sm font-medium text-gray-700">Debit:</label>
+                            <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md" placeholder="Isi detail debit...">
+                        </div>
+                        <div class="mb-4 hidden" id="kreditBox">
+                            <label for="kreditTextbox" class="block text-sm font-medium text-gray-700">Kredit:</label>
+                            <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md" placeholder="Isi detail kredit...">
+                        </div>
+                        <button type="submit" class="bg-green-500 text-white rounded p-2">Simpan</button>
+                    </form>
                 </div>
             </div>
         </main>
@@ -330,10 +319,45 @@ if (isset($_POST['tanggal'])) {
                 row.style.display = ""; // Tampilkan semua baris
             });
         });
+
+        // modal
+        function toggleModal() {
+            const modal = document.getElementById('inputModal');
+            modal.classList.toggle('hidden');
+        }
+
+        // Event listener for dropdown change
+        const dropdown = document.getElementById('dropdown');
+        dropdown.addEventListener('change', function() {
+            document.getElementById('debitBox').classList.toggle('hidden', this.value !== 'Debit');
+            document.getElementById('kreditBox').classList.toggle('hidden', this.value !== 'Kredit');
+        });
+
+        // Handle form submission
+        document.getElementById('dataForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent page refresh
+
+            const tanggal = document.getElementById('datePicker').value;
+            const kode = document.getElementById('kode').value;
+            const reff = dropdown.value;
+            const keterangan = document.getElementById('keterangan').value;
+
+            console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}`);
+
+            // Reset form and close modal
+            this.reset();
+            toggleModal();
+        });
+
+        // Initialize Flatpickr for the date picker
+        flatpickr("#datePicker", {
+            dateFormat: "Y-m-d", // Set the desired date format
+        });
+
     </script>
 
     <!-- JavaScript -->
-    <script>
+    <!-- <script>
         const dropdown = document.getElementById('dropdown');
         const debitbox = document.getElementById('debitbox');
         const kreditbox = document.getElementById('kreditbox');
@@ -356,7 +380,7 @@ if (isset($_POST['tanggal'])) {
                     kreditBox.style.display = 'none';
                 }
             });
-    </script>
+    </script> -->
 
 </body>
 </html>
