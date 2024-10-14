@@ -782,31 +782,3 @@ table .dataTable {
     border-collapse: separate; /* Bisa dicoba: collapse untuk efek berbeda */
     border-spacing: 0 10px; /* Atur jarak antar baris dengan border spacing */
 }
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.75);
-    z-index: 40; /* Lower than modal */
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-}
-
-.modal-container {
-    position: relative;
-	margin-top: 10%;
-    z-index: 50; /* Higher than overlay */
-    max-width: 600px; /* Optional: set a max width */
-    width: 90%; /* Responsive width */
-    padding: 20px; /* Add some padding */
-    border-radius: 8px; /* Optional: rounded corners */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Optional: shadow effect */
-}
-
-.hidden {
-    display: none;
-}
