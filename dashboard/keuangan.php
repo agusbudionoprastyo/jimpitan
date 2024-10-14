@@ -294,47 +294,47 @@ if (isset($_POST['tanggal'])) {
             rows.forEach(row => row.style.display = "");
         });
 
-    // Open modal
-    $('#openModal').click(function() {
-        $('#inputModal').removeClass('hidden');
+        // Open modal
+        $('#openModal').click(function() {
+            $('#inputModal').removeClass('hidden');
+        });
+
+        // Close modal
+        $('.close-modal, .modal-overlay').click(function() {
+            $('#inputModal').addClass('hidden');
+        });
+
+        // Form submission handling
+        $('#dataForm').on('submit', function(e) {
+            e.preventDefault(); // Prevent page refresh
+
+            // Validate form inputs
+            if (!$(this).get(0).checkValidity()) {
+                return; // Prevent submission if form is invalid
+            }
+
+            const tanggal = $('#datePicker').val();
+            const kode = $('#kode').val();
+            const reff = $('#dropdown').val();
+            const keterangan = $('#keterangan').val();
+            const debit = $('#debitTextbox').val();
+            const kredit = $('#kreditTextbox').val();
+
+            console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}, Debit: ${debit}, Kredit: ${kredit}`);
+
+            // Reset form and close modal
+            $(this).trigger('reset');
+            $('#inputModal').addClass('hidden');
+            Swal.fire('Data saved!', '', 'success');
+        });
+
+        // Dropdown logic for debit/kredit
+        $('#dropdown').change(function() {
+            const selectedValue = $(this).val();
+            $('#debitBox').toggle(selectedValue === "Opsi 1");
+            $('#kreditBox').toggle(selectedValue === "Opsi 2");
+        });
     });
-
-    // Close modal
-    $('.close-modal').click(function() {
-        $('#inputModal').addClass('hidden');
-    });
-
-    // Close modal
-    $('.modal-overlay').click(function() {
-        $('#inputModal').addClass('hidden');
-    });
-
-    // Form submission handling
-    $('#dataForm').on('submit', function(e) {
-        e.preventDefault(); // Prevent page refresh
-
-        const tanggal = $('#datePicker').val();
-        const kode = $('#kode').val();
-        const reff = $('#dropdown').val();
-        const keterangan = $('#keterangan').val();
-        const debit = $('#debitTextbox').val();
-        const kredit = $('#kreditTextbox').val();
-
-        console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}, Debit: ${debit}, Kredit: ${kredit}`);
-
-        // Reset form and close modal
-        $(this).trigger('reset');
-        $('#inputModal').addClass('hidden');
-        Swal.fire('Data saved!', '', 'success');
-    });
-
-    // Dropdown logic for debit/kredit
-    $('#dropdown').change(function() {
-        const selectedValue = $(this).val();
-        $('#debitBox').toggle(selectedValue === "Opsi 1");
-        $('#kreditBox').toggle(selectedValue === "Opsi 2");
-    });
-});
 
     </script>
 
