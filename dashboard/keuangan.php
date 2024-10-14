@@ -267,56 +267,65 @@ if (isset($_POST['tanggal'])) {
             const rows = document.querySelectorAll("#example tbody tr");
             rows.forEach(row => row.style.display = "");
         });
-// Open modal
-$('#openModal').click(function() {
-        $('#inputModal').removeClass('hidden').addClass('modal-show'); // Menampilkan modal dengan animasi
-    });
 
-    // Close modal
-    $('#inputModal').on('click', '.close-modal, .modal-overlay', function() {
-        console.log('Modal closed'); // Debug log
-        $('#inputModal').removeClass('modal-show'); // Menghapus kelas untuk animasi
+        // Open modal
+        $('#openModal').click(function() {
+                $('#inputModal').removeClass('hidden').addClass('modal-show'); // Menampilkan modal dengan animasi
+            });
 
-        // Tunggu hingga animasi selesai sebelum menyembunyikan modal
-        setTimeout(function() {
-            $('#inputModal').addClass('hidden'); // Menyembunyikan modal
-        }, 300); // Durasi harus sesuai dengan CSS transition
-    });
+            // Close modal
+            $('#inputModal').on('click', '.close-modal, .modal-overlay', function() {
+                console.log('Modal closed'); // Debug log
+                $('#inputModal').removeClass('modal-show'); // Menghapus kelas untuk animasi
 
-    // Form submission handling
-    $('#dataForm').on('submit', function(e) {
-        e.preventDefault(); // Prevent page refresh
+                // Tunggu hingga animasi selesai sebelum menyembunyikan modal
+                setTimeout(function() {
+                    $('#inputModal').addClass('hidden'); // Menyembunyikan modal
+                }, 300); // Durasi harus sesuai dengan CSS transition
+            });
 
-        // Validate form inputs
-        if (!$(this).get(0).checkValidity()) {
-            return; // Prevent submission if form is invalid
-        }
+            // Date picker initialization
+            flatpickr("#modalDatePicker", {
+                dateFormat: "Y-m-d",
+                onChange: function(selectedDates, dateStr) {
+                    filterTableByDate(dateStr);
+                }
+            });
 
-        const tanggal = $('#datePicker').val();
-        const kode = $('#kode').val();
-        const reff = $('#dropdown').val();
-        const keterangan = $('#keterangan').val();
-        const debit = $('#debitTextbox').val();
-        const kredit = $('#kreditTextbox').val();
+            // Form submission handling
+            $('#dataForm').on('submit', function(e) {
+                e.preventDefault(); // Prevent page refresh
 
-        console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}, Debit: ${debit}, Kredit: ${kredit}`);
+                // Validate form inputs
+                if (!$(this).get(0).checkValidity()) {
+                    return; // Prevent submission if form is invalid
+                }
 
-        // Reset form and close modal
-        $(this).trigger('reset');
-        $('#inputModal').removeClass('modal-show'); // Menghapus kelas untuk animasi
-        setTimeout(function() {
-            $('#inputModal').addClass('hidden'); // Menyembunyikan modal
-        }, 300); // Durasi harus sesuai dengan CSS transition
-        Swal.fire('Data saved!', '', 'success');
-    });
+                const tanggal = $('#modalDatePicker').val();
+                const kode = $('#kode').val();
+                const reff = $('#dropdown').val();
+                const keterangan = $('#keterangan').val();
+                const debit = $('#debitTextbox').val();
+                const kredit = $('#kreditTextbox').val();
 
-    // Dropdown logic for debit/kredit
-    $('#dropdown').change(function() {
-        const selectedValue = $(this).val();
-        $('#debitBox').toggle(selectedValue === "Opsi 1");
-        $('#kreditBox').toggle(selectedValue === "Opsi 2");
-    });
-    });
+                console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}, Debit: ${debit}, Kredit: ${kredit}`);
+
+                // Reset form and close modal
+                $(this).trigger('reset');
+                $('#inputModal').removeClass('modal-show'); // Menghapus kelas untuk animasi
+                setTimeout(function() {
+                    $('#inputModal').addClass('hidden'); // Menyembunyikan modal
+                }, 300); // Durasi harus sesuai dengan CSS transition
+                Swal.fire('Data saved!', '', 'success');
+            });
+
+            // Dropdown logic for debit/kredit
+            $('#dropdown').change(function() {
+                const selectedValue = $(this).val();
+                $('#debitBox').toggle(selectedValue === "Opsi 1");
+                $('#kreditBox').toggle(selectedValue === "Opsi 2");
+            });
+        });
     </script>
 
 </body>
