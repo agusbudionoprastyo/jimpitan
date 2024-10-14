@@ -294,31 +294,43 @@ if (isset($_POST['tanggal'])) {
             rows.forEach(row => row.style.display = "");
         });
 
-        // Dropdown logic for debit/kredit
-        $('#dropdown').change(function() {
-            const selectedValue = $(this).val();
-            $('#debitBox').toggle(selectedValue === "Opsi 1");
-            $('#kreditBox').toggle(selectedValue === "Opsi 2");
-        });
-
-        // Modal controls
-        $('#openModal').click(function() {
-            $('#inputModal').removeClass('hidden');
-        });
-
-        $('.close-modal').click(function() {
-            $('#inputModal').addClass('hidden');
-        });
-
-        // Form submission handling
-        $('#dataForm').submit(function(event) {
-            event.preventDefault();
-            const formData = $(this).serialize();
-            console.log(formData); // Replace with your AJAX call
-            $('#inputModal').addClass('hidden');
-            Swal.fire('Data saved!', '', 'success');
-        });
+    // Open modal
+    $('#openModal').click(function() {
+        $('#inputModal').removeClass('hidden');
     });
+
+    // Close modal
+    $('.close-modal').click(function() {
+        $('#inputModal').addClass('hidden');
+    });
+
+    // Form submission handling
+    $('#dataForm').on('submit', function(e) {
+        e.preventDefault(); // Prevent page refresh
+
+        const tanggal = $('#datePicker').val();
+        const kode = $('#kode').val();
+        const reff = $('#dropdown').val();
+        const keterangan = $('#keterangan').val();
+        const debit = $('#debitTextbox').val();
+        const kredit = $('#kreditTextbox').val();
+
+        console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}, Debit: ${debit}, Kredit: ${kredit}`);
+
+        // Reset form and close modal
+        $(this).trigger('reset');
+        $('#inputModal').addClass('hidden');
+        Swal.fire('Data saved!', '', 'success');
+    });
+
+    // Dropdown logic for debit/kredit
+    $('#dropdown').change(function() {
+        const selectedValue = $(this).val();
+        $('#debitBox').toggle(selectedValue === "Opsi 1");
+        $('#kreditBox').toggle(selectedValue === "Opsi 2");
+    });
+});
+
     </script>
 
     <!-- JavaScript -->
