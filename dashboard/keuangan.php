@@ -300,7 +300,8 @@ if (isset($_POST['tanggal'])) {
         });
 
         // Close modal
-        $('.close-modal, .modal-overlay').click(function() {
+        $('#inputModal').on('click', '.close-modal, .modal-overlay', function() {
+            console.log('Modal closed'); // Debug log
             $('#inputModal').addClass('hidden');
         });
 
