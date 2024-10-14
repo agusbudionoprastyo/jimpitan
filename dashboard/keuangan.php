@@ -304,6 +304,11 @@ if (isset($_POST['tanggal'])) {
         $('#inputModal').addClass('hidden');
     });
 
+    // Close modal
+    $('.modal-overlay').click(function() {
+        $('#inputModal').addClass('hidden');
+    });
+
     // Form submission handling
     $('#dataForm').on('submit', function(e) {
         e.preventDefault(); // Prevent page refresh
