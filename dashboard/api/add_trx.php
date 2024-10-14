@@ -20,8 +20,8 @@ $coa_code = isset($data['kode']) ? $data['kode'] : null; // Assuming 'kode' is u
 $date_trx = isset($data['tanggal']) ? $data['tanggal'] : null;
 $Disc_trx = isset($data['keterangan']) ? $data['keterangan'] : null;
 $reff = isset($data['reff']) ? $data['reff'] : null;
-$debet = isset($data['debit']) ? $data['debit'] : null;
-$kredit = isset($data['kredit']) ? $data['kredit'] : null;
+$debet = isset($data['debit']) && $data['debit'] !== '' ? $data['debit'] : 0; // Default to 0 if not set
+$kredit = isset($data['kredit']) && $data['kredit'] !== '' ? $data['kredit'] : 0; // Default to 0 if not set
 
 // Basic validation
 if (empty($coa_code) || empty($date_trx) || empty($reff) || empty($Disc_trx)) {
