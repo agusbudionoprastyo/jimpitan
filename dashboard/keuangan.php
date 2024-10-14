@@ -267,48 +267,55 @@ if (isset($_POST['tanggal'])) {
             const rows = document.querySelectorAll("#example tbody tr");
             rows.forEach(row => row.style.display = "");
         });
+// Open modal
+$('#openModal').click(function() {
+        $('#inputModal').removeClass('hidden').addClass('modal-show'); // Menampilkan modal dengan animasi
+    });
 
-        // Open modal
-        $('#openModal').click(function() {
-            $('#inputModal').removeClass('hidden');
-        });
+    // Close modal
+    $('#inputModal').on('click', '.close-modal, .modal-overlay', function() {
+        console.log('Modal closed'); // Debug log
+        $('#inputModal').removeClass('modal-show'); // Menghapus kelas untuk animasi
 
-        // Close modal
-        $('#inputModal').on('click', '.close-modal, .modal-overlay', function() {
-            console.log('Modal closed'); // Debug log
-            $('#inputModal').addClass('hidden');
-        });
+        // Tunggu hingga animasi selesai sebelum menyembunyikan modal
+        setTimeout(function() {
+            $('#inputModal').addClass('hidden'); // Menyembunyikan modal
+        }, 300); // Durasi harus sesuai dengan CSS transition
+    });
 
-        // Form submission handling
-        $('#dataForm').on('submit', function(e) {
-            e.preventDefault(); // Prevent page refresh
+    // Form submission handling
+    $('#dataForm').on('submit', function(e) {
+        e.preventDefault(); // Prevent page refresh
 
-            // Validate form inputs
-            if (!$(this).get(0).checkValidity()) {
-                return; // Prevent submission if form is invalid
-            }
+        // Validate form inputs
+        if (!$(this).get(0).checkValidity()) {
+            return; // Prevent submission if form is invalid
+        }
 
-            const tanggal = $('#datePicker').val();
-            const kode = $('#kode').val();
-            const reff = $('#dropdown').val();
-            const keterangan = $('#keterangan').val();
-            const debit = $('#debitTextbox').val();
-            const kredit = $('#kreditTextbox').val();
+        const tanggal = $('#datePicker').val();
+        const kode = $('#kode').val();
+        const reff = $('#dropdown').val();
+        const keterangan = $('#keterangan').val();
+        const debit = $('#debitTextbox').val();
+        const kredit = $('#kreditTextbox').val();
 
-            console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}, Debit: ${debit}, Kredit: ${kredit}`);
+        console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}, Debit: ${debit}, Kredit: ${kredit}`);
 
-            // Reset form and close modal
-            $(this).trigger('reset');
-            $('#inputModal').addClass('hidden');
-            Swal.fire('Data saved!', '', 'success');
-        });
+        // Reset form and close modal
+        $(this).trigger('reset');
+        $('#inputModal').removeClass('modal-show'); // Menghapus kelas untuk animasi
+        setTimeout(function() {
+            $('#inputModal').addClass('hidden'); // Menyembunyikan modal
+        }, 300); // Durasi harus sesuai dengan CSS transition
+        Swal.fire('Data saved!', '', 'success');
+    });
 
-        // Dropdown logic for debit/kredit
-        $('#dropdown').change(function() {
-            const selectedValue = $(this).val();
-            $('#debitBox').toggle(selectedValue === "Opsi 1");
-            $('#kreditBox').toggle(selectedValue === "Opsi 2");
-        });
+    // Dropdown logic for debit/kredit
+    $('#dropdown').change(function() {
+        const selectedValue = $(this).val();
+        $('#debitBox').toggle(selectedValue === "Opsi 1");
+        $('#kreditBox').toggle(selectedValue === "Opsi 2");
+    });
     });
     </script>
 
