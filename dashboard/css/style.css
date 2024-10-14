@@ -776,9 +776,28 @@ body {
 .custom-row-height {
     padding: 10px 10px; /* Mengatur padding atas-bawah */
 }
-table.dataTable {
+table .dataTable {
     width: 80%;
     margin: auto;
     border-collapse: separate; /* Bisa dicoba: collapse untuk efek berbeda */
     border-spacing: 0 10px; /* Atur jarak antar baris dengan border spacing */
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 40; /* Lower than modal */
+}
+
+.modal-container {
+    position: relative;
+    z-index: 50; /* Higher than overlay */
+}
+
+.hidden {
+    display: none;
 }
