@@ -152,7 +152,7 @@ if (isset($_POST['tanggal'])) {
 
                 <!-- Modal -->
                 <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-60 hidden"> <!-- Increased z-index -->
-                <div class="modal-overlay absolute inset-0 bg-black opacity-50 z-50"></div> <!-- Keep the overlay z-index lower -->
+                <div class="modal-overlay absolute inset-0 bg-black opacity-0 z-0"></div> <!-- Keep the overlay z-index lower -->
                 <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-60"> <!-- Increased z-index -->
                     <div class="modal-header flex justify-between items-center p-4 border-b">
                         <h5 class="text-lg font-semibold" id="modalLabel">Form Tambah Data</h5>
@@ -169,7 +169,7 @@ if (isset($_POST['tanggal'])) {
                                 <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="kode" name="kode" required>
                             </div>
                             <div class="mb-3">
-                                <label for="dropdown" class="block text-sm font-medium">Reff:</label>
+                                <label for="dropdown" class="block text-sm font-medium">Reff</label>
                                 <select id="dropdown" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                                     <option value="">-- Pilih Opsi --</option>
                                     <option value="Opsi 1">Debet</option>
@@ -177,11 +177,11 @@ if (isset($_POST['tanggal'])) {
                                 </select>
                             </div>
                             <div class="mb-3" id="debitBox" style="display: none;">
-                                <label for="debitTextbox" class="block text-sm font-medium">Debit:</label>
+                                <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
                                 <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi detail debit...">
                             </div>
                             <div class="mb-3" id="kreditBox" style="display: none;">
-                                <label for="kreditTextbox" class="block text-sm font-medium">Kredit:</label>
+                                <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
                                 <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi detail kredit...">
                             </div>
                             <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md">Simpan</button>
