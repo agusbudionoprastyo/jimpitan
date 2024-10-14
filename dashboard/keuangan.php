@@ -147,57 +147,45 @@ if (isset($_POST['tanggal'])) {
                     </table>
                 </div>  
             </div>
-            <!-- Modal -->
-            <div class="modal fade" id="inputModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalLabel">Form Tambah Data</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Modal -->
+        <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+            <div class="modal-overlay absolute inset-0 bg-black opacity-50"></div>
+            <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-50">
+                <div class="modal-header flex justify-between items-center p-4 border-b">
+                    <h5 class="text-lg font-semibold" id="modalLabel">Form Tambah Data</h5>
+                    <button type="button" class="close-modal text-gray-500" aria-label="Close">&times;</button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="dataForm">
+                        <div class="mb-3">
+                            <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
+                            <input type="text" id="datePicker" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Pilih Tanggal" name="tanggal" required>
                         </div>
-                        <div class="modal-body">
-                            <form id="dataForm">
-                                <div class="mb-3">
-                                    <label for="tanggal" class="form-label">Tanggal</label>
-                                    <!--<input type="text" class="form-control" id="nama" name="nama" required>-->
-                                    <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal" name="tanggal" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="kode" class="form-label">Kode</label>
-                                    <input type="text" class="form-control" id="kode" name="kode" required>
-                                </div>
-                                <!-- Dropdown -->
-                                <div class="mb-3">
-                                    <label for="dropdown" class="form-label">Reff:</label>
-                                    <select id="dropdown" class="form-select">
-                                        <option value="">-- Pilih Opsi --</option>
-                                        <option value="Opsi 1">Debet</option>
-                                        <option value="Opsi 2">Kredit</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="keterangan" class="form-label">Keterangan</label>
-                                    <input type="text" class="form-control" id="keterangan" name="keterangan" required>
-                                </div>
-                                <!-- Textbox Debit (disembunyikan secara default) -->
-                                <div class="mb-3" id="debitBox" style="display: none;">
-                                    <label for="debitTextbox" class="form-label">Debit:</label>
-                                    <input type="text" id="debitTextbox" class="form-control" placeholder="Isi detail debit...">
-                                </div>
-
-                                <!-- Textbox Kredit (disembunyikan secara default) -->
-                                <div class="mb-3" id="kreditBox" style="display: none;">
-                                    <label for="kreditTextbox" class="form-label">Kredit:</label>
-                                    <input type="text" id="kreditTextbox" class="form-control" placeholder="Isi detail kredit...">
-                                </div>
-
-                                <button type="submit" class="btn btn-success">Simpan</button>
-                            </form>
+                        <div class="mb-3">
+                            <label for="kode" class="block text-sm font-medium">Kode</label>
+                            <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="kode" name="kode" required>
                         </div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="dropdown" class="block text-sm font-medium">Reff:</label>
+                            <select id="dropdown" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                <option value="">-- Pilih Opsi --</option>
+                                <option value="Opsi 1">Debet</option>
+                                <option value="Opsi 2">Kredit</option>
+                            </select>
+                        </div>
+                        <div class="mb-3" id="debitBox" style="display: none;">
+                            <label for="debitTextbox" class="block text-sm font-medium">Debit:</label>
+                            <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi detail debit...">
+                        </div>
+                        <div class="mb-3" id="kreditBox" style="display: none;">
+                            <label for="kreditTextbox" class="block text-sm font-medium">Kredit:</label>
+                            <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi detail kredit...">
+                        </div>
+                        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md">Simpan</button>
+                    </form>
                 </div>
             </div>
+        </div>
         </main>
     </section>
 
@@ -235,39 +223,20 @@ if (isset($_POST['tanggal'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.2.1/exceljs.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-        // Table initialize
+    $(document).ready(function() {
+        // Initialize DataTable
         var table = new DataTable('#example', {
-            pageLength: 10, // Set the default number of records per page to 10
-            lengthMenu: [10, 25, 50, 100], // Options for the dropdown
-            searching: true, // Enable searching
-            order: [[2, 'desc']], // Sort by the third column (index 2), descanding order
+            pageLength: 10,
+            lengthMenu: [10, 25, 50, 100],
+            searching: true,
+            order: [[2, 'desc']],
             columnDefs: [
-                { 
-                    "targets": 0,  // Kolom ke-1 (indeks mulai dari 0)
-                    "className": "text-left" 
-                },
-                { 
-                    "targets": 1,  // Kolom ke-2 (indeks mulai dari 0)
-                    "className": "text-center" 
-                }
-                ,
-                { 
-                    "targets": 2,  // Kolom ke-3 (indeks mulai dari 0)
-                    "className": "text-center" 
-                },
-                { 
-                    "targets": 3,  // Kolom ke-4 (indeks mulai dari 0)
-                    "className": "text-center" 
-                },
-                { 
-                    "targets": 4,  // Kolom ke-5 (indeks mulai dari 0)
-                    "className": "text-right" 
-                },
-                { 
-                    "targets": 5,  // Kolom ke-6 (indeks mulai dari 0)
-                    "className": "text-right" 
-                }
+                { targets: 0, className: "text-left" },
+                { targets: 1, className: "text-center" },
+                { targets: 2, className: "text-center" },
+                { targets: 3, className: "text-center" },
+                { targets: 4, className: "text-right" },
+                { targets: 5, className: "text-right" }
             ],
             language: {
                 lengthMenu: "_MENU_ Entri per halaman",
@@ -278,62 +247,78 @@ if (isset($_POST['tanggal'])) {
             }
         });
 
-        // Event listener untuk "Enter" pada #search-input
+        // Search functionality
         $('#search-input').keypress(function(event) {
             if (event.which === 13) {
-                event.preventDefault(); // Mencegah form submit (jika ada)
+                event.preventDefault();
                 var searchText = $(this).val();
                 table.search(searchText).draw();
             }
         });
 
-        // Event listener untuk klik pada tombol .search-btn
-        $('.search-btn').click(function(event) {
+        $('.search-btn').click(function() {
             var searchText = $('#search-input').val();
             table.search(searchText).draw();
         });
 
-        // Event listener untuk klik pada tombol .clear-btn
-        $('.clear-btn').click(function(event) {
-            $('#search-input').val(''); // Mengosongkan nilai input pencarian
-            table.search('').draw(); // Mereset pencarian pada tabel
-            });
+        $('.clear-btn').click(function() {
+            $('#search-input').val('');
+            table.search('').draw();
         });
-        // Inisialisasi Flatpickr untuk input tanggal
+
+        // Date picker initialization
         flatpickr("#datePicker", {
-            dateFormat: "Y-m-d", // Format untuk tanggal
+            dateFormat: "Y-m-d",
             onChange: function(selectedDates, dateStr) {
-                filterTableByDate(dateStr); // Panggil fungsi filter saat tanggal berubah
+                filterTableByDate(dateStr);
             }
         });
 
-        // Fungsi untuk menyaring baris tabel berdasarkan tanggal yang dipilih
+        // Filter table by date
         function filterTableByDate(selectedDate) {
-            const table = document.getElementById("example");
-            const rows = table.querySelectorAll("tbody tr");
-
+            const rows = document.querySelectorAll("#example tbody tr");
             rows.forEach(row => {
-                const dateCell = row.cells[1].textContent; // Mengasumsikan tanggal ada di kolom kedua
-                if (dateCell === selectedDate) {
-                    row.style.display = ""; // Tampilkan baris jika tanggal cocok
-                } else {
-                    row.style.display = "none"; // Sembunyikan baris jika tidak cocok
-                }
+                const dateCell = row.cells[1].textContent; // Assuming date is in the second column
+                row.style.display = (dateCell === selectedDate) ? "" : "none";
             });
         }
 
-        // Pendengar acara untuk tombol reset filter
+        // Reset filters
         document.getElementById("resetFilterBtn").addEventListener("click", function() {
-            document.getElementById("datePicker")._flatpickr.clear(); // Hapus input tanggal
+            document.getElementById("datePicker")._flatpickr.clear();
             const rows = document.querySelectorAll("#example tbody tr");
-            rows.forEach(row => {
-                row.style.display = ""; // Tampilkan semua baris
-            });
+            rows.forEach(row => row.style.display = "");
         });
+
+        // Dropdown logic for debit/kredit
+        $('#dropdown').change(function() {
+            const selectedValue = $(this).val();
+            $('#debitBox').toggle(selectedValue === "Opsi 1");
+            $('#kreditBox').toggle(selectedValue === "Opsi 2");
+        });
+
+        // Modal controls
+        $('#openModal').click(function() {
+            $('#inputModal').removeClass('hidden');
+        });
+
+        $('.close-modal').click(function() {
+            $('#inputModal').addClass('hidden');
+        });
+
+        // Form submission handling
+        $('#dataForm').submit(function(event) {
+            event.preventDefault();
+            const formData = $(this).serialize();
+            console.log(formData); // Replace with your AJAX call
+            $('#inputModal').addClass('hidden');
+            Swal.fire('Data saved!', '', 'success');
+        });
+    });
     </script>
 
     <!-- JavaScript -->
-    <script>
+    <!-- <script>
         const dropdown = document.getElementById('dropdown');
         const debitbox = document.getElementById('debitbox');
         const kreditbox = document.getElementById('kreditbox');
@@ -356,7 +341,7 @@ if (isset($_POST['tanggal'])) {
                     kreditBox.style.display = 'none';
                 }
             });
-    </script>
+    </script> -->
 
 </body>
 </html>
