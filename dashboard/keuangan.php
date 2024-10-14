@@ -184,7 +184,7 @@ if (isset($_POST['tanggal'])) {
                         <label for="keterangan" class="block text-sm font-medium">Keterangan</label>
                         <textarea id="keterangan" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Isi keterangan" rows="4" required></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">Simpan</button>
+                    <button type="submit" class="w-full text-white py-2" style="background-color: #3c91e6; border-radius: 15px;">Simpan</button>
                 </form>
             </div>
         </div>
