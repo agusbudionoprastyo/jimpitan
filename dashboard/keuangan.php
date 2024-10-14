@@ -70,9 +70,10 @@ if (isset($_POST['tanggal'])) {
             <li><a href="setting.php"><i class='bx bxs-cog'></i><span class="text">Settings</span></a></li>
             <li><a href="logout.php" class="logout"><i class='bx bxs-log-out-circle'></i><span class="text">Logout</span></a></li>
         </ul>
+
         <!-- Modal -->
         <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-50 hidden"> 
-        <div class="modal-overlay absolute inset-0 bg-black opacity-20 z-40"></div>
+        <div class="modal-overlay absolute inset-0 bg-black opacity-50 z-40"></div>
         <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-50">
             <div class="modal-header flex justify-between items-center p-4 border-b">
                 <h5 class="text-lg font-semibold" id="modalLabel">Tambah Data Keuangan</h5>
