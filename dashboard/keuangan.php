@@ -168,17 +168,17 @@ if (isset($_POST['tanggal'])) {
                         <label for="dropdown" class="block text-sm font-medium">Reff</label>
                         <select id="dropdown" class="mt-1 block w-full border border-gray-300" style="border-radius: 15px; height: 48px; padding: 0 12px;" required>
                             <option value="" disabled selected>-- Pilih Opsi --</option>
-                            <option value="Opsi 1">Debet</option>
-                            <option value="Opsi 2">Kredit</option>
+                            <option value="IN">Debet</option>
+                            <option value="OUT">Kredit</option>
                         </select>
                     </div>
                     <div class="mb-4" id="debitBox" style="display: none;">
                         <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
-                        <input type="text" id="debitTextbox" class="mt-1 block w-full border border-gray-300" style="border-radius: 15px; height: 48px; padding: 0 12px;" placeholder="Detail debit">
+                        <input type="text" id="debitTextbox" class="mt-1 block w-full border border-gray-300" style="border-radius: 15px; height: 48px; padding: 0 12px;" placeholder="Rp.">
                     </div>
                     <div class="mb-4" id="kreditBox" style="display: none;">
                         <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
-                        <input type="text" id="kreditTextbox" class="mt-1 block w-full border border-gray-300" style="border-radius: 15px; height: 48px; padding: 0 12px;" placeholder="Detail kredit">
+                        <input type="text" id="kreditTextbox" class="mt-1 block w-full border border-gray-300" style="border-radius: 15px; height: 48px; padding: 0 12px;" placeholder="Rp.">
                     </div>
                     <div class="mb-4">
                         <label for="keterangan" class="block text-sm font-medium">Keterangan</label>
@@ -289,6 +289,7 @@ if (isset($_POST['tanggal'])) {
             dateFormat: "Y-m-d"
         });
 
+        // Handle form submission
         $('#dataForm').on('submit', function(e) {
             e.preventDefault(); // Prevent page refresh
 
@@ -326,8 +327,8 @@ if (isset($_POST['tanggal'])) {
         // Dropdown logic for debit/kredit
         $('#dropdown').change(function() {
             const selectedValue = $(this).val();
-            $('#debitBox').toggle(selectedValue === "In");
-            $('#kreditBox').toggle(selectedValue === "Out");
+            $('#debitBox').toggle(selectedValue === "IN"); // Adjusted for your dropdown values
+            $('#kreditBox').toggle(selectedValue === "OUT");
         });
         });
     </script>
