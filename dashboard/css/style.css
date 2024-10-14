@@ -785,7 +785,7 @@ table .dataTable {
 
 .modal-overlay {
     position: fixed;
-    top: 50;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -798,6 +798,7 @@ table .dataTable {
 
 .modal-container {
     position: relative;
+	margin-top: 20%;
     z-index: 50; /* Higher than overlay */
     max-width: 600px; /* Optional: set a max width */
     width: 90%; /* Responsive width */
