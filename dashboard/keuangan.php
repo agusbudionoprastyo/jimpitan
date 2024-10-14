@@ -147,51 +147,58 @@ if (isset($_POST['tanggal'])) {
                     </table>
                 </div>  
             </div>
+            <!-- Modal -->
+            <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+                <div class="modal-overlay absolute inset-0 bg-black opacity-0"></div>
+                <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg">
+                    <div class="modal-header flex justify-between items-center p-4 border-b">
+                        <h5 class="text-lg font-semibold" id="modalLabel">Form Tambah Data</h5>
+                        <button type="button" class="close-modal text-gray-500" aria-label="Close">&times;</button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form id="dataForm">
+                            <div class="mb-3">
+                                <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
+                                <input type="text" id="datePicker" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Pilih Tanggal" name="tanggal" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="kode" class="block text-sm font-medium">Kode</label>
+                                <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="kode" name="kode" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dropdown" class="block text-sm font-medium">Reff</label>
+                                <select id="dropdown" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                    <option value="">-- Pilih Opsi --</option>
+                                    <option value="Opsi 1">Debet</option>
+                                    <option value="Opsi 2">Kredit</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" id="debitBox" style="display: none;">
+                                <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
+                                <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Detail debit">
+                            </div>
+                            <div class="mb-3" id="kreditBox" style="display: none;">
+                                <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
+                                <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Detail kredit">
+                            </div>
+                            <div class="mb-3">
+                                <label for="keterangan" class="block text-sm font-medium">Keterangan</label>
+                                <textarea id="keterangan" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi keterangan" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md">Simpan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </main>
     </section>
 
-        <!-- Modal -->
-        <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-50 hidden"> 
-            <div class="modal-overlay absolute inset-0 bg-black opacity-50 z-40"></div>
-            <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-50">
-                <div class="modal-header flex justify-between items-center p-4 border-b">
-                    <h5 class="text-lg font-semibold" id="modalLabel">Form Tambah Data</h5>
-                    <button type="button" class="close-modal text-gray-500" aria-label="Close">&times;</button>
-                </div>
-                <div class="modal-body p-4">
-                    <form id="dataForm">
-                        <div class="mb-3">
-                            <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
-                            <input type="text" id="datePicker" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Pilih Tanggal" name="tanggal" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="kode" class="block text-sm font-medium">Kode</label>
-                            <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="kode" name="kode" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="dropdown" class="block text-sm font-medium">Reff</label>
-                            <select id="dropdown" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                <option value="">-- Pilih Opsi --</option>
-                                <option value="Opsi 1">Debet</option>
-                                <option value="Opsi 2">Kredit</option>
-                            </select>
-                        </div>
-                        <div class="mb-3" id="debitBox" style="display: none;">
-                            <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
-                            <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi detail debit...">
-                        </div>
-                        <div class="mb-3" id="kreditBox" style="display: none;">
-                            <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
-                            <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi detail kredit...">
-                        </div>
-                        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md">Simpan</button>
-                    </form>
-                </div>
-            </div>
-        </div>
 
+    <!-- jQuery (Optional for extra functionality) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="js/monthSelectPlugin.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.tailwindcss.js"></script>
     <script src="js/script.js"></script>
@@ -273,7 +280,7 @@ if (isset($_POST['tanggal'])) {
         // Close modal
         $('#inputModal').on('click', '.close-modal, .modal-overlay', function() {
             console.log('Modal closed'); // Debug log
-            $('#inputModal').classList.add('hidden');
+            $('#inputModal').addClass('hidden');
         });
 
         // Form submission handling
