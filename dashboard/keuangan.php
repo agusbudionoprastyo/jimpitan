@@ -107,7 +107,7 @@ if (isset($_POST['tanggal'])) {
                             Tambah Transaksi
                         </button>
 
-                        <button type="button" id="addcreditdebBtn" class="btn-download" data-bs-toggle="modal" data-bs-target="#inputModal">
+                        <button type="button" id="openModal" class="btn-download" data-bs-toggle="modal" data-bs-target="#inputModal">
                             <i class='bx bxs-add-to-queue'></i> Deb/Cr
                         </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
@@ -147,10 +147,11 @@ if (isset($_POST['tanggal'])) {
                     </table>
                 </div>  
             </div>
+
             <!-- Modal -->
-            <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-                <div class="modal-overlay absolute inset-0 bg-black opacity-0"></div>
-                <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg">
+            <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-50 hidden"> 
+                <div class="modal-overlay absolute inset-0 bg-black opacity-50 z-40"></div>
+                <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-50">
                     <div class="modal-header flex justify-between items-center p-4 border-b">
                         <h5 class="text-lg font-semibold" id="modalLabel">Form Tambah Data</h5>
                         <button type="button" class="close-modal text-gray-500" aria-label="Close">&times;</button>
