@@ -183,7 +183,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="w-1/2 px-4 py-2">Nama KK</th> <!-- Kolom pertama rata kiri -->
+                                <th class="w-1/2 px-4 py-1">Nama KK</th> <!-- Kolom pertama rata kiri -->
                                 <th style="text-align: center;">Code</th>
                                 <th style="text-align: center;">Tanggal</th>
                                 <th style="text-align: center;">Nominal</th>
@@ -195,7 +195,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 if ($data) {
                                     foreach ($data as $row): ?>
                                         <tr>
-                                            <td class="px-4 py-2 text-left"><?php echo htmlspecialchars($row["kk_name"]); ?></td> <!-- Rata kiri -->
+                                            <td class="px-4 py-1 text-left"><?php echo htmlspecialchars($row["kk_name"]); ?></td> <!-- Rata kiri -->
                                             <td><?php echo htmlspecialchars($row["report_id"]); ?></td> <!-- Rata tengah -->
                                             <td><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
                                             <td><?php echo htmlspecialchars($row["nominal"]); ?></td>

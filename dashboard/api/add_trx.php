@@ -1,74 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Input Transaksi</title>
+<?php
+session_start(); // Start the session
+header('Content-Type: application/json');
+
+// Include the connection file
+require 'db.php'; // Ensure this points to your actual DB connection file
+
+// Get input data
+$data = json_decode(file_get_contents("php://input"), true);
+
+// Extract input data
+$coa_code = isset($data['kode']) ? $data['kode'] : null; // COA code
+$date_trx = isset($data['tanggal']) ? $data['tanggal'] : null; // Transaction date
+$Disc_trx = isset($data['keterangan']) ? $data['keterangan'] : null; // Description
+$reff = isset($data['reff']) ? $data['reff'] : null; // Reference
+$debet = !empty($data['debit']) ? $data['debit'] : 0; // Default to 0 if not set
+$kredit = !empty($data['kredit']) ? $data['kredit'] : 0; // Default to 0 if not set
+
+// Insert data into the kas_umum table
+try {
+    // Prepare the SQL statement
+    $stmt = $pdo->prepare("INSERT INTO kas_umum (coa_code, date_trx, Disc_trx, reff, debet, kredit) VALUES (?, ?, ?, ?, ?, ?)");
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h2 class="text-center">Form Input Transaksi</h2>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inputModal">
-            Tambah Transaksi
-        </button>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="inputModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Form Tambah Transaksi</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="dataForm">
-                        <div class="mb-3">
-                            <label for="tanggal" class="form-label">Tanggal</label>
-                            <input type="text" class="form-control" id="tanggal" name="tanggal" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="kode" class="form-label">Kode</label>
-                            <input type="number" class="form-control" id="kode" name="kode" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="reff" class="form-label">Reff</label>
-                            <textarea class="form-control" id="reff" name="reff" rows="3" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-success">Simpan</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
-
-    <!-- jQuery (Optional for extra functionality) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        // Event listener untuk form submit
-        $('#dataForm').on('submit', function(e) {
-            e.preventDefault();  // Mencegah refresh halaman
-
-            // Ambil data input dari form
-            const tanggal = $('#tanggal').val();
-            const kode = $('#kode').val();
-            const reff = $('#reff').val();
-
-            // Tampilkan data di konsol (bisa disesuaikan)
-            console.log(`tanggal: ${tanggal}, kode: ${kode}, reff: ${reff}`);
-
-            // Reset form dan tutup modal
-            $(this).trigger('reset');
-            $('#inputModal').modal('hide');
-        });
-    </script>
-</body>
-</html>
+    // Execute the statement with data
+    $stmt->execute([$coa_code, $date_trx, $Disc_trx, $reff, $debet, $kredit]);
+    
+    // Respond with success
+    echo json_encode(['success' => true, 'message' => 'Data berhasil disimpan.']);
+} catch (PDOException $e) {
+    // Handle any database errors
+    echo json_encode(['success' => false, 'message' => 'Gagal menyimpan data: ' . $e->getMessage()]);
+}
