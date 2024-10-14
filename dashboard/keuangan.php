@@ -271,6 +271,7 @@ if (isset($_POST['tanggal'])) {
         // Open modal
         $('#openModal').click(function() {
             $('#inputModal').removeClass('hidden').addClass('modal-show'); // Show modal with animation
+            $('#generatedCode').val(''); // Clear the generated code when opening the modal
         });
 
         // Close modal
@@ -295,7 +296,7 @@ if (isset($_POST['tanggal'])) {
 
             const dataToSend = {
                 tanggal: $('#modalDatePicker').val(),
-                kode: generateCode(), // Call function to generate the correct code
+                kode: $('#generatedCode').val(), // Use the generated code from the input
                 reff: $('#dropdown').val(),
                 keterangan: $('#keterangan').val(),
                 debit: $('#debitTextbox').val() || '0', // Default to 0 if not filled
@@ -327,8 +328,9 @@ if (isset($_POST['tanggal'])) {
         // Dropdown logic for debit/kredit
         $('#dropdown').change(function() {
             const selectedValue = $(this).val();
-            $('#debitBox').toggle(selectedValue === "IN"); // Debit IN corresponds to "IN"
-            $('#kreditBox').toggle(selectedValue === "OUT"); // Kredit OUT corresponds to "OUT"
+            $('#debitBox').toggle(selectedValue === "IN"); // Show debit input for "IN"
+            $('#kreditBox').toggle(selectedValue === "OUT"); // Show kredit input for "OUT"
+            generateCode(); // Generate the code when the dropdown value changes
         });
 
         // Function to generate the code based on the selected option
@@ -341,15 +343,16 @@ if (isset($_POST['tanggal'])) {
             } else if (selectedValue === "OUT") { // For Kredit OUT
                 baseCode = "400-100-00"; // Base code for kredit
             } else {
-                return null; // No valid option selected
+                $('#generatedCode').val(''); // Clear the generated code if no option is selected
+                return;
             }
 
             // Get the current count of entries to generate the next code
             let count = 2; // Replace this with a dynamic count from your database
+            const generatedCode = `${baseCode}${String(count).padStart(3, '0')}`;
 
-            return `${baseCode}${String(count).padStart(3, '0')}`; // Generate the code with leading zeros
+            $('#generatedCode').val(generatedCode); // Set the generated code in the input
         }
-
         });
     </script>
 
