@@ -24,10 +24,10 @@ $debet = isset($data['debit']) && $data['debit'] !== '' ? $data['debit'] : 0; //
 $kredit = isset($data['kredit']) && $data['kredit'] !== '' ? $data['kredit'] : 0; // Default to 0 if not set
 
 // Basic validation
-if (empty($coa_code) || empty($date_trx) || empty($reff) || empty($Disc_trx)) {
-    echo json_encode(['success' => false, 'message' => 'Semua field harus diisi.']);
-    exit;
-}
+// if (empty($coa_code) || empty($date_trx) || empty($reff) || empty($Disc_trx)) {
+//     echo json_encode(['success' => false, 'message' => 'Semua field harus diisi.']);
+//     exit;
+// }
 
 // Insert data into the kas_umum table
 try {

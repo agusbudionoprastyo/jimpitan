@@ -298,12 +298,12 @@ if (isset($_POST['tanggal'])) {
                 return; // Prevent submission if form is invalid
             }
 
-        const tanggal = $('#modalDatePicker').val();
-        const kode = $('#kode').val();
-        const reff = $('#dropdown').val();
-        const keterangan = $('#keterangan').val();
-        const debit = $('#debitTextbox').val() || '0'; // Default to '0' if not provided
-        const kredit = $('#kreditTextbox').val() || '0'; // Default to '0' if not provided
+            const tanggal = $('#modalDatePicker').val();
+            const kode = $('#kode').val();
+            const reff = $('#dropdown').val();
+            const keterangan = $('#keterangan').val();
+            const debit = $('#debitTextbox').val() || '0'; // Default to '0' if not provided
+            const kredit = $('#kreditTextbox').val() || '0'; // Default to '0' if not provided
 
             console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}, Debit: ${debit}, Kredit: ${kredit}`);
 
