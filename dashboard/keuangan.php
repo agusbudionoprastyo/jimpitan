@@ -146,10 +146,10 @@ if (isset($_POST['tanggal'])) {
         </main>
     </section>
 
-    <!-- Modal -->
-    <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-50 hidden"> 
-        <div class="modal-overlay absolute inset-0 bg-black opacity-50 z-40"></div>
-        <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-50">
+   <!-- Modal -->
+    <div id="inputModal" class="fixed inset-0 flex items-center justify-center hidden"> 
+        <div class="modal-overlay absolute inset-0 bg-black opacity-50"></div>
+        <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg">
             <div class="modal-header flex justify-between items-center p-4 border-b">
                 <h5 class="text-lg font-semibold" id="modalLabel">Tambah Data Keuangan</h5>
                 <button type="button" class="close-modal text-gray-500 hover:text-gray-800" aria-label="Close">&times;</button>
@@ -166,7 +166,7 @@ if (isset($_POST['tanggal'])) {
                     </div>
                     <div class="mb-4">
                         <label for="dropdown" class="block text-sm font-medium">Reff</label>
-                        <select id="dropdown" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        <select id="dropdown" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
                             <option value="" disabled selected>-- Pilih Opsi --</option>
                             <option value="Opsi 1">Debet</option>
                             <option value="Opsi 2">Kredit</option>
