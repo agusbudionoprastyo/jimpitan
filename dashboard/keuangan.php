@@ -73,47 +73,47 @@ if (isset($_POST['tanggal'])) {
 
         <!-- Modal -->
         <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-50 hidden"> 
-        <div class="modal-overlay absolute inset-0 bg-black opacity-50 z-40"></div>
-        <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-50">
-            <div class="modal-header flex justify-between items-center p-4 border-b">
-                <h5 class="text-lg font-semibold" id="modalLabel">Tambah Data Keuangan</h5>
-                <button type="button" class="close-modal text-gray-500" aria-label="Close">&times;</button>
-            </div>
-            <div class="modal-body p-4">
-                <form id="dataForm">
-                    <div class="mb-3">
-                        <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
-                        <input type="text" id="datePicker" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Pilih Tanggal" name="tanggal" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="kode" class="block text-sm font-medium">Kode</label>
-                        <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="kode" name="kode" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="dropdown" class="block text-sm font-medium">Reff</label>
-                        <select id="dropdown" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            <option value="" disabled>-- Pilih Opsi --</option>
-                            <option value="Opsi 1">Debet</option>
-                            <option value="Opsi 2">Kredit</option>
-                        </select>
-                    </div>
-                    <div class="mb-3" id="debitBox" style="display: none;">
-                        <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
-                        <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Detail debit">
-                    </div>
-                    <div class="mb-3" id="kreditBox" style="display: none;">
-                        <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
-                        <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Detail kredit">
-                    </div>
-                    <div class="mb-3">
-                        <label for="keterangan" class="block text-sm font-medium">Keterangan</label>
-                        <textarea id="keterangan" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi keterangan" rows="3" required></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md">Simpan</button>
-                </form>
+            <div class="modal-overlay absolute inset-0 bg-black opacity-50 z-40"></div>
+            <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-50">
+                <div class="modal-header flex justify-between items-center p-4 border-b">
+                    <h5 class="text-lg font-semibold" id="modalLabel">Tambah Data Keuangan</h5>
+                    <button type="button" class="close-modal text-gray-500 hover:text-gray-800" aria-label="Close">&times;</button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="dataForm">
+                        <div class="mb-4">
+                            <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
+                            <input type="text" id="datePicker" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Pilih Tanggal" name="tanggal" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="kode" class="block text-sm font-medium">Kode</label>
+                            <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" id="kode" name="kode" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="dropdown" class="block text-sm font-medium">Reff</label>
+                            <select id="dropdown" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>-- Pilih Opsi --</option>
+                                <option value="Opsi 1">Debet</option>
+                                <option value="Opsi 2">Kredit</option>
+                            </select>
+                        </div>
+                        <div class="mb-4" id="debitBox" style="display: none;">
+                            <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
+                            <input type="text" id="debitTextbox" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Detail debit">
+                        </div>
+                        <div class="mb-4" id="kreditBox" style="display: none;">
+                            <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
+                            <input type="text" id="kreditTextbox" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Detail kredit">
+                        </div>
+                        <div class="mb-4">
+                            <label for="keterangan" class="block text-sm font-medium">Keterangan</label>
+                            <textarea id="keterangan" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Isi keterangan" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">Simpan</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     </section>
     <!-- SIDEBAR -->
 
