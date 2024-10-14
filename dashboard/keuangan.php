@@ -175,15 +175,15 @@ if (isset($_POST['tanggal'])) {
                             </div>
                             <div class="mb-3" id="debitBox" style="display: none;">
                                 <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
-                                <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Detail debit...">
+                                <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Detail debit">
                             </div>
                             <div class="mb-3" id="kreditBox" style="display: none;">
                                 <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
-                                <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Detail kredit...">
+                                <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Detail kredit">
                             </div>
                             <div class="mb-3">
                                 <label for="keterangan" class="block text-sm font-medium">Keterangan</label>
-                                <textarea id="keterangan" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi keterangan..." rows="3" required></textarea>
+                                <textarea id="keterangan" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi keterangan" rows="3" required></textarea>
                             </div>
                             <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md">Simpan</button>
                         </form>
@@ -200,7 +200,7 @@ if (isset($_POST['tanggal'])) {
     <!-- jQuery (Optional for extra functionality) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
+    <!-- <script>
         // Event listener untuk form submit
         $('#dataForm').on('submit', function(e) {
             e.preventDefault();  // Mencegah refresh halaman
@@ -217,7 +217,7 @@ if (isset($_POST['tanggal'])) {
             $(this).trigger('reset');
             $('#inputModal').modal('hide');
         });
-    </script>
+    </script> -->
 
     <script src="js/monthSelectPlugin.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
