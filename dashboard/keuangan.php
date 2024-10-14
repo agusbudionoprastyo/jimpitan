@@ -270,58 +270,80 @@ if (isset($_POST['tanggal'])) {
 
         // Open modal
         $('#openModal').click(function() {
-                $('#inputModal').removeClass('hidden').addClass('modal-show'); // Menampilkan modal dengan animasi
-            });
+            $('#inputModal').removeClass('hidden').addClass('modal-show'); // Show modal with animation
+        });
 
-            // Close modal
-            $('#inputModal').on('click', '.close-modal, .modal-overlay', function() {
-                console.log('Modal closed'); // Debug log
-                $('#inputModal').removeClass('modal-show'); // Menghapus kelas untuk animasi
+        // Close modal
+        $('#inputModal').on('click', '.close-modal, .modal-overlay', function() {
+            console.log('Modal closed'); // Debug log
+            $('#inputModal').removeClass('modal-show'); // Remove class for animation
 
-                // Tunggu hingga animasi selesai sebelum menyembunyikan modal
-                setTimeout(function() {
-                    $('#inputModal').addClass('hidden'); // Menyembunyikan modal
-                }, 300); // Durasi harus sesuai dengan CSS transition
-            });
+            // Wait for animation to finish before hiding modal
+            setTimeout(function() {
+                $('#inputModal').addClass('hidden'); // Hide modal
+            }, 300); // Duration should match CSS transition
+        });
 
-            // Date picker initialization
-            flatpickr("#modalDatePicker", {
-                dateFormat: "Y-m-d"
-            });
+        // Date picker initialization
+        flatpickr("#modalDatePicker", {
+            dateFormat: "Y-m-d"
+        });
 
-            // Form submission handling
-            $('#dataForm').on('submit', function(e) {
-                e.preventDefault(); // Prevent page refresh
+        // Form submission handling
+        $('#dataForm').on('submit', function(e) {
+            e.preventDefault(); // Prevent page refresh
 
-                // Validate form inputs
-                if (!$(this).get(0).checkValidity()) {
-                    return; // Prevent submission if form is invalid
+            // Validate form inputs
+            if (!$(this).get(0).checkValidity()) {
+                return; // Prevent submission if form is invalid
+            }
+
+            const tanggal = $('#modalDatePicker').val();
+            const kode = $('#kode').val();
+            const reff = $('#dropdown').val();
+            const keterangan = $('#keterangan').val();
+            const debit = $('#debitTextbox').val();
+            const kredit = $('#kreditTextbox').val();
+
+            console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}, Debit: ${debit}, Kredit: ${kredit}`);
+
+            // AJAX request to send data to the server
+            $.ajax({
+                url: 'api/add_trx.php', // Endpoint to send data to
+                type: 'POST', // Use POST method
+                data: {
+                    tanggal: tanggal,
+                    kode: kode,
+                    reff: reff,
+                    keterangan: keterangan,
+                    debit: debit,
+                    kredit: kredit
+                },
+                success: function(response) {
+                    console.log('Response from server:', response);
+                    // Reset form and close modal
+                    $('#dataForm').trigger('reset');
+                    $('#inputModal').removeClass('modal-show'); // Remove class for animation
+                    setTimeout(function() {
+                        $('#inputModal').addClass('hidden'); // Hide modal
+                    }, 300); // Duration should match CSS transition
+
+                    // Show success message
+                    Swal.fire('Data saved!', '', 'success');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    Swal.fire('Error saving data', '', 'error'); // Show error message
                 }
-
-                const tanggal = $('#modalDatePicker').val();
-                const kode = $('#kode').val();
-                const reff = $('#dropdown').val();
-                const keterangan = $('#keterangan').val();
-                const debit = $('#debitTextbox').val();
-                const kredit = $('#kreditTextbox').val();
-
-                console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}, Debit: ${debit}, Kredit: ${kredit}`);
-
-                // Reset form and close modal
-                $(this).trigger('reset');
-                $('#inputModal').removeClass('modal-show'); // Menghapus kelas untuk animasi
-                setTimeout(function() {
-                    $('#inputModal').addClass('hidden'); // Menyembunyikan modal
-                }, 300); // Durasi harus sesuai dengan CSS transition
-                Swal.fire('Data saved!', '', 'success');
             });
+        });
 
-            // Dropdown logic for debit/kredit
-            $('#dropdown').change(function() {
-                const selectedValue = $(this).val();
-                $('#debitBox').toggle(selectedValue === "Opsi 1");
-                $('#kreditBox').toggle(selectedValue === "Opsi 2");
-            });
+        // Dropdown logic for debit/kredit
+        $('#dropdown').change(function() {
+            const selectedValue = $(this).val();
+            $('#debitBox').toggle(selectedValue === "Opsi 1");
+            $('#kreditBox').toggle(selectedValue === "Opsi 2");
+        });
         });
     </script>
 

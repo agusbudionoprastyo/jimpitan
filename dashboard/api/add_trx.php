@@ -1,67 +1,45 @@
 <?php
-session_start(); // Memulai sesi
+session_start(); // Start the session
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 // Include the connection file
-require 'db.php.php';
+require 'db.php'; // Ensure this points to your actual DB connection file
 
-// Pastikan pengguna sudah login
+// Ensure the user is logged in
 if (!isset($_SESSION['user'])) {
     echo json_encode(['success' => false, 'message' => 'Pengguna tidak terautentikasi']);
-    exit; // Hentikan eksekusi jika pengguna tidak terautentikasi
+    exit; // Stop execution if the user is not authenticated
 }
 
-// Dapatkan informasi pengguna dari sesi
-$collector = $_SESSION['user']['user_name'];
+// Get input data
+$data = json_decode(file_get_contents("php://input"), true);
 
-// Dapatkan input data
-$data = json_decode(file_get_contents("php://input"));
+// Validate input data
+$coa_code = isset($data['kode']) ? $data['kode'] : null; // Assuming 'kode' is used for COA code
+$date_trx = isset($data['tanggal']) ? $data['tanggal'] : null;
+$Disc_trx = isset($data['keterangan']) ? $data['keterangan'] : null;
+$reff = isset($data['reff']) ? $data['reff'] : null;
+$debet = isset($data['debit']) ? $data['debit'] : null;
+$kredit = isset($data['kredit']) ? $data['kredit'] : null;
 
-// Pastikan semua data yang diperlukan ada
-if (isset($data->report_id) && isset($data->jimpitan_date) && isset($data->nominal)) {
-    $report_id = $data->report_id;
-    $jimpitan_date = $data->jimpitan_date;
-    $nominal = $data->nominal;
-
-    // Dapatkan koneksi database
-    $conn = getDatabaseConnection();
-
-    // Periksa apakah data sudah ada
-    $checkSql = "
-        SELECT COUNT(*) AS count, m.kk_name 
-        FROM report r
-        JOIN master_kk m ON r.report_id = m.code_id 
-        WHERE r.report_id = ? AND r.jimpitan_date = ?
-    ";
-    $checkStmt = $conn->prepare($checkSql);
-    $checkStmt->execute([$report_id, $jimpitan_date]);
-    $result = $checkStmt->fetch(PDO::FETCH_ASSOC);
-
-    $exists = $result['count'];
-    $kk_name = $result['kk_name'] ?? null; // Jika kk_name tidak ada, set ke null
-
-    if ($exists > 0) {
-        echo json_encode(['success' => false, 'message' => 'Jimpitan tanggal ' . $jimpitan_date . ', Nama ' . $kk_name . ' sudah ada, mau di hapus?']);
-        exit; // Hentikan eksekusi jika data sudah ada
-    }
-
-    // Siapkan pernyataan SQL untuk penyisipan
-    $sql = "INSERT INTO report (report_id, jimpitan_date, nominal, collector) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-
-    if ($stmt) {
-        // Eksekusi pernyataan
-        $stmt->execute([$report_id, $jimpitan_date, $nominal, $collector]);
-        
-        // Respons sukses
-        echo json_encode(['success' => true, 'message' => 'Jimpitan tanggal ' . $jimpitan_date . ', Nama ' . $kk_name . ', tercatat dengan nominal Rp' . $nominal]);
-    } else {
-        // Respons gagal untuk persiapan pernyataan
-        echo json_encode(['success' => false, 'message' => 'Gagal menyiapkan pernyataan']);
-    }
-} else {
-    // Respons jika data tidak lengkap
-    echo json_encode(['success' => false, 'message' => 'Data tidak lengkap']);
+// Basic validation
+if (empty($coa_code) || empty($date_trx) || empty($reff) || empty($Disc_trx)) {
+    echo json_encode(['success' => false, 'message' => 'Semua field harus diisi.']);
+    exit;
 }
-?>
+
+// Insert data into the kas_umum table
+try {
+    // Prepare the SQL statement
+    $stmt = $db->prepare("INSERT INTO kas_umum (coa_code, date_trx, Disc_trx, reff, debet, kredit) VALUES (?, ?, ?, ?, ?, ?)");
+    
+    // Execute the statement with data
+    $stmt->execute([$coa_code, $date_trx, $Disc_trx, $reff, $debet, $kredit]);
+    
+    // Respond with success
+    echo json_encode(['success' => true, 'message' => 'Data berhasil disimpan.']);
+} catch (PDOException $e) {
+    // Handle any database errors
+    echo json_encode(['success' => false, 'message' => 'Gagal menyimpan data: ' . $e->getMessage()]);
+}
