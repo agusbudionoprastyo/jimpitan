@@ -118,12 +118,12 @@ if (isset($_POST['tanggal'])) {
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th style="text-align: left;">Kode</th>
-                                <th style="text-align: center;">Tanggal</th>
-                                <th style="text-align: center;">Reff</th>
-                                <th style="text-align: center;">Keterangan</th>
-                                <th style="text-align: center;">Debet</th>
-                                <th style="text-align: center;">Kredit</th>
+                                <th class="py-0.5" style="text-align: left;">Kode</th>
+                                <th class="py-0.5" style="text-align: center;">Tanggal</th>
+                                <th class="py-0.5" style="text-align: center;">Reff</th>
+                                <th class="py-0.5" style="text-align: center;">Keterangan</th>
+                                <th class="py-0.5" style="text-align: center;">Debet</th>
+                                <th class="py-0.5" style="text-align: center;">Kredit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,12 +131,12 @@ if (isset($_POST['tanggal'])) {
                                 if ($data) {
                                     foreach ($data as $row): ?>
                                         <tr>
-                                            <td><?php echo htmlspecialchars($row["coa_code"]); ?></td>
-                                            <td><?php echo htmlspecialchars($row["date_trx"]); ?></td>
-                                            <td><?php echo htmlspecialchars($row["reff"]); ?></td>
-                                            <td><?php echo htmlspecialchars($row["description"]); ?></td>
-                                            <td><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
-                                            <td><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
+                                            <td class="py-0.5"><?php echo htmlspecialchars($row["coa_code"]); ?></td>
+                                            <td class="py-0.5"><?php echo htmlspecialchars($row["date_trx"]); ?></td>
+                                            <td class="py-0.5"><?php echo htmlspecialchars($row["reff"]); ?></td>
+                                            <td class="py-0.5"><?php echo htmlspecialchars($row["description"]); ?></td>
+                                            <td class="py-0.5"><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
+                                            <td class="py-0.5"><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
                                         </tr>
                                     <?php endforeach; 
                                 } else {
@@ -152,7 +152,7 @@ if (isset($_POST['tanggal'])) {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalLabel">Form Tambah Data</h5>
+                            <h5 class="modal-title" id="modalLabel">Form Tambah Transaksi</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
