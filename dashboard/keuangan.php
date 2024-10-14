@@ -146,44 +146,44 @@ if (isset($_POST['tanggal'])) {
         </main>
     </section>
 
-  <!-- Modal -->
+    <!-- Modal -->
     <div id="inputModal" class="fixed inset-0 flex items-center justify-center hidden"> 
         <div class="modal-overlay absolute inset-0 bg-black opacity-50"></div>
-        <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto shadow-lg border-radius: 15px;">
+        <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto shadow-lg rounded-15">
             <div class="modal-header flex justify-between items-center p-4">
                 <h5 class="text-lg font-semibold" id="modalLabel">Tambah Data Keuangan</h5>
                 <button type="button" class="close-modal text-gray-500 hover:text-gray-800" aria-label="Close">&times;</button>
             </div>
             <div class="modal-body p-4">
                 <form id="dataForm">
-                <div class="mb-4">
-                    <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
-                    <input type="text" id="modalDatePicker" class="mt-1 block w-full border border-gray-300 border-radius: 15px; shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 px-3 py-2" placeholder="Pilih Tanggal" name="tanggal" required>
-                </div>
-                <div class="mb-4">
-                    <label for="kode" class="block text-sm font-medium">Kode</label>
-                    <input type="text" class="mt-1 block w-full border border-gray-300 border-radius: 15px; shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 px-3 py-2" id="kode" name="kode" required>
-                </div>
-                <div class="mb-4">
-                    <label for="dropdown" class="block text-sm font-medium">Reff</label>
-                    <select id="dropdown" class="mt-1 block w-full border border-gray-300 border-radius: 15px; shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 px-3 py-2" required>
-                        <option value="" disabled selected>-- Pilih Opsi --</option>
-                        <option value="Opsi 1">Debet</option>
-                        <option value="Opsi 2">Kredit</option>
-                    </select>
-                </div>
-                <div class="mb-4" id="debitBox" style="display: none;">
-                    <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
-                    <input type="text" id="debitTextbox" class="mt-1 block w-full border border-gray-300 border-radius: 15px; shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 px-3 py-2" placeholder="Detail debit">
-                </div>
-                <div class="mb-4" id="kreditBox" style="display: none;">
-                    <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
-                    <input type="text" id="kreditTextbox" class="mt-1 block w-full border border-gray-300 border-radius: 15px; shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 px-3 py-2" placeholder="Detail kredit">
-                </div>
-                <div class="mb-4">
-                    <label for="keterangan" class="block text-sm font-medium">Keterangan</label>
-                    <textarea id="keterangan" class="mt-1 block w-full border border-gray-300 border-radius: 15px; shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2" placeholder="Isi keterangan" rows="4" required></textarea>
-                </div>
+                    <div class="mb-4">
+                        <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
+                        <input type="text" id="modalDatePicker" class="mt-1 block w-full border border-gray-300 rounded-15 shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 px-3 py-2" placeholder="Pilih Tanggal" name="tanggal" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="kode" class="block text-sm font-medium">Kode</label>
+                        <input type="text" class="mt-1 block w-full border border-gray-300 rounded-15 shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 px-3 py-2" id="kode" name="kode" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="dropdown" class="block text-sm font-medium">Reff</label>
+                        <select id="dropdown" class="mt-1 block w-full border border-gray-300 rounded-15 shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 px-3 py-2" required>
+                            <option value="" disabled selected>-- Pilih Opsi --</option>
+                            <option value="Opsi 1">Debet</option>
+                            <option value="Opsi 2">Kredit</option>
+                        </select>
+                    </div>
+                    <div class="mb-4" id="debitBox" style="display: none;">
+                        <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
+                        <input type="text" id="debitTextbox" class="mt-1 block w-full border border-gray-300 rounded-15 shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 px-3 py-2" placeholder="Detail debit">
+                    </div>
+                    <div class="mb-4" id="kreditBox" style="display: none;">
+                        <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
+                        <input type="text" id="kreditTextbox" class="mt-1 block w-full border border-gray-300 rounded-15 shadow-sm focus:ring-blue-500 focus:border-blue-500 h-12 px-3 py-2" placeholder="Detail kredit">
+                    </div>
+                    <div class="mb-4">
+                        <label for="keterangan" class="block text-sm font-medium">Keterangan</label>
+                        <textarea id="keterangan" class="mt-1 block w-full border border-gray-300 rounded-15 shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2" placeholder="Isi keterangan" rows="4" required></textarea>
+                    </div>
                     <button type="submit" class="w-full text-white py-2" style="background-color: #3c91e6; border-radius: 15px;">Simpan</button>
                 </form>
             </div>
