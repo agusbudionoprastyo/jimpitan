@@ -272,6 +272,7 @@ if (isset($_POST['tanggal'])) {
         $('#openModal').click(function() {
             $('#inputModal').removeClass('hidden').addClass('modal-show'); // Show modal with animation
             $('#generatedCode').val(''); // Clear the generated code when opening the modal
+            $('#kode').val(''); // Clear the kode input as well
         });
 
         // Close modal
@@ -296,12 +297,14 @@ if (isset($_POST['tanggal'])) {
 
             const dataToSend = {
                 tanggal: $('#modalDatePicker').val(),
-                kode: $('#generatedCode').val(), // Use the generated code from the input
+                kode: $('#kode').val(), // Use the generated code from the kode input
                 reff: $('#dropdown').val(),
                 keterangan: $('#keterangan').val(),
                 debit: $('#debitTextbox').val() || '0', // Default to 0 if not filled
                 kredit: $('#kreditTextbox').val() || '0' // Default to 0 if not filled
             };
+
+            console.log(dataToSend); // Log the data being sent
 
             $.ajax({
                 url: 'api/add_trx.php', // Your endpoint
@@ -348,13 +351,12 @@ if (isset($_POST['tanggal'])) {
                 return ''; // Return empty if no valid option is selected
             }
 
-            // Get the current count of entries to generate the next code
-            let count = 2; // Replace this with a dynamic count from your database
+            // Replace this with a dynamic count from your database
+            let count = 2; // Placeholder; replace with actual count logic
             const generatedCode = `${baseCode}${String(count).padStart(3, '0')}`;
 
             return generatedCode; // Return the generated code
         }
-
         });
     </script>
 
