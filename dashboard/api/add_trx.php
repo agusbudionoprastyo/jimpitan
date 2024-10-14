@@ -1,16 +1,8 @@
 <?php
-session_start(); // Start the session
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
 
 // Include the connection file
 require 'db.php'; // Ensure this points to your actual DB connection file
-
-// Ensure the user is logged in
-if (!isset($_SESSION['user'])) {
-    echo json_encode(['success' => false, 'message' => 'Pengguna tidak terautentikasi']);
-    exit; // Stop execution if the user is not authenticated
-}
+header('Content-Type: application/json');
 
 // Get input data
 $data = json_decode(file_get_contents("php://input"), true);
