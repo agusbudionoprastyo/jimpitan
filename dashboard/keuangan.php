@@ -330,12 +330,14 @@ if (isset($_POST['tanggal'])) {
             const selectedValue = $(this).val();
             $('#debitBox').toggle(selectedValue === "IN"); // Show debit input for "IN"
             $('#kreditBox').toggle(selectedValue === "OUT"); // Show kredit input for "OUT"
-            generateCode(); // Generate the code when the dropdown value changes
+            
+            // Generate the code when the dropdown value changes
+            const generatedCode = generateCode(selectedValue);
+            $('#kode').val(generatedCode); // Populate the generated code into the kode input
         });
 
         // Function to generate the code based on the selected option
-        function generateCode() {
-            const selectedValue = $('#dropdown').val();
+        function generateCode(selectedValue) {
             let baseCode;
 
             if (selectedValue === "IN") { // For Debit IN
@@ -343,16 +345,16 @@ if (isset($_POST['tanggal'])) {
             } else if (selectedValue === "OUT") { // For Kredit OUT
                 baseCode = "400-100-00"; // Base code for kredit
             } else {
-                $('#generatedCode').val(''); // Clear the generated code if no option is selected
-                return;
+                return ''; // Return empty if no valid option is selected
             }
 
             // Get the current count of entries to generate the next code
             let count = 2; // Replace this with a dynamic count from your database
             const generatedCode = `${baseCode}${String(count).padStart(3, '0')}`;
 
-            $('#generatedCode').val(generatedCode); // Set the generated code in the input
+            return generatedCode; // Return the generated code
         }
+
         });
     </script>
 
