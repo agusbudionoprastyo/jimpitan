@@ -166,7 +166,7 @@ if (isset($_POST['tanggal'])) {
                                 <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="kode" name="kode" required>
                             </div>
                             <div class="mb-3">
-                                <label for="dropdown" class="block text-sm font-medium">Reff:</label>
+                                <label for="dropdown" class="block text-sm font-medium">Reff</label>
                                 <select id="dropdown" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                                     <option value="">-- Pilih Opsi --</option>
                                     <option value="Opsi 1">Debet</option>
@@ -174,12 +174,12 @@ if (isset($_POST['tanggal'])) {
                                 </select>
                             </div>
                             <div class="mb-3" id="debitBox" style="display: none;">
-                                <label for="debitTextbox" class="block text-sm font-medium">Debit:</label>
-                                <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi detail debit...">
+                                <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
+                                <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Detail debit...">
                             </div>
                             <div class="mb-3" id="kreditBox" style="display: none;">
-                                <label for="kreditTextbox" class="block text-sm font-medium">Kredit:</label>
-                                <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi detail kredit...">
+                                <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
+                                <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Detail kredit...">
                             </div>
                             <div class="mb-3">
                                 <label for="keterangan" class="block text-sm font-medium">Keterangan</label>
