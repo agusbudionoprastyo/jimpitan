@@ -783,6 +783,7 @@ table .dataTable {
     border-spacing: 0 10px; /* Atur jarak antar baris dengan border spacing */
 }
 
+/* Animasi untuk overlay */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -791,13 +792,25 @@ table .dataTable {
     bottom: 0;
     background-color: rgba(238, 238, 238, 0.8);
     z-index: 3000; /* Set a high z-index to be above the sidebar */
+    opacity: 0; /* Mulai dengan opacity 0 */
+    transition: opacity 0.3s ease; /* Transisi untuk efek fade */
 }
 
+/* Animasi untuk modal */
 .modal-container {
     position: relative;
     z-index: 3100; /* Ensure this is higher than the overlay */
+    transform: translateY(-50px); /* Mulai dari posisi di luar tampilan */
+    opacity: 0; /* Mulai dengan opacity 0 */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Transisi untuk efek muncul */
 }
 
-.hidden {
-    display: none; /* This hides the element from the layout */
+/* Kelas untuk menunjukkan modal */
+.modal-show .modal-overlay {
+    opacity: 1; /* Akhirnya muncul */
+}
+
+.modal-show .modal-container {
+    transform: translateY(0); /* Kembali ke posisi normal */
+    opacity: 1; /* Akhirnya muncul */
 }
