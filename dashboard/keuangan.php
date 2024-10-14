@@ -107,7 +107,7 @@ if (isset($_POST['tanggal'])) {
                             Tambah Transaksi
                         </button>
 
-                        <button type="button" id="addcreditdebBtn" class="btn-download" data-bs-toggle="modal" data-bs-target="#inputModal">
+                        <button type="button" id="openModal" class="btn-download" data-bs-toggle="modal" data-bs-target="#inputModal">
                             <i class='bx bxs-add-to-queue'></i> Deb/Cr
                         </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
@@ -155,35 +155,12 @@ if (isset($_POST['tanggal'])) {
             <div class="modal-overlay absolute inset-0 bg-black opacity-50 z-40"></div>
             <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-50">
                 <div class="modal-header flex justify-between items-center p-4 border-b">
-                    <h5 class="text-lg font-semibold" id="modalLabel">Form Tambah Data</h5>
+                    <h5 class="text-lg font-semibold">Form Tambah Data</h5>
                     <button type="button" class="close-modal text-gray-500" aria-label="Close">&times;</button>
                 </div>
                 <div class="modal-body p-4">
                     <form id="dataForm">
-                        <div class="mb-3">
-                            <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
-                            <input type="text" id="datePicker" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Pilih Tanggal" name="tanggal" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="kode" class="block text-sm font-medium">Kode</label>
-                            <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" id="kode" name="kode" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="dropdown" class="block text-sm font-medium">Reff</label>
-                            <select id="dropdown" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                <option value="">-- Pilih Opsi --</option>
-                                <option value="Opsi 1">Debet</option>
-                                <option value="Opsi 2">Kredit</option>
-                            </select>
-                        </div>
-                        <div class="mb-3" id="debitBox" style="display: none;">
-                            <label for="debitTextbox" class="block text-sm font-medium">Debit</label>
-                            <input type="text" id="debitTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi detail debit...">
-                        </div>
-                        <div class="mb-3" id="kreditBox" style="display: none;">
-                            <label for="kreditTextbox" class="block text-sm font-medium">Kredit</label>
-                            <input type="text" id="kreditTextbox" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Isi detail kredit...">
-                        </div>
+                        <!-- Form fields here -->
                         <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md">Simpan</button>
                     </form>
                 </div>
@@ -277,9 +254,10 @@ if (isset($_POST['tanggal'])) {
             $('#inputModal').removeClass('hidden');
         });
 
-        // Optionally, close the modal when clicking outside of it
-        document.querySelector('.modal-overlay').addEventListener('click', () => {
-            document.getElementById('inputModal').classList.add('hidden');
+        // Close modal
+        $('#inputModal').on('click', '.close-modal, .modal-overlay', function() {
+            console.log('Modal closed'); // Debug log
+            $('#inputModal').addClass('hidden');
         });
 
         // Form submission handling
