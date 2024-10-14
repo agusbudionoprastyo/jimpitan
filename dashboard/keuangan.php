@@ -143,9 +143,10 @@ if (isset($_POST['tanggal'])) {
                     </table>
                 </div>  
             </div>
-
-            <!-- Modal -->
-            <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-50 hidden"> 
+        </main>
+    </section>
+                <!-- Modal -->
+                <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-50 hidden"> 
                 <div class="modal-overlay absolute inset-0 bg-black opacity-20 z-40"></div>
                 <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-50">
                     <div class="modal-header flex justify-between items-center p-4 border-b">
@@ -187,8 +188,6 @@ if (isset($_POST['tanggal'])) {
                     </div>
                 </div>
             </div>
-        </main>
-    </section>
 
     <!-- jQuery (Optional for extra functionality) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
