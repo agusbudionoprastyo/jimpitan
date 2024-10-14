@@ -103,12 +103,8 @@ if (isset($_POST['tanggal'])) {
                 <div class="order">
                     <div class="head">
                         <h3>Keuangan</h3>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inputModal">
-                            Tambah Transaksi
-                        </button>
-
                         <button type="button" id="openModal" class="btn-download" data-bs-toggle="modal" data-bs-target="#inputModal">
-                            <i class='bx bxs-add-to-queue'></i> Deb/Cr
+                            <i class='bx bxs-add-to-queue'></i> Transaksi
                         </button>
                         <input type="text" id="datePicker" class="custom-select" placeholder="Pilih Tanggal">
                             <button type="button" id="resetFilterBtn">
@@ -153,7 +149,7 @@ if (isset($_POST['tanggal'])) {
                 <div class="modal-overlay absolute inset-0 bg-black opacity-50 z-40"></div>
                 <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-50">
                     <div class="modal-header flex justify-between items-center p-4 border-b">
-                        <h5 class="text-lg font-semibold" id="modalLabel">Form Tambah Data</h5>
+                        <h5 class="text-lg font-semibold" id="modalLabel">Tambah Data Keuangan</h5>
                         <button type="button" class="close-modal text-gray-500" aria-label="Close">&times;</button>
                     </div>
                     <div class="modal-body p-4">
@@ -169,7 +165,7 @@ if (isset($_POST['tanggal'])) {
                             <div class="mb-3">
                                 <label for="dropdown" class="block text-sm font-medium">Reff</label>
                                 <select id="dropdown" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                    <option value="">-- Pilih Opsi --</option>
+                                    <option value="" disabled>-- Pilih Opsi --</option>
                                     <option value="Opsi 1">Debet</option>
                                     <option value="Opsi 2">Kredit</option>
                                 </select>
@@ -193,7 +189,6 @@ if (isset($_POST['tanggal'])) {
             </div>
         </main>
     </section>
-
 
     <!-- jQuery (Optional for extra functionality) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -315,34 +310,7 @@ if (isset($_POST['tanggal'])) {
             $('#kreditBox').toggle(selectedValue === "Opsi 2");
         });
     });
-
     </script>
-
-    <!-- JavaScript -->
-    <!-- <script>
-        const dropdown = document.getElementById('dropdown');
-        const debitbox = document.getElementById('debitbox');
-        const kreditbox = document.getElementById('kreditbox');
-
-
-        dropdown.addEventListener('change', function () {
-        const selectedValue = dropdown.value;
-
-
-            // Tampilkan textbox debit jika pilihan adalah 'debit'
-            if (selectedValue === 'Debit') {
-                    debitBox.style.display = 'block';  // Tampilkan textbox Debit
-                    kreditBox.style.display = 'none';  // Sembunyikan textbox Kredit
-                } else if (selectedValue === 'Kredit') {
-                    kreditBox.style.display = 'block'; // Tampilkan textbox Kredit
-                    debitBox.style.display = 'none';   // Sembunyikan textbox Debit
-                } else {
-                    // Sembunyikan kedua textbox jika bukan Debit atau Kredit
-                    debitBox.style.display = 'none';
-                    kreditBox.style.display = 'none';
-                }
-            });
-    </script> -->
 
 </body>
 </html>
