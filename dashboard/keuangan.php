@@ -152,7 +152,7 @@ if (isset($_POST['tanggal'])) {
     <!-- Modal -->
     <div id="inputModal" class="fixed inset-0 flex items-center justify-center z-100 hidden"> 
         <div class="modal-overlay absolute inset-0 bg-black opacity-0 z-100"></div>
-        <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-100">
+        <div class="modal-container bg-white w-11/12 md:w-1/3 mx-auto rounded-lg shadow-lg z-90">
             <div class="modal-header flex justify-between items-center p-4 border-b">
                 <h5 class="text-lg font-semibold" id="modalLabel">Form Tambah Data</h5>
                 <button type="button" class="close-modal text-gray-500" aria-label="Close">&times;</button>
