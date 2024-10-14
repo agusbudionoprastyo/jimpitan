@@ -289,51 +289,36 @@ if (isset($_POST['tanggal'])) {
             dateFormat: "Y-m-d"
         });
 
-        // Form submission handling
         $('#dataForm').on('submit', function(e) {
             e.preventDefault(); // Prevent page refresh
 
-            // Validate form inputs
-            if (!$(this).get(0).checkValidity()) {
-                return; // Prevent submission if form is invalid
-            }
+            const dataToSend = {
+                tanggal: $('#modalDatePicker').val(),
+                kode: $('#kode').val(),
+                reff: $('#dropdown').val(),
+                keterangan: $('#keterangan').val(),
+                debit: $('#debitTextbox').val() || '0', // Default to 0 if not filled
+                kredit: $('#kreditTextbox').val() || '0' // Default to 0 if not filled
+            };
 
-            const tanggal = $('#modalDatePicker').val();
-            const kode = $('#kode').val();
-            const reff = $('#dropdown').val();
-            const keterangan = $('#keterangan').val();
-            const debit = $('#debitTextbox').val() || '0'; // Default to '0' if not provided
-            const kredit = $('#kreditTextbox').val() || '0'; // Default to '0' if not provided
-
-            console.log(`Tanggal: ${tanggal}, Kode: ${kode}, Reff: ${reff}, Keterangan: ${keterangan}, Debit: ${debit}, Kredit: ${kredit}`);
-
-            // AJAX request to send data to the server
             $.ajax({
-                url: 'api/add_trx.php', // Endpoint to send data to
-                type: 'POST', // Use POST method
-                data: {
-                    tanggal: tanggal,
-                    kode: kode,
-                    reff: reff,
-                    keterangan: keterangan,
-                    debit: debit,
-                    kredit: kredit
-                },
+                url: 'api/add_trx.php', // Your endpoint
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(dataToSend),
                 success: function(response) {
-                    console.log('Response from server:', response);
-                    // Reset form and close modal
-                    $('#dataForm').trigger('reset');
-                    $('#inputModal').removeClass('modal-show'); // Remove class for animation
-                    setTimeout(function() {
-                        $('#inputModal').addClass('hidden'); // Hide modal
-                    }, 300); // Duration should match CSS transition
-
-                    // Show success message
-                    Swal.fire('Data saved!', '', 'success');
+                    if (response.success) {
+                        Swal.fire('Data saved!', '', 'success');
+                    } else {
+                        Swal.fire('Error', response.message, 'error');
+                    }
+                    // Reset form and close modal if necessary
+                    $('#dataForm')[0].reset();
+                    $('#inputModal').addClass('hidden');
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
-                    Swal.fire('Error saving data', '', 'error'); // Show error message
+                    Swal.fire('Error saving data', '', 'error');
                 }
             });
         });
@@ -341,8 +326,8 @@ if (isset($_POST['tanggal'])) {
         // Dropdown logic for debit/kredit
         $('#dropdown').change(function() {
             const selectedValue = $(this).val();
-            $('#debitBox').toggle(selectedValue === "Opsi 1");
-            $('#kreditBox').toggle(selectedValue === "Opsi 2");
+            $('#debitBox').toggle(selectedValue === "In");
+            $('#kreditBox').toggle(selectedValue === "Out");
         });
         });
     </script>
