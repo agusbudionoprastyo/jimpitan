@@ -790,12 +790,12 @@ table .dataTable {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
-    z-index: 40; /* Should be below the modal but above other content */
+    z-index: 3000; /* Set a high z-index to be above the sidebar */
 }
 
 .modal-container {
     position: relative;
-    z-index: 50; /* Higher than the overlay */
+    z-index: 3100; /* Ensure this is higher than the overlay */
 }
 
 .hidden {
