@@ -789,7 +789,7 @@ table .dataTable {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    background-color: rgba(238, 238, 238, 0.8);
     z-index: 3000; /* Set a high z-index to be above the sidebar */
 }
 
