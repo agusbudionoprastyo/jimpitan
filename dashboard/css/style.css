@@ -798,3 +798,7 @@ table .dataTable {
 	margin-top: 10%;
     z-index: 50; /* Higher than the overlay */
 }
+
+.hidden {
+    display: none; /* This hides the element from the layout */
+}
