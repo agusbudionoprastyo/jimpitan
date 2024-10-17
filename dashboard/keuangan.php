@@ -111,15 +111,15 @@ if (isset($_POST['tanggal'])) {
                             <i class="bx bx-x-circle" style="font-size: 24px; color: red;"></i>
                             </button>
                     </div>
-                    <table id="example" class="display" style="width:100%">
+                    <table id="example" class="display table-auto border-collapse border border-gray-300 w-full" style="width:100%">
                         <thead>
                             <tr>
-                                <th style="text-align: left;">Kode</th>
-                                <th style="text-align: center;">Tanggal</th>
-                                <th style="text-align: center;">Reff</th>
-                                <th style="text-align: center;">Keterangan</th>
-                                <th style="text-align: center;">Debet</th>
-                                <th style="text-align: center;">Kredit</th>
+                                <th class="border border-gray-300 px-2 py-1 leading-tight" style="text-align: left;">Kode</th>
+                                <th class="border border-gray-300 px-2 py-1 leading-tight" style="text-align: center;">Tanggal</th>
+                                <th class="border border-gray-300 px-2 py-1 leading-tight" style="text-align: center;">Reff</th>
+                                <th class="border border-gray-300 px-2 py-1 leading-tight" style="text-align: center;">Keterangan</th>
+                                <th class="border border-gray-300 px-2 py-1 leading-tight" style="text-align: center;">Debet</th>
+                                <th class="border border-gray-300 px-2 py-1 leading-tight" style="text-align: center;">Kredit</th>
                             </tr>
                         </thead>
                         <tbody class="space-y-0">
@@ -127,12 +127,12 @@ if (isset($_POST['tanggal'])) {
                                 if ($data) {
                                     foreach ($data as $row): ?>
                                         <tr>
-                                            <td class="border border-gray-300 px-2 py-0"><?php echo htmlspecialchars($row["coa_code"]); ?></td>
-                                            <td class="border border-gray-300 px-2 py-0"><?php echo htmlspecialchars($row["date_trx"]); ?></td>
-                                            <td class="border border-gray-300 px-2 py-0"><?php echo htmlspecialchars($row["reff"]); ?></td>
-                                            <td class="border border-gray-300 px-2 py-0"><?php echo htmlspecialchars($row["description"]); ?></td>
-                                            <td class="border border-gray-300 px-2 py-0"><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
-                                            <td class="border border-gray-300 px-2 py-0"><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
+                                            <td class="border border-gray-300 px-2 py-1 leading-tight"><?php echo htmlspecialchars($row["coa_code"]); ?></td>
+                                            <td class="border border-gray-300 px-2 py-1 leading-tight"><?php echo htmlspecialchars($row["date_trx"]); ?></td>
+                                            <td class="border border-gray-300 px-2 py-1 leading-tight"><?php echo htmlspecialchars($row["reff"]); ?></td>
+                                            <td class="border border-gray-300 px-2 py-1 leading-tight"><?php echo htmlspecialchars($row["description"]); ?></td>
+                                            <td class="border border-gray-300 px-2 py-1 leading-tight"><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
+                                            <td class="border border-gray-300 px-2 py-1 leading-tight"><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
                                         </tr>   
                                     <?php endforeach; 
                                 } else {    
