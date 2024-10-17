@@ -122,17 +122,17 @@ if (isset($_POST['tanggal'])) {
                                 <th style="text-align: center;">Kredit</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="space-y-0">
                             <?php
                                 if ($data) {
                                     foreach ($data as $row): ?>
                                         <tr>
-                                            <td><?php echo htmlspecialchars($row["coa_code"]); ?></td>
-                                            <td><?php echo htmlspecialchars($row["date_trx"]); ?></td>
-                                            <td><?php echo htmlspecialchars($row["reff"]); ?></td>
-                                            <td><?php echo htmlspecialchars($row["description"]); ?></td>
-                                            <td><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
-                                            <td><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
+                                            <td class="border border-gray-300 px-2 py-1"><?php echo htmlspecialchars($row["coa_code"]); ?></td>
+                                            <td class="border border-gray-300 px-2 py-1"><?php echo htmlspecialchars($row["date_trx"]); ?></td>
+                                            <td class="border border-gray-300 px-2 py-1"><?php echo htmlspecialchars($row["reff"]); ?></td>
+                                            <td class="border border-gray-300 px-2 py-1"><?php echo htmlspecialchars($row["description"]); ?></td>
+                                            <td class="border border-gray-300 px-2 py-1"><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
+                                            <td class="border border-gray-300 px-2 py-1"><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
                                         </tr>   
                                     <?php endforeach; 
                                 } else {    
