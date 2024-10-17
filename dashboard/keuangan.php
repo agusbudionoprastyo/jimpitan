@@ -115,6 +115,7 @@ if (isset($_POST['tanggal'])) {
                         <thead>
                             <tr>
                                 <th style="text-align: left;">Kode</th>
+                                <th style="text-align: center;">Tanggal</th>
                                 <th style="text-align: center;">Reff</th>
                                 <th style="text-align: center;">Keterangan</th>
                                 <th style="text-align: center;">Debet</th>
@@ -131,7 +132,7 @@ if (isset($_POST['tanggal'])) {
                                             <td><?php echo htmlspecialchars($row["reff"]); ?></td>
                                             <td><?php echo htmlspecialchars($row["description"]); ?></td>
                                             <td><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
-                                            <td class="py-1"><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
+                                            <td><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
                                         </tr>   
                                     <?php endforeach; 
                                 } else {    
