@@ -126,15 +126,15 @@ if (isset($_POST['tanggal'])) {
                                 if ($data) {
                                     foreach ($data as $row): ?>
                                         <tr>
-                                            <td class="p-1"><?php echo htmlspecialchars($row["coa_code"]); ?></td>
-                                            <td class="p-1"><?php echo htmlspecialchars($row["date_trx"]); ?></td>
-                                            <td class="p-1"><?php echo htmlspecialchars($row["reff"]); ?></td>
-                                            <td class="p-1"><?php echo htmlspecialchars($row["description"]); ?></td>
-                                            <td class="p-1"><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
-                                            <td class="p-1"><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
-                                        </tr>
+                                            <td class="py-1" sapace><?php echo htmlspecialchars($row["coa_code"]); ?></td>
+                                            <td class="py-1"><?php echo htmlspecialchars($row["date_trx"]); ?></td>
+                                            <td class="py-1"><?php echo htmlspecialchars($row["reff"]); ?></td>
+                                            <td class="py-1"><?php echo htmlspecialchars($row["description"]); ?></td>
+                                            <td class="py-1"><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
+                                            <td class="py-1"><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
+                                        </tr>   
                                     <?php endforeach; 
-                                } else {
+                                } else {    
                                     echo '<tr><td colspan="6" style="text-align:center;">No data available</td></tr>';
                                 }
                             ?>
