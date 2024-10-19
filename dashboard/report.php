@@ -89,6 +89,12 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <span class="text">Keuangan</span>
                 </a>
             </li>
+            <li>
+            <a href="buku_kas.php">
+                    <i class='bx bxs-badge-check'></i>
+                    <span class="text">Buku Kas</span>
+                </a>
+            </li>
         </ul>
 
         <ul class="side-menu">
