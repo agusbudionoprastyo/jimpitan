@@ -128,7 +128,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <tr>
                                         <td><?php echo htmlspecialchars($row["coa_code"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["date_trx"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["desc_trx"]); ?></td>
+                                        <td style="text-align: left;"><?php echo htmlspecialchars($row["desc_trx"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["reff"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["debit"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["credit"]); ?></td>
