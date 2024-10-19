@@ -112,13 +112,13 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th style="text-align: left;">coa_code</th>
-                                <th style="text-align: center;">date_trx</th>
-                                <th style="text-align: center;">description</th>
+                                <th style="text-align: left;">COA</th>
+                                <th style="text-align: center;">Tanggal</th>
+                                <th style="text-align: center;">Description</th>
                                 <th style="text-align: center;">Reff</th>
-                                <th style="text-align: center;">debit</th>
-                                <th style="text-align: center;">credit</th>
-                                <th style="text-align: center;">timestamp</th>
+                                <th style="text-align: center;">Debit</th>
+                                <th style="text-align: center;">Kredit</th>
+                                <th style="text-align: center;">System</th>
                             </tr>
                         </thead>
                         <tbody>
