@@ -83,7 +83,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <i class='bx bxs-wallet' ></i>
                     <span class="text">Keuangan
                         <i class='bx bxs-badge-check'></i>
-                        <span class="badge">1</span>
+                        <span class="text">Iuran Sosial</span>
                     </span>
                 </a>
             </li>
