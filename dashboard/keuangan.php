@@ -131,7 +131,7 @@ if (isset($_POST['tanggal'])) {
                                             <td><?php echo htmlspecialchars($row["coa_code"]); ?></td>
                                             <td><?php echo htmlspecialchars($row["date_trx"]); ?></td>
                                             <td><?php echo htmlspecialchars($row["reff"]); ?></td>
-                                            <td><?php echo htmlspecialchars($row["description"]); ?></td>
+                                            <td><?php echo htmlspecialchars($row["desc_trx"]); ?></td>
                                             <td><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
                                             <td><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
                                         </tr>   
