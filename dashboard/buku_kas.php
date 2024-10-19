@@ -114,9 +114,9 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <th style="text-align: left;">COA</th>
                                 <th style="text-align: center;">Tanggal</th>
-                                <th style="text-align: center;">Description</th>
+                                <th style="text-align: left;">Description</th>
                                 <th style="text-align: center;">Reff</th>
-                                <th style="text-align: center;">Debit</th>
+                                <th style="text-align: center;">Debet</th>
                                 <th style="text-align: center;">Kredit</th>
                                 <th style="text-align: center;">System</th>
                             </tr>
@@ -128,10 +128,10 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <tr>
                                         <td><?php echo htmlspecialchars($row["coa_code"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["date_trx"]); ?></td>
-                                        <td style="text-align: left;"><?php echo htmlspecialchars($row["desc_trx"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["desc_trx"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["reff"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["debit"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["credit"]); ?></td>
+                                        <td><?php echo "Rp " . number_format(htmlspecialchars($row["debet"]), 0, ',', '.'); ?></td> 
+                                        <td><?php echo "Rp " . number_format(htmlspecialchars($row["kredit"]), 0, ',', '.'); ?></td> <!-- asem variable billingual hahahahah :) -->
                                         <td><?php echo htmlspecialchars($row["timestamp"]); ?></td>
                                     </tr>
                                 <?php endforeach; 
