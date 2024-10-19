@@ -344,9 +344,9 @@ if (isset($_POST['tanggal'])) {
             let baseCode;
 
             if (selectedValue === "IN") { // For Debit IN
-                baseCode = "100-000-000"; // Base code for debit
+                baseCode = "100-000-"; // Base code for debit
             } else if (selectedValue === "OUT") { // For Kredit OUT
-                baseCode = "100-100-000"; // Base code for kredit
+                baseCode = "100-100-"; // Base code for kredit
             } else {
                 return ''; // Return empty if no valid option is selected
             }
