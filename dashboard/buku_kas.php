@@ -16,7 +16,7 @@ if ($_SESSION['user']['role'] !== 'admin') {
 include 'api/db.php';
 
 // Prepare and execute the SQL statement
-$stmt = $pdo->prepare("SELECT kk_name, code_id FROM master_kk"); // Update 'your_table'
+$stmt = $pdo->prepare("SELECT * FROM kas_umum"); // Update 'your_table'
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -91,7 +91,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h1>Jimpitan - RT07 Salatiga</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="#">KK</a>
+                            <a href="#">Buku Kas</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
@@ -104,7 +104,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>KK</h3>
+                        <h3>Buku Kas</h3>
 						<button type="button" id="printSelectedBtn" class="btn-download">
 							<i class='bx bxs-printer' style="font-size:24px"></i>
 						</button>
@@ -112,12 +112,13 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th style="text-align: left;">Nama KK</th>
-                                <th style="text-align: center;">Code</th>
-                                <th style="text-align: center;">
-                                    <input type="checkbox" id="selectAllCheckbox" style="display:none">
-                                    <label for="selectAllCheckbox" style="font-size:24px"><i class='bx bx-check-double'></i></label>
-                                </th>
+                                <th style="text-align: left;">coa_code</th>
+                                <th style="text-align: center;">date_trx</th>
+                                <th style="text-align: center;">description</th>
+                                <th style="text-align: center;">Reff</th>
+                                <th style="text-align: center;">debit</th>
+                                <th style="text-align: center;">credit</th>
+                                <th style="text-align: center;">timestamp</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -125,15 +126,17 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if ($data) {
                                 foreach ($data as $row): ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($row["kk_name"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["code_id"]); ?></td>
-                                        <td>
-                                            <input type="checkbox" class="print-checkbox">    
-                                        </td>
+                                        <td><?php echo htmlspecialchars($row["coa_code"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["date_trx"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["disc_trx"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["reff"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["debit"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["credit"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["timestamp"]); ?></td>
                                     </tr>
                                 <?php endforeach; 
                             } else {
-                                echo '<tr><td colspan="3">No data available</td></tr>';
+                                echo '<tr><td colspan="7">No data available</td></tr>';
                             }
                         ?>
                         </tbody>
