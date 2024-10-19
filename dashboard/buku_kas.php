@@ -54,51 +54,16 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <span class="text">Jimpitan</span>
         </a>
         <ul class="side-menu top">
-            <li>
-                <a href="index.php">
-                    <i class='bx bxs-dashboard' ></i>
-                    <span class="text">Dashboard</span>
-                </a>
-            </li>
-            <li class="active">
-            <a href="#">
-                    <i class='bx bxs-group' ></i>
-                    <span class="text">KK</span>
-                </a>
-            </li>
-            <li>
-                <a href="report.php">
-                    <i class='bx bxs-report'></i>
-                    <span class="text">Report</span>
-                </a>
-            </li>
-            <li>
-            <a href="keuangan.php">
-                    <i class='bx bxs-wallet' ></i>
-                    <span class="text">Keuangan</span>
-                </a>
-            </li>
-            <li class="active">
-            <a href="#">
-                    <i class='bx bxs-badge-check'></i>
-                    <span class="text">Buku Kas</span>
-                </a>
-            </li>
+            <li><a href="index.php"><i class='bx bxs-dashboard'></i><span class="text">Dashboard</span></a></li>
+            <li><a href="kk.php"><i class='bx bxs-group'></i><span class="text">KK</span></a></li>
+            <li><a href="report.php"><i class='bx bxs-report'></i><span class="text">Report</span></a></li>
+            <li><a href="keuangan.php"><i class='bx bxs-wallet'></i><span class="text">Keuangan</span></a></li>
+            <li class="active"><a href="#"><i class='bx bxs-badge-check'></i><span class="text">Buku Kas</span></a></li>
         </ul>
         <ul class="side-menu">
-			<li>
-                <a href="setting.php">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
-			<li>
-				<a href="logout.php" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
+            <li><a href="setting.php"><i class='bx bxs-cog'></i><span class="text">Settings</span></a></li>
+            <li><a href="logout.php" class="logout"><i class='bx bxs-log-out-circle'></i><span class="text">Logout</span></a></li>
+        </ul>
     </section>
     <!-- SIDEBAR -->
 
