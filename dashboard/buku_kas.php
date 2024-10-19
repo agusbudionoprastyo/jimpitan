@@ -114,7 +114,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <th style="text-align: left;">COA</th>
                                 <th style="text-align: center;">Tanggal</th>
-                                <th style="text-align: left;">Description</th>
+                                <th style="text-align: center;">Description</th>
                                 <th style="text-align: center;">Reff</th>
                                 <th style="text-align: center;">Debet</th>
                                 <th style="text-align: center;">Kredit</th>
