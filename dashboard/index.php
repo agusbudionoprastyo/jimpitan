@@ -81,7 +81,10 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li>
             <a href="keuangan.php">
                     <i class='bx bxs-wallet' ></i>
-                    <span class="text">Keuangan</span>
+                    <span class="text">Keuangan
+                        <i class='bx bxs-badge-check'></i>
+                        <span class="badge">1</span>
+                    </span>
                 </a>
             </li>
         </ul>
