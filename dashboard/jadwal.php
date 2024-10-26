@@ -139,7 +139,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             </button>
                                             <button class="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded mr-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12h-9" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 3.487c.359-.359.939-.359 1.297 0l2.354 2.354c.359.359.359.939 0 1.297l-9.27 9.27a1.5 1.5 0 01-.53.354l-3.033.91a.75.75 0 01-.929-.928l.91-3.034a1.5 1.5 0 01.353-.529l9.27-9.27zM19.5 9l-4.5-4.5" />
                                                 </svg>
                                                 Edit
                                             </button>
