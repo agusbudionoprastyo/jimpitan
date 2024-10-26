@@ -16,7 +16,7 @@ if ($_SESSION['user']['role'] !== 'admin') {
 include 'api/db.php';
 
 // Prepare and execute the SQL statement
-$stmt = $pdo->prepare("SELECT id_code,user_name,password,shift,role FROM users"); // Update 'your_table'
+$stmt = $pdo->prepare("SELECT id_code,user_name,name,password,shift,role FROM users"); // Update 'your_table'
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -92,7 +92,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h1>Jimpitan - RT07 Salatiga</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="#">users</a>
+                            <a href="#">Users</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
@@ -105,7 +105,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>KK</h3>
+                        <h3>Jadwal Jaga</h3>
 						<button type="button" id="printSelectedBtn" class="btn-download">
 							<i class='bx bxs-printer' style="font-size:24px"></i>
 						</button>
@@ -115,6 +115,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <th style="text-align: left;">Kode ID</th>
                                 <th style="text-align: center;">Nama User</th>
+                                <th style="text-align: center;">Nama</th>
                                 <th style="text-align: center;">Password</th>
                                 <th style="text-align: center;">Shift</th>
                                 <th style="text-align: center;">Role</th>
@@ -131,6 +132,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <tr>
                                         <td><?php echo htmlspecialchars($row["id_code"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["user_name"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["name"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["password"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["shift"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["role"]); ?></td>
