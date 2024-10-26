@@ -16,7 +16,7 @@ if ($_SESSION['user']['role'] !== 'admin') {
 include 'api/db.php';
 
 // Prepare and execute the SQL statement
-$stmt = $pdo->prepare("SELECT kk_name, code_id FROM master_kk"); // Update 'your_table'
+$stmt = $pdo->prepare("SELECT id_code,user_name,password,shift,role FROM users"); // Update 'your_table'
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -92,7 +92,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h1>Jimpitan - RT07 Salatiga</h1>
                     <ul class="breadcrumb">
                         <li>
-                            <a href="#">KK</a>
+                            <a href="#">users</a>
                         </li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
@@ -113,8 +113,11 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th style="text-align: left;">Nama KK</th>
-                                <th style="text-align: center;">Code</th>
+                                <th style="text-align: left;">Kode ID</th>
+                                <th style="text-align: center;">Nama User</th>
+                                <th style="text-align: center;">Password</th>
+                                <th style="text-align: center;">Shift</th>
+                                <th style="text-align: center;">Role</th>
                                 <th style="text-align: center;">
                                     <input type="checkbox" id="selectAllCheckbox" style="display:none">
                                     <label for="selectAllCheckbox" style="font-size:24px"><i class='bx bx-check-double'></i></label>
@@ -126,8 +129,11 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if ($data) {
                                 foreach ($data as $row): ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($row["kk_name"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["code_id"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["id_code"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["user_name"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["password"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["shift"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["role"]); ?></td>
                                         <td>
                                             <input type="checkbox" class="print-checkbox">    
                                         </td>
