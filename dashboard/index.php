@@ -118,7 +118,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <li>
                     <i class='bx bxs-badge-check bx-lg' ></i>
                     <span class="text">
-                        <h3 id="totalCheck">0</h3>
+                        <h3 id="totalCheck">$row</h3>
                         <p>Checked</p>
                     </span>
                 </li>
@@ -189,5 +189,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="js/script.js"></script>
+
 </body>
 </html>
