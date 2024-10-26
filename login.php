@@ -89,7 +89,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="error-message" style="color: red; font-size: 12px;"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
     </div>
-    <p style="color:grey">@2024 copyright | by doniabiy</p>
+    <style>
+        .center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+    </style>
+    <p style="color:grey" class="center-text">@2024 copyright | by doniabiy</p>
 </div>
 </form>
     <!-- <script>
