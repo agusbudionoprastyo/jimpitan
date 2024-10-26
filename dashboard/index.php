@@ -118,7 +118,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <li>
                     <i class='bx bxs-badge-check bx-lg' ></i>
                     <span class="text">
-                        <h3 id="totalCheck">$row</h3>
+                        <h3 id="totalCheck"><?php $row ?></h3>
                         <p>Checked</p>
                     </span>
                 </li>
