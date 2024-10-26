@@ -153,7 +153,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <td><?php echo htmlspecialchars($row["user_name"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["shift"]); ?></td>
                                     </tr>
-                                <?php endforeach; 
+                                <?php endforeach;
+                                $no = $no + 1 
                             } else {
                                 echo '<tr><td colspan="3">No data available</td></tr>';
                             }
