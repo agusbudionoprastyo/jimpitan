@@ -137,6 +137,12 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             <button class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded">
                                                 Hapus
                                             </button>
+                                            <button class="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12h-9" />
+                                                </svg>
+                                                Edit
+                                            </button>
                                         </td>
                                     </tr>
                                 <?php endforeach; 
