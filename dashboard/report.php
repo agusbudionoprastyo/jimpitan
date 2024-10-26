@@ -159,9 +159,9 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="w-1/2 px-4 py-1">Nama KK</th> <!-- Kolom pertama rata kiri -->
+                                <th style="text-align: Left;">Nama KK</th> <!-- Kolom pertama rata kiri -->
                                 <th style="text-align: center;">Code</th>
-                                <th class="py-2 px-4 border-b cursor-pointer" id="sort-date">
+                                <th style="text-align: center;" id="sort-date">
                                     Tanggal
                                     <span class="ml-2">&#9650;</span> <!-- Panah untuk indikasi sorting -->
                                 </th>
