@@ -116,10 +116,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <th style="text-align: left;">Kode ID</th>
                                 <th style="text-align: center;">Nama</th>
                                 <th style="text-align: center;">Shift</th>
-                                <th style="text-align: center;">
-                                    <input type="checkbox" id="selectAllCheckbox" style="display:none">
-                                    <label for="selectAllCheckbox" style="font-size:24px"><i class='bx bx-check-double'></i></label>
-                                </th>
+                                <th style="text-align: center;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
