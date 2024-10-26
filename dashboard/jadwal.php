@@ -130,12 +130,12 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if ($data) {
                                 foreach ($data as $row): ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($row["id_code"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["user_name"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["name"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["password"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["shift"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["role"]); ?></td>
+                                        <td border-spacing: 0px 0px;><?php echo htmlspecialchars($row["id_code"]); ?></td>
+                                        <td border-spacing: 0px 0px;><?php echo htmlspecialchars($row["user_name"]); ?></td>
+                                        <td border-spacing: 0px 0px;><?php echo htmlspecialchars($row["name"]); ?></td>
+                                        <td border-spacing: 0px 0px;><?php echo htmlspecialchars($row["password"]); ?></td>
+                                        <td border-spacing: 0px 0px;><?php echo htmlspecialchars($row["shift"]); ?></td>
+                                        <td border-spacing: 0px 0px;><?php echo htmlspecialchars($row["role"]); ?></td>
                                         <td>
                                             <input type="checkbox" class="print-checkbox">    
                                         </td>
