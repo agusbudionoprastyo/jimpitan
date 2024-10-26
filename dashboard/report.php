@@ -175,7 +175,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($data as $row): ?>
                                         <tr>
                                             <td class="px-4 py-1 text-left"><?php echo htmlspecialchars($row["kk_name"]); ?></td> <!-- Rata kiri -->
-                                            <td><?php echo htmlspecialchars($row["report_id"]); ?></td> <!-- Rata tengah -->
+                                            <td class="px-4 py-1 text-left"><?php echo htmlspecialchars($row["report_id"]); ?></td> <!-- Rata tengah -->
                                             <td><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
                                             <td><?php echo htmlspecialchars($row["nominal"]); ?></td>
                                             <td><?php echo htmlspecialchars($row["collector"]); ?></td>
