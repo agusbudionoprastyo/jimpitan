@@ -91,7 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <style>
         .center-text {
-            position: absolute;
             transform: translate(-50%, -50%);
             text-align: center;
         }
