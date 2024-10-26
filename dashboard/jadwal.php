@@ -114,9 +114,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <thead>
                             <tr>
                                 <th style="text-align: left;">Kode ID</th>
-                                <th style="text-align: left;">Nama User</th>
                                 <th style="text-align: left;">Nama</th>
-                                <th style="text-align: left;">Password</th>
                                 <th style="text-align: left;">Shift</th>
                                 <th style="text-align: left;">Role</th>
                                 <th style="text-align: center;">
@@ -130,12 +128,10 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if ($data) {
                                 foreach ($data as $row): ?>
                                     <tr>
-                                        <td class="border-spacing-0"><?php echo htmlspecialchars($row["id_code"]); ?></td>
-                                        <td class="border-spacing-0"><?php echo htmlspecialchars($row["user_name"]); ?></td>
-                                        <td class="border-spacing-0"><?php echo htmlspecialchars($row["name"]); ?></td>
-                                        <td class="border-spacing-0"><?php echo htmlspecialchars($row["password"]); ?></td>
-                                        <td class="border-spacing-0"><?php echo htmlspecialchars($row["shift"]); ?></td>
-                                        <td class="border-spacing-0"><?php echo htmlspecialchars($row["role"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["id_code"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["name"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["shift"]); ?></td>
+                                        <td><?php echo htmlspecialchars($row["role"]); ?></td>
                                         <td>
                                             <input type="checkbox" class="print-checkbox">    
                                         </td>
