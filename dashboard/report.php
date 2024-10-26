@@ -161,10 +161,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <th style="text-align: Left;">Nama KK</th> <!-- Kolom pertama rata kiri -->
                                 <th style="text-align: center;">Code</th>
-                                <th class="py-2 px-4 border-b cursor-pointer" id="sort-date">
-                                    Tanggal
-                                    <span class="ml-2">&#9650;</span> <!-- Panah untuk indikasi sorting -->
-                                </th>
+                                <th style="text-align: center;" id="sort-date">Tanggal</th>
                                 <th style="text-align: center;">Nominal</th>
                                 <th style="text-align: center;">Input By</th>
                             </tr>
@@ -258,7 +255,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     // Fungsi untuk mengurutkan tabel berdasarkan kolom tanggal
     const tableBody = document.getElementById('table-body');
     const sortDateButton = document.getElementById('sort-date');
-    let discending = false; // Urutan awal: terbaru ke terlama
+    let ascending = false; // Urutan awal: terbaru ke terlama
 
     sortDateButton.addEventListener('click', () => {
       const rows = Array.from(tableBody.querySelectorAll('tr'));
@@ -266,14 +263,14 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
       rows.sort((a, b) => {
         const dateA = new Date(a.cells[2].innerText);
         const dateB = new Date(b.cells[2].innerText);
-        return discending ? dateA - dateB : dateB - dateA;
+        return ascending ? dateA - dateB : dateB - dateA;
       });
 
-      discending = !discending; // Balik urutan setiap klik
+      ascending = !ascending; // Balik urutan setiap klik
       rows.forEach(row => tableBody.appendChild(row)); // Re-attach rows yang sudah diurutkan
 
       // Update simbol panah untuk indikasi sorting
-      sortDateButton.querySelector('span').innerHTML = discending ? '&#9660;' : '&#9650;';
+      sortDateButton.querySelector('span').innerHTML = ascending ? '&#9660;' : '&#9650;';
     });
   </script>
 
