@@ -116,7 +116,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <th style="text-align: left;">Kode ID</th>
                                 <th style="text-align: center;">Nama</th>
                                 <th style="text-align: center;">Shift</th>
-                                <th style="text-align: center;">Role</th>
                                 <th style="text-align: center;">
                                     <input type="checkbox" id="selectAllCheckbox" style="display:none">
                                     <label for="selectAllCheckbox" style="font-size:24px"><i class='bx bx-check-double'></i></label>
@@ -131,9 +130,13 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <td><?php echo htmlspecialchars($row["id_code"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["name"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["shift"]); ?></td>
-                                        <td><?php echo htmlspecialchars($row["role"]); ?></td>
-                                        <td>
-                                            <input type="checkbox" class="print-checkbox">    
+                                        <td class="border border-gray-300 px-4 py-2">
+                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded mr-2">
+                                                Edit
+                                            </button>
+                                            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">
+                                                Hapus
+                                            </button>
                                         </td>
                                     </tr>
                                 <?php endforeach; 
