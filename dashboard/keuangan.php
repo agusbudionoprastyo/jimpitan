@@ -62,6 +62,7 @@ if (isset($_POST['tanggal'])) {
         </a>
         <ul class="side-menu top">
             <li><a href="index.php"><i class='bx bxs-dashboard'></i><span class="text">Dashboard</span></a></li>
+            <li><a href="kk.php"><i class='bx bxs-group'></i><span class="text">Jadwal Jaga</span></a></li>
             <li><a href="kk.php"><i class='bx bxs-group'></i><span class="text">KK</span></a></li>
             <li><a href="report.php"><i class='bx bxs-report'></i><span class="text">Report</span></a></li>
             <li class="active"><a href="#"><i class='bx bxs-wallet'></i><span class="text">Keuangan</span></a></li>
