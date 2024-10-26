@@ -160,7 +160,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <thead>
                             <tr>
                                 <th class="w-1/2 px-4 py-1">Nama KK</th> <!-- Kolom pertama rata kiri -->
-                                <th style="text-align: Left;">Code</th>
+                                <th style="text-align: center;">Code</th>
                                 <th class="py-2 px-4 border-b cursor-pointer" id="sort-date">
                                     Tanggal
                                     <span class="ml-2">&#9650;</span> <!-- Panah untuk indikasi sorting -->
@@ -174,8 +174,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 if ($data) {
                                     foreach ($data as $row): ?>
                                         <tr>
-                                            <td ><?php echo htmlspecialchars($row["kk_name"]); ?></td> <!-- Rata kiri -->
-                                            <td ><?php echo htmlspecialchars($row["report_id"]); ?></td> <!-- Rata tengah -->
+                                            <td><?php echo htmlspecialchars($row["kk_name"]); ?></td> <!-- Rata kiri -->
+                                            <td><?php echo htmlspecialchars($row["report_id"]); ?></td> <!-- Rata tengah -->
                                             <td><?php echo htmlspecialchars($row["jimpitan_date"]); ?></td>
                                             <td><?php echo htmlspecialchars($row["nominal"]); ?></td>
                                             <td><?php echo htmlspecialchars($row["collector"]); ?></td>
