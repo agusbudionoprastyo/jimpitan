@@ -155,7 +155,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             ?>
                         </tbody>
                     </table> -->
-                    <div class="m-4"> <!-- Margin di sekitar tabel -->
+                    <div class="table-data"> <!-- Margin di sekitar tabel -->
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
