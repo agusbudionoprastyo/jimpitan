@@ -138,6 +138,7 @@ if (!isset($_SESSION['user'])) {
       <input type="file" id="qr-input-file" accept="image/*" capture hidden>
   </div>
   <div id="qr-reader"></div>
+  <p>Apabila ada kendala bisa hubungi: Hermawan (Maman)</p>
 </div>
 
 <audio id="audio" src="assets/audio/interface.wav"></audio>
