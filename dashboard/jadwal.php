@@ -131,10 +131,10 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <td><?php echo htmlspecialchars($row["name"]); ?></td>
                                         <td><?php echo htmlspecialchars($row["shift"]); ?></td>
                                         <td style="text-align: center;">
-                                            <button class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded mr-2">
+                                            <button class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded mr-2">
                                                 Edit
                                             </button>
-                                            <button class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded">
+                                            <button class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded">
                                                 Hapus
                                             </button>
                                         </td>
