@@ -118,7 +118,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <li>
                     <i class='bx bxs-badge-check bx-lg' ></i>
                     <span class="text">
-                        <h3 id="totalCheck"><?php $row ?></h3>
+                        <h3 id="totalCheck"><?php $no ?></h3>
                         <p>Checked</p>
                     </span>
                 </li>
@@ -147,6 +147,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 						<tbody>
                         <?php
                             if ($data) {
+                                $no = 1;
                                 foreach ($data as $row): ?>
                                     <tr>
                                         <td><?php echo htmlspecialchars($row["user_name"]); ?></td>
